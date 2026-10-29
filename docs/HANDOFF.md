@@ -46,14 +46,14 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 - 2026-10-29: TASK-011d sources, pricing plans, affiliate links (encrypted), CSV import — PR #7, Live on dev.
 - 2026-10-29: TASK-013 `/go/{slug}` redirect + click tracking (ADR-024) — PR #8, Live on dev.
 - 2026-10-29: TASK-015 age gate infrastructure (ADR-025) — PR #9, Live on dev.
+- 2026-10-29: TASK-012a/b public pages (home, category, app review, info pages), editorial fields + quality gate (ADR-026) — see `docs/tasks/TASK-012.feedback.md`.
 - 2026-10-29: go-live runbook `docs/runbooks/go-live-prod.md` + `ops/nginx/cloudflare-ips.sh` (real visitor IP + origin lock behind Cloudflare).
 - 2026-10-29 16:16: first dev deploy (owner, Deploy dev with setup) — run 40899557896 success; smoke check: sha 548417e, db ok, home 200, noindex. Robots disallow confirmed externally. TASK-011 split agreed (ADR-020).
 
 ## Owner's open actions
 Done by owner 2026-10-29: `DEPLOY_DEV_ENABLED=true`, DNS + `SMTP_PASSWORD` for hi@thecrushguy.com (magic-link mail received, login works on dev 17:38), server reboot, local `~/tcg_deploy` deleted.
-1. GitHub env secret `LINK_ENCRYPTION_KEY` in `dev` (`openssl rand -base64 32`, keep a copy) — until then affiliate links can't be saved on dev.
-2. Cloudflare proxy + "Add visitor location headers" + origin lock — `docs/runbooks/go-live-prod.md` §2 (until then the age gate hides NSFW sections everywhere, ADR-025).
-3. Imprint/privacy facts for Data Vallis d.o.o. (address, registration no., VAT no.) — needed by TASK-012.
+Done by owner 2026-10-29 17:59: `LINK_ENCRYPTION_KEY` (dev), Cloudflare setup.
+3. Imprint facts for Data Vallis d.o.o. (address, registration no., VAT no.) → `src/content/legal.ts`; lawyer review of privacy + terms drafts (`/en/privacy`, `/en/terms`).
 4. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006/025).
 5. Claim social handles @thecrushguy.
 6. Prod setup when ready: `docs/runbooks/go-live-prod.md` §1, §4.
@@ -63,9 +63,9 @@ Done by owner 2026-10-29: `DEPLOY_DEV_ENABLED=true`, DNS + `SMTP_PASSWORD` for h
 - Cloudflare Access as a second layer in front of `/admin`.
 
 ## Next
-- TASK-012 public pages v1 (needs TASK-003 palette — currently placeholder tokens; typography done) and TASK-006 app universe (research).
+- TASK-014 SEO foundation (sitemaps, hreflang, schema) — then TASK-006 app universe (research + CSV) and TASK-003 palette.
 - In parallel: TASK-003 CGP, TASK-005 keywords, TASK-006 app universe, review testing template.
-- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-025 (next free ADR-026).
+- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-026 (next free ADR-027).
 
 ## Open items
 

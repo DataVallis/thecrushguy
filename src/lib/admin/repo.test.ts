@@ -60,6 +60,31 @@ const FULL = {
   chkPrivacyPolicy: true,
   chkOperatorIdentifiable: true,
 };
+/** Everything the quality gate (ADR-026) needs besides a price. */
+const CONTENT = {
+  ...FULL,
+  scoreConversation: "80",
+  scoreMemory: "70",
+  scoreCustomization: "60",
+  scoreMedia: "50",
+  scoreValue: "90",
+  scorePrivacy: "40",
+  scoreConversationNote: "Natural replies",
+  scoreMemoryNote: "Remembers a week",
+  scoreCustomizationNote: "Many sliders",
+  scoreMediaNote: "Voice only",
+  scoreValueNote: "Cheap yearly plan",
+  scorePrivacyNote: "Vague policy",
+  pros: "Fast\nCheap\nGood voice",
+  cons: "Ads\nShort memory\nNo export",
+  verdictMd: "Good starter app.",
+} as Record<string, unknown>;
+async function addPlan(appId: string) {
+  const [s] = await sql<{ id: string }[]>`insert into sources (app_id, url, field, checked_at)
+    values (${appId}, 'https://x.test/pricing', 'pricing', now()) returning id`;
+  await sql`insert into pricing_plans (app_id, name, price_cents, currency, period, source_id)
+    values (${appId}, 'Pro', 999, 'USD', 'month', ${s!.id})`;
+}
 const cat = (over: Partial<CategoryInput> = {}): CategoryInput =>
   categoryInput.parse({ slug: `c-${Math.random().toString(36).slice(2, 9)}`, name: "Cat", isNsfw: false, ...over });
 
@@ -146,17 +171,61 @@ describe("compliance checklist + publish guard", () => {
       await expectAdminError(setAppStatus(sql, ACTOR, id, "published", null), "status");
       expect((await getApp(sql, id))!.status).toBe("draft");
     }
-    const ok = await createApp(sql, ACTOR, app(FULL));
+    const ok = await createApp(sql, ACTOR, app(CONTENT as never));
+    await addPlan(ok);
     await setAppStatus(sql, ACTOR, ok, "published", null);
     expect((await getApp(sql, ok))!.status).toBe("published");
   });
 
   it("unchecking an item on a published app is refused (the guard also holds on edit)", async () => {
-    const input = app(FULL);
+    const input = app(CONTENT as never);
     const id = await createApp(sql, ACTOR, input);
+    await addPlan(id);
     await setAppStatus(sql, ACTOR, id, "published", null);
     await expectAdminError(updateApp(sql, ACTOR, id, { ...input, chkNoMinorContent: false }), "status");
     expect((await getApp(sql, id))!.chk_no_minor_content).toBe(true);
+  });
+
+  it("quality gate: each missing piece of content blocks publishing and is named in the message", async () => {
+    const cases: [string, Record<string, unknown>][] = [
+      ["memory score", { scoreMemory: "" }],
+      ["privacy reason", { scorePrivacyNote: "" }],
+      ["verdict", { verdictMd: "" }],
+      ["3 pros", { pros: "One\nTwo" }],
+      ["3 cons", { cons: "" }],
+    ];
+    for (const [gap, over] of cases) {
+      const id = await createApp(sql, ACTOR, app({ ...CONTENT, ...over } as never));
+      await addPlan(id);
+      const err = await setAppStatus(sql, ACTOR, id, "published", null).catch((e: unknown) => e);
+      expect((err as AdminError).message).toContain(gap);
+      expect((await getApp(sql, id))!.status).toBe("draft");
+    }
+    const noPrice = await createApp(sql, ACTOR, app(CONTENT as never));
+    const err = await setAppStatus(sql, ACTOR, noPrice, "published", null).catch((e: unknown) => e);
+    expect((err as AdminError).message).toContain("a sourced price");
+  });
+
+  it("a published app can't be edited below the quality gate", async () => {
+    const input = app(CONTENT as never);
+    const id = await createApp(sql, ACTOR, input);
+    await addPlan(id);
+    await setAppStatus(sql, ACTOR, id, "published", null);
+    await expectAdminError(updateApp(sql, ACTOR, id, { ...input, pros: ["Only one"] }), "status");
+    expect((await getApp(sql, id))!.pros).toEqual(["Fast", "Cheap", "Good voice"]);
+  });
+
+  it("editorial fields: one item per line, max 5 pros, max 160 chars", () => {
+    const base = {
+      ...formToObject(new FormData(), APP_FIELDS),
+      slug: "x",
+      name: "X",
+      websiteUrl: "https://x.test",
+      hasFreePlan: "unknown",
+    };
+    expect(appInput.parse({ ...base, pros: " a \r\n\n b " }).pros).toEqual(["a", "b"]);
+    expect(appInput.safeParse({ ...base, pros: "1\n2\n3\n4\n5\n6" }).success).toBe(false);
+    expect(appInput.safeParse({ ...base, cons: "x".repeat(161) }).success).toBe(false);
   });
 
   it("removal needs a reason; leaving 'removed' clears it; every status change is audited", async () => {

@@ -144,6 +144,26 @@ export function AppForm(props: { action: Action; initial: Values; categories: { 
         <Text name="scoreMedia" label="Media" v={v} e={e} />
         <Text name="scoreValue" label="Value" v={v} e={e} />
         <Text name="scorePrivacy" label="Privacy" v={v} e={e} />
+        <Text name="scoreConversationNote" label="Why (conversation)" v={v} e={e} />
+        <Text name="scoreMemoryNote" label="Why (memory)" v={v} e={e} />
+        <Text name="scoreCustomizationNote" label="Why (customization)" v={v} e={e} />
+        <Text name="scoreMediaNote" label="Why (media)" v={v} e={e} />
+        <Text name="scoreValueNote" label="Why (value)" v={v} e={e} />
+        <Text name="scorePrivacyNote" label="Why (privacy)" v={v} e={e} />
+      </fieldset>
+
+      <fieldset className="grid gap-4 sm:grid-cols-3">
+        <legend className="mb-2 font-semibold">Review (SFW language — public pages)</legend>
+        <Text name="pros" label="Pros (one per line, max 5)" v={v} e={e} area />
+        <Text name="cons" label="Cons (one per line, max 5)" v={v} e={e} area />
+        <Text name="bestFor" label="Best for (one per line, max 6)" v={v} e={e} area />
+        <div className="sm:col-span-3">
+          <Text name="verdictMd" label="Verdict" v={v} e={e} area />
+        </div>
+        <p className="text-xs text-neutral-600 sm:col-span-3">
+          Publishing needs all six scores with a reason, a verdict, 3–5 pros, 3–5 cons and at least one sourced price
+          (quality gate, ADR-026).
+        </p>
       </fieldset>
 
       <fieldset className="flex flex-wrap gap-4">

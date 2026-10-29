@@ -102,6 +102,16 @@ function appColumns(a: AppInput) {
     chk_privacy_policy: a.chkPrivacyPolicy,
     chk_operator_identifiable: a.chkOperatorIdentifiable,
     checklist_note: a.checklistNote,
+    score_conversation_note: a.scoreConversationNote,
+    score_memory_note: a.scoreMemoryNote,
+    score_customization_note: a.scoreCustomizationNote,
+    score_media_note: a.scoreMediaNote,
+    score_value_note: a.scoreValueNote,
+    score_privacy_note: a.scorePrivacyNote,
+    pros: a.pros,
+    cons: a.cons,
+    best_for: a.bestFor,
+    verdict_md: a.verdictMd,
   };
 }
 
@@ -162,6 +172,7 @@ export async function updateApp(
       const cols = appColumns(input);
       const next = { ...cols, checklist_checked_at: checklistStamp(before, cols, now) };
       await tx`update apps set ${tx(next)} where id = ${id}`;
+      if (before.status === "published") await assertPublishable(tx, id);
       const beforeCats = await setCategories(tx, id, input.categoryIds);
       const diff = changes(before, next);
       const cats = [...new Set(input.categoryIds)].sort();
@@ -171,6 +182,32 @@ export async function updateApp(
   } catch (err) {
     mapPgError(err);
   }
+}
+
+/**
+ * Quality gate for published apps (06-SEO-CONTENT "No thin pages", ADR-026): what a published app still lacks.
+ * The compliance checklist is enforced separately by the database.
+ */
+export async function qualityGaps(tx: Tx, id: string): Promise<string[]> {
+  const [a] = await tx<Record<string, unknown>[]>`
+    select a.*, (select count(*)::int from pricing_plans p where p.app_id = a.id) as plan_count
+    from apps a where a.id = ${id}`;
+  if (!a) return ["app not found"];
+  const gaps: string[] = [];
+  for (const s of ["conversation", "memory", "customization", "media", "value", "privacy"]) {
+    if (a[`score_${s}`] === null) gaps.push(`${s} score`);
+    if (!String(a[`score_${s}_note`] ?? "").trim()) gaps.push(`${s} reason`);
+  }
+  if (!String(a.verdict_md ?? "").trim()) gaps.push("verdict");
+  if ((a.pros as string[]).length < 3) gaps.push("3 pros");
+  if ((a.cons as string[]).length < 3) gaps.push("3 cons");
+  if ((a.plan_count as number) < 1) gaps.push("a sourced price");
+  return gaps;
+}
+
+export async function assertPublishable(tx: Tx, id: string): Promise<void> {
+  const gaps = await qualityGaps(tx, id);
+  if (gaps.length) throw new AdminError("status", `A published app needs: ${gaps.join(", ")}`);
 }
 
 export async function setAppStatus(
@@ -187,6 +224,7 @@ export async function setAppStatus(
       if (!before) throw new AdminError("_form", "App not found");
       const reason = status === "removed" ? removalReason : null;
       await tx`update apps set status = ${status}, removal_reason = ${reason} where id = ${id}`;
+      if (status === "published") await assertPublishable(tx, id);
       await audit(tx, actor, "status", "app", id, changes(before, { status, removal_reason: reason }));
     });
   } catch (err) {

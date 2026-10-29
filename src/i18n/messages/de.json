@@ -1,10 +1,99 @@
 {
   "meta": {
-    "title": "The Crush Guy — ehrliche Tests von AI-Companion-Apps",
-    "description": "MACHINE DRAFT — not published. Scaffold test locale only (see src/i18n/config.ts publishedLocales)."
+    "title": "The Crush Guy — honest reviews of AI companion apps",
+    "description": "I tried every AI crush, so you don't have to. Independent rankings, reviews and comparisons of AI girlfriend, boyfriend and companion apps."
+  },
+  "nav": {
+    "home": "Home",
+    "howWeRank": "How we rank",
+    "skip": "Skip to content"
+  },
+  "footer": {
+    "about": "About",
+    "howWeRank": "How we rank",
+    "disclosure": "Affiliate disclosure",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "imprint": "Imprint",
+    "contact": "Contact",
+    "note": "Independent reviews. Our scores are never for sale.",
+    "wellbeing": "AI companions are entertainment, not a replacement for people or professional help."
+  },
+  "disclosure": {
+    "line": "We may earn a commission when you sign up through our links. It never changes our scores.",
+    "link": "How we make money"
   },
   "home": {
-    "tagline": "Ich habe jeden AI-Crush ausprobiert, damit du es nicht musst.",
-    "status": "MACHINE DRAFT — not published."
+    "tagline": "I tried every AI crush, so you don't have to.",
+    "status": "We're building the guide. First reviews coming soon.",
+    "intro": "Honest, hands-on reviews of AI companion apps — ranked on conversation, memory, customization, media, value and privacy.",
+    "topApps": "Top rated right now",
+    "categories": "Browse by category",
+    "newApps": "Recently added",
+    "empty": "The first reviews are being tested right now. Check back soon."
+  },
+  "app": {
+    "visit": "Visit {name}",
+    "score": "Our score",
+    "outOf": "/10",
+    "quickFacts": "Quick facts",
+    "freePlan": "Free plan",
+    "startingPrice": "Starting price",
+    "platforms": "Platforms",
+    "features": "Features",
+    "nsfw": "Adult content allowed",
+    "yes": "Yes",
+    "no": "No",
+    "unknown": "Not verified yet",
+    "scoreBreakdown": "Score breakdown",
+    "pricing": "Pricing",
+    "source": "Source",
+    "checked": "checked {date}",
+    "pros": "Pros",
+    "cons": "Cons",
+    "bestFor": "Best for",
+    "verdict": "Verdict",
+    "about": "About {name}",
+    "operator": "Operator",
+    "privacyPolicy": "Privacy policy",
+    "alternatives": "Alternatives to {name}",
+    "lastVerified": "Last verified: {date}",
+    "notVerified": "Not verified yet",
+    "rechecking": "Being re-checked",
+    "report": "Report outdated info",
+    "categories": "Listed in",
+    "perPeriod": {
+      "month": "/ month",
+      "year": "/ year",
+      "lifetime": "one-time",
+      "credits": "credits"
+    }
+  },
+  "criteria": {
+    "conversation": "Conversation",
+    "memory": "Memory",
+    "customization": "Customization",
+    "media": "Media (voice & images)",
+    "value": "Value for money",
+    "privacy": "Privacy & safety"
+  },
+  "featureNames": {
+    "voice": "Voice",
+    "imageGen": "Image generation",
+    "video": "Video",
+    "memory": "Long-term memory",
+    "groupChat": "Group chat",
+    "customCharacter": "Custom characters",
+    "api": "API"
+  },
+  "category": {
+    "title": "Best {name} apps",
+    "ranked": "Ranked by our score",
+    "empty": "No apps in this category yet.",
+    "rank": "#{n}",
+    "from": "from {price}",
+    "free": "Free plan",
+    "review": "Read review",
+    "gatedTitle": "Adults-only category"
   }
 }

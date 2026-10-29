@@ -8,7 +8,7 @@ Status: **Live on dev** (TASK-015, PR #9) — infrastructure only; no NSFW secti
   <NsfwSection returnTo={`/${locale}/app/${slug}`}>…NSFW-only details…</NsfwSection>
 </Suspense>
 ```
-`src/lib/age-gate/gate.tsx` reads cookies + headers at request time and renders `GatedContent` (`view.tsx`). Any page containing a gated section must set `robots: { index: false, follow: false }`. SFW pages never use it and are never gated.
+`src/lib/age-gate/gate.tsx` reads cookies + headers at request time and renders `GatedContent` (`view.tsx`). Pages gated as a whole (adults-only categories) are `noindex`; pages with a small gated section stay indexable (ADR-026). SFW pages never use it and are never gated.
 
 ## Decision (`src/lib/age-gate/policy.ts`)
 | Visitor | Result |

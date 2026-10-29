@@ -18,6 +18,9 @@ Login pages live in `(auth)/` with their own narrow layout; `(console)/layout.ts
 form → server action (`(console)/actions.ts`) → `requireAdmin()` (identity from the session only) → `formToObject` (reads **only** whitelisted field names — `status`, ids, `checklist_checked_at` etc. sent by a client are ignored) → zod schema (`src/lib/admin/validation.ts`) → repo function (`src/lib/admin/repo.ts`) in **one transaction with its `audit_log` row** → `updateTag("apps" | "app:<slug>" | "categories")` (ADR-013) → redirect with `?saved=1`.
 Validation or constraint errors come back to the form (`useActionState`) with the typed values kept. Forms also work without JavaScript.
 
+## Editorial fields + quality gate (TASK-012a, ADR-026)
+Score reasons, pros/cons/best-for (one per line), verdict. Publishing (and editing a published app, or deleting its last price) requires all six scores with reasons, verdict, 3–5 pros, 3–5 cons and ≥ 1 sourced price; the message names what is missing.
+
 ## Rules enforced
 - **Publish guard (07-LEGAL §2):** the DB check `apps_publish_requires_checklist` refuses `published` unless all five checklist items are true and `checklist_checked_at` is set; the UI disables the option and shows the DB refusal as a message. Unchecking an item on a published app is refused the same way.
 - `checklist_checked_at` is stamped when the checklist becomes complete or any item changes while complete; unrelated edits keep it; unchecking clears it.
