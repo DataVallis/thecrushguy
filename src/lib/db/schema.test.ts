@@ -60,6 +60,7 @@ describe("migrations", () => {
       "audit_log",
       "auth_rate_events",
       "categories",
+      "clicks",
       "pricing_plans",
       "sources",
       "translations",
@@ -69,7 +70,7 @@ describe("migrations", () => {
   it("are idempotent (second run applies nothing new)", async () => {
     await runMigrations(db.url);
     const [{ n }] = await sql`select count(*)::int as n from drizzle.__drizzle_migrations`;
-    expect(n).toBe(3);
+    expect(n).toBe(4);
   });
 });
 

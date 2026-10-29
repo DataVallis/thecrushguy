@@ -318,3 +318,33 @@ export const authRateEvents = pgTable(
   },
   (t) => [index("auth_rate_events_bucket_at_idx").on(t.bucket, t.at)],
 );
+
+/**
+ * Outbound clicks on `/go/{slug}` (TASK-013, 02-ARCHITECTURE "Outbound click tracking"). No raw IP: `ip_hash` is an
+ * HMAC with a daily salt. `placement` and `locale` come from validated query params; `referrer_path` is a path on
+ * our own site only (no query, no foreign hosts).
+ */
+export const clicks = pgTable(
+  "clicks",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    appId: uuid("app_id")
+      .notNull()
+      .references(() => apps.id, { onDelete: "cascade" }),
+    linkId: uuid("link_id").references(() => affiliateLinks.id, { onDelete: "set null" }),
+    placement: text("placement").notNull(),
+    locale: text("locale"),
+    country: char("country", { length: 2 }),
+    device: text("device").notNull(),
+    referrerPath: text("referrer_path"),
+    ipHash: char("ip_hash", { length: 64 }).notNull(),
+    at: timestamp("at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("clicks_app_at_idx").on(t.appId, t.at),
+    index("clicks_at_idx").on(t.at),
+    index("clicks_ip_at_idx").on(t.ipHash, t.at),
+    check("clicks_device", sql`${t.device} in ('mobile', 'tablet', 'desktop')`),
+    check("clicks_placement_format", sql`${t.placement} ~ '^[a-z0-9_-]{1,32}$'`),
+  ],
+);
