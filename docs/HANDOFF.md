@@ -66,7 +66,7 @@ Done by owner 2026-10-29 17:59: `LINK_ENCRYPTION_KEY` (dev), Cloudflare setup.
 
 ## Next
 - Owner: decide the holds listed in `docs/research/APPS-SEED.md`; then import candidates on dev (`/admin/import`) and start hands-on reviews (gallery check + test account) — first published app unlocks Lighthouse + Rich Results checks.
-- TASK-005 keyword & competitor research (needed for top-50 ordering and comparison pages).
+- Owner: approve v1 sitemap in `docs/research/KEYWORDS.md`; connect Google Ads (Keyword Planner) for volumes.
 - In parallel: TASK-003 CGP, TASK-005 keywords, TASK-006 app universe, review testing template.
 - Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-029 (next free ADR-030).
 
