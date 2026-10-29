@@ -142,3 +142,8 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Date: 2026-10-29 · Status: Accepted (agent, mode B — owner may override)
 - Decision: unpublished/unknown apps → 404; published app without a usable active link → 302 to our app page (never 404). Sub-IDs via a `{subid}` placeholder in the stored affiliate URL (filled with `placement-locale`). Only affiliate redirects by non-bots are logged, after the response (`after()`), max 30 per IP hash per hour. IP hash = HMAC with a daily salt derived from `LINK_ENCRYPTION_KEY`. Referrer policy stays the site-wide `strict-origin-when-cross-origin`.
 - Consequences: changing the link-encryption key also changes the IP salt (only affects same-day rate limiting). Click stats in admin come with the stats task.
+
+## ADR-025 — Age gate shape (TASK-015; implements ADR-006 default "geo rule (a)")
+- Date: 2026-10-29 · Status: Accepted (agent, mode B) — the restricted region list is **Proposed**, owner/lawyer to confirm (07-LEGAL §3)
+- Decision: NSFW content is gated per section (`<NsfwSection>`), self-declaration cookie `age_ok=1` (30 days) behind an `AgeVerificationProvider` interface. Location from Cloudflare headers; unknown location fails closed. Restricted regions default to GB, US, FR, DE, IT, AU (blocked even with the cookie), overridable by env `AGE_GATE_RESTRICTED_REGIONS`. Same SFW markup for every visitor without the cookie (no cloaking); pages with gated sections are `noindex`.
+- Consequences: NSFW sections stay hidden for everyone until the domain is proxied through Cloudflare with location headers, and the origin must then accept only Cloudflare traffic (else the header is spoofable). The lawyer's answer narrows the list.

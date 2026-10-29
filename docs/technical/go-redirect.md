@@ -1,6 +1,6 @@
 # `/go/{slug}` — outbound redirect + click tracking
 
-Status: **Built** (TASK-013). Code: `src/app/go/[slug]/route.ts`, `src/lib/go/redirect.ts`. Table: `clicks` (migration `0003_clicks`).
+Status: **Live on dev** (TASK-013, PR #8). Code: `src/app/go/[slug]/route.ts`, `src/lib/go/redirect.ts`. Table: `clicks` (migration `0003_clicks`).
 
 ## Request
 `GET /go/{slug}?p={placement}&l={locale}` — `p` = where the CTA sat (`[a-z0-9_-]{1,32}`, else `unknown`), `l` = page locale (known locales only).
