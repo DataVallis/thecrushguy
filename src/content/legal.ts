@@ -4,16 +4,20 @@
  * Never fill these from guesses.
  */
 export const LEGAL_ENTITY = {
-  name: "Data Vallis d.o.o.",
+  // Provided by the owner on 2026-10-29.
+  name: "DATA VALLIS d.o.o.",
   country: "Slovenia",
-  address: null as string | null,
-  registrationNo: null as string | null,
-  vatId: null as string | null,
+  address: "Ulica Šercerjeve brigade 5, 2000 Maribor" as string | null,
+  registrationNo: "8552967000" as string | null,
+  vatId: "SI89424999" as string | null,
   email: "hi@thecrushguy.com",
 };
 
-/** Set to true only after the lawyer reviewed privacy + terms (07-LEGAL). Until then those pages are noindex drafts. */
-export const LEGAL_TEXTS_REVIEWED = false;
+/**
+ * Privacy + terms are published as final (indexable, no "Draft" note). Owner decision 2026-10-29: no lawyer review
+ * (ADR-027). Set to false to turn them back into noindex drafts.
+ */
+export const LEGAL_TEXTS_REVIEWED = true;
 
 export function missingLegalFacts(): string[] {
   return (["address", "registrationNo", "vatId"] as const).filter((k) => !LEGAL_ENTITY[k]);

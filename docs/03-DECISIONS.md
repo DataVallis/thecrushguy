@@ -156,3 +156,8 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
   - **Correction to ADR-025**: only pages that are gated *as a whole* (adults-only category pages) are `noindex`. A page with a small gated section (the "adult content allowed" fact on an app page) stays indexable, because every visitor without the cookie — crawlers included — gets identical SFW markup (no cloaking).
   - Info pages are English-only content modules; privacy/terms are marked "Draft" and `noindex` until a lawyer reviewed them; the imprint stays `noindex` until the operator's address, registration and VAT numbers are provided.
 - Consequences: imported apps need editorial work before publishing; admin weights remain fixed in code for now.
+
+## ADR-027 — No lawyer review; imprint published (owner, 2026-10-29)
+- Date: 2026-10-29 · Status: Accepted (owner: "to ignoriraj — odvetniški pregled … in odgovor, v katerih regijah skriti vsebino za odrasle")
+- Decision: privacy policy and terms go live as written (`LEGAL_TEXTS_REVIEWED = true` → indexable, no "Draft" note). The 07-LEGAL §3 lawyer check is dropped; the age gate keeps the conservative default restricted list (GB, US, FR, DE, IT, AU) and fail-closed on unknown location (ADR-025) — no change in behaviour. Imprint shows DATA VALLIS d.o.o., Ulica Šercerjeve brigade 5, 2000 Maribor, reg. no. 8552967000, VAT SI89424999 (EU e-Commerce Directive Art. 5 information duty for an EU-established provider).
+- Consequences: supersedes the launch-blocking lawyer item of ADR-006/ADR-025. Owner accepts the legal risk of unreviewed texts; the agent keeps the content-policy hard rules (07-LEGAL §2) unchanged.

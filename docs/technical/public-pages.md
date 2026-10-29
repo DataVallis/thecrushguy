@@ -19,7 +19,7 @@ Header (logo, How we rank) and footer (info links, independence + wellbeing note
 - **NSFW**: adults-only categories are gated as a whole and `noindex`; on app pages only the "adult content allowed" fact is gated — the page stays indexable because everyone without the cookie (crawlers included) sees the same SFW box (ADR-026 corrects ADR-025).
 - **No HTML from the database**: Markdown fields render as plain paragraphs.
 - **Caching** (`cached.ts`): `use cache` + tags `apps`, `app:<slug>`, `categories`, `category:<slug>`, `cacheLife("hours")`; admin saves call `updateTag`. Data is only read at request time (after `connection()` / runtime params) — the Docker build has no database (`env -u DATABASE_URL npm run build` passes).
-- **noindex**: unpublished locales, empty or adults-only categories, unknown slugs, privacy/terms until `LEGAL_TEXTS_REVIEWED`, imprint until address/registration/VAT are filled in `src/content/legal.ts`.
+- **noindex**: unpublished locales, empty or adults-only categories, unknown slugs, privacy/terms only if `LEGAL_TEXTS_REVIEWED` is switched back to false; imprint if company facts in `src/content/legal.ts` are removed (ADR-027).
 
 ## Known limitation
 Unknown slugs render the not-found page with `noindex` but HTTP status **200**: the status is already sent when the streamed part calls `notFound()` (params are runtime data under Cache Components, and there is no database at build time to prerender known slugs). Revisit with TASK-014 (sitemaps make known slugs available).

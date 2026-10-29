@@ -12,8 +12,8 @@ Tick items in order; each block says how to verify.
 |---|---|---|---|
 | 0.1 | Public pages v1: home, category lists, app pages, methodology, about, contact, privacy, terms, affiliate disclosure, imprint (TASK-012) | Agent | Planned |
 | 0.2 | SEO foundation: sitemaps, canonical/hreflang, schema (TASK-014) | Agent | Planned |
-| 0.3 | Imprint data for Data Vallis d.o.o. (address, registration no., VAT no.) and privacy-policy facts (ADR-007) | Owner → agent | Open |
-| 0.4 | Lawyer answer on 07-LEGAL §3 (which regions get NSFW sections) — narrows `AGE_GATE_RESTRICTED_REGIONS` (ADR-006/025) | Owner | Open |
+| 0.3 | Imprint data for Data Vallis d.o.o. (address, registration no., VAT no.) and privacy-policy facts (ADR-007) | Owner → agent | Done 2026-10-29 |
+| 0.4 | ~~Lawyer answer on 07-LEGAL §3~~ — dropped by owner (ADR-027); conservative default region list stays | — | Dropped |
 | 0.5 | First real listings: TASK-006 research → CSV import → every app's checklist done → publish | Agent + owner review | Planned |
 | 0.6 | Affiliate accounts approved (networks/direct programs) and links entered in prod admin | Owner | Open |
 | 0.7 | Backups of the prod DB + one restore drill (DEVELOPMENT-RULES §9) | Agent (script) + owner (server) | Planned |
