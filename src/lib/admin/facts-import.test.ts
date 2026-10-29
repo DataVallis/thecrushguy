@@ -53,6 +53,30 @@ describe("research bundle import", () => {
   });
 });
 
+describe("owner additions (TASK-020)", () => {
+  it("a manual sourced price feeds the formula; manual checklist ticks survive a re-import", async () => {
+    const { recomputeApp } = await import("./facts-import");
+    const [a] = await sql<
+      { id: string; score_value: number }[]
+    >`select id, score_value from apps where slug = 'candy-ai'`;
+    const [src] = await sql<{ id: string }[]>`insert into sources (app_id, url, field, checked_at)
+      values (${a!.id}, 'https://candy.ai/premium', 'pricing', now()) returning id`;
+    await sql`insert into pricing_plans (app_id, name, price_cents, currency, period, source_id)
+      values (${a!.id}, 'Monthly', 1299, 'USD', 'month', ${src!.id})`;
+    await sql`update apps set chk_18plus_terms = true where id = ${a!.id}`;
+    expect(await recomputeApp(sql, actor, a!.id)).toBe(true);
+    const [b] = await sql`select score_value, starting_price_cents, chk_18plus_terms from apps where id = ${a!.id}`;
+    expect(b!.starting_price_cents).toBe(1299);
+    expect(b!.score_value).toBeGreaterThan(a!.score_value);
+    expect(b!.chk_18plus_terms).toBe(true);
+    const plans = await sql`select notes from pricing_plans where app_id = ${a!.id}`;
+    expect(plans).toHaveLength(1); // no extra imported row next to the owner's plan
+    await importResearchBundle(sql, actor, bundleSchema.parse(bundle));
+    const [c] = await sql`select chk_18plus_terms, starting_price_cents from apps where id = ${a!.id}`;
+    expect(c).toMatchObject({ chk_18plus_terms: true, starting_price_cents: 1299 });
+  });
+});
+
 describe("review queue", () => {
   it("lists ready apps first; gallery OK publishes in one audited step", async () => {
     const q = await reviewQueue(sql);

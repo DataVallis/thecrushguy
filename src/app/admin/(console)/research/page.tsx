@@ -82,7 +82,34 @@ async function Research() {
 
       <section className="flex flex-col gap-2">
         <h2 className="text-lg font-bold">3. Not ready yet ({waiting.length})</h2>
-        <p>Missing facts can be added on the app&apos;s edit page (with a source). Re-check, then it moves up.</p>
+        <p>
+          Open the app (Edit), fix what&apos;s listed, and it moves up to &quot;ready&quot; by itself. How to fix each
+          item:
+        </p>
+        <ul className="list-disc pl-5 text-neutral-700">
+          <li>
+            <strong>missing a sourced price</strong> — open the app&apos;s pricing page in your browser. In{" "}
+            <em>Sources</em> add that URL (supports: <code>pricing</code>), then in <em>Pricing plans</em> add the
+            cheapest monthly (or yearly) plan with that source. Scores and pros/cons update automatically.
+          </li>
+          <li>
+            <strong>terms don&apos;t state 18+</strong> — open its Terms (or &quot;underage policy&quot;). If it says
+            users must be 18+, add the URL as a source (<code>18+ requirement</code>) and tick &quot;Service states 18+
+            only&quot; → Save. If it allows minors → Reject (adults-only rule).
+          </li>
+          <li>
+            <strong>deepfake check not confirmed</strong> — if the site offers creating companions or images from real
+            people&apos;s photos or celebrities → Reject. Otherwise tick &quot;No deepfake-of-real-person feature&quot;
+            → Save.
+          </li>
+          <li>
+            <strong>operator not identifiable / no privacy policy</strong> — look for company name and address in the
+            footer, terms or imprint; add the source and tick the box. None found → leave it as a draft.
+          </li>
+          <li>
+            <strong>missing 3 pros / 3 cons</strong> — too little public information; leave it as a draft for now.
+          </li>
+        </ul>
         <ul className="flex flex-col gap-1">
           {waiting.map((q) => (
             <li key={q.id}>

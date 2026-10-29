@@ -88,7 +88,8 @@ async function runFacts(
         report.skippedHandsOn.push(slug);
         continue;
       }
-      const r = computeDataReview(before.name as string, raw);
+      // Owner additions win over "unknown": a manual sourced price feeds the formula (TASK-020).
+      const r = computeDataReview(before.name as string, await withManualPrice(tx, before.id as string, raw));
       const f = factsSchema.parse(raw);
       const checkedAt = new Date(`${f.checked_at}T00:00:00Z`);
       const deepfake = raw.no_deepfake_feature as { v: string; src: string } | undefined;
@@ -111,7 +112,7 @@ async function runFacts(
         pros: r.pros,
         cons: r.cons,
         verdict_md: r.verdict,
-        has_free_plan: r.hasFreePlan,
+        has_free_plan: r.hasFreePlan ?? before.has_free_plan,
         starting_price_cents: r.startingPriceCents,
         currency: r.currency,
         feat_voice: r.features.voice,
@@ -120,10 +121,11 @@ async function runFacts(
         feat_group_chat: r.features.groupChat,
         feat_custom_character: r.features.customCharacter,
         nsfw_allowed: r.nsfwAllowed,
-        chk_18plus_terms: r.checklist.chk18PlusTerms,
-        chk_privacy_policy: r.checklist.chkPrivacyPolicy,
-        chk_operator_identifiable: r.checklist.chkOperatorIdentifiable,
-        chk_no_deepfake_feature: deepfake?.v === "yes" && /^https?:\/\//.test(deepfake.src),
+        chk_18plus_terms: before.chk_18plus_terms === true || r.checklist.chk18PlusTerms,
+        chk_privacy_policy: before.chk_privacy_policy === true || r.checklist.chkPrivacyPolicy,
+        chk_operator_identifiable: before.chk_operator_identifiable === true || r.checklist.chkOperatorIdentifiable,
+        chk_no_deepfake_feature:
+          before.chk_no_deepfake_feature === true || (deepfake?.v === "yes" && /^https?:\/\//.test(deepfake.src)),
       };
       // jsonb does not keep key order: keep the stored object when the content is the same.
       if (canonical(before.facts) === canonical(raw)) cols.facts = before.facts;
@@ -152,6 +154,42 @@ async function runFacts(
       report.updated++;
     }
   });
+}
+
+/**
+ * If research found no usable price but the owner added a sourced monthly/yearly plan in admin, use the cheapest
+ * one (per month) as the starting price — so adding a price in admin is enough to make an app publishable.
+ */
+async function withManualPrice(tx: Tx, appId: string, raw: Record<string, unknown>): Promise<Record<string, unknown>> {
+  const pricing = (raw.pricing ?? {}) as Record<string, unknown>;
+  const known = pricing.starting_price_monthly as { v?: unknown; src?: string } | undefined;
+  if (typeof known?.v === "number" && pricing.billing !== "unknown" && /^https?:\/\//.test(known.src ?? "")) return raw;
+  const [m] = await tx<{ monthly: number; currency: string; period: string; url: string }[]>`
+    select (case when p.period = 'year' then round(p.price_cents / 12.0) else p.price_cents end)::int as monthly,
+      p.currency, p.period, s.url
+    from pricing_plans p join sources s on s.id = p.source_id
+    where p.app_id = ${appId} and p.period in ('month', 'year')
+      and p.notes is distinct from ${IMPORTED_PLAN_NOTE} and p.notes is distinct from ${LEGACY_PLAN_NOTE}
+    order by 1 limit 1`;
+  if (!m) return raw;
+  return {
+    ...raw,
+    pricing: {
+      ...pricing,
+      starting_price_monthly: { v: m.monthly / 100, src: m.url },
+      currency: m.currency,
+      billing: m.period === "year" ? "annual" : "monthly",
+    },
+  };
+}
+
+/** Recompute one app's data review from its stored facts (after the owner adds or removes a price). */
+export async function recomputeApp(sql: postgres.Sql, actor: string, appId: string): Promise<boolean> {
+  const [a] = await sql<{ facts: Record<string, unknown> | null; review_method: string }[]>`
+    select facts, review_method from apps where id = ${appId}`;
+  if (!a?.facts || a.review_method !== "data") return false;
+  const r = await importFacts(sql, actor, [a.facts]);
+  return r.updated > 0;
 }
 
 function canonical(v: unknown): string {
@@ -189,6 +227,18 @@ async function syncPlan(
   r: ReturnType<typeof computeDataReview>,
   checkedAt: Date,
 ): Promise<boolean> {
+  // An owner-entered plan is the price: the import then keeps no row of its own (TASK-020).
+  const [manual] = await tx`
+    select 1 from pricing_plans where app_id = ${appId}
+      and notes is distinct from ${IMPORTED_PLAN_NOTE} and notes is distinct from ${LEGACY_PLAN_NOTE} limit 1`;
+  if (manual) {
+    const gone = await tx<{ id: string; price_cents: number }[]>`
+      delete from pricing_plans where app_id = ${appId} and notes in (${IMPORTED_PLAN_NOTE}, ${LEGACY_PLAN_NOTE})
+      returning id, price_cents`;
+    for (const g of gone)
+      await audit(tx, actor, "import-facts", "pricing_plan", g.id, { deleted: [g.price_cents, null] });
+    return gone.length > 0;
+  }
   const [existing, ...dupes] = await tx<{ id: string; price_cents: number; currency: string; notes: string }[]>`
     select id, price_cents, currency, notes from pricing_plans
     where app_id = ${appId} and notes in (${IMPORTED_PLAN_NOTE}, ${LEGACY_PLAN_NOTE}) order by created_at`;

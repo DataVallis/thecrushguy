@@ -23,7 +23,7 @@ import {
   statusInput,
 } from "@/lib/admin/validation";
 import { importAppsCsv, type ImportReport } from "@/lib/admin/csv-import";
-import { bundleSchema, importResearchBundle, type FactsReport } from "@/lib/admin/facts-import";
+import { bundleSchema, importResearchBundle, recomputeApp, type FactsReport } from "@/lib/admin/facts-import";
 import {
   addSource,
   affiliateInput,
@@ -171,12 +171,18 @@ export async function savePricingAction(
   const raw = formToObject(form, ["name", "price", "currency", "period", "notes", "sourceId"]);
   const parsed = pricingInput.safeParse(raw);
   if (!parsed.success) return failure(prev, fieldErrors(parsed.error), raw);
-  return listingWrite(appId, prev, raw, () => savePricingPlan(sql(), actor, appId, planId, parsed.data));
+  return listingWrite(appId, prev, raw, async () => {
+    await savePricingPlan(sql(), actor, appId, planId, parsed.data);
+    await recomputeApp(sql(), actor, appId); // data reviews pick up the new price (TASK-020)
+  });
 }
 
 export async function deletePricingAction(appId: string, planId: string, prev: FormState): Promise<FormState> {
   const actor = await requireAdmin();
-  return listingWrite(appId, prev, {}, () => deletePricingPlan(sql(), actor, appId, planId));
+  return listingWrite(appId, prev, {}, async () => {
+    await deletePricingPlan(sql(), actor, appId, planId);
+    await recomputeApp(sql(), actor, appId);
+  });
 }
 
 export async function saveAffiliateAction(
