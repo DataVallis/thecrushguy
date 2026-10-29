@@ -133,12 +133,14 @@ export type ImportReport = {
   updated: number;
   unchanged: number;
   sourcesAdded: number;
+  /** Rows with a research `status` of excluded/hold — never imported (TASK-006, 07-LEGAL §2). */
+  skipped: number;
   errors: string[];
 };
 
 export async function importAppsCsv(sql: postgres.Sql, actor: string, text: string): Promise<ImportReport> {
   if (!actor) throw new Error("actor is required");
-  const report: ImportReport = { created: 0, updated: 0, unchanged: 0, sourcesAdded: 0, errors: [] };
+  const report: ImportReport = { created: 0, updated: 0, unchanged: 0, sourcesAdded: 0, skipped: 0, errors: [] };
   if (Buffer.byteLength(text, "utf8") > MAX_BYTES) return { ...report, errors: ["File is larger than 1 MB"] };
   let rows: string[][];
   try {
@@ -156,7 +158,14 @@ export async function importAppsCsv(sql: postgres.Sql, actor: string, text: stri
   // Validate everything first; import nothing if any row is invalid (all-or-nothing, easy to fix and re-run).
   const parsed: z.output<typeof rowSchema>[] = [];
   const seen = new Set<string>();
+  const statusIdx = cols.indexOf("status");
   data.forEach((cells, i) => {
+    // Research files (docs/research/APPS-SEED.csv) carry status: only `candidate` (or no status column) is imported.
+    const status = statusIdx >= 0 ? (cells[statusIdx] ?? "").trim().toLowerCase() : "candidate";
+    if (status !== "candidate") {
+      report.skipped++;
+      return;
+    }
     const obj: Record<string, string> = {};
     for (const c of CSV_COLUMNS) {
       const idx = cols.indexOf(c);

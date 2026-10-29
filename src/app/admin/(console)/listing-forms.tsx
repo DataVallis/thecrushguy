@@ -74,7 +74,8 @@ export function ImportForm(props: { action: (prev: ImportState, form: FormData) 
           </div>
         ) : (
           <p role="status" className="rounded bg-emerald-50 p-3">
-            Created {r.created}, updated {r.updated}, unchanged {r.unchanged}, sources added {r.sourcesAdded}.
+            Created {r.created}, updated {r.updated}, unchanged {r.unchanged}, sources added {r.sourcesAdded}, skipped
+            (excluded/hold) {r.skipped}.
           </p>
         )
       ) : null}
