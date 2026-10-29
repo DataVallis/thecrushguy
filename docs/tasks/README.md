@@ -8,7 +8,7 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-002 | Logo | 001 | DONE (concept A, refinements open) → `design/logo/` (ADR-009) |
 | TASK-003 | CGP + tokens | 002 | DONE — PR #14, Live on dev (`design/CGP.md`, ADR-029) |
 | TASK-004 | Affiliate program research | — | DONE → `docs/research/AFFILIATE-PROGRAMS.md` |
-| TASK-005 | Keyword & competitor research | — | Planned |
+| TASK-005 | Keyword & competitor research | — | PARTIAL — universe + competitors + v1 sitemap proposal (`docs/research/KEYWORDS.md`); volumes wait for Keyword Planner |
 | TASK-006 | App universe (150 apps + compliance) | 004 | PARTIAL — 125 apps (43 candidate / 60 hold / 22 excluded), `docs/research/APPS-SEED.md`; top-50 + gallery checks open |
 | TASK-010 | Scaffold + deploy skeleton | — | DONE — Live on dev 2026-10-29 |
 | TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | DONE — PR #1, Live on dev (run 40899557896) |
