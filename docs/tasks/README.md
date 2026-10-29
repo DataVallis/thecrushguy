@@ -6,10 +6,10 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 |---|---|---|---|
 | TASK-001 | Brand naming | — | DONE → The Crush Guy (ADR-008) |
 | TASK-002 | Logo | 001 | DONE (concept A, refinements open) → `design/logo/` (ADR-009) |
-| TASK-003 | CGP + tokens | 002 | Built — `design/CGP.md`, `design/tokens.json` (ADR-023/029) |
+| TASK-003 | CGP + tokens | 002 | DONE — PR #14, Live on dev (`design/CGP.md`, ADR-029) |
 | TASK-004 | Affiliate program research | — | DONE → `docs/research/AFFILIATE-PROGRAMS.md` |
 | TASK-005 | Keyword & competitor research | — | Planned |
-| TASK-006 | App universe (150 apps + compliance) | 004 | Planned |
+| TASK-006 | App universe (150 apps + compliance) | 004 | PARTIAL — 125 apps (43 candidate / 60 hold / 22 excluded), `docs/research/APPS-SEED.md`; top-50 + gallery checks open |
 | TASK-010 | Scaffold + deploy skeleton | — | DONE — Live on dev 2026-10-29 |
 | TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | DONE — PR #1, Live on dev (run 40899557896) |
 | TASK-011a | Data model + migrations + publish guard | 010b | DONE — PR #2, Live on dev (migrated at start) |

@@ -38,6 +38,7 @@ Score reasons, pros/cons/best-for (one per line), verdict. Publishing (and editi
 Columns `slug,name,website_url,tagline,company_name,company_country,privacy_policy_url,platforms,nsfw_allowed,source_url,source_field,checked_at` (required: slug, name, website_url, source_url, checked_at; platforms `;`-separated; dates `YYYY-MM-DD`; ≤ 1,000 rows, ≤ 1 MB). Upload a file or paste text.
 - Validate all rows first; **any invalid row → nothing imported**, errors listed per line.
 - Match by slug: new → `draft` with empty checklist; existing → only changed listed columns updated (never status or checklist); source added if that (url, field) is new. Every change audited as `import`.
+- Research files may carry a `status` column: only `candidate` rows are imported; `excluded`/`hold` are counted as skipped (TASK-006). `docs/research/APPS-SEED.csv` must stay importable (`src/lib/admin/apps-seed.test.ts`).
 - Idempotent: the same file twice → second run "unchanged", no new rows or audit entries.
 
 Delete of apps/categories is intentionally absent: apps are `removed` with a reason.

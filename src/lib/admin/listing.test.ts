@@ -190,6 +190,7 @@ describe("CSV import", () => {
       updated: 0,
       unchanged: 0,
       sourcesAdded: 2,
+      skipped: 0,
       errors: [],
     });
     const audits = (await sql`select count(*)::int as n from audit_log where action = 'import'`)[0]!.n;
@@ -198,6 +199,7 @@ describe("CSV import", () => {
       updated: 0,
       unchanged: 2,
       sourcesAdded: 0,
+      skipped: 0,
       errors: [],
     });
     expect((await sql`select count(*)::int as n from audit_log where action = 'import'`)[0]!.n).toBe(audits);
@@ -230,6 +232,13 @@ describe("CSV import", () => {
     expect(r).toMatchObject({ updated: 1, created: 0 });
     const [a] = await sql`select name, status, chk_privacy_policy from apps where slug = 'nomi-ai'`;
     expect(a).toEqual({ name: "Nomi AI", status: "paused", chk_privacy_policy: true });
+  });
+
+  it("research status column: only candidates are imported; excluded and hold rows are skipped, even if invalid", async () => {
+    const H = `status,${HEADER}`;
+    const csv = [H, `candidate,${ROW1}`, `excluded,${ROW2}`, `hold,bad slug!,,,,,,,,,,,`].join("\n");
+    expect(await importAppsCsv(sql, ACTOR, csv)).toMatchObject({ created: 1, skipped: 2, errors: [] });
+    expect((await sql`select slug from apps`).map((r) => r.slug)).toEqual(["nomi-ai"]);
   });
 
   it("all-or-nothing: one bad row imports nothing and reports the line", async () => {
