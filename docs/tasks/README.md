@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-021** (next free: ADR-022).
+Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-022** (next free: ADR-023).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -13,7 +13,7 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-010 | Scaffold + deploy skeleton | — | DONE — Live on dev 2026-10-29 |
 | TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | DONE — PR #1, Live on dev (run 40899557896) |
 | TASK-011a | Data model + migrations + publish guard | 010b | DONE — PR #2, Live on dev (migrated at start) |
-| TASK-011b | Magic-link admin auth (ADR-017/018) | 011a | Planned |
+| TASK-011b | Magic-link admin auth (ADR-017/018/022) | 011a | Built — PR pending |
 | TASK-011c | Apps/categories admin, publish flow, audit | 011b | Planned |
 | TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | Planned |
 | TASK-012 | Public pages v1 | 003, 011 | Planned |

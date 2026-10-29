@@ -32,6 +32,9 @@ jobs:
       KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      SMTP_PORT: ${{ vars.SMTP_PORT }}
+      ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -63,3 +66,6 @@ jobs:
           test "$(curl -s -o /dev/null -w '%{http_code}' -L https://thecrushguy.com/)" = "200"
           # prod must be indexable: no noindex header
           ! curl -sI https://thecrushguy.com/en | grep -qi "x-robots-tag: noindex"
+          # Admin (TASK-011b): anonymous /admin redirects to the login page; admin is never indexable.
+          curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://thecrushguy.com/admin | grep -qE '^307 https?://thecrushguy\.com/admin/login$'
+          curl -sI https://thecrushguy.com/admin/login | grep -qi "x-robots-tag: noindex"

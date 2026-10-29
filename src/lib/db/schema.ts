@@ -266,3 +266,56 @@ export const auditLog = pgTable(
   },
   (t) => [index("audit_log_entity_idx").on(t.entity, t.entityId), index("audit_log_at_idx").on(t.at)],
 );
+
+/**
+ * Admin magic-link login (TASK-011b, ADR-017/022). Only SHA-256 hashes of tokens are stored — a DB leak
+ * cannot be replayed as a login link or a session cookie.
+ */
+export const adminLoginTokens = pgTable(
+  "admin_login_tokens",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    email: text("email").notNull(),
+    tokenHash: char("token_hash", { length: 64 }).notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex("admin_login_tokens_hash_uq").on(t.tokenHash),
+    index("admin_login_tokens_email_idx").on(t.email, t.createdAt),
+    check("admin_login_tokens_hash_hex", sql`${t.tokenHash} ~ '^[0-9a-f]{64}$'`),
+    check("admin_login_tokens_email_lower", sql`${t.email} = lower(${t.email})`),
+  ],
+);
+
+export const adminSessions = pgTable(
+  "admin_sessions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    email: text("email").notNull(),
+    tokenHash: char("token_hash", { length: 64 }).notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex("admin_sessions_hash_uq").on(t.tokenHash),
+    index("admin_sessions_expires_idx").on(t.expiresAt),
+    check("admin_sessions_hash_hex", sql`${t.tokenHash} ~ '^[0-9a-f]{64}$'`),
+    check("admin_sessions_email_lower", sql`${t.email} = lower(${t.email})`),
+  ],
+);
+
+/**
+ * Rate-limit events for login-link requests. `bucket` is "email:<sha256>" or "ip:<hmac>" — never a raw
+ * email or IP (07-LEGAL privacy, 02-ARCHITECTURE "no raw IP storage"). Rows older than 24 h are pruned.
+ */
+export const authRateEvents = pgTable(
+  "auth_rate_events",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    bucket: text("bucket").notNull(),
+    at: timestamp("at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("auth_rate_events_bucket_at_idx").on(t.bucket, t.at)],
+);

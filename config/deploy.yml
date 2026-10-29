@@ -32,8 +32,15 @@ env:
   clear:
     NODE_ENV: production
     RUN_MIGRATIONS: "1" # apply drizzle/ migrations at container start (TASK-011a)
+    # Admin login mail (ADR-018): hi@thecrushguy.com on the owner's mail server. Port via GitHub variable SMTP_PORT (default 587, STARTTLS).
+    SMTP_HOST: mail.datavallis.com
+    SMTP_PORT: '<%= ENV["SMTP_PORT"].to_s.empty? ? "587" : ENV["SMTP_PORT"] %>'
+    SMTP_USER: hi@thecrushguy.com
+    MAIL_FROM: "The Crush Guy <hi@thecrushguy.com>"
   secret:
     - DATABASE_URL
+    - SMTP_PASSWORD # GitHub environment secret (dev / prod)
+    - ADMIN_EMAILS # GitHub variable; passed as a secret so the address never lands in logs (ADR-020)
 
 # Keep a few old images for rollback, prune the rest (shared host).
 retain_containers: 3
