@@ -13,6 +13,7 @@ import type postgres from "postgres";
 import { z } from "zod";
 import { computeDataReview, factsSchema } from "@/lib/review/data-review";
 import { importAppsCsv, type ImportReport } from "./csv-import";
+import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { assertPublishable, audit, changes, type Tx } from "./repo";
 
 /** Marks the one price row the facts import manages (shown publicly as the plan note). */
@@ -60,6 +61,7 @@ export async function importFacts(sql: postgres.Sql, actor: string, input: unkno
 
   try {
     await runFacts(sql, actor, items, report);
+    if (report.updated) await syncAutoCategories(sql, actor); // TASK-023: fact-driven category lists
   } catch (err) {
     const e = err as { constraint_name?: string; message?: string; field?: string };
     if (e.constraint_name === "apps_publish_requires_checklist")

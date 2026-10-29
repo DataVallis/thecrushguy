@@ -10,6 +10,7 @@ import { z } from "zod";
 import bundle from "@/data/research-bundle.json";
 import { bundleSchema, importFacts, importResearchBundle, recomputeApp } from "@/lib/admin/facts-import";
 import { AdminError, audit, changes, qualityGaps, reviewQueue, setAppStatus } from "@/lib/admin/repo";
+import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { factsSchema } from "@/lib/review/data-review";
 
@@ -296,6 +297,13 @@ export const TOOLS: Tool[] = [
       forgetKnownSlugs();
       return { ok: true };
     },
+  },
+  {
+    name: "sync_categories",
+    description:
+      "Create/refresh the fact-driven category lists (free, cheap, voice, pictures, memory, iPhone, Android, adults-only) and recompute which apps belong to each.",
+    input: z.object({}),
+    run: async (sql) => ({ changes: await syncAutoCategories(sql, MCP_ACTOR) }),
   },
   {
     name: "import_research_bundle",
