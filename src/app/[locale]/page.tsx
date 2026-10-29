@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
@@ -6,7 +7,15 @@ import { AppRow } from "@/components/public/app-bits";
 import { Disclosure } from "@/components/public/site-chrome";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
+import { siteUrl } from "@/lib/env";
 import { getHomeData } from "@/lib/public/cached";
+import { JsonLd, websiteLd } from "@/lib/seo/jsonld";
+import { alternatesFor } from "@/lib/seo/meta";
+
+export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  return isLocale(locale) ? { alternates: alternatesFor(locale, "") } : {};
+}
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -14,6 +23,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   const t = await getDictionary(locale);
   return (
     <div className="flex flex-col gap-10">
+      <JsonLd data={websiteLd(siteUrl(), locale)} />
       <section className="flex flex-col gap-3 py-6 text-center">
         <h1 className="font-display text-3xl font-extrabold text-ink sm:text-5xl">{t.home.tagline}</h1>
         <p className="mx-auto max-w-2xl text-muted">{t.home.intro}</p>

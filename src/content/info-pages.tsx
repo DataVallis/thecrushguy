@@ -5,16 +5,9 @@
 import { WEIGHTS } from "@/lib/public/scoring";
 import { LEGAL_ENTITY, LEGAL_TEXTS_REVIEWED, missingLegalFacts } from "./legal";
 
-export const INFO_PAGES = [
-  "about",
-  "how-we-rank",
-  "affiliate-disclosure",
-  "privacy",
-  "terms",
-  "imprint",
-  "contact",
-] as const;
-export type InfoPage = (typeof INFO_PAGES)[number];
+import { INFO_PAGES, type InfoPage } from "./info-page-names";
+
+export { INFO_PAGES, type InfoPage };
 
 export type InfoContent = { title: string; description: string; indexable: boolean; body: React.ReactNode };
 

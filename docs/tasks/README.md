@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-027** (next free: ADR-028).
+Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-028** (next free: ADR-029).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-011b | Magic-link admin auth (ADR-017/018/022) | 011a | DONE — PR #4, Live on dev (deploy + smoke check green) |
 | TASK-011c | Apps/categories admin, publish flow, audit | 011b | DONE — PR #6, Live on dev |
 | TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | DONE — PR #7, Live on dev |
-| TASK-012 | Public pages v1 | 003, 011 | Built (012a/b, ADR-026) — Lighthouse/CWV + legal facts open |
+| TASK-012 | Public pages v1 | 003, 011 | DONE — PR #11, Live on dev; Lighthouse/CWV open |
 | TASK-013 | `/go/` redirect + click tracking | 011 | DONE — PR #8, Live on dev |
-| TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Planned |
+| TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Built (ADR-028) — Rich Results Test on prod open |
 | TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | DONE — PR #9, Live on dev; default region list kept (ADR-027) |

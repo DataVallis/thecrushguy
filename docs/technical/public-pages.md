@@ -21,8 +21,8 @@ Header (logo, How we rank) and footer (info links, independence + wellbeing note
 - **Caching** (`cached.ts`): `use cache` + tags `apps`, `app:<slug>`, `categories`, `category:<slug>`, `cacheLife("hours")`; admin saves call `updateTag`. Data is only read at request time (after `connection()` / runtime params) — the Docker build has no database (`env -u DATABASE_URL npm run build` passes).
 - **noindex**: unpublished locales, empty or adults-only categories, unknown slugs, privacy/terms only if `LEGAL_TEXTS_REVIEWED` is switched back to false; imprint if company facts in `src/content/legal.ts` are removed (ADR-027).
 
-## Known limitation
-Unknown slugs render the not-found page with `noindex` but HTTP status **200**: the status is already sent when the streamed part calls `notFound()` (params are runtime data under Cache Components, and there is no database at build time to prerender known slugs). Revisit with TASK-014 (sitemaps make known slugs available).
+## Unknown URLs
+Real HTTP 404s since TASK-014 — the proxy rewrites unknown slugs to the global 404 page (`docs/technical/seo.md`, ADR-028).
 
 ## Tests
 `src/lib/public/catalog.test.ts` (real Postgres): weights/rounding/staleness boundaries, published-only for app/category/home, pricing with source + date, no affiliate data in the read model, alternatives skip NSFW categories and unpublished apps, ranking order (override → score → name), home lists. Quality gate: `src/lib/admin/repo.test.ts`.

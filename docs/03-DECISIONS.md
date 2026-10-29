@@ -161,3 +161,8 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Date: 2026-10-29 · Status: Accepted (owner: "to ignoriraj — odvetniški pregled … in odgovor, v katerih regijah skriti vsebino za odrasle")
 - Decision: privacy policy and terms go live as written (`LEGAL_TEXTS_REVIEWED = true` → indexable, no "Draft" note). The 07-LEGAL §3 lawyer check is dropped; the age gate keeps the conservative default restricted list (GB, US, FR, DE, IT, AU) and fail-closed on unknown location (ADR-025) — no change in behaviour. Imprint shows DATA VALLIS d.o.o., Ulica Šercerjeve brigade 5, 2000 Maribor, reg. no. 8552967000, VAT SI89424999 (EU e-Commerce Directive Art. 5 information duty for an EU-established provider).
 - Consequences: supersedes the launch-blocking lawyer item of ADR-006/ADR-025. Owner accepts the legal risk of unreviewed texts; the agent keeps the content-policy hard rules (07-LEGAL §2) unchanged.
+
+## ADR-028 — Real 404s via proxy + global-not-found; SEO shapes (TASK-014)
+- Date: 2026-10-29 · Status: Accepted (agent, mode B)
+- Decision: the proxy checks app/category slugs against an in-memory list of published slugs (60 s TTL, dropped on admin save; skipped if the DB is down) and rewrites unknown URLs to a path that matches no route; `app/global-not-found.tsx` (experimental `globalNotFound`) answers with HTTP 404 and a branded page. Sitemaps: index + per locale/type files, prod only in the index. JSON-LD: our own `Review` on `SoftwareApplication`, never `AggregateRating`; hreflang only for published locales + x-default.
+- Consequences: depends on an experimental Next.js flag — re-check on Next upgrades. The 404 page is English (locale unknown at that level).

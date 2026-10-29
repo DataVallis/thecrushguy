@@ -1,5 +1,5 @@
 # TASK-012 feedback — public pages v1 (012a data pages, 012b info pages)
-Status: DONE (Built) — Live on dev after merge; CWV/Lighthouse and legal facts open
+Status: DONE — Live on dev (PR #11); CWV/Lighthouse open; legal facts done (ADR-027)
 
 ## What I implemented
 Home, category ranked list, app review page, 7 info pages, header/footer, disclosure line on money pages, `/go` CTAs with `rel="sponsored nofollow"`, editorial fields in admin + publish quality gate, cached read model. Details: `docs/technical/public-pages.md`, ADR-026.

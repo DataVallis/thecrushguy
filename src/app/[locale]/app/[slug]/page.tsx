@@ -9,7 +9,10 @@ import { isLocale, publishedLocales, type Locale } from "@/i18n/config";
 import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
 import { fmt, money, shortDate } from "@/i18n/format";
 import { NsfwSection } from "@/lib/age-gate/gate";
+import { siteUrl } from "@/lib/env";
 import { getPublishedApp } from "@/lib/public/cached";
+import { JsonLd, appLd, breadcrumbLd } from "@/lib/seo/jsonld";
+import { DESCRIPTION_MAX, TITLE_MAX, alternatesFor, clamp } from "@/lib/seo/meta";
 import { type AppDetail } from "@/lib/public/catalog";
 import { WEIGHTS, isStale, toTen } from "@/lib/public/scoring";
 
@@ -19,9 +22,12 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/app/[slu
   const app = await getPublishedApp(slug);
   if (!app) return { robots: { index: false } };
   return {
-    title: `${app.name} review`,
-    description: app.tagline ?? undefined,
-    alternates: { canonical: `/${locale}/app/${slug}` },
+    title: clamp(`${app.name} review: score, pricing, pros & cons`, TITLE_MAX),
+    description: clamp(
+      `${app.name}: ${toTen(app.overall)}/10 in our hands-on test.${app.tagline ? ` ${app.tagline.replace(/[.!?]*$/, ".")}` : ""} Pricing with sources, pros and cons.`,
+      DESCRIPTION_MAX,
+    ),
+    alternates: alternatesFor(locale, `/app/${slug}`),
     robots: publishedLocales.includes(locale) ? undefined : { index: false, follow: true },
   };
 }
@@ -47,6 +53,18 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
 
   return (
     <article className="flex flex-col gap-10">
+      <JsonLd
+        data={[
+          appLd(siteUrl(), locale, app),
+          breadcrumbLd([
+            { name: t.nav.home, url: `${siteUrl()}/${locale}` },
+            ...(sfwCategories[0]
+              ? [{ name: sfwCategories[0].name, url: `${siteUrl()}/${locale}/category/${sfwCategories[0].slug}` }]
+              : []),
+            { name: app.name, url: `${siteUrl()}/${locale}/app/${app.slug}` },
+          ]),
+        ]}
+      />
       <header className="flex flex-col gap-4">
         <div className="flex items-center gap-4">
           <Avatar name={app.name} />
