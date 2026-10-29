@@ -1,4 +1,4 @@
-# Handoff — state as of 2026-10-29 16:20 (Europe/Ljubljana)
+# Handoff — state as of 2026-10-29 16:45 (Europe/Ljubljana)
 
 ## Working mode
 - **Mode B — autonomous** (DEVELOPMENT-RULES §1) since 2026-10-29 15:54. Owner's words: "to odpreš PR in mergaš v dev sam" (you open the PR and merge into dev yourself).
@@ -39,11 +39,12 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 - 2026-10-29: TASK-010 scaffold **Built**, pushed to `dev` (commit `chore: scaffold…`) — proof in `docs/tasks/TASK-010.feedback.md`. ADR-010…017; owner accepted ADR-011…015 and dropped uat (ADR-016); admin login = magic link (ADR-017) via mail.datavallis.com (ADR-018).
 - 2026-10-29: TASK-010b Kamal deploy (ADR-019/021) — PR #1 merged to `dev` (CI run 40896479493 green; Deploy dev skipped until owner setup).
 - 2026-10-29: TASK-011a data model + migrations — PR #2 merged to `dev` (CI green incl. db:check).
+- 2026-10-29: TASK-011b magic-link admin auth Built (ADR-022) — PR `feat/TASK-011b-magic-link-auth`; proof in `docs/tasks/TASK-011b.feedback.md`.
 - 2026-10-29 16:16: first dev deploy (owner, Deploy dev with setup) — run 40899557896 success; smoke check: sha 548417e, db ok, home 200, noindex. Robots disallow confirmed externally. TASK-011 split agreed (ADR-020).
 
 ## Owner's open actions
 1. Set repo variable `DEPLOY_DEV_ENABLED=true` (auto-deploy on merge to `dev`).
-2. DNS for hi@thecrushguy.com on mail.datavallis.com: MX, SPF, DKIM, DMARC (ADR-018) — needed before TASK-011b can send mail; then add env secret `SMTP_PASSWORD` (environment `dev`).
+2. Done per owner (2026-10-29 16:32): DNS for hi@thecrushguy.com and env secret `SMTP_PASSWORD`. Check after deploy: request a link at https://dev.thecrushguy.com/admin/login and confirm the mail arrives (if the server needs port 465, set repo variable `SMTP_PORT=465`).
 3. Server shows "System restart required" — reboot at a quiet time (affects all apps on the host).
 4. Delete the local private key file `~/tcg_deploy` after storing it in the password manager.
 5. Claim social handles @thecrushguy. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006).
@@ -53,9 +54,10 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 - Cloudflare Access as a second layer in front of `/admin`.
 
 ## Next
-- TASK-011b magic-link auth (spec: `docs/tasks/TASK-011-data-admin.md`, ADR-017/018/020).
+- Owner request 2026-10-29: replace Bricolage Grotesque (same font as PetPrep) for headings + wordmark — part of TASK-003 CGP, needs owner's pick.
+- TASK-011c apps/categories admin, publish flow, audit (spec: `docs/tasks/TASK-011-data-admin.md`).
 - In parallel: TASK-003 CGP, TASK-005 keywords, TASK-006 app universe, review testing template.
-- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-021 (next free ADR-022).
+- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-022 (next free ADR-023).
 
 ## Open items
 

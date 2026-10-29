@@ -119,3 +119,15 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Date: 2026-10-29 · Status: Accepted (owner: "ko se merga v main, se deploy avtomatsko požene")
 - Decision: `deploy-prod.yml` runs on push to `main` once the repo variable `DEPLOY_PROD_ENABLED=true`; manual run with setup = true is used once for the first prod deploy. Deploy guard unchanged: prod only from `main`. Only the owner merges into `main`, so the merge is the release decision.
 - Consequences: every merge to `main` is a release — migrations must be backward compatible (expand → migrate → contract); the smoke check fails the workflow if the deployed SHA, DB or indexability are wrong; rollback per runbook §6.
+
+## ADR-022 — Magic-link implementation details (TASK-011b; refines ADR-017/020)
+- Date: 2026-10-29 · Status: Accepted (agent, mode B — owner may override)
+- Decision:
+  - **Confirm step:** the emailed link opens `/admin/auth/verify?token=…`, which only renders a "Sign in to admin" button; the token is consumed by the POST (server action). Mail link scanners (e.g. Outlook Safe Links) GET links and would otherwise burn the single-use token.
+  - **Rate limits:** 3 link requests per email per 15 min and 10 per client IP per hour, counted for every request (allowlisted or not) so the limit can't reveal the allowlist. Stored in `auth_rate_events` as `email:<sha256>` / `ip:<hmac>` buckets — no raw email or IP. The IP HMAC salt is random, in memory, rotated every 24 h (and on restart); client IP = nginx `X-Real-IP`.
+  - **Revocation:** sessions and pending links are checked against `ADMIN_EMAILS` on every use — removing an address revokes it immediately. A successful login burns every other pending link of that address.
+  - **Cookie:** `tcg_admin`, `Path=/admin`, httpOnly, SameSite=Lax, Secure whenever `SITE_URL` is https. The link base is `SITE_URL`, never the request Host header.
+  - **Admin UI is English-only** with inline strings (it is unlocalized per ADR-012); public UI keeps the i18n rule.
+  - **Mail capture in tests:** an in-process SMTP catcher (`test/smtp-catcher.ts`) instead of the Mailpit container from ADR-020 — no service or download needed, the real nodemailer transport is still exercised. Local dev without `SMTP_HOST` prints the link to the server console (`APP_ENV=local` only).
+  - **Deploy wiring:** `SMTP_HOST`/`SMTP_USER`/`MAIL_FROM` clear in `config/deploy.yml`; `SMTP_PORT` from the optional GitHub variable (default 587, STARTTLS required; 465 = implicit TLS); `SMTP_PASSWORD` (env secret) and `ADMIN_EMAILS` (variable) are passed to the container as Kamal secrets so the address never appears in logs.
+- Consequences: 2FA from 02-ARCHITECTURE "Security" is covered by possession of the mailbox; Cloudflare Access stays a parked optional second layer.

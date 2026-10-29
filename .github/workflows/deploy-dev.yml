@@ -30,6 +30,9 @@ jobs:
       KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      SMTP_PORT: ${{ vars.SMTP_PORT }}
+      ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -60,3 +63,6 @@ jobs:
           echo "$body" | grep -q "\"sha\":\"${GITHUB_SHA}\"" && echo "$body" | grep -q '"db":"ok"'
           test "$(curl -s -o /dev/null -w '%{http_code}' -L https://dev.thecrushguy.com/)" = "200"
           curl -sI https://dev.thecrushguy.com/en | grep -qi "x-robots-tag: noindex"
+          # Admin (TASK-011b): anonymous /admin redirects to the login page, which renders.
+          curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://dev.thecrushguy.com/admin | grep -qE '^307 https?://dev\.thecrushguy\.com/admin/login$'
+          test "$(curl -s -o /dev/null -w '%{http_code}' https://dev.thecrushguy.com/admin/login)" = "200"

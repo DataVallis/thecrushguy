@@ -52,10 +52,13 @@ describe("migrations", () => {
   it("create every table from zero", async () => {
     const rows = await sql`select table_name from information_schema.tables where table_schema = 'public' order by 1`;
     expect(rows.map((r) => r.table_name)).toEqual([
+      "admin_login_tokens",
+      "admin_sessions",
       "affiliate_links",
       "app_categories",
       "apps",
       "audit_log",
+      "auth_rate_events",
       "categories",
       "pricing_plans",
       "sources",
@@ -66,7 +69,7 @@ describe("migrations", () => {
   it("are idempotent (second run applies nothing new)", async () => {
     await runMigrations(db.url);
     const [{ n }] = await sql`select count(*)::int as n from drizzle.__drizzle_migrations`;
-    expect(n).toBe(2);
+    expect(n).toBe(3);
   });
 });
 
