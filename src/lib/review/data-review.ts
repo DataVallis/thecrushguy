@@ -67,6 +67,8 @@ export const factsSchema = z.object({
     country: fact(z.string()).optional(),
     address_stated: optYn,
   }),
+  /** Who the companions are, as the app presents them (TASK-024): drives the girlfriend/boyfriend lists. */
+  audience: fact(z.enum(["girlfriend", "boyfriend", "both", "friend", "unknown"]).catch("unknown")).optional(),
   notes: z.string().optional(),
 });
 export type Facts = z.output<typeof factsSchema>;
