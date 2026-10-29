@@ -10,9 +10,9 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-004 | Affiliate program research | — | DONE → `docs/research/AFFILIATE-PROGRAMS.md` |
 | TASK-005 | Keyword & competitor research | — | Planned |
 | TASK-006 | App universe (150 apps + compliance) | 004 | Planned |
-| TASK-010 | Scaffold + deploy skeleton | — | PARTIAL — Built, pushed to `dev`; CI blocked by org billing; dev deploy pending (`TASK-010.feedback.md`) |
-| TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | Merged to `dev` (PR #1); first deploy pending owner steps |
-| TASK-011a | Data model + migrations + publish guard | 010b | DONE — PR to `dev` (`TASK-011a.feedback.md`) |
+| TASK-010 | Scaffold + deploy skeleton | — | DONE — Live on dev 2026-10-29 |
+| TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | DONE — PR #1, Live on dev (run 40899557896) |
+| TASK-011a | Data model + migrations + publish guard | 010b | DONE — PR #2, Live on dev (migrated at start) |
 | TASK-011b | Magic-link admin auth (ADR-017/018) | 011a | Planned |
 | TASK-011c | Apps/categories admin, publish flow, audit | 011b | Planned |
 | TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | Planned |

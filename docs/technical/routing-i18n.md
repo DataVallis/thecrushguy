@@ -1,4 +1,4 @@
-# Routing, i18n and indexing — Status: Built (not yet Live)
+# Routing, i18n and indexing — Status: Live on dev (2026-10-29)
 
 ## URL shape
 - Public pages live under `/{locale}/…` (`src/app/[locale]/`). `[locale]` is the root segment, so `<html lang>` is always correct.

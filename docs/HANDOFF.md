@@ -1,4 +1,4 @@
-# Handoff — state as of 2026-10-29 16:00 (Europe/Ljubljana)
+# Handoff — state as of 2026-10-29 16:20 (Europe/Ljubljana)
 
 ## Working mode
 - **Mode B — autonomous** (DEVELOPMENT-RULES §1) since 2026-10-29 15:54. Owner's words: "to odpreš PR in mergaš v dev sam" (you open the PR and merge into dev yourself).
@@ -31,20 +31,21 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 | Env | URL | Deploys from | Status |
 |---|---|---|---|
 | local | http://localhost:3000 | working tree | Built |
-| dev | https://dev.thecrushguy.com | `dev` branch via Kamal, host 91.99.191.8 | Planned (first deploy per `docs/runbooks/deploy-dev.md`) |
+| dev | https://dev.thecrushguy.com | `dev` branch via Kamal, host 91.99.191.8 | **Live** since 2026-10-29 16:16 (run 40899557896, sha 548417e) |
 | prod | https://thecrushguy.com | `main`, auto-deploy on merge (ADR-021), same host | Planned |
 
 ## Done
 - 2026-10-29: brand The Crush Guy + domain (ADR-008), logo A (ADR-009), affiliate research (TASK-004), entity Data Vallis (ADR-007), NSFW behind age gate from day one (ADR-006).
 - 2026-10-29: TASK-010 scaffold **Built**, pushed to `dev` (commit `chore: scaffold…`) — proof in `docs/tasks/TASK-010.feedback.md`. ADR-010…017; owner accepted ADR-011…015 and dropped uat (ADR-016); admin login = magic link (ADR-017) via mail.datavallis.com (ADR-018).
 - 2026-10-29: TASK-010b Kamal deploy (ADR-019/021) — PR #1 merged to `dev` (CI run 40896479493 green; Deploy dev skipped until owner setup).
-- 2026-10-29: TASK-011a data model + migrations — PR to `dev` — `docs/tasks/TASK-011a.feedback.md`. TASK-011 split agreed (ADR-020).
+- 2026-10-29: TASK-011a data model + migrations — PR #2 merged to `dev` (CI green incl. db:check).
+- 2026-10-29 16:16: first dev deploy (owner, Deploy dev with setup) — run 40899557896 success; smoke check: sha 548417e, db ok, home 200, noindex. Robots disallow confirmed externally. TASK-011 split agreed (ADR-020).
 
 ## Owner's open actions
-1. Default branch = `dev` (check).
-2. Follow `docs/runbooks/deploy-dev.md`: Cloudflare DNS (grey cloud), nginx + certbot on the host, GitHub variables/secrets, first "Deploy dev" with setup = true; then `DEPLOY_DEV_ENABLED=true`.
-3. DNS for hi@thecrushguy.com on mail.datavallis.com: MX, SPF, DKIM, DMARC (ADR-018).
-4. Set repo variable `ADMIN_EMAILS` (owner's address, ADR-020).
+1. Set repo variable `DEPLOY_DEV_ENABLED=true` (auto-deploy on merge to `dev`).
+2. DNS for hi@thecrushguy.com on mail.datavallis.com: MX, SPF, DKIM, DMARC (ADR-018) — needed before TASK-011b can send mail; then add env secret `SMTP_PASSWORD` (environment `dev`).
+3. Server shows "System restart required" — reboot at a quiet time (affects all apps on the host).
+4. Delete the local private key file `~/tcg_deploy` after storing it in the password manager.
 5. Claim social handles @thecrushguy. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006).
 
 ## Parked ideas
@@ -57,5 +58,4 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 - Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-021 (next free ADR-022).
 
 ## Open items
-- Docker image build not yet run anywhere (first Kamal deploy will prove it).
 

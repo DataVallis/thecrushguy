@@ -356,7 +356,7 @@ Status values: Proposed · Accepted · Superseded by ADR-XXX · Open.
 | Working mode | **B (autonomous)** since 2026-10-29 — owner: "to odpreš PR in mergaš v dev sam"; agent merges to `dev` only on green CI; `main` (prod) stays owner-only. |
 | Repo | DataVallis/thecrushguy, default branch `dev` |
 | Stack | Node 22, Next.js 16.4 (App Router, Cache Components), Tailwind 4, PostgreSQL 16 + Drizzle, Vitest, Docker standalone, GitHub Actions + GHCR, Kamal 2 on shared Hetzner host (ADR-019) |
-| Environments and URLs | dev: https://dev.thecrushguy.com · prod: https://thecrushguy.com (both on Hetzner 91.99.191.8, not yet Live) · **no uat** (ADR-016) · prod auto-deploys on merge to `main` (ADR-021) |
+| Environments and URLs | dev: https://dev.thecrushguy.com · prod: https://thecrushguy.com (both on Hetzner 91.99.191.8; dev Live since 2026-10-29, prod not yet) · **no uat** (ADR-016) · prod auto-deploys on merge to `main` (ADR-021) |
 | Test commands | lint: `npm run lint` · typecheck: `npm run typecheck` · format: `npm run format:check` · unit+integration: `npm test` (needs DATABASE_URL to a real Postgres) · e2e: not yet |
 | CI duration / deploy duration | not measured yet / not measured yet |
 | PR size guideline | ~800 changed lines |

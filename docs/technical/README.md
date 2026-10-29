@@ -4,12 +4,12 @@ Which doc covers which code. Every PR that changes an area updates its doc (DEVE
 
 | Area | Code | Doc | Status |
 |---|---|---|---|
-| Routing + i18n | `src/proxy.ts`, `src/lib/routing.ts`, `src/i18n/*`, `src/app/[locale]/layout.tsx` | `routing-i18n.md` | Built |
-| Runtime env + indexing guard | `src/lib/env.ts`, `src/proxy.ts`, `src/app/robots.txt/route.ts` | `routing-i18n.md` §Indexing | Built |
-| Database + migrations + link encryption | `src/lib/db/*`, `src/lib/crypto/*`, `src/instrumentation*.ts`, `drizzle.config.ts`, `drizzle/` | `database.md` | Built |
-| Health | `src/app/api/health/route.ts` | this file below | Built |
+| Routing + i18n | `src/proxy.ts`, `src/lib/routing.ts`, `src/i18n/*`, `src/app/[locale]/layout.tsx` | `routing-i18n.md` | Live on dev |
+| Runtime env + indexing guard | `src/lib/env.ts`, `src/proxy.ts`, `src/app/robots.txt/route.ts` | `routing-i18n.md` §Indexing | Live on dev |
+| Database + migrations + link encryption | `src/lib/db/*`, `src/lib/crypto/*`, `src/instrumentation*.ts`, `drizzle.config.ts`, `drizzle/` | `database.md` | Live on dev |
+| Health | `src/app/api/health/route.ts` | this file below | Live on dev |
 | Fonts + tokens | `src/app/globals.css`, `src/fonts/` | `design-system.md` (TASK-003) | Built (placeholder tokens) |
-| Build + deploy | `Dockerfile`, `.github/workflows/*.yml`, `config/deploy*.yml`, `.kamal/`, `ops/nginx/` | `docs/runbooks/deploy-dev.md` | Built |
+| Build + deploy | `Dockerfile`, `.github/workflows/*.yml`, `config/deploy*.yml`, `.kamal/`, `ops/nginx/` | `docs/runbooks/deploy-dev.md` | Live on dev |
 
 ## Health endpoint
 `GET /api/health` → 200 `{"status":"ok","db":"ok","env":"<APP_ENV>","sha":"<GIT_SHA>"}` when `select 1` succeeds within 2 s; otherwise 503 `{"status":"error","db":"down",...}` without error details. Always `Cache-Control: no-store`. Used by the Docker `HEALTHCHECK`, kamal-proxy and the deploy smoke check (compares `sha` with the pushed commit).

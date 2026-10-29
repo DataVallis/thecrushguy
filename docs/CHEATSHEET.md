@@ -4,7 +4,7 @@
 | What | URL |
 |---|---|
 | Repo | https://github.com/DataVallis/thecrushguy (default branch `dev`) |
-| dev | https://dev.thecrushguy.com (auto-deploy on push to `dev` once `DEPLOY_DEV_ENABLED=true`) |
+| dev | https://dev.thecrushguy.com — **Live** (auto-deploy on push to `dev` once `DEPLOY_DEV_ENABLED=true`) |
 | dev health | https://dev.thecrushguy.com/api/health → `"status":"ok"`, `"db":"ok"`, `"sha"` = last commit on dev |
 | prod | https://thecrushguy.com (auto-deploy on merge to `main` once `DEPLOY_PROD_ENABLED=true`, ADR-021) |
 
