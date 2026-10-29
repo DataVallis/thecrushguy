@@ -16,6 +16,8 @@ type AppRow = {
   feat_long_term_memory: boolean;
   platforms: string[];
   nsfw_allowed: boolean;
+  feat_custom_character: boolean;
+  audience: string | null;
 };
 
 export type AutoCategory = {
@@ -38,6 +40,28 @@ export const AUTO_CATEGORIES: AutoCategory[] = [
       "Every AI companion app we list — AI girlfriends, boyfriends, friends and character chats — ranked by our score. Prices, free plans and privacy facts are checked against each app's own pages.",
     sort: 10,
     rule: () => true,
+  },
+  {
+    slug: "ai-girlfriend-apps",
+    name: "Best AI girlfriend apps",
+    description:
+      "AI companion apps built around a virtual girlfriend (as the app presents itself), ranked by our score. Prices, free plans and privacy facts are linked to their sources.",
+    sort: 12,
+    rule: (a) => a.audience === "girlfriend" || a.audience === "both",
+  },
+  {
+    slug: "ai-boyfriend-apps",
+    name: "Best AI boyfriend apps",
+    description: "AI companion apps that offer a virtual boyfriend (as the app presents itself), ranked by our score.",
+    sort: 14,
+    rule: (a) => a.audience === "boyfriend" || a.audience === "both",
+  },
+  {
+    slug: "ai-roleplay-character-chat",
+    name: "Best AI roleplay and character chat apps",
+    description: "AI companion apps where you create your own characters and scenarios, ranked by our score.",
+    sort: 16,
+    rule: (a) => a.feat_custom_character,
   },
   {
     slug: "free-ai-companion-apps",
@@ -106,7 +130,8 @@ export async function syncAutoCategories(sql: postgres.Sql | Tx, actor: string):
   let changes = 0;
   const apps = await sql<AppRow[]>`
     select id, has_free_plan, starting_price_cents, currency, feat_voice, feat_image_gen, feat_long_term_memory,
-      platforms, nsfw_allowed from apps where status in ('draft', 'published', 'paused')`;
+      platforms, nsfw_allowed, feat_custom_character, facts -> 'audience' ->> 'v' as audience
+    from apps where status in ('draft', 'published', 'paused')`;
   for (const c of AUTO_CATEGORIES) {
     let [cat] = await sql<{ id: string; name: string; description: string | null; is_nsfw: boolean; sort: number }[]>`
       select id, name, description, is_nsfw, sort from categories where slug = ${c.slug}`;

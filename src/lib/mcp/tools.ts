@@ -77,6 +77,7 @@ const FACT_PATHS = [
   "operator.country",
   "operator.address_stated",
   "no_deepfake_feature",
+  "audience",
 ] as const;
 
 const CHECK_ITEMS = [
@@ -226,7 +227,7 @@ export const TOOLS: Tool[] = [
   },
   {
     name: "set_fact",
-    description: `Set one sourced fact and recompute the data review. path: ${FACT_PATHS.join(", ")}. value: yes/no/unknown (training also opt-out; operator.name/country/free_plan_limits/age_verification are text). A quote (≤25 words) is required for privacy.* and terms.*.`,
+    description: `Set one sourced fact and recompute the data review. path: ${FACT_PATHS.join(", ")}. value: yes/no/unknown (training also opt-out; audience: girlfriend/boyfriend/both/friend — who the companions are as the app presents them; operator.name/country/free_plan_limits/age_verification are text). A quote (≤25 words) is required for privacy.* and terms.*.`,
     input: z.object({
       slug,
       path: z.enum(FACT_PATHS),
