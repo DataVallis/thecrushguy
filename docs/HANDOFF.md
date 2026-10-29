@@ -70,7 +70,7 @@ Done by owner 2026-10-29 17:59: `LINK_ENCRYPTION_KEY` (dev), Cloudflare setup.
 - Owner: `/admin/research` → Import research bundle → gallery check → publish (ADR-030). Then affiliate links per app.
 - Next agent work: categories from the v1 sitemap filled automatically from facts; facts for remaining candidates; comparison/alternatives templates.
 - In parallel: TASK-003 CGP, TASK-005 keywords, TASK-006 app universe, review testing template.
-- Latest numbers: TASK-019 (+010b, 011a–d sub-tasks; next free TASK-020) · ADR-032 (next free ADR-033).
+- Latest numbers: TASK-019 (+010b, 011a–d sub-tasks; next free TASK-021) · ADR-032 (next free ADR-033).
 
 ## Open items
 
