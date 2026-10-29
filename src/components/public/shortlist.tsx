@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { fmt } from "@/i18n/format";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -30,7 +31,7 @@ export function Shortlist(props: { apps: AppCard[]; locale: string; t: Dictionar
     <div className="flex flex-col gap-4">
       <fieldset className="flex flex-col gap-2">
         <legend className="mb-2 font-display text-lg font-extrabold">{t.home.filterTitle}</legend>
-        <div className="flex flex-wrap gap-2">
+        <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-5 sm:overflow-visible sm:px-0">
           {(Object.keys(TEST) as FilterKey[]).map((k) => {
             const active = on.includes(k);
             return (
@@ -39,12 +40,15 @@ export function Shortlist(props: { apps: AppCard[]; locale: string; t: Dictionar
                 type="button"
                 aria-pressed={active}
                 onClick={() => toggle(k)}
-                className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta ${
-                  active ? "border-ink bg-ink text-white" : "border-ink/15 bg-white text-ink hover:border-ink/40"
+                className={`flex w-32 shrink-0 snap-start flex-col items-center gap-1 rounded-3xl border-2 bg-white p-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta sm:w-auto ${
+                  active ? "border-ink shadow-[0_6px_0_0_#1B1530]" : "border-ink/10 hover:border-ink/40"
                 }`}
               >
-                {active ? "✓ " : ""}
-                {t.filters[k]}
+                <Image src={`/illustrations/${k}.svg`} alt="" width={88} height={88} unoptimized />
+                <span className="flex items-center gap-1">
+                  {active ? <span aria-hidden>✓</span> : null}
+                  {t.filters[k]}
+                </span>
               </button>
             );
           })}
@@ -75,7 +79,13 @@ export function Shortlist(props: { apps: AppCard[]; locale: string; t: Dictionar
           ))}
         </ol>
       ) : (
-        <p className="rounded-3xl bg-white p-6 text-center text-muted">{t.home.noMatch}</p>
+        <div className="flex flex-col items-center gap-3 rounded-3xl bg-white p-8 text-center text-muted">
+          <Image src="/illustrations/search.svg" alt="" width={160} height={128} unoptimized />
+          <p>{t.home.noMatch}</p>
+          <button type="button" onClick={() => setOn([])} className="font-semibold text-ink underline">
+            {t.home.clear}
+          </button>
+        </div>
       )}
     </div>
   );

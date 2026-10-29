@@ -3,6 +3,7 @@ import { fmt, money } from "@/i18n/format";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { AppCard } from "@/lib/public/catalog";
 import { toTen } from "@/lib/public/scoring";
+import { AppCover } from "./cover";
 
 export function ScoreBadge({ score, t, size = "md" }: { score: number; t: Dictionary; size?: "md" | "lg" }) {
   const big = size === "lg";
@@ -17,24 +18,9 @@ export function ScoreBadge({ score, t, size = "md" }: { score: number; t: Dictio
   );
 }
 
-/** Profile-photo stand-in: the app's initial on blush with a small coral heart (we never use vendor imagery). */
-export function Avatar({ name, size = "md" }: { name: string; size?: "md" | "lg" }) {
-  const big = size === "lg";
-  return (
-    <span
-      aria-hidden
-      className={`relative flex shrink-0 items-center justify-center rounded-2xl bg-blush font-display font-extrabold text-coral-strong ${big ? "size-20 text-4xl" : "size-12 text-xl"}`}
-    >
-      {name.slice(0, 1).toUpperCase()}
-      <svg
-        viewBox="0 0 24 24"
-        className={`absolute -right-1 -bottom-1 fill-coral ${big ? "size-6" : "size-4"}`}
-        aria-hidden
-      >
-        <path d="M12 21s-7.5-4.6-10-9.3C.4 8.4 2.3 4.5 6 4.5c2.2 0 3.6 1.3 4.5 2.6l1.5 2 1.5-2c.9-1.3 2.3-2.6 4.5-2.6 3.7 0 5.6 3.9 4 7.2C19.5 16.4 12 21 12 21z" />
-      </svg>
-    </span>
-  );
+/** The app's cover tile (own artwork, TASK-019). */
+export function Avatar({ name, slug, size = "md" }: { name: string; slug: string; size?: "md" | "lg" }) {
+  return <AppCover slug={slug} name={name} variant={size === "lg" ? "tile-lg" : "tile"} />;
 }
 
 /** Outbound CTA → /go/{slug} (TASK-013): affiliate link if we have one, else the app's official site (TASK-018). */
@@ -124,7 +110,7 @@ export function AppRow(props: { app: AppCard; rank?: number; locale: string; t: 
               {props.rank}
             </span>
           ) : null}
-          <Avatar name={app.name} />
+          <Avatar name={app.name} slug={app.slug} />
           <div className="min-w-0 flex-1">
             <h3 className="font-display text-xl leading-tight font-extrabold">
               {/* The name link covers the card (stretched link) so the whole card opens the review. */}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
@@ -85,8 +86,16 @@ async function HomeBody({ locale, t }: { locale: Locale; t: Dictionary }) {
             {t.home.faqTitle}
           </h2>
           <dl className="grid gap-6 sm:grid-cols-3">
-            {faq.map((f) => (
-              <div key={f.q}>
+            {faq.map((f, i) => (
+              <div key={f.q} className="rounded-3xl bg-white p-5">
+                <Image
+                  src={`/illustrations/${["search", "free", "voice"][i] ?? "search"}.svg`}
+                  alt=""
+                  width={72}
+                  height={72}
+                  unoptimized
+                  className="mb-2"
+                />
                 <dt className="font-display text-lg leading-snug font-extrabold">{f.q}</dt>
                 <dd className="mt-1 text-sm leading-relaxed text-muted">{f.a}</dd>
               </div>
@@ -143,7 +152,18 @@ function Hero({ t, locale, data }: { t: Dictionary; locale: Locale; data: HomeDa
             </Link>
           </p>
         </div>
-        {pick ? <PickCard app={pick} locale={locale} t={t} /> : null}
+        <div className="relative pt-32 md:pt-44">
+          <Image
+            src="/illustrations/hero.svg"
+            alt=""
+            width={240}
+            height={210}
+            priority
+            unoptimized
+            className="absolute top-0 right-2 z-10 w-40 md:right-6 md:w-56"
+          />
+          {pick ? <PickCard app={pick} locale={locale} t={t} /> : null}
+        </div>
       </div>
     </section>
   );
@@ -156,7 +176,7 @@ function PickCard({ app, locale, t }: { app: AppCard; locale: Locale; t: Diction
         {t.home.topPick}
       </p>
       <div className="flex items-center gap-4">
-        <Avatar name={app.name} size="lg" />
+        <Avatar name={app.name} slug={app.slug} size="lg" />
         <div className="min-w-0 flex-1">
           <h2 className="font-display text-2xl leading-tight font-extrabold">
             <Link href={`/${locale}/app/${app.slug}`} className="hover:underline">
