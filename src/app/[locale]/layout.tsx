@@ -24,7 +24,14 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     description: t.meta.description,
     // Unpublished (untranslated/unreviewed) locales are never indexed.
     robots: published ? undefined : { index: false, follow: false },
-    icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+    icons: {
+      icon: [
+        { url: "/icon.svg", type: "image/svg+xml" },
+        { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+        { url: "/favicon.ico", sizes: "48x48" },
+      ],
+      apple: "/apple-touch-icon.png",
+    },
     openGraph: { siteName: "The Crush Guy", images: ["/og-default.png"], locale },
   };
 }
