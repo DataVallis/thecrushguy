@@ -16,6 +16,8 @@ import { importAppsCsv, type ImportReport } from "./csv-import";
 import { assertPublishable, audit, changes, type Tx } from "./repo";
 
 /** Marks the one price row the facts import manages (shown publicly as the plan note). */
+/** Note used by the first TASK-016 build; rows with it are still managed (and renamed) by the import. */
+const LEGACY_PLAN_NOTE = "Imported from public facts (ADR-030)";
 export const IMPORTED_PLAN_NOTE = "Cheapest monthly price on the app's pricing page or store listing";
 
 const bundleFacts = z.array(
@@ -187,8 +189,13 @@ async function syncPlan(
   r: ReturnType<typeof computeDataReview>,
   checkedAt: Date,
 ): Promise<boolean> {
-  const [existing] = await tx<{ id: string; price_cents: number; currency: string }[]>`
-    select id, price_cents, currency from pricing_plans where app_id = ${appId} and notes = ${IMPORTED_PLAN_NOTE}`;
+  const [existing, ...dupes] = await tx<{ id: string; price_cents: number; currency: string; notes: string }[]>`
+    select id, price_cents, currency, notes from pricing_plans
+    where app_id = ${appId} and notes in (${IMPORTED_PLAN_NOTE}, ${LEGACY_PLAN_NOTE}) order by created_at`;
+  for (const d of dupes) {
+    await tx`delete from pricing_plans where id = ${d.id}`;
+    await audit(tx, actor, "import-facts", "pricing_plan", d.id, { deleted: [d.price_cents, null] });
+  }
   const priceSrc = r.sources.find((s) => s.field === "pricing");
   if (r.startingPriceCents === null || !r.currency || !priceSrc) {
     if (!existing) return false;
@@ -196,7 +203,13 @@ async function syncPlan(
     await audit(tx, actor, "import-facts", "pricing_plan", existing.id, { deleted: [existing.price_cents, null] });
     return true;
   }
-  if (existing && existing.price_cents === r.startingPriceCents && existing.currency === r.currency) return false;
+  if (
+    existing &&
+    existing.price_cents === r.startingPriceCents &&
+    existing.currency === r.currency &&
+    existing.notes === IMPORTED_PLAN_NOTE
+  )
+    return dupes.length > 0;
   const [src] = await tx<{ id: string }[]>`
     select id from sources where app_id = ${appId} and url = ${priceSrc.url} and field = 'pricing'`;
   const sourceId =

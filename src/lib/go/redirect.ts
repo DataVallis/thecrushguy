@@ -83,11 +83,13 @@ export function withSubId(url: string, placement: string, locale: string | null)
 export type Target =
   | { kind: "affiliate"; appId: string; linkId: string; url: string }
   | { kind: "app-page"; appId: string; url: string }
+  | { kind: "website"; appId: string; url: string }
   | { kind: "not-found" };
 
 /**
  * Where `/go/{slug}` sends the visitor. Only published apps are reachable. No active link (or a link that can't
- * be decrypted) → our own app page, never a 404, so a dead campaign link still lands somewhere useful.
+ * be decrypted) → the app's official website (TASK-018: visitors expect "Visit X" to open X), or our own app page
+ * if the stored website isn't a valid http(s) URL — never a 404.
  */
 export async function resolveTarget(
   sql: postgres.Sql,
@@ -96,14 +98,20 @@ export async function resolveTarget(
 ): Promise<Target> {
   const slug = cleanSlug(slugRaw);
   if (!slug) return { kind: "not-found" };
-  const [row] = await sql<{ app_id: string; link_id: string | null; url_encrypted: string | null }[]>`
-    select a.id as app_id, l.id as link_id, l.url_encrypted
+  const [row] = await sql<
+    { app_id: string; link_id: string | null; url_encrypted: string | null; website_url: string }[]
+  >`
+    select a.id as app_id, l.id as link_id, l.url_encrypted, a.website_url
     from apps a left join affiliate_links l on l.app_id = a.id and l.active
     where a.slug = ${slug} and a.status = 'published'`;
   if (!row) return { kind: "not-found" };
   const pageLocale = opts.locale && publishedLocales.includes(opts.locale) ? opts.locale : defaultLocale;
   const appPage = `/${pageLocale}/app/${slug}`;
-  if (!row.link_id || !row.url_encrypted) return { kind: "app-page", appId: row.app_id, url: appPage };
+  const fallback = (): Target =>
+    /^https?:\/\/\S+$/.test(row.website_url) && URL.canParse(row.website_url)
+      ? { kind: "website", appId: row.app_id, url: row.website_url }
+      : { kind: "app-page", appId: row.app_id, url: appPage };
+  if (!row.link_id || !row.url_encrypted) return fallback();
   try {
     const plain = opts.key ? decryptLink(row.url_encrypted, opts.key) : decryptLink(row.url_encrypted);
     if (!/^https:\/\//.test(plain)) throw new Error("non-https target");
@@ -116,7 +124,7 @@ export async function resolveTarget(
   } catch (err) {
     // Wrong/missing key or tampered ciphertext: fail safe to our own page and say so in the log (no URL, no key).
     console.error("[go] affiliate link unusable:", err instanceof Error ? err.message : "unknown error");
-    return { kind: "app-page", appId: row.app_id, url: appPage };
+    return fallback();
   }
 }
 

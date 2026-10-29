@@ -29,14 +29,15 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/go/[slug]">)
 
   if (target.kind === "not-found") return new Response("Not found", { status: 404, headers: HEADERS });
 
-  const location = target.kind === "affiliate" ? target.url : new URL(target.url, siteUrl()).toString();
+  const location = target.kind === "app-page" ? new URL(target.url, siteUrl()).toString() : target.url;
   const ua = request.headers.get("user-agent");
-  if (target.kind === "affiliate" && !isBot(ua)) {
+  // Website clicks are logged too (link_id null): shows which apps are worth an affiliate deal.
+  if (target.kind !== "app-page" && !isBot(ua)) {
     const ip = request.headers.get("x-real-ip")?.trim() || "unknown";
     const now = new Date();
     const click = {
       appId: target.appId,
-      linkId: target.linkId,
+      linkId: target.kind === "affiliate" ? target.linkId : null,
       placement,
       locale,
       country: countryOf(request.headers.get("cf-ipcountry")),

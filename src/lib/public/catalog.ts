@@ -16,6 +16,11 @@ export type AppCard = {
   startingPriceCents: number | null;
   currency: string | null;
   rankOverride?: number | null;
+  /** For list cards (TASK-018): advertised features, strongest pro/con ("green/red flag"), rating method. */
+  features: { voice: boolean; imageGen: boolean; memory: boolean };
+  greenFlag: string | null;
+  redFlag: string | null;
+  reviewMethod: "data" | "hands_on";
 };
 
 export type PricingRow = {
@@ -65,6 +70,12 @@ const scoresOf = (r: Row): Scores => ({
   privacy: r.score_privacy as number | null,
 });
 
+/** The most telling pro/con for a card: skip ones the fact chips already show or that nearly every app shares. */
+function pickFlag(list: string[] | null, skip: RegExp): string | null {
+  if (!list?.length) return null;
+  return list.find((x) => !skip.test(x)) ?? list[0]!;
+}
+
 const cardOf = (r: Row): AppCard => ({
   slug: r.slug as string,
   name: r.name as string,
@@ -73,6 +84,14 @@ const cardOf = (r: Row): AppCard => ({
   hasFreePlan: (r.has_free_plan as boolean | null) ?? null,
   startingPriceCents: (r.starting_price_cents as number | null) ?? null,
   currency: (r.currency as string | null) ?? null,
+  features: {
+    voice: r.feat_voice as boolean,
+    imageGen: r.feat_image_gen as boolean,
+    memory: r.feat_long_term_memory as boolean,
+  },
+  greenFlag: pickFlag(r.pros as string[] | null, /^(free plan|low entry price)/i),
+  redFlag: pickFlag(r.cons as string[] | null, /tokens\/credits/i),
+  reviewMethod: r.review_method === "data" ? "data" : "hands_on",
 });
 
 /** Ranked: our score, high → low; ties by name. Never by affiliate terms (ADR-005). */
@@ -183,27 +202,36 @@ export async function loadCategoryPage(db: postgres.Sql, slug: string): Promise<
   };
 }
 
-export type HomeData = { top: AppCard[]; categories: (CategoryRef & { count: number })[]; recent: AppCard[] };
+export type HomeData = {
+  /** Every published app, ranked by our score (ADR-005). */
+  all: AppCard[];
+  top: AppCard[];
+  categories: (CategoryRef & { count: number })[];
+  recent: AppCard[];
+  stats: { apps: number; sources: number };
+};
 
 export async function loadHomeData(db: postgres.Sql): Promise<HomeData> {
-  const [apps, cats] = await Promise.all([
+  const [apps, cats, [src]] = await Promise.all([
     db<Row[]>`select * from apps where status = 'published'`,
     db<{ slug: string; name: string; is_nsfw: boolean; count: number }[]>`
       select c.slug, c.name, c.is_nsfw, count(a.id)::int as count from categories c
       join app_categories ac on ac.category_id = c.id
       join apps a on a.id = ac.app_id and a.status = 'published'
       where not c.is_nsfw group by c.id order by c.sort, c.name`,
+    db<{ n: number }[]>`select count(*)::int as n from sources s join apps a on a.id = s.app_id
+      where a.status = 'published'`,
   ]);
   const cards = apps.map((r) => ({ card: cardOf(r), created: r.created_at as Date }));
+  const all = cards.map((c) => c.card).sort(byScore);
   return {
-    top: cards
-      .map((c) => c.card)
-      .sort(byScore)
-      .slice(0, 10),
+    all,
+    top: all.slice(0, 10),
     categories: cats.map((c) => ({ slug: c.slug, name: c.name, isNsfw: c.is_nsfw, count: c.count })),
-    recent: cards
+    recent: [...cards]
       .sort((a, b) => b.created.getTime() - a.created.getTime())
-      .slice(0, 5)
+      .slice(0, 6)
       .map((c) => c.card),
+    stats: { apps: all.length, sources: src?.n ?? 0 },
   };
 }
