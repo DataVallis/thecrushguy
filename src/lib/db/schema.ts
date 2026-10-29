@@ -39,8 +39,7 @@ export const affiliateNetwork = pgEnum("affiliate_network", ["direct", "crakreve
 export const affiliateModel = pgEnum("affiliate_model", ["revshare", "cpa", "pps", "hybrid"]);
 export const translationStatus = pgEnum("translation_status", ["machine", "reviewed"]);
 
-/** Allowed platform values for `apps.platforms` (validated in the app layer with zod). */
-export const PLATFORMS = ["web", "ios", "android", "desktop", "telegram", "discord"] as const;
+export { PLATFORMS } from "./platforms";
 
 const score = (name: string) => smallint(name);
 

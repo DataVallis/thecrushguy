@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { requestLinkAction } from "../actions";
+import { requestLinkAction } from "@/app/admin/actions";
 
 export const metadata: Metadata = { title: "Sign in" };
 
