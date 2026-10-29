@@ -7,7 +7,10 @@ import { isLocale, publishedLocales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { fmt } from "@/i18n/format";
 import { NsfwSection } from "@/lib/age-gate/gate";
+import { siteUrl } from "@/lib/env";
 import { getCategoryPage } from "@/lib/public/cached";
+import { JsonLd, breadcrumbLd, categoryListLd } from "@/lib/seo/jsonld";
+import { DESCRIPTION_MAX, TITLE_MAX, alternatesFor, clamp } from "@/lib/seo/meta";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/category/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -16,9 +19,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/category
   if (!cat) return { robots: { index: false } };
   const title = fmt(t.category.title, { name: cat.name });
   return {
-    title,
-    description: cat.description ?? undefined,
-    alternates: { canonical: `/${locale}/category/${slug}` },
+    title: clamp(title, TITLE_MAX),
+    description: clamp(cat.description ?? `${title}, ranked by our independent score.`, DESCRIPTION_MAX),
+    alternates: alternatesFor(locale, `/category/${slug}`),
     // Adults-only category pages are gated → never indexed (ADR-025/026). Thin (empty) lists aren't either.
     robots:
       cat.isNsfw || cat.apps.length === 0 || !publishedLocales.includes(locale)
@@ -52,6 +55,17 @@ async function Category({ params }: PageProps<"/[locale]/category/[slug]">) {
     );
   return (
     <div className="flex flex-col gap-6">
+      {cat.isNsfw ? null : (
+        <JsonLd
+          data={[
+            categoryListLd(siteUrl(), locale, cat),
+            breadcrumbLd([
+              { name: t.nav.home, url: `${siteUrl()}/${locale}` },
+              { name: cat.name, url: `${siteUrl()}/${locale}/category/${slug}` },
+            ]),
+          ]}
+        />
+      )}
       <header className="flex flex-col gap-2">
         <h1 className="font-display text-3xl font-extrabold sm:text-4xl">
           {fmt(t.category.title, { name: cat.name })}

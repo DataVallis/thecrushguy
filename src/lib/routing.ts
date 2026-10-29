@@ -1,7 +1,7 @@
 import { isLocale, negotiateLocale } from "@/i18n/config";
 
 /** Paths that are never locale-prefixed. */
-const UNLOCALIZED_PREFIXES = ["/api/", "/go/", "/admin", "/_next/"];
+const UNLOCALIZED_PREFIXES = ["/api/", "/go/", "/admin", "/_next/", "/sitemaps/"];
 const UNLOCALIZED_EXACT = ["/robots.txt", "/sitemap.xml", "/favicon.ico", "/manifest.webmanifest"];
 
 export function needsLocale(pathname: string): boolean {

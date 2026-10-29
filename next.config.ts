@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
   output: "standalone", // Docker image runs .next/standalone/server.js (docs/runbooks/deploy-dev.md)
   poweredByHeader: false,
   cacheComponents: true,
+  // One branded 404 for unmatched URLs: we have multiple root layouts ([locale], admin) — TASK-014, ADR-028.
+  experimental: { globalNotFound: true },
   partialPrefetching: true,
   typedRoutes: true,
   turbopack: {

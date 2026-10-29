@@ -32,6 +32,7 @@ import {
   sourceInput,
 } from "@/lib/admin/listing";
 import { requireAdmin } from "@/lib/auth/session";
+import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { sql } from "@/lib/db/client";
 
 /**
@@ -51,6 +52,7 @@ function failure(prev: FormState, errors: Record<string, string>, values: Record
 
 /** Cache tags for public pages (ADR-013); public pages tag their data with these in TASK-012. */
 function invalidateApps(slug?: string) {
+  forgetKnownSlugs(); // proxy 404 check sees new/renamed/unpublished slugs immediately
   updateTag("apps");
   if (slug) updateTag(`app:${slug}`);
 }
@@ -107,6 +109,7 @@ export async function saveCategoryAction(id: string | null, prev: FormState, for
     if (err instanceof AdminError) return failure(prev, { [err.field]: err.message }, raw);
     throw err;
   }
+  forgetKnownSlugs();
   updateTag("categories");
   redirect("/admin/categories?saved=1");
 }

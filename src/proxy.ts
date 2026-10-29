@@ -1,9 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { adminGateRedirect, isAdminPath } from "@/lib/auth/gate";
+import { sql } from "@/lib/db/client";
 import { isIndexable } from "@/lib/env";
+import { knownSlugs } from "@/lib/seo/known-slugs";
+import { needsSlugCheck, notFoundRewrite } from "@/lib/seo/not-found";
 import { localeRedirect } from "@/lib/routing";
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const admin = isAdminPath(pathname);
   const target = admin
@@ -13,9 +16,12 @@ export function proxy(request: NextRequest) {
       )
     : localeRedirect(pathname, request.headers.get("accept-language"));
 
-  const response = target
-    ? NextResponse.redirect(new URL(admin ? target : `${target}${search}`, request.url), 307)
-    : NextResponse.next();
+  let response: NextResponse;
+  if (target) response = NextResponse.redirect(new URL(admin ? target : `${target}${search}`, request.url), 307);
+  else {
+    const missing = admin ? null : notFoundRewrite(pathname, needsSlugCheck(pathname) ? await knownSlugs(sql) : null);
+    response = missing ? NextResponse.rewrite(new URL(missing, request.url)) : NextResponse.next();
+  }
 
   // Runtime guard: only prod may be indexed (same image runs in dev and prod).
   if (!isIndexable()) response.headers.set("X-Robots-Tag", "noindex, nofollow");

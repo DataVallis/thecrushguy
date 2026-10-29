@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { INFO, INFO_PAGES, type InfoPage } from "@/content/info-pages";
 import { isLocale, locales, publishedLocales } from "@/i18n/config";
+import { alternatesFor } from "@/lib/seo/meta";
 
 // Fully static: known page names prerendered at build (no database); anything else → notFound().
 export function generateStaticParams() {
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
   return {
     title: c.title,
     description: c.description,
-    alternates: { canonical: `/${locale}/${page}` },
+    alternates: alternatesFor(locale, `/${page}`),
     robots: c.indexable && publishedLocales.includes(locale) ? undefined : { index: false, follow: true },
   };
 }
