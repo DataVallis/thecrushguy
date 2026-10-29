@@ -48,6 +48,8 @@ The workflow's smoke check verifies the same automatically.
 | DB shell | `kamal accessory exec db -d dev --interactive --reuse "psql -U tcg thecrushguy_dev"` |
 
 ## 7. Prod (when the owner decides)
+Full go-live checklist (Cloudflare, prod secrets, release flow, verification): **`docs/runbooks/go-live-prod.md`**.
+
 GitHub environment **prod** with `PROD_HOST`, `DEPLOY_SSH_KEY`, `PROD_SSH_KNOWN_HOSTS`, `POSTGRES_PASSWORD` (new), `DATABASE_URL=postgres://tcg:<pw>@thecrushguy-prod-db:5432/thecrushguy_prod`. Actions → **Deploy prod** → branch `main`, setup = true the first time; then set repo variable `DEPLOY_PROD_ENABLED=true` — from then on **every merge to `main` deploys prod automatically** (ADR-021). Backups before prod go live (separate task).
 
 ## Migrations

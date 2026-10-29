@@ -45,17 +45,18 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 - 2026-10-29: TASK-011c admin console (apps, categories, publish flow, audit) — PR #6, Live on dev.
 - 2026-10-29: TASK-011d sources, pricing plans, affiliate links (encrypted), CSV import — PR #7, Live on dev.
 - 2026-10-29: TASK-013 `/go/{slug}` redirect + click tracking (ADR-024) — PR #8, Live on dev.
-- 2026-10-29: TASK-015 age gate infrastructure (ADR-025) — see `docs/tasks/TASK-015.feedback.md`.
+- 2026-10-29: TASK-015 age gate infrastructure (ADR-025) — PR #9, Live on dev.
+- 2026-10-29: go-live runbook `docs/runbooks/go-live-prod.md` + `ops/nginx/cloudflare-ips.sh` (real visitor IP + origin lock behind Cloudflare).
 - 2026-10-29 16:16: first dev deploy (owner, Deploy dev with setup) — run 40899557896 success; smoke check: sha 548417e, db ok, home 200, noindex. Robots disallow confirmed externally. TASK-011 split agreed (ADR-020).
 
 ## Owner's open actions
-0. Create GitHub environment secret `LINK_ENCRYPTION_KEY` in `dev` (and later `prod`, a different value): `openssl rand -base64 32`; keep a copy in your password manager. Until then saving an affiliate link on dev shows "LINK_ENCRYPTION_KEY is not configured".
-1. Done: `DEPLOY_DEV_ENABLED=true` (merge of PR #4 deployed automatically).
-2. Done per owner (2026-10-29 16:32): DNS for hi@thecrushguy.com and env secret `SMTP_PASSWORD`. Check after deploy: request a link at https://dev.thecrushguy.com/admin/login and confirm the mail arrives (if the server needs port 465, set repo variable `SMTP_PORT=465`).
-3. Server shows "System restart required" — reboot at a quiet time (affects all apps on the host).
-4. Delete the local private key file `~/tcg_deploy` after storing it in the password manager.
-5a. Proxy thecrushguy.com through Cloudflare (orange cloud) with "Add visitor location headers" and restrict origin nginx to Cloudflare IPs — until then the age gate hides NSFW sections for everyone (ADR-025).
-5. Claim social handles @thecrushguy. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006).
+Done by owner 2026-10-29: `DEPLOY_DEV_ENABLED=true`, DNS + `SMTP_PASSWORD` for hi@thecrushguy.com (magic-link mail received, login works on dev 17:38), server reboot, local `~/tcg_deploy` deleted.
+1. GitHub env secret `LINK_ENCRYPTION_KEY` in `dev` (`openssl rand -base64 32`, keep a copy) — until then affiliate links can't be saved on dev.
+2. Cloudflare proxy + "Add visitor location headers" + origin lock — `docs/runbooks/go-live-prod.md` §2 (until then the age gate hides NSFW sections everywhere, ADR-025).
+3. Imprint/privacy facts for Data Vallis d.o.o. (address, registration no., VAT no.) — needed by TASK-012.
+4. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006/025).
+5. Claim social handles @thecrushguy.
+6. Prod setup when ready: `docs/runbooks/go-live-prod.md` §1, §4.
 
 ## Parked ideas
 - Persona poses for the heart mascot (thumbs up, yawn, raised brow).

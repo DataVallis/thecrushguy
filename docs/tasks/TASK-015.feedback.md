@@ -1,5 +1,5 @@
 # TASK-015 feedback — age gate (pluggable)
-Status: DONE (Built) — infrastructure Live on dev after merge; NSFW sections arrive with TASK-012
+Status: DONE — infrastructure Live on dev (PR #9 → 19f4298); NSFW sections arrive with TASK-012
 
 ## What I implemented
 Policy + provider interface (`src/lib/age-gate/policy.ts`), request-time `NsfwSection` (`gate.tsx`), pure `GatedContent` view, `POST /api/age-gate` confirm route. Details: `docs/technical/age-gate.md`.

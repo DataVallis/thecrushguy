@@ -19,4 +19,4 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-012 | Public pages v1 | 003, 011 | Planned |
 | TASK-013 | `/go/` redirect + click tracking | 011 | DONE — PR #8, Live on dev |
 | TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Planned |
-| TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | Built — infrastructure (ADR-025); region list awaits lawyer |
+| TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | DONE — PR #9, Live on dev (infrastructure); region list awaits lawyer |
