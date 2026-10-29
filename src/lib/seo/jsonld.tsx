@@ -69,11 +69,17 @@ export function appLd(site: string, locale: string, app: AppDetail): Json {
     applicationCategory: "LifestyleApplication",
     ...(os ? { operatingSystem: os } : {}),
     ...(offers ? { offers } : {}),
-    review: {
-      "@type": "Review",
-      author: ORG,
-      reviewRating: { "@type": "Rating", ratingValue: toTen(app.overall), bestRating: "10", worstRating: "0" },
-      ...(app.verifiedAt ? { datePublished: new Date(app.verifiedAt).toISOString().slice(0, 10) } : {}),
-    },
+    // Review markup only for hands-on reviews: a rating computed from public facts is not a first-hand review
+    // (Google review-snippet guidelines; ADR-030).
+    ...(app.reviewMethod === "hands_on"
+      ? {
+          review: {
+            "@type": "Review",
+            author: ORG,
+            reviewRating: { "@type": "Rating", ratingValue: toTen(app.overall), bestRating: "10", worstRating: "0" },
+            ...(app.verifiedAt ? { datePublished: new Date(app.verifiedAt).toISOString().slice(0, 10) } : {}),
+          },
+        }
+      : {}),
   };
 }

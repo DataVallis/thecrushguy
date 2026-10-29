@@ -138,7 +138,12 @@ export type ImportReport = {
   errors: string[];
 };
 
-export async function importAppsCsv(sql: postgres.Sql, actor: string, text: string): Promise<ImportReport> {
+export async function importAppsCsv(
+  sql: postgres.Sql,
+  actor: string,
+  text: string,
+  opts: { createOnly?: boolean } = {},
+): Promise<ImportReport> {
   if (!actor) throw new Error("actor is required");
   const report: ImportReport = { created: 0, updated: 0, unchanged: 0, sourcesAdded: 0, skipped: 0, errors: [] };
   if (Buffer.byteLength(text, "utf8") > MAX_BYTES) return { ...report, errors: ["File is larger than 1 MB"] };
@@ -205,7 +210,7 @@ export async function importAppsCsv(sql: postgres.Sql, actor: string, text: stri
           values (${actor}, 'import', 'app', ${appId}, ${tx.json(JSON.parse(JSON.stringify({ slug: r.slug, ...cols })))})`;
       } else {
         appId = before.id as string;
-        const diff = changes(before, cols);
+        const diff = opts.createOnly ? {} : changes(before, cols);
         if (Object.keys(diff).length) {
           await tx`update apps set ${tx(cols)} where id = ${appId}`;
           report.updated++;

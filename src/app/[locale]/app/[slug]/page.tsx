@@ -81,6 +81,14 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
           <Verified app={app} locale={locale} t={t} />
         </div>
         <Disclosure locale={locale} t={t} />
+        {app.reviewMethod === "data" ? (
+          <p className="rounded-xl bg-lavender p-3 text-sm">
+            {t.app.dataReview}{" "}
+            <Link href={`/${locale}/how-we-rank`} className="font-semibold underline">
+              {t.app.howWeRate}
+            </Link>
+          </p>
+        ) : null}
       </header>
 
       <section aria-labelledby="facts">
@@ -116,14 +124,21 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
         </h2>
         <ul className="flex flex-col gap-3">
           {(Object.keys(WEIGHTS) as (keyof typeof WEIGHTS)[]).map((k) => {
-            const s = app.scores[k] ?? 0;
+            const score = app.scores[k];
+            const s = score ?? 0;
             return (
               <li key={k} className="rounded-2xl border border-ink/10 bg-white p-4">
                 <div className="flex items-center justify-between gap-3">
                   <span className="font-semibold">
                     {t.criteria[k]} <span className="text-xs font-normal text-muted">({WEIGHTS[k]}%)</span>
                   </span>
-                  <span className="font-display text-lg font-extrabold">{toTen(s)}</span>
+                  <span className="font-display text-lg font-extrabold">
+                    {score === null ? (
+                      <span className="text-sm font-semibold text-muted">{t.app.notTested}</span>
+                    ) : (
+                      toTen(s)
+                    )}
+                  </span>
                 </div>
                 <div className="mt-2 h-2 rounded-full bg-blush" aria-hidden>
                   <div className="h-2 rounded-full bg-coral" style={{ width: `${s}%` }} />
@@ -242,6 +257,27 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
           <ul className="flex flex-col gap-3">
             {app.alternatives.map((a) => (
               <AppRow key={a.slug} app={a} locale={locale} t={t} placement="app-alternatives" />
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {app.sources.length ? (
+        <section aria-labelledby="sources">
+          <h2 id="sources" className="mb-3 font-display text-xl font-extrabold">
+            {t.app.sources}
+          </h2>
+          <ul className="flex flex-col gap-1 text-sm">
+            {app.sources.map((s) => (
+              <li key={`${s.field}|${s.url}`}>
+                <span className="text-muted">{s.field}: </span>
+                <a href={s.url} rel="nofollow noopener" target="_blank" className="break-all underline">
+                  {new URL(s.url).host + new URL(s.url).pathname}
+                </a>{" "}
+                <span className="text-xs text-muted">
+                  ({fmt(t.app.checked, { date: shortDate(s.checkedAt, locale) })})
+                </span>
+              </li>
             ))}
           </ul>
         </section>

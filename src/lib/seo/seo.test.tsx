@@ -114,7 +114,14 @@ describe("JSON-LD", () => {
     platforms: ["web", "ios"],
     verifiedAt: new Date("2026-10-29T00:00:00Z"),
     pricing: [{ priceCents: 999, currency: "EUR" }],
+    reviewMethod: "hands_on",
   } as unknown as AppDetail;
+
+  it("data-based rating (ADR-030): no Review markup", () => {
+    const ld = appLd(SITE, "en", { ...app, reviewMethod: "data" });
+    expect(ld).toMatchObject({ "@type": "SoftwareApplication" });
+    expect(JSON.stringify(ld)).not.toMatch(/Review|Rating/);
+  });
 
   it("app: SoftwareApplication with our own Review (no AggregateRating), cheapest offer, OS list", () => {
     const ld = appLd(SITE, "en", app);

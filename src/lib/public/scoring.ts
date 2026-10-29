@@ -13,11 +13,19 @@ export const WEIGHTS: Readonly<Record<keyof Scores, number>> = {
   privacy: 10,
 };
 
-/** 0–100, rounded to one decimal. Missing sub-scores count as 0 (published apps have all six — ADR-026). */
+/**
+ * 0–100, rounded to one decimal. Weighted average over the sub-scores that exist: hands-on reviews have all six
+ * (ADR-026); data-based reviews leave "conversation" empty, so its weight is spread over the other five (ADR-030).
+ */
 export function overallScore(s: Scores): number {
   let sum = 0;
-  for (const [k, w] of Object.entries(WEIGHTS) as [keyof Scores, number][]) sum += (s[k] ?? 0) * w;
-  return Math.round(sum / 10) / 10;
+  let weight = 0;
+  for (const [k, w] of Object.entries(WEIGHTS) as [keyof Scores, number][]) {
+    if (s[k] === null) continue;
+    sum += s[k] * w;
+    weight += w;
+  }
+  return weight ? Math.round((sum / weight) * 10) / 10 : 0;
 }
 
 /** Display on a 0–10 scale with one decimal, e.g. 73.5 → "7.4" (round half up). */

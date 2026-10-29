@@ -67,7 +67,11 @@
       "year": "/ year",
       "lifetime": "one-time",
       "credits": "credits"
-    }
+    },
+    "dataReview": "Bewertet anhand öffentlicher Informationen – Preisseite, Datenschutzerklärung, AGB und Store-Einträge der App, unten verlinkt – noch nicht selbst getestet.",
+    "howWeRate": "So bewerten wir",
+    "notTested": "Nicht getestet",
+    "sources": "Quellen"
   },
   "criteria": {
     "conversation": "Conversation",

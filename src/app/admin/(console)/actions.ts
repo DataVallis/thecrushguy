@@ -7,6 +7,7 @@ import {
   createApp,
   createCategory,
   markVerified,
+  publishAfterGalleryCheck,
   setAppStatus,
   updateApp,
   updateCategory,
@@ -21,6 +22,7 @@ import {
   statusInput,
 } from "@/lib/admin/validation";
 import { importAppsCsv, type ImportReport } from "@/lib/admin/csv-import";
+import { bundleSchema, importResearchBundle, type FactsReport } from "@/lib/admin/facts-import";
 import {
   addSource,
   affiliateInput,
@@ -187,4 +189,47 @@ export async function importCsvAction(prev: ImportState, form: FormData): Promis
   const report = await importAppsCsv(sql(), actor, text);
   if (report.created || report.updated) invalidateApps();
   return { seq: prev.seq + 1, report };
+}
+
+// ---------- TASK-016: research bundle import + review queue (ADR-030) ----------
+
+export type ResearchState = {
+  seq: number;
+  seed?: ImportReport;
+  facts?: FactsReport;
+};
+
+export async function importResearchAction(prev: ResearchState): Promise<ResearchState> {
+  const actor = await requireAdmin();
+  const { default: bundle } = await import("@/data/research-bundle.json");
+  const result = await importResearchBundle(sql(), actor, bundleSchema.parse(bundle));
+  invalidateApps();
+  return { seq: prev.seq + 1, ...result };
+}
+
+/** Owner looked at the app's public gallery/marketing: no minor-coded content → tick + publish (07-LEGAL §2). */
+export async function galleryOkPublishAction(id: string, prev: FormState): Promise<FormState> {
+  const actor = await requireAdmin();
+  try {
+    await publishAfterGalleryCheck(sql(), actor, id);
+  } catch (err) {
+    if (err instanceof AdminError) return failure(prev, { [err.field]: err.message }, {});
+    throw err;
+  }
+  invalidateApps();
+  redirect("/admin/research?published=1");
+}
+
+export async function rejectFromQueueAction(id: string, prev: FormState, form: FormData): Promise<FormState> {
+  const actor = await requireAdmin();
+  const reason = String(form.get("reason") ?? "").trim();
+  if (reason.length < 3) return failure(prev, { reason: "Say why (e.g. minor-coded characters in gallery)" }, {});
+  try {
+    await setAppStatus(sql(), actor, id, "removed", reason.slice(0, 500));
+  } catch (err) {
+    if (err instanceof AdminError) return failure(prev, { [err.field]: err.message }, {});
+    throw err;
+  }
+  invalidateApps();
+  redirect("/admin/research?removed=1");
 }

@@ -170,3 +170,14 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 ## ADR-029 — Palette A "Midnight coral" (TASK-003)
 - Date: 2026-10-29 · Status: Accepted (owner picked option A from `palette-options.png`)
 - Decision: ink #1B1530, coral #FF4D6D (logo), coral-strong/CTA #C81E45 (hover #A8163A), blush #FFE4EA, paper #FFF8F9, lavender #F3F0FA, state colours. Primary CTA uses `cta` with white text because white on bright coral is only 3.2:1 (fails WCAG AA). `design/tokens.json` is the source of truth; `globals.css` mirrors it; a test enforces sync and AA contrast for every listed text pair. Guidelines: `design/CGP.md`.
+
+## ADR-030 — Data-based ratings without hands-on testing; owner does the gallery check (TASK-016)
+- Date: 2026-10-29 · Status: Accepted (owner: "dajmo avtomatizirat, nebom jaz testiral vseh aplikacij"; picked "Podatkovne ocene" and "Jaz, 2 min/app")
+- Decision:
+  - Apps may be published with a **data-based rating** (`apps.review_method = 'data'`): sub-scores, one-line reasons, pros, cons and verdict are computed by code (`src/lib/review/data-review.ts`) from sourced public facts (`apps.facts`, `docs/research/FACTS-BRIEF.md` format). A fact counts only with a source URL; "not stated" earns nothing. The formula is published on /how-we-rank.
+  - **Conversation** (chat quality) is never scored from data — it stays empty ("Not tested"); the overall score is the weighted average of the sub-scores present.
+  - Pages say "Rated from public information … not tested hands-on yet", list every source with its date, and emit **no Review/Rating JSON-LD** (Google review-snippet rules require first-hand reviews). Hands-on reviews keep the `Review` markup and are never overwritten by an import.
+  - The **gallery check for minor-coded content stays human** (07-LEGAL §2 hard rule; agents may not open explicit galleries). The owner does it in `/admin/research` ("Gallery OK — publish" / "Reject"), one audited step that ticks `chk_no_minor_content` and publishes. The other four checklist items are set from sourced facts.
+  - Research data ships with the app (`src/data/research-bundle.json`, built by `scripts/build-research-bundle.py`) and is imported with one click; conflicts found in research (e.g. "Teen Mode", 12+ store rating, no 18+ terms) are put on hold in the bundle.
+- Supersedes: 06-SEO-CONTENT "Real testing" as a *publishing* requirement (it stays the goal for top earners); ADR-026 quality gate allows an empty conversation score for data reviews.
+- Consequences: weaker E-E-A-T than hands-on reviews — honest labels and sources are the mitigation; scores reflect what an app offers on paper, not quality. Prices must have a known billing period. Research quotes were extracted by a summariser — spot-check before relying on a single fact.

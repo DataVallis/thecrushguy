@@ -44,6 +44,9 @@ export type AppDetail = AppCard & {
   cons: string[];
   bestFor: string[];
   verdictMd: string | null;
+  /** ADR-030: `data` = rated from sourced public facts, not tested hands-on. */
+  reviewMethod: "data" | "hands_on";
+  sources: { url: string; field: string; checkedAt: Date }[];
   verifiedAt: Date | null;
   hasActiveLink: boolean;
   categories: CategoryRef[];
@@ -83,7 +86,7 @@ export async function loadPublishedApp(db: postgres.Sql, slug: string): Promise<
     from apps a where a.slug = ${slug} and a.status = 'published'`;
   if (!r) return null;
   const id = r.id as string;
-  const [cats, plans, alts] = await Promise.all([
+  const [cats, plans, alts, srcs] = await Promise.all([
     db<{ slug: string; name: string; is_nsfw: boolean; id: string }[]>`
       select c.id, c.slug, c.name, c.is_nsfw from app_categories ac join categories c on c.id = ac.category_id
       where ac.app_id = ${id} order by c.sort, c.name`,
@@ -96,6 +99,8 @@ export async function loadPublishedApp(db: postgres.Sql, slug: string): Promise<
       join categories c on c.id = ac.category_id
       where a.status = 'published' and a.id <> ${id} and not c.is_nsfw
         and ac.category_id in (select category_id from app_categories where app_id = ${id})`,
+    db<{ url: string; field: string; checked_at: Date }[]>`
+      select url, field, checked_at from sources where app_id = ${id} order by field, url`,
   ]);
   const scoreNote = (k: string) => (r[`score_${k}_note`] as string | null) ?? null;
   return {
@@ -130,6 +135,8 @@ export async function loadPublishedApp(db: postgres.Sql, slug: string): Promise<
     cons: r.cons as string[],
     bestFor: r.best_for as string[],
     verdictMd: (r.verdict_md as string | null) ?? null,
+    reviewMethod: r.review_method === "data" ? "data" : "hands_on",
+    sources: srcs.map((x) => ({ url: x.url, field: x.field, checkedAt: x.checked_at })),
     verifiedAt: (r.verified_at as Date | null) ?? null,
     hasActiveLink: r.has_active_link as boolean,
     categories: cats.map((c) => ({ slug: c.slug, name: c.name, isNsfw: c.is_nsfw })),

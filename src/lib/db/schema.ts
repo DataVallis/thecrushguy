@@ -103,6 +103,11 @@ export const apps = pgTable(
       .notNull()
       .default(sql`'{}'::text[]`),
     verdictMd: text("verdict_md"),
+    // Data-based reviews (ADR-030): `data` = scores/pros/cons/verdict computed by code from sourced public facts
+    // (`facts`, FACTS-BRIEF format); `hands_on` = written from our own test. Default hands_on for manual edits.
+    reviewMethod: text("review_method").notNull().default("hands_on"),
+    facts: jsonb("facts"),
+    factsCheckedAt: timestamp("facts_checked_at", { withTimezone: true }),
 
     // Compliance checklist (07-LEGAL-COMPLIANCE §2) — all must be true to publish.
     chk18PlusTerms: boolean("chk_18plus_terms").notNull().default(false),
@@ -143,6 +148,7 @@ export const apps = pgTable(
         AND ${t.checklistCheckedAt} IS NOT NULL)`,
     ),
     check("apps_removed_needs_reason", sql`${t.status} <> 'removed' OR ${t.removalReason} IS NOT NULL`),
+    check("apps_review_method", sql`${t.reviewMethod} IN ('data', 'hands_on')`),
     check("apps_pros_cons_max5", sql`cardinality(${t.pros}) <= 5 AND cardinality(${t.cons}) <= 5`),
   ],
 );

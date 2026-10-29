@@ -1,0 +1,371 @@
+[
+  {
+    "slug": "candy-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://candy.ai/terms-of-service"},
+      "free_plan_limits": {"v": "Free users may generally send a maximum of 5 messages to AI Characters", "src": "https://candy.ai/terms-of-service"},
+      "starting_price_monthly": {"v": "unknown", "src": ""},
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://candy.ai/terms-of-service"}
+    },
+    "features": {
+      "long_term_memory": {"v": "unknown", "src": ""},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "yes", "src": "https://candy.ai/faq"},
+      "custom_character_creation": {"v": "yes", "src": "https://candy.ai/faq"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://candy.ai/faq"},
+    "privacy": {
+      "privacy_policy_url": "https://candy.ai/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://candy.ai/privacy-policy", "q": "You can also request that we erase your Personal Data in limited circumstances"},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://candy.ai/privacy-policy", "q": "We will not disclose, sell, trade, or otherwise transfer your Personal Data"},
+      "chats_used_for_training": {"v": "yes", "src": "https://candy.ai/privacy-policy", "q": "train and develop our AI models and moderation technologies"},
+      "retention_period_stated": {"v": "yes", "src": "https://candy.ai/privacy-policy", "q": "For three years after your last Account activity"}
+    },
+    "terms": {
+      "min_age_18": {"v": "unknown", "src": "https://candy.ai/terms-of-service", "q": "of the legal age to form a binding contract with us in the jurisdiction where you live"},
+      "bans_minor_content": {"v": "yes", "src": "https://candy.ai/terms-of-service", "q": "We have a zero-tolerance policy toward Child Sexual Abuse Material (CSAM)."},
+      "refund_policy_stated": {"v": "yes", "src": "https://candy.ai/terms-of-service", "q": "You have 24 hours after your payment to request a refund"},
+      "age_verification": {"v": "unknown", "src": ""}
+    },
+    "operator": {
+      "name": {"v": "EverAI Limited", "src": "https://candy.ai/terms-of-service"},
+      "country": {"v": "MT", "src": "https://candy.ai/terms-of-service"},
+      "address_stated": {"v": "yes", "src": "https://candy.ai/terms-of-service"}
+    },
+    "notes": "No price amounts on /premium or /faq (only '70% OFF' and monthly/quarterly/yearly plans; free trial mentioned). Terms do not say 18 explicitly (legal contract age); separate Underage Policy not opened. FAQ says companions 'engage in voice conversations' - unclear if messages or calls, left unknown. Paid subscribers get 'generally 100' tokens/month per terms. EU/UK 14-day withdrawal right also in terms. Training quote says chat data may be aggregated/anonymized first. Homepage not opened (likely explicit). All quotes came through WebFetch extraction - verify verbatim."
+  },
+  {
+    "slug": "dreambf-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": "unknown", "src": ""},
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "unknown", "src": ""}
+    },
+    "features": {
+      "long_term_memory": {"v": "unknown", "src": ""},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "unknown", "src": ""},
+      "custom_character_creation": {"v": "unknown", "src": ""},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://dreambf.ai/terms"},
+    "privacy": {
+      "privacy_policy_url": "https://dreambf.ai/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://dreambf.ai/privacy-policy", "q": "you can ask us to erase or delete all or some of your personal data"},
+      "sells_or_shares_for_ads": {"v": "unknown", "src": "https://dreambf.ai/privacy-policy", "q": "We may share your personal data to the extent necessary with third party suppliers"},
+      "chats_used_for_training": {"v": "unknown", "src": "https://dreambf.ai/privacy-policy", "q": "We have the right to review the chat correspondence you conduct with AI only if you have reported a problem"},
+      "retention_period_stated": {"v": "no", "src": "https://dreambf.ai/privacy-policy", "q": "We only keep your personal data for as long as necessary for the fulfilment of our purposes"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://dreambf.ai/terms", "q": "intended for adults who are 18 years or older"},
+      "bans_minor_content": {"v": "yes", "src": "https://dreambf.ai/terms", "q": "Any AI-generated content that resembles minors will be promptly reviewed and removed."},
+      "refund_policy_stated": {"v": "yes", "src": "https://dreambf.ai/refund", "q": "we do not offer refunds for subscription fees or transactions unless required by applicable consumer protection laws"},
+      "age_verification": {"v": "self-declaration", "src": "https://dreambf.ai/terms"}
+    },
+    "operator": {
+      "name": {"v": "DreamAI SRL", "src": "https://dreambf.ai/terms"},
+      "country": {"v": "RO", "src": "https://dreambf.ai/terms"},
+      "address_stated": {"v": "yes", "src": "https://dreambf.ai/terms"}
+    },
+    "notes": "/plans renders prices client-side; WebFetch got no amounts (menu tooltip says 'Monthly Subscriptions of DreamBF') - needs a human browser check for price, free tier, tokens. Features unknown: homepage not opened (likely explicit), no SFW feature page read. Terms say refunds 'may be granted at our discretion' while /refund says non-refundable unless law requires. UK-only age verification page exists (https://dreambf.ai/policies/uk-users) but method/provider not stated. Same operator/network as other DreamAI SRL sites. Quotes via WebFetch extraction - verify verbatim."
+  },
+  {
+    "slug": "eva-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 11.99, "src": "https://apps.apple.com/app/id1551794721"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://apps.apple.com/app/id1551794721"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://apps.apple.com/app/id1551794721"},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "unknown", "src": ""},
+      "custom_character_creation": {"v": "yes", "src": "https://apps.apple.com/app/id1551794721"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "no", "src": "https://evaapp.ai/app/terms/ios"}
+    },
+    "platforms": {"v": ["ios", "android"], "src": "https://evaapp.ai/app/"},
+    "privacy": {
+      "privacy_policy_url": "https://evaapp.ai/app/pp",
+      "account_data_deletion": {"v": "yes", "src": "https://evaapp.ai/app/pp", "q": "You have the right, at any time, to change or delete your Personal data by deleting your profile at App or website."},
+      "sells_or_shares_for_ads": {"v": "yes", "src": "https://evaapp.ai/app/pp", "q": "Our trusted partners help us serve advertising and analytics and may place cookies on your device."},
+      "chats_used_for_training": {"v": "yes", "src": "https://evaapp.ai/app/pp", "q": "To improve the quality of text and voice messages of the virtual friend and to develop its AI"},
+      "retention_period_stated": {"v": "no", "src": "https://evaapp.ai/app/pp", "q": "The Personal data is kept for the time necessary to provide the services to you."}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://evaapp.ai/app/terms/ios", "q": "you guarantee that you are at least 18 years old"},
+      "bans_minor_content": {"v": "yes", "src": "https://evaapp.ai/app/terms/ios", "q": "any child endangerment content, including but not limited to: child abuse content, content that sexualizes minors"},
+      "refund_policy_stated": {"v": "yes", "src": "https://evaapp.ai/app/terms/ios", "q": "the sale is final, and we will not provide a refund."},
+      "age_verification": {"v": "unknown", "src": ""}
+    },
+    "operator": {
+      "name": {"v": "NOVI LIMITED", "src": "https://evaapp.ai/app/pp"},
+      "country": {"v": "CY", "src": "https://evaapp.ai/app/pp"},
+      "address_stated": {"v": "yes", "src": "https://evaapp.ai/app/pp"}
+    },
+    "notes": "App Store (US) IAP list has several '1 Month Membership' entries ($11.99, $14.99, $24.99) plus 'EVA Premium' $13.99 - lowest monthly taken as $11.99; tiers unexplained. 'Neurons' = in-app currency (500 Neurons $9.99). Store name is 'EVA AI Soulmate', 18+ on both stores. Terms quote prohibiting 'any sexually explicit, pornographic, or adult-themed content' (Section 5.2 i) is from iOS terms; Android terms (https://evaapp.ai/app/terms/android) not opened. Terms say account may be blocked if suspected under 18 and unblocked with proof - no routine verification method. Ads sharing also mentions Mintegral. Web chat availability unknown. Quotes via WebFetch extraction - verify verbatim."
+  },
+  {
+    "slug": "funfun-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": "unknown", "src": ""},
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://www.funfun.ai/legal/terms"}
+    },
+    "features": {
+      "long_term_memory": {"v": "unknown", "src": ""},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "yes", "src": "https://funfun.ai"},
+      "custom_character_creation": {"v": "yes", "src": "https://funfun.ai"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "yes", "src": "https://www.funfun.ai/legal/terms"}
+    },
+    "platforms": {"v": ["web"], "src": "https://funfun.ai"},
+    "privacy": {
+      "privacy_policy_url": "https://www.funfun.ai/legal/privacy",
+      "account_data_deletion": {"v": "unknown", "src": "https://www.funfun.ai/legal/privacy", "q": "please contact us so that we can delete the information"},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://www.funfun.ai/legal/privacy", "q": "We do not sell, trade, or rent your personal information to others."},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "unknown", "src": "", "q": ""}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://www.funfun.ai/legal/terms", "q": "users must be at least 18 years old or of legal age in their country of residence"},
+      "bans_minor_content": {"v": "yes", "src": "https://www.funfun.ai/legal/terms", "q": "unequivocally disallow content that exploits or poses a danger to minors"},
+      "refund_policy_stated": {"v": "yes", "src": "https://www.funfun.ai/legal/terms", "q": "You have 24 hours after your payment to request a refund."},
+      "age_verification": {"v": "self-declaration", "src": "https://www.funfun.ai/legal/terms"}
+    },
+    "operator": {
+      "name": {"v": "Chaindesk SAS", "src": "https://www.funfun.ai/legal/terms"},
+      "country": {"v": "FR", "src": "https://www.funfun.ai/legal/terms"},
+      "address_stated": {"v": "yes", "src": "https://www.funfun.ai/legal/terms"}
+    },
+    "notes": "No pricing page found (/pricing failed to load); homepage shows no prices. Terms: paid subscribers get '100 tokens per month'; subscription auto-renews. NSFW quote: 'The APP includes AI-generated adult content for registered users only.' Homepage text was suggestive but WebFetch rated it not explicit; image generation/custom character from homepage feature text ('AI Art Generator', create AI girlfriend by appearance/personality). Privacy policy deletion quote only concerns children's data; no general deletion process -> unknown. Retention and training not addressed in privacy policy (so 'unknown', arguably 'no' for retention). Quotes via WebFetch extraction - verify verbatim."
+  },
+  {
+    "slug": "janitor-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": "unknown", "src": ""},
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "unknown", "src": ""}
+    },
+    "features": {
+      "long_term_memory": {"v": "unknown", "src": "https://help.janitorai.com/en/article/chat-memory-context-management-9oivt3/"},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "unknown", "src": ""},
+      "custom_character_creation": {"v": "yes", "src": "https://help.janitorai.com/en/article/the-basics-the-character-creation-page-overview-15xevon/"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://janitorai.com"},
+    "privacy": {
+      "privacy_policy_url": "",
+      "account_data_deletion": {"v": "yes", "src": "https://help.janitorai.com/en/article/how-do-i-delete-my-account-1hdga2o/", "q": "Account deletion can only be completed by the user by following the steps above"},
+      "sells_or_shares_for_ads": {"v": "unknown", "src": "", "q": ""},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "unknown", "src": "", "q": ""}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://help.janitorai.com/en/article/minor-related-content-16ydlbg/", "q": "Our services are exclusively intended for an audience above the age of 18."},
+      "bans_minor_content": {"v": "yes", "src": "https://help.janitorai.com/en/article/minor-related-content-16ydlbg/", "q": "The creation, use, or roleplay of an underage persona is strictly prohibited under all circumstances."},
+      "refund_policy_stated": {"v": "unknown", "src": "", "q": ""},
+      "age_verification": {"v": "id-or-face", "src": "https://help.janitorai.com/en/article/age-verification-for-australia-brazil-and-the-uk-t4opjk/"}
+    },
+    "operator": {
+      "name": {"v": "unknown", "src": ""},
+      "country": {"v": "unknown", "src": ""},
+      "address_stated": {"v": "no", "src": ""}
+    },
+    "notes": "janitorai.com/terms, /privacy and /tos all failed in WebFetch (client_error, likely bot protection) - ToS, privacy policy, operator, refund, ads, training all need a human browser check. Homepage text exposed no links or prices. Age verification (k-ID: facial age estimation, ID scan or AgeKey) applies ONLY to Australia, Brazil and the UK (IP-based); elsewhere unknown. Memory help article describes only context window/memory notes/summaries, no long-term memory feature. Help center mentions JanitorLLM (JLLM) and proxies (OpenRouter) but no official statement on free/paid. Min age 18 sourced from help-center content guideline, not ToS. Quotes via WebFetch extraction - verify verbatim."
+  },
+  {
+    "slug": "moemate",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 13.0, "src": "https://apps.apple.com/us/app/id6480003409?l=en-us"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://apps.apple.com/us/app/id6480003409?l=en-us"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://apps.apple.com/us/app/id6480003409?l=en-us"},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "yes", "src": "https://apps.apple.com/us/app/id6480003409?l=en-us"},
+      "image_generation": {"v": "yes", "src": "https://apps.apple.com/us/app/id6480003409?l=en-us"},
+      "custom_character_creation": {"v": "unknown", "src": ""},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web", "ios"], "src": "https://apps.apple.com/us/app/id6480003409?l=en-us"},
+    "privacy": {
+      "privacy_policy_url": "https://www.moemate.io/discover/privacy",
+      "account_data_deletion": {"v": "unknown", "src": "", "q": ""},
+      "sells_or_shares_for_ads": {"v": "unknown", "src": "", "q": ""},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "unknown", "src": "", "q": ""}
+    },
+    "terms": {
+      "min_age_18": {"v": "no", "src": "https://www.moemate.io/terms", "q": "you must be at least the minimum age required in your jurisdiction"},
+      "bans_minor_content": {"v": "unknown", "src": "", "q": ""},
+      "refund_policy_stated": {"v": "yes", "src": "https://www.moemate.io/terms", "q": "cancel your subscription within 48 hours of signing up ... will be eligible for a full refund"},
+      "age_verification": {"v": "unknown", "src": ""}
+    },
+    "operator": {
+      "name": {"v": "Webaverse, Inc.", "src": "https://apps.apple.com/us/app/id6480003409?l=en-us"},
+      "country": {"v": "unknown", "src": ""},
+      "address_stated": {"v": "no", "src": "https://www.moemate.io/terms"}
+    },
+    "notes": "Privacy policy (www.moemate.io/privacy and /discover/privacy) and /discover/terms blocked by robots.txt for WebFetch - privacy facts need human check. Operator name is the App Store developer/seller (terms page names only 'moemate'). App Store IAPs: Rookie Monthly $13.00, Champion $29, Elite $49, yearly $149/$299/$539, 'Battery Pack' consumables (counted as credits). App Store age rating 17+ (infrequent/mild sexual content). 'voice_calls' = listing claim of 'hands-free voice chats' - verify. Homepage says web works, iPhone support 'coming soon' (conflicts with live App Store app); Android unknown. min_age_18 set 'no' because terms tie age to jurisdiction minimum, not 18 - human should confirm. Moemate is partly a desktop/screen-assistant + Twitch companion, not purely a romance app."
+  },
+  {
+    "slug": "nomi-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://nomi.ai"},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 9.99, "src": "https://apps.apple.com/us/app/nomi-ai-companion-with-a-soul/id6450270929"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://apps.apple.com/us/app/nomi-ai-companion-with-a-soul/id6450270929"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://nomi.ai"},
+      "voice_messages": {"v": "yes", "src": "https://nomi.ai"},
+      "voice_calls": {"v": "yes", "src": "https://nomi.ai"},
+      "image_generation": {"v": "yes", "src": "https://nomi.ai"},
+      "custom_character_creation": {"v": "yes", "src": "https://nomi.ai"},
+      "group_chat": {"v": "yes", "src": "https://nomi.ai"},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web", "ios", "android"], "src": "https://apps.apple.com/us/app/nomi-ai-companion-with-a-soul/id6450270929"},
+    "privacy": {
+      "privacy_policy_url": "https://nomi.ai/privacy-policy/",
+      "account_data_deletion": {"v": "yes", "src": "https://nomi.ai/privacy-policy/", "q": "you can delete your account, which will delete all of your personal information"},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://nomi.ai/privacy-policy/", "q": "Although not employed currently, we may use advertising networks"},
+      "chats_used_for_training": {"v": "yes", "src": "https://nomi.ai/privacy-policy/", "q": "any information in our training archives would no longer be attributable to you"},
+      "retention_period_stated": {"v": "no", "src": "https://nomi.ai/privacy-policy/", "q": "none of your personal information is retained upon the deletion of your account"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://nomi.ai/terms-of-service/", "q": "If you are under the age of 18, you cannot use the Nomi.ai platform under any circumstances."},
+      "bans_minor_content": {"v": "unknown", "src": "https://nomi.ai/terms-of-service/", "q": "will suspend or terminate an account that we suspect or learn is being used by someone under the age of 18"},
+      "refund_policy_stated": {"v": "yes", "src": "https://nomi.ai/refund-policy/", "q": "Nomi.ai does not provide refunds for buyer's remorse, lack of usage, or dissatisfaction."},
+      "age_verification": {"v": "self-declaration", "src": "https://nomi.ai/terms-of-service/"}
+    },
+    "operator": {
+      "name": {"v": "Glimpse.ai, Inc.", "src": "https://nomi.ai/terms-of-service/"},
+      "country": {"v": "US", "src": "https://nomi.ai/privacy-policy/"},
+      "address_stated": {"v": "yes", "src": "https://nomi.ai/privacy-policy/"}
+    },
+    "notes": "Lowest monthly = 'Launch Plan Monthly' $9.99 on US App Store; 'Standard Plan Monthly' $15.99, yearly $99.99 / Launch yearly $59.99; credits packs from $4.99. Web prices not published on nomi.ai. Free: homepage says 'free (no credit card required) to start chatting' - limits not found. Platforms: web (nomi.ai app), iOS (App Store, seller AI GLIMPSE INC, 18+), Android (Play listing https://play.google.com/store/apps/details?id=ai.nomi.twa - developer not shown in fetch). Ads: policy says personal info not sold/leased and ad networks not currently used. Training: privacy policy references 'training archives' that survive account deletion de-identified - treated as 'yes'. Address in privacy policy (Baltimore, MD). No explicit minors-content clause found in ToS. Age: ToS 'requires users to provide their age' and reserves additional verification. NSFW not stated on pages read. Quotes via WebFetch extraction - verify verbatim."
+  },
+  {
+    "slug": "polybuzz",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://www.polybuzz.ai/faq"},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 9.9, "src": "https://apps.apple.com/app/6449190344"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://www.polybuzz.ai/faq"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://www.polybuzz.ai/membership"},
+      "voice_messages": {"v": "yes", "src": "https://www.polybuzz.ai/faq"},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "yes", "src": "https://www.polybuzz.ai/faq"},
+      "custom_character_creation": {"v": "yes", "src": "https://www.polybuzz.ai/faq"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "no", "src": "https://www.polybuzz.ai/terms-of-use"}
+    },
+    "platforms": {"v": ["web", "ios", "android"], "src": "https://www.polybuzz.ai/faq"},
+    "privacy": {
+      "privacy_policy_url": "https://www.polybuzz.ai/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://www.polybuzz.ai/privacy-policy", "q": "To delete your PolyBuzz account, you may go to the \"Setting\" page, and then click \"Account\" - \"Delete\"."},
+      "sells_or_shares_for_ads": {"v": "yes", "src": "https://www.polybuzz.ai/privacy-policy", "q": "online identifiers ... with advertising partners"},
+      "chats_used_for_training": {"v": "unknown", "src": "https://www.polybuzz.ai/privacy-policy", "q": "train our AI algorithm"},
+      "retention_period_stated": {"v": "no", "src": "https://www.polybuzz.ai/privacy-policy", "q": "All user personal information will be retained for no longer than is necessary for the purposes"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://www.polybuzz.ai/terms-of-use", "q": "You must have reached 18-year-old to use PolyBuzz and/or our Services."},
+      "bans_minor_content": {"v": "yes", "src": "https://www.polybuzz.ai/terms-of-use", "q": "We also have zero tolerance for any form of child nudity and child sexual exploitation"},
+      "refund_policy_stated": {"v": "yes", "src": "https://www.polybuzz.ai/terms-of-use", "q": "users are not entitled to any refund for a completed purchase without due reason."},
+      "age_verification": {"v": "self-declaration", "src": "https://www.polybuzz.ai/terms-of-use"}
+    },
+    "operator": {
+      "name": {"v": "Singularity Mutual Entertainment Culture Media Limited", "src": "https://www.polybuzz.ai/terms-of-use"},
+      "country": {"v": "HK", "src": "https://www.polybuzz.ai/terms-of-use"},
+      "address_stated": {"v": "yes", "src": "https://www.polybuzz.ai/terms-of-use"}
+    },
+    "notes": "CONFLICT: ToS says 18+ only, but FAQ mentions 'graded modes for different age groups' and a 'Teen Mode' - human must review. App Store seller is CLOUD WHALE INTERACTIVE TECHNOLOGY LLC (different from ToS operator); App Store rating 18+ with sexual content/nudity listed. Lowest monthly = Poly Standard Monthly $9.90 (App Store); weekly $4.99 also exists; web /membership shows $14.9 first week and $24.9/month on yearly. Coins (from $2.49) and Opals. NSFW 'no' based on ToS Community Rules banning content that 'depicts pornography or sexual acts' and FAQ 'strictly prohibit public display of NSFW content' - but ToS also mentions adults accessing 'the full range of AI-generated content'; ambiguous. Training: policy says uploaded photos/geolocation may train AI; chat text not addressed -> unknown. Ads: data-sharing toggle in settings and email opt-out exist (CCPA section). Address given is the copyright agent mailing address in Kwun Tong, HK. Age: DOB entry generally; UK uses Ondato/Yoti. Long memory = 'Long Memory'/'Permanent Memory' models listed on membership page. Voice = 'unlimited character voice listening' for members. Quotes via WebFetch extraction - verify verbatim."
+  },
+  {
+    "slug": "xchar-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 14.95, "src": "https://www.xchar.ai/pricing"},
+      "currency": "USD",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://www.xchar.ai/pricing"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://www.xchar.ai/pricing"},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "yes", "src": "https://www.xchar.ai/pricing"},
+      "custom_character_creation": {"v": "unknown", "src": ""},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://www.xchar.ai/pricing"},
+    "privacy": {
+      "privacy_policy_url": "https://www.xchar.ai/privacy",
+      "account_data_deletion": {"v": "yes", "src": "https://www.xchar.ai/privacy", "q": "You can delete your account and all associated data directly from the profile page."},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://www.xchar.ai/privacy", "q": "We may share limited data with service providers who help us operate our platform."},
+      "chats_used_for_training": {"v": "no", "src": "https://www.xchar.ai/privacy", "q": "We do not use your conversations with AI characters for training or improvement purposes."},
+      "retention_period_stated": {"v": "unknown", "src": "", "q": ""}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://www.xchar.ai/terms-of-service", "q": "The User guarantees that they are at least 18 years of age"},
+      "bans_minor_content": {"v": "yes", "src": "https://www.xchar.ai/terms-of-service", "q": "Relates to minors, including both people (whether AI-generated or not) who have not yet reached the age of 18"},
+      "refund_policy_stated": {"v": "yes", "src": "https://www.xchar.ai/terms-of-service", "q": "withdraw from the online purchase within 14 days without giving any reason"},
+      "age_verification": {"v": "unknown", "src": ""}
+    },
+    "operator": {
+      "name": {"v": "Always is Now Inc.", "src": "https://www.xchar.ai/terms-of-service"},
+      "country": {"v": "US", "src": "https://www.xchar.ai/terms-of-service"},
+      "address_stated": {"v": "yes", "src": "https://www.xchar.ai/terms-of-service"}
+    },
+    "notes": "Homepage is sexually explicit (was opened once for links only, before that was known; no facts sourced from it). Pricing: Premium $14.95 / Deluxe $29.95 / Ultra $49.95 with Monthly/Quarterly/Yearly toggle - page text does not say which period the shown prices apply to; '50% off' yearly banner -> billing unknown, human must confirm monthly price. Credits: 8,000/18,000/36,000 per 30 days. 'Long memory (6K tokens)' = context-size claim on pricing page. sells_or_shares_for_ads 'no' rests on policy stating personal info is not sold; ads not mentioned. Terms do not explicitly permit adult content, only list prohibited sexual categories; site has a 2257 Statement and Parental Controls page (not opened). Refund via support page: within 14 days if no credits used. Las Vegas, NV registered office. Quotes via WebFetch extraction - verify verbatim."
+  }
+]
