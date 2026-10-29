@@ -1091,8 +1091,9 @@
       },
       "notes": "App Store IAP: Monthly $9.99, Annual $39.99, 50 Image Generation Credits $19.99; App Store age rating 18+ (no sexual-content descriptor). Terms list monthly, semi-annual or annual billing. Address: 107-111 Fleet Street, London EC4A 2AB (Terms s.8.4). Privacy shares website visitor data with ad partners but says it will 'never share your TenderTalk conversations' with advertisers. AI training: only 'learn from your interactions' - left unknown. Terms ban 'pornographic' uploaded content but do not address AI-generated content - NSFW left unknown. No explicit minor-content ban (only bans soliciting info from under-18s). Voice calls from App Store 'voice and video-style interactions'; website lists video calls. 12 preset personalities; custom creation not mentioned. iOS only per website.",
       "no_deepfake_feature": {
-        "v": "unknown",
-        "src": "https://apps.apple.com/us/app/id6467968256"
+        "v": "yes",
+        "src": "https://www.tendertalkapp.com/",
+        "q": "Official feature list (12 personalities, video calls, prompt-based videos): no photo upload or real-person creation."
       }
     },
     {
@@ -1819,8 +1820,9 @@
       },
       "notes": "Pricing page shows only weekly/yearly/lifetime ('One payment, nothing renews'): Pro $3.44/week, Ultra $5.75/week (struck-through $12.99/$24.99, period unclear); no monthly price -> unknown, human check. Memory on subscriptions page = 'She Remembers' last 30/100 messages (short context, not clearly long-term) -> unknown. Free: homepage says 'Unlimited Chat for Free' after registration but subscriptions table shows 15 messages - conflicting. Privacy 'will not ... sell' is followed by 'without your consent or unless otherwise stated'. Terms name Servalot Ltd (Cyprus) as payment processor; privacy says service is 'operated by Servalot Ltd (Cyprus)'. Homepage says 'Install App' but no store listing found.",
       "no_deepfake_feature": {
-        "v": "unknown",
-        "src": "https://kupid.ai/terms-of-service"
+        "v": "yes",
+        "src": "https://kupid.ai/subscriptions",
+        "q": "Pricing feature list (messages, photos, videos, voice, \"Create Your Own\"): no photo upload or real-person creation. ToS has no explicit ban."
       }
     },
     {
@@ -1940,8 +1942,9 @@
       },
       "notes": "Homepage is adult-oriented (nsfw 'yes' from that marker; a 2257 statement also exists in legal hub) - homepage not otherwise used. Price: web 12-month plan $5.99/mo (struck $19.99), 6-month $8.99/mo; total term charge not shown. App Store IAP: Monthly $12.99, Yearly $69.99 (= $5.83/mo); 3-day free trial. Coins used for images/audio/unlocking characters. Voice/audio generation exists but voice messages vs calls not specified -> unknown. Country conflict: ToS says 'San Francisco, United States', Privacy says 'Texas, United States'. App Store seller is AJ NETWORK LLC. Underage policy mentions only an 'initial age gate'.",
       "no_deepfake_feature": {
-        "v": "unknown",
-        "src": "https://www.luvr.ai/legal/terms-of-service"
+        "v": "yes",
+        "src": "https://www.luvr.ai/subscribe",
+        "q": "Pricing feature list: no photo upload or real-person creation. Blocked Content Policy bans \"Impersonation or misleading representations\"."
       }
     },
     {
@@ -2912,7 +2915,8 @@
       "no_deepfake_feature": {
         "v": "unknown",
         "src": "https://apps.apple.com/us/app/id6692609366"
-      }
+      },
+      "hold": "Content guidelines permit characters of celebrities/public figures — real-person rule (07-LEGAL §2.2); owner decision"
     },
     {
       "slug": "moemate",
@@ -3153,8 +3157,9 @@
       },
       "notes": "Lowest monthly = 'Launch Plan Monthly' $9.99 on US App Store; 'Standard Plan Monthly' $15.99, yearly $99.99 / Launch yearly $59.99; credits packs from $4.99. Web prices not published on nomi.ai. Free: homepage says 'free (no credit card required) to start chatting' - limits not found. Platforms: web (nomi.ai app), iOS (App Store, seller AI GLIMPSE INC, 18+), Android (Play listing https://play.google.com/store/apps/details?id=ai.nomi.twa - developer not shown in fetch). Ads: policy says personal info not sold/leased and ad networks not currently used. Training: privacy policy references 'training archives' that survive account deletion de-identified - treated as 'yes'. Address in privacy policy (Baltimore, MD). No explicit minors-content clause found in ToS. Age: ToS 'requires users to provide their age' and reserves additional verification. NSFW not stated on pages read. Quotes via WebFetch extraction - verify verbatim.",
       "no_deepfake_feature": {
-        "v": "unknown",
-        "src": "https://nomi.ai/terms-of-service/"
+        "v": "yes",
+        "src": "https://apps.apple.com/us/app/nomi-ai-companion-with-a-soul/id6450270929",
+        "q": "Store feature list: choose from preset appearances; users may send photos for Nomi to see; no real-person creation or face swap."
       }
     },
     {
@@ -3883,8 +3888,9 @@
       },
       "notes": "kajiwoto.com is a client-rendered SPA: homepage and /privacy returned only meta tags, /terms errored, direct curl blocked - privacy/terms facts all unknown; needs a human with a browser. App Store IAPs (durations not shown): Kajiwoto Plus $10.49, Plus $116.99, Pro $34.99, Pro (Annual) $349.99, Coins (10) $9.99 - $10.49 assumed lowest but billing period unverified. App Store age rating 18+; app is free to download with IAP (not counted as a free plan). Last iOS update v1.17.23 on Oct 31, 2024 - possibly inactive. Version notes mention 'Updated memories list' and 'Multiple AIs added to all rooms' (possible memory/group features, unconfirmed). No Google Play listing found. Web app likely at kajiwoto.com but not verifiable from text.",
       "no_deepfake_feature": {
-        "v": "unknown",
-        "src": "https://apps.apple.com/us/app/kajiwoto/id1409354116"
+        "v": "yes",
+        "src": "https://apps.apple.com/us/app/kajiwoto/id1409354116",
+        "q": "Store description: characters built via datasets, prompts, traits, model selection; no photo upload or real-person creation."
       }
     },
     {
@@ -4125,8 +4131,9 @@
       },
       "notes": "Price: subscription page text shows only 'Annual payment billed as $69.99' (69.99/12 = 5.83) plus '/ month' plans whose amounts did not render; promo 'Up to 70% OFF'. Verify actual monthly price in a browser. 100 Dream Coins/month; 3-20 coins per image/character. Ads: privacy says it uses Meta Pixel/CAPI and Google Ads conversion tracking for marketing, and needs 'express opt-in consent before we share' for outside marketing - left unknown, human decision. Training quote is from privacy (data said to be anonymized/aggregated); no opt-out found. Minor-ban quote refers to the Blocked Content Policy as cited in the Underage Policy. Imprint: Grolmanstraße 40, 10623 Berlin, HRB 231497. Homepage is explicit - only text read.",
       "no_deepfake_feature": {
-        "v": "unknown",
-        "src": "https://www.mydreamcompanion.com/terms-and-policies/"
+        "v": "yes",
+        "src": "https://www.mydreamcompanion.com/subscription/",
+        "q": "Pricing feature list: no photo upload or real-person creation. Blocked Content Policy: \"Falsely representing individuals, celebrities, or public figures, with intent to deceive, is prohibited.\""
       }
     },
     {
@@ -4367,8 +4374,9 @@
       },
       "notes": "No prices found: /premium errored, homepage shows no plan amounts; only third-party reviews list prices (not used). Terms: plans billed weekly/monthly/3-monthly/yearly; tokens for premium features. Refund applies when 10% or less of the tokens bought with that payment were used - verify wording. Homepage advertises 'Join Free' / 'free AI girlfriend website' but no defined free plan or limits - left unknown. Memory from homepage marketing line 'Desires, limits, and habits stay remembered.' 'Sexy Voice' mentioned without detail. Age verification: terms only 'represent and warrant' 18+. Content policy sets 21+ for characters. Privacy also lets users delete individual chats or full history. Homepage is explicit - only text read.",
       "no_deepfake_feature": {
-        "v": "unknown",
-        "src": "https://sweetdream.ai/terms"
+        "v": "yes",
+        "src": "https://sweetdream.ai/pricing",
+        "q": "Pricing feature list: no photo upload or real-person creation. Content policy: providers refuse requests \"when a face may belong to a real person\"."
       }
     }
   ]

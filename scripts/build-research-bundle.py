@@ -22,6 +22,7 @@ HOLDS = {
     "moemate": "Terms only require the minimum age of the user's jurisdiction, not 18+ — adults-only rule",
     "dream-ai-companion": "Google Play rates it 12+ while the App Store says 18+ — adults-only rule; owner decision",
     "voxta": "Terms found do not state an 18+ requirement — adults-only rule",
+    "janitor-ai": "Content guidelines permit characters of celebrities/public figures — real-person rule (07-LEGAL §2.2); owner decision",
 }
 
 seed_rows = list(csv.DictReader(SEED.open(encoding="utf-8")))
