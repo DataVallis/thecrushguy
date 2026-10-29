@@ -37,6 +37,7 @@ jobs:
       ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
       AI_TRAINING_BOTS: ${{ vars.AI_TRAINING_BOTS }}
       LINK_ENCRYPTION_KEY: ${{ secrets.LINK_ENCRYPTION_KEY }}
+      MCP_TOKEN: ${{ secrets.MCP_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1

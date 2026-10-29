@@ -2360,8 +2360,9 @@
           "src": ""
         },
         "nsfw_allowed": {
-          "v": "unknown",
-          "src": ""
+          "v": "yes",
+          "src": "https://candy.ai/underage-policy",
+          "q": "the access and consumption of adult content"
         }
       },
       "platforms": {
@@ -2393,9 +2394,9 @@
       },
       "terms": {
         "min_age_18": {
-          "v": "unknown",
-          "src": "https://candy.ai/terms-of-service",
-          "q": "of the legal age to form a binding contract with us in the jurisdiction where you live"
+          "v": "yes",
+          "src": "https://candy.ai/underage-policy",
+          "q": "users must be 18 years or older to access our services"
         },
         "bans_minor_content": {
           "v": "yes",
@@ -2426,7 +2427,7 @@
           "src": "https://candy.ai/terms-of-service"
         }
       },
-      "notes": "No price amounts on /premium or /faq (only '70% OFF' and monthly/quarterly/yearly plans; free trial mentioned). Terms do not say 18 explicitly (legal contract age); separate Underage Policy not opened. FAQ says companions 'engage in voice conversations' - unclear if messages or calls, left unknown. Paid subscribers get 'generally 100' tokens/month per terms. EU/UK 14-day withdrawal right also in terms. Training quote says chat data may be aggregated/anonymized first. Homepage not opened (likely explicit). All quotes came through WebFetch extraction - verify verbatim.",
+      "notes": "No price amounts on /premium or /faq (only '70% OFF' and monthly/quarterly/yearly plans; free trial mentioned). Terms do not say 18 explicitly (legal contract age); separate Underage Policy not opened. FAQ says companions 'engage in voice conversations' - unclear if messages or calls, left unknown. Paid subscribers get 'generally 100' tokens/month per terms. EU/UK 14-day withdrawal right also in terms. Training quote says chat data may be aggregated/anonymized first. Homepage not opened (likely explicit). All quotes came through WebFetch extraction - verify verbatim. | 2026-10-29: 18+ and adult content confirmed on the Underage Policy (owner pasted the page; agent verified the URL).",
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://candy.ai/terms-of-service"

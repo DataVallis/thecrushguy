@@ -132,5 +132,12 @@
     "from": "Ab",
     "greenFlags": "Green Flags",
     "redFlags": "Red Flags"
+  },
+  "consent": {
+    "text": "Wir möchten Google Analytics nutzen, um zu sehen, welche Seiten hilfreich sind. Dabei werden Cookies gesetzt und Nutzungsdaten an Google gesendet.",
+    "allow": "Analyse erlauben",
+    "deny": "Nein danke",
+    "more": "Datenschutz",
+    "settings": "Cookie-Einstellungen"
   }
 }

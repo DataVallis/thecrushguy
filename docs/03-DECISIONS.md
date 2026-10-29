@@ -200,3 +200,14 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
   - **ADR-024 amended**: `/go/{slug}` without an active affiliate link redirects to the app's official website (logged as a click with `link_id` null — shows where an affiliate deal is worth chasing); our app page only if the stored website is invalid.
   - Hero copy no longer claims hands-on testing of every app ("Find an AI crush worth your time."), matching ADR-030.
 - Consequences: clicks table now also counts non-affiliate visits; stats must split by `link_id`.
+
+## ADR-033 — MCP endpoint for the research agent (TASK-021)
+- Date: 2026-10-29 · Status: Accepted (owner: "meni to ni všeč da moram tak vpisevat noter, naredima mcp, da boš ti dodajal?")
+- Decision: `POST /api/mcp/<MCP_TOKEN>` — a stateless MCP server (Streamable HTTP, JSON responses, no SDK). Tools: review_queue, list_apps, get_app, add_app, add_source, set_price, set_fact, set_facts, set_checklist, set_status, import_research_bundle. Every write goes through the same rules as /admin (sources required, quotes for privacy/terms facts, audit rows with actor `mcp-agent@thecrushguy.com`, quality gate, cache invalidation).
+- Never via MCP: publishing, the gallery check (`chk_no_minor_content`), affiliate links. Unticking a checklist item of a published app requires unpublishing first.
+- Auth: secret token in the path (claude.ai custom connectors take a URL), compared in constant time; unset or < 32 chars → 404. Separate token per environment (GitHub environment secret `MCP_TOKEN`). The path token can appear in access logs — rotate by changing the secret.
+
+## ADR-034 — Google Analytics 4 with consent (TASK-022)
+- Date: 2026-10-29 · Status: Accepted (owner provided measurement ID G-C7DSZV0X87 for prod)
+- Decision: GA4 loads only on prod (`APP_ENV=prod` + `GA_MEASUREMENT_ID` in `config/deploy.prod.yml`, a public ID) and only after the visitor clicks "Allow analytics" (EU ePrivacy/GDPR). Choice in cookie `tcg_consent` (1 year); "Cookie settings" in the footer reopens it. Outbound `/go` clicks become `visit_app` events. Privacy policy updated (Google Ireland, `_ga` cookies, DPF transfer, consent basis).
+- Consequences: GA numbers undercount (only consenting visitors); our own `/go` click log stays the source of truth for clicks.

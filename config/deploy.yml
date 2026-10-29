@@ -44,6 +44,7 @@ env:
     - SMTP_PASSWORD # GitHub environment secret (dev / prod)
     - ADMIN_EMAILS # GitHub variable; passed as a secret so the address never lands in logs (ADR-020)
     - LINK_ENCRYPTION_KEY # GitHub environment secret: AES-256-GCM key for affiliate URLs (TASK-011d)
+    - MCP_TOKEN # GitHub environment secret (optional): path token of /api/mcp/<token> (TASK-021); empty = endpoint off
 
 # Keep a few old images for rollback, prune the rest (shared host).
 retain_containers: 3
