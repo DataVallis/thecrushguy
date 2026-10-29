@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-016** (next free: TASK-017). Latest ADR: **ADR-030** (next free: ADR-031).
+Latest TASK number in use: **TASK-017** (next free: TASK-018). Latest ADR: **ADR-031** (next free: ADR-032).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -21,3 +21,4 @@ Latest TASK number in use: **TASK-016** (next free: TASK-017). Latest ADR: **ADR
 | TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | DONE — PR #13, Live on dev; Rich Results Test on prod open |
 | TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | DONE — PR #9, Live on dev; default region list kept (ADR-027) |
 | TASK-016 | Data-based reviews + review queue (ADR-030) | 006, 012 | DONE — `/admin/research`; 36 apps researched, owner gallery check pending |
+| TASK-017 | GEO — AI search optimisation (ADR-031) | 014 | DONE — robots AI groups, /llms.txt, quick answers, IndexNow |

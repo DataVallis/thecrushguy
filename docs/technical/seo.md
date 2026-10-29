@@ -31,3 +31,9 @@ OG images per page (default `og-default.png` is used), FAQ schema, per-locale tr
 
 ## Tests
 `src/lib/seo/seo.test.tsx` (real Postgres): alternates, clamp, sitemap index/names/entries/escaping/cap, 404 decisions, known slugs (published only), JSON-LD shape (no AggregateRating) and script-tag escaping.
+
+## GEO — AI search engines (TASK-017, ADR-031)
+- `robots.txt` (prod): `*` group + named AI search bots + named AI training bots (env `AI_TRAINING_BOTS=block` disallows only the training group). Dev/local: `Disallow: /` for all.
+- `/llms.txt`: generated per request from published apps (score, method, free plan, price) and SFW categories; English locale links.
+- App pages: "Quick answers" built by `quickAnswers()` from sourced fields only; the same Q&A as `FAQPage` JSON-LD.
+- IndexNow: `pingIndexNow()` after admin app saves, status changes and gallery-check publishes (`after()`), prod only, 5 s timeout, errors swallowed. Key at `/indexnow-key.txt` (env `INDEXNOW_KEY` or HMAC of `LINK_ENCRYPTION_KEY`).

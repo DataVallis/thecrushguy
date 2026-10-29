@@ -181,3 +181,12 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
   - Research data ships with the app (`src/data/research-bundle.json`, built by `scripts/build-research-bundle.py`) and is imported with one click; conflicts found in research (e.g. "Teen Mode", 12+ store rating, no 18+ terms) are put on hold in the bundle.
 - Supersedes: 06-SEO-CONTENT "Real testing" as a *publishing* requirement (it stays the goal for top earners); ADR-026 quality gate allows an empty conversation score for data reviews.
 - Consequences: weaker E-E-A-T than hands-on reviews — honest labels and sources are the mitigation; scores reflect what an app offers on paper, not quality. Prices must have a known billing period. Research quotes were extracted by a summariser — spot-check before relying on a single fact.
+
+## ADR-031 — GEO: welcome AI search engines, llms.txt, quick answers, IndexNow (TASK-017)
+- Date: 2026-10-29 · Status: Accepted (agent, mode B — owner asked "a seo in geo, za ai iskalnike optimizacijo imamo narejeno?")
+- Decision:
+  - robots.txt (prod) names the AI search/answer crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User, Claude-SearchBot, Claude-User, DuckAssistBot) and allows them; training crawlers (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot) are allowed by default for brand visibility in model answers, and can be shut out with the GitHub variable `AI_TRAINING_BOTS=block`. Every group repeats the `/go/`, `/api/`, `/admin` disallows.
+  - `/llms.txt` (llmstxt.org): site summary, method links, categories and every published app with score, review method, free plan and starting price.
+  - App pages get "Quick answers" (is it free / how much / is it private / features / who runs it), built only from sourced fields, with matching `FAQPage` JSON-LD (same text as visible).
+  - IndexNow ping (Bing → ChatGPT search, Copilot, DuckDuckGo) after admin saves/publishes, prod only; key served at `/indexnow-key.txt`, from env `INDEXNOW_KEY` or derived one-way from `LINK_ENCRYPTION_KEY`.
+- Consequences: no owner setup needed except Bing Webmaster Tools verification (runbook). Google no longer shows FAQ rich results for most sites — the markup is kept for AI parsers and costs nothing.

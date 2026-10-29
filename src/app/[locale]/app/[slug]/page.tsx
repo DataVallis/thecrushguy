@@ -11,7 +11,8 @@ import { fmt, money, shortDate } from "@/i18n/format";
 import { NsfwSection } from "@/lib/age-gate/gate";
 import { siteUrl } from "@/lib/env";
 import { getPublishedApp } from "@/lib/public/cached";
-import { JsonLd, appLd, breadcrumbLd } from "@/lib/seo/jsonld";
+import { JsonLd, appLd, breadcrumbLd, faqLd } from "@/lib/seo/jsonld";
+import { quickAnswers } from "@/lib/seo/geo";
 import { DESCRIPTION_MAX, TITLE_MAX, alternatesFor, clamp } from "@/lib/seo/meta";
 import { type AppDetail } from "@/lib/public/catalog";
 import { WEIGHTS, isStale, toTen } from "@/lib/public/scoring";
@@ -50,6 +51,8 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
   if (!app) notFound();
   const sfwCategories = app.categories.filter((c) => !c.isNsfw);
   const features = (Object.keys(app.features) as (keyof AppDetail["features"])[]).filter((f) => app.features[f]);
+  const answers = quickAnswers(app);
+  const faq = faqLd(answers);
 
   return (
     <article className="flex flex-col gap-10">
@@ -63,6 +66,7 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
               : []),
             { name: app.name, url: `${siteUrl()}/${locale}/app/${app.slug}` },
           ]),
+          ...(faq ? [faq] : []),
         ]}
       />
       <header className="flex flex-col gap-4">
@@ -90,6 +94,22 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
           </p>
         ) : null}
       </header>
+
+      {answers.length ? (
+        <section aria-labelledby="answers">
+          <h2 id="answers" className="mb-3 font-display text-2xl font-extrabold">
+            {t.app.quickAnswers}
+          </h2>
+          <dl className="flex flex-col gap-3">
+            {answers.map((x) => (
+              <div key={x.q}>
+                <dt className="font-semibold">{x.q}</dt>
+                <dd className="text-muted">{x.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ) : null}
 
       <section aria-labelledby="facts">
         <h2 id="facts" className="mb-3 font-display text-2xl font-extrabold">

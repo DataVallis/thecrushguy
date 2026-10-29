@@ -109,3 +109,8 @@ Dev and prod have separate databases — nothing is copied automatically, and de
 | DB shell | `kamal accessory exec prod-db -d prod --interactive --reuse "psql -U tcg thecrushguy_prod"` |
 
 A rollback is safe because migrations are backward compatible. Then fix forward on `dev` and release again.
+
+## 7. Search engines (owner, once after first prod deploy)
+1. Google Search Console → add property `https://thecrushguy.com` (DNS TXT via Cloudflare) → submit `https://thecrushguy.com/sitemap.xml`.
+2. Bing Webmaster Tools → **Import from Google Search Console** (one click, no extra verification). Bing's index feeds ChatGPT search, Copilot and DuckDuckGo; IndexNow pings start automatically on every publish (ADR-031).
+3. Check: `https://thecrushguy.com/robots.txt` lists the AI bots; `https://thecrushguy.com/llms.txt` lists the apps; `https://thecrushguy.com/indexnow-key.txt` returns a key.

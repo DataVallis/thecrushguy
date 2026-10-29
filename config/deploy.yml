@@ -37,6 +37,8 @@ env:
     SMTP_PORT: '<%= ENV["SMTP_PORT"].to_s.empty? ? "587" : ENV["SMTP_PORT"] %>'
     SMTP_USER: hi@thecrushguy.com
     MAIL_FROM: "The Crush Guy <hi@thecrushguy.com>"
+    # GEO (ADR-031): GitHub variable AI_TRAINING_BOTS=block shuts out AI training crawlers (search bots stay allowed).
+    AI_TRAINING_BOTS: '<%= ENV["AI_TRAINING_BOTS"].to_s %>'
   secret:
     - DATABASE_URL
     - SMTP_PASSWORD # GitHub environment secret (dev / prod)
