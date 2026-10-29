@@ -33,6 +33,7 @@ jobs:
       SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
       SMTP_PORT: ${{ vars.SMTP_PORT }}
       ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
+      LINK_ENCRYPTION_KEY: ${{ secrets.LINK_ENCRYPTION_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1

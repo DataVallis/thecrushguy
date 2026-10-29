@@ -1,6 +1,6 @@
 # Admin console — apps, categories, publish flow, audit
 
-Status: **Built** (TASK-011c). Auth: see `auth.md`.
+Status: apps/categories/publish/audit **Live on dev** (TASK-011c, PR #6); sources/pricing/affiliate links/import **Built** (TASK-011d). Auth: see `auth.md`.
 
 ## Pages (`src/app/admin/(console)/`, all behind `requireAdmin()`)
 | Path | What |
@@ -9,6 +9,7 @@ Status: **Built** (TASK-011c). Auth: see `auth.md`.
 | `/admin/apps` | All apps: status, checklist complete?, verified, updated |
 | `/admin/apps/new`, `/admin/apps/[id]` | App form (basics, pricing, platforms, features, operator, editorial scores, categories, compliance checklist); status panel; "Mark verified now" |
 | `/admin/categories`, `/admin/categories/[id]` | List + create; edit (parent, sort, NSFW flag) |
+| `/admin/import` | CSV import of app listings (below) |
 | `/admin/audit` | Latest 100 audit entries with diffs |
 
 Login pages live in `(auth)/` with their own narrow layout; `(console)/layout.tsx` adds the nav. Admin UI is English-only (ADR-022).
@@ -25,9 +26,20 @@ Validation or constraint errors come back to the form (`useActionState`) with th
 - Category parents: self and loops (A → B → A) refused.
 - Every create/update/status/verify writes an `audit_log` row (`actor_email`, action, entity, `{field: [old, new]}`); a no-op save writes nothing. `audit_log` is append-only at DB level (TASK-011a).
 
-## Not yet (TASK-011d)
-Pricing plans, sources, affiliate links, CSV import. Delete of apps/categories is intentionally absent: apps are `removed` with a reason.
+## Sources, pricing plans, affiliate links (TASK-011d) — `src/lib/admin/listing.ts`, `apps/[id]/listing.tsx`
+- **Sources**: url (http/s), what it supports (`field`), checked date (default today), optional archive URL. A source backing a price can't be deleted (FK `restrict` → friendly message).
+- **Pricing plans**: name, price typed `12.99` → `price_cents` 1299, currency, period; **a source of the same app is required** (CLAUDE.md hard rule: every factual claim has a source).
+- **Affiliate links**: network, model, terms summary, optional source, active flag. The URL must be https, is encrypted with AES-256-GCM (`LINK_ENCRYPTION_KEY`, `src/lib/crypto/link-cipher.ts`) before the INSERT and is **never read back for display, echoed into a form or written to the audit log** — the UI shows only the host (`url_hint`); the audit records `url: "replaced"`. Blank URL on update keeps the stored one. Activating a link deactivates the app's other links in the same transaction (one active per app, DB unique index). Without `LINK_ENCRYPTION_KEY` the save fails with a clear message and nothing is stored.
+
+## CSV import (`/admin/import`, `src/lib/admin/csv-import.ts`)
+Columns `slug,name,website_url,tagline,company_name,company_country,privacy_policy_url,platforms,nsfw_allowed,source_url,source_field,checked_at` (required: slug, name, website_url, source_url, checked_at; platforms `;`-separated; dates `YYYY-MM-DD`; ≤ 1,000 rows, ≤ 1 MB). Upload a file or paste text.
+- Validate all rows first; **any invalid row → nothing imported**, errors listed per line.
+- Match by slug: new → `draft` with empty checklist; existing → only changed listed columns updated (never status or checklist); source added if that (url, field) is new. Every change audited as `import`.
+- Idempotent: the same file twice → second run "unchanged", no new rows or audit entries.
+
+Delete of apps/categories is intentionally absent: apps are `removed` with a reason.
 
 ## Tests
 - `src/lib/admin/repo.test.ts` (real Postgres): create/update/audit diffs, duplicate slug rollback, unknown category rollback, actor required, checklist stamping, publish guard for each missing item, unpublish-by-uncheck refused, removal reason, verification queue order, category loops, validation boundaries, no mass assignment.
+- `src/lib/admin/listing.test.ts` (real Postgres): price needs a source of the same app, cents, audit diffs, source delete guard, cross-app delete refused, ciphertext only + URL never in reads/audit, one active link, blank URL keeps ciphertext, https only, missing key fails loudly; CSV quoting/CRLF/BOM, idempotent import, status/checklist untouched, all-or-nothing, column/duplicate/platform/date/URL validation.
 - `src/app/admin/actions.guard.test.ts`: every exported admin server action starts with `await requireAdmin()` (sign-in/out actions exempt).

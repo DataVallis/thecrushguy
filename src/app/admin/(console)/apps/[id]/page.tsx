@@ -8,6 +8,7 @@ import { sql } from "@/lib/db/client";
 import { markVerifiedAction, saveAppAction, setStatusAction } from "../../actions";
 import { AppForm, StatusForm } from "../../forms";
 import { Loading, PageTitle, StatusBadge, fmtDate } from "../../ui";
+import { Listing } from "./listing";
 
 export const metadata: Metadata = { title: "Edit app" };
 
@@ -64,6 +65,7 @@ async function EditApp({ params, searchParams }: PageProps<"/admin/apps/[id]">) 
           </div>
         </aside>
       </div>
+      <Listing appId={app.id} />
     </>
   );
 }
