@@ -1,6 +1,6 @@
 # SEO foundation
 
-Status: **Built** (TASK-014). Code: `src/lib/seo/*`, `src/app/sitemap.xml`, `src/app/sitemaps/[name]`, `src/app/global-not-found.tsx`, `src/proxy.ts`.
+Status: **Live on dev** (TASK-014, PR #13). Code: `src/lib/seo/*`, `src/app/sitemap.xml`, `src/app/sitemaps/[name]`, `src/app/global-not-found.tsx`, `src/proxy.ts`.
 
 ## Canonical + hreflang (`meta.ts`)
 `alternatesFor(locale, path)` on home, category, app and info pages: absolute canonical per locale (via `metadataBase`), `hreflang` for **published locales only** plus `x-default` → default locale (ADR-012/016 quality bar). Unpublished locales (`de`) keep their own canonical and `noindex`, and are never listed as alternates.

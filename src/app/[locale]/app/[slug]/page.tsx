@@ -286,7 +286,7 @@ function List({ title, items, tone }: { title: string; items: string[]; tone: "p
       <ul className="flex flex-col gap-1.5 text-sm">
         {items.map((p) => (
           <li key={p} className="flex gap-2">
-            <span aria-hidden className={tone === "pro" ? "text-emerald-700" : "text-coral-strong"}>
+            <span aria-hidden className={tone === "pro" ? "text-success" : "text-coral-strong"}>
               {tone === "pro" ? "+" : "−"}
             </span>
             {p}

@@ -47,7 +47,8 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 - 2026-10-29: TASK-013 `/go/{slug}` redirect + click tracking (ADR-024) — PR #8, Live on dev.
 - 2026-10-29: TASK-015 age gate infrastructure (ADR-025) — PR #9, Live on dev.
 - 2026-10-29: TASK-012a/b public pages, editorial fields + quality gate (ADR-026) — PR #11, Live on dev. Imprint + final legal pages (ADR-027) — PR #12.
-- 2026-10-29: TASK-014 SEO (sitemaps, hreflang, JSON-LD, real 404s, ADR-028) — see `docs/tasks/TASK-014.feedback.md`.
+- 2026-10-29: TASK-014 SEO (sitemaps, hreflang, JSON-LD, real 404s, ADR-028) — PR #13, Live on dev.
+- 2026-10-29: TASK-003 CGP v1 — palette A (ADR-029), `design/CGP.md`, `design/tokens.json`, token/contrast guard test.
 - 2026-10-29: go-live runbook `docs/runbooks/go-live-prod.md` + `ops/nginx/cloudflare-ips.sh` (real visitor IP + origin lock behind Cloudflare).
 - 2026-10-29 16:16: first dev deploy (owner, Deploy dev with setup) — run 40899557896 success; smoke check: sha 548417e, db ok, home 200, noindex. Robots disallow confirmed externally. TASK-011 split agreed (ADR-020).
 
@@ -63,9 +64,9 @@ Done by owner 2026-10-29 17:59: `LINK_ENCRYPTION_KEY` (dev), Cloudflare setup.
 - Cloudflare Access as a second layer in front of `/admin`.
 
 ## Next
-- TASK-006 app universe (research → `docs/research/APPS-SEED.csv` in the importer format), then TASK-003 palette.
+- TASK-006 app universe (research → `docs/research/APPS-SEED.csv` in the importer format).
 - In parallel: TASK-003 CGP, TASK-005 keywords, TASK-006 app universe, review testing template.
-- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-028 (next free ADR-029).
+- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-029 (next free ADR-030).
 
 ## Open items
 

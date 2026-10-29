@@ -1,12 +1,12 @@
 # Tasks
 
-Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-028** (next free: ADR-029).
+Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-029** (next free: ADR-030).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
 | TASK-001 | Brand naming | — | DONE → The Crush Guy (ADR-008) |
 | TASK-002 | Logo | 001 | DONE (concept A, refinements open) → `design/logo/` (ADR-009) |
-| TASK-003 | CGP + tokens | 002 | In progress — typography decided (ADR-023), palette/tokens open |
+| TASK-003 | CGP + tokens | 002 | Built — `design/CGP.md`, `design/tokens.json` (ADR-023/029) |
 | TASK-004 | Affiliate program research | — | DONE → `docs/research/AFFILIATE-PROGRAMS.md` |
 | TASK-005 | Keyword & competitor research | — | Planned |
 | TASK-006 | App universe (150 apps + compliance) | 004 | Planned |
@@ -18,5 +18,5 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | DONE — PR #7, Live on dev |
 | TASK-012 | Public pages v1 | 003, 011 | DONE — PR #11, Live on dev; Lighthouse/CWV open |
 | TASK-013 | `/go/` redirect + click tracking | 011 | DONE — PR #8, Live on dev |
-| TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Built (ADR-028) — Rich Results Test on prod open |
+| TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | DONE — PR #13, Live on dev; Rich Results Test on prod open |
 | TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | DONE — PR #9, Live on dev; default region list kept (ADR-027) |

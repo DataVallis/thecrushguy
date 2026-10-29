@@ -35,7 +35,7 @@ export function VisitButton(props: { slug: string; name: string; placement: stri
       href={`/go/${props.slug}?p=${props.placement}&l=${props.locale}`}
       rel="sponsored nofollow noopener"
       target="_blank"
-      className="inline-flex items-center justify-center rounded-full bg-coral px-5 py-2.5 font-semibold text-white hover:bg-coral-strong"
+      className="inline-flex items-center justify-center rounded-full bg-cta px-5 py-2.5 font-semibold text-white hover:bg-cta-hover"
     >
       {fmt(props.t.app.visit, { name: props.name })}
     </a>

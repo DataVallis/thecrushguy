@@ -44,21 +44,31 @@
 }
 
 /*
- * Design tokens — PLACEHOLDER until TASK-003 (CGP) produces design/tokens.json.
- * Values come from the approved logo (ADR-009).
+ * Design tokens — mirror of design/tokens.json (TASK-003, palette A, ADR-029). Change both together;
+ * src/lib/design/tokens.test.ts fails if they drift or a text pair drops below WCAG AA.
  */
 @theme {
   --color-ink: #1b1530;
   --color-ink-soft: #3d3550;
   --color-muted: #5a5370;
   --color-coral: #ff4d6d;
-  --color-coral-strong: #c81e45; /* coral for text on white (AA) */
+  --color-coral-strong: #c81e45;
+  --color-cta: #c81e45;
+  --color-cta-hover: #a8163a;
   --color-blush: #ffe4ea;
   --color-paper: #fff8f9;
   --color-lavender: #f3f0fa;
+  --color-success: #047857;
+  --color-warning: #b45309;
+  --color-danger: #b91c1c;
+  --color-info: #1d4ed8;
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "Onest", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --radius-tile: 1rem;
+  --radius-pill: 9999px;
 }
 
 html {
