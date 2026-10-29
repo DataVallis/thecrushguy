@@ -12,6 +12,7 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
           </Link>
           <Link href="/admin/apps">Apps</Link>
           <Link href="/admin/categories">Categories</Link>
+          <Link href="/admin/import">Import</Link>
           <Link href="/admin/audit">Audit log</Link>
           <form action={logoutAction} className="ml-auto">
             <button type="submit" className="text-neutral-600 underline">

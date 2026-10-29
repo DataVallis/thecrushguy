@@ -20,6 +20,17 @@ import {
   formToObject,
   statusInput,
 } from "@/lib/admin/validation";
+import { importAppsCsv, type ImportReport } from "@/lib/admin/csv-import";
+import {
+  addSource,
+  affiliateInput,
+  deletePricingPlan,
+  deleteSource,
+  pricingInput,
+  saveAffiliateLink,
+  savePricingPlan,
+  sourceInput,
+} from "@/lib/admin/listing";
 import { requireAdmin } from "@/lib/auth/session";
 import { sql } from "@/lib/db/client";
 
@@ -98,4 +109,79 @@ export async function saveCategoryAction(id: string | null, prev: FormState, for
   }
   updateTag("categories");
   redirect("/admin/categories?saved=1");
+}
+
+// ---------- TASK-011d: sources, pricing, affiliate links, CSV import ----------
+
+async function listingWrite(
+  appId: string,
+  prev: FormState,
+  raw: Record<string, unknown>,
+  run: () => Promise<unknown>,
+): Promise<FormState> {
+  try {
+    await run();
+  } catch (err) {
+    if (err instanceof AdminError) return failure(prev, { [err.field]: err.message }, raw);
+    throw err;
+  }
+  invalidateApps();
+  redirect(`/admin/apps/${appId}?saved=1#listing`);
+}
+
+export async function addSourceAction(appId: string, prev: FormState, form: FormData): Promise<FormState> {
+  const actor = await requireAdmin();
+  const raw = formToObject(form, ["url", "field", "checkedAt", "archivedUrl"]);
+  const parsed = sourceInput.safeParse(raw);
+  if (!parsed.success) return failure(prev, fieldErrors(parsed.error), raw);
+  return listingWrite(appId, prev, raw, () => addSource(sql(), actor, appId, parsed.data));
+}
+
+export async function deleteSourceAction(appId: string, sourceId: string, prev: FormState): Promise<FormState> {
+  const actor = await requireAdmin();
+  return listingWrite(appId, prev, {}, () => deleteSource(sql(), actor, appId, sourceId));
+}
+
+export async function savePricingAction(
+  appId: string,
+  planId: string | null,
+  prev: FormState,
+  form: FormData,
+): Promise<FormState> {
+  const actor = await requireAdmin();
+  const raw = formToObject(form, ["name", "price", "currency", "period", "notes", "sourceId"]);
+  const parsed = pricingInput.safeParse(raw);
+  if (!parsed.success) return failure(prev, fieldErrors(parsed.error), raw);
+  return listingWrite(appId, prev, raw, () => savePricingPlan(sql(), actor, appId, planId, parsed.data));
+}
+
+export async function deletePricingAction(appId: string, planId: string, prev: FormState): Promise<FormState> {
+  const actor = await requireAdmin();
+  return listingWrite(appId, prev, {}, () => deletePricingPlan(sql(), actor, appId, planId));
+}
+
+export async function saveAffiliateAction(
+  appId: string,
+  linkId: string | null,
+  prev: FormState,
+  form: FormData,
+): Promise<FormState> {
+  const actor = await requireAdmin();
+  // The URL is never echoed back to the form, even after a validation error.
+  const raw = formToObject(form, ["network", "model", "termsSummary", "url", "sourceId", "active"]);
+  const parsed = affiliateInput.safeParse(raw);
+  const echo = { ...raw, url: "" };
+  if (!parsed.success) return failure(prev, fieldErrors(parsed.error), echo);
+  return listingWrite(appId, prev, echo, () => saveAffiliateLink(sql(), actor, appId, linkId, parsed.data));
+}
+
+export type ImportState = { seq: number; report?: ImportReport };
+
+export async function importCsvAction(prev: ImportState, form: FormData): Promise<ImportState> {
+  const actor = await requireAdmin();
+  const file = form.get("file");
+  const text = file instanceof File && file.size > 0 ? await file.text() : String(form.get("csv") ?? "");
+  const report = await importAppsCsv(sql(), actor, text);
+  if (report.created || report.updated) invalidateApps();
+  return { seq: prev.seq + 1, report };
 }

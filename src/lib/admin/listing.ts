@@ -1,0 +1,271 @@
+/**
+ * Sources, pricing plans and affiliate links (TASK-011d). Same rules as repo.ts: one transaction per write
+ * with its audit row; actor from the session. Affiliate URLs are encrypted before they reach the database and
+ * are never returned to the UI (only the host hint) — CLAUDE.md hard rule.
+ */
+import type postgres from "postgres";
+import { z } from "zod";
+import { encryptLink, linkHint, linkKey } from "@/lib/crypto/link-cipher";
+import { AdminError, changes } from "./repo";
+import { priceToCents } from "./validation";
+
+type Tx = postgres.TransactionSql;
+
+async function audit(tx: Tx, actor: string, action: string, entity: string, id: string, diff: unknown) {
+  if (!actor) throw new Error("audit: actor is required");
+  await tx`insert into audit_log (actor_email, action, entity, entity_id, diff)
+    values (${actor}, ${action}, ${entity}, ${id}, ${tx.json(JSON.parse(JSON.stringify(diff ?? null)))})`;
+}
+
+const httpUrl = z
+  .string()
+  .trim()
+  .max(2000)
+  .refine((v) => /^https?:\/\/[^\s]+$/.test(v) && URL.canParse(v), "Must be an http(s) URL");
+
+// ---------- sources ----------
+
+export const sourceInput = z.object({
+  url: httpUrl,
+  field: z.string().trim().min(1, "What does this source support? e.g. pricing").max(200),
+  checkedAt: z
+    .string()
+    .trim()
+    .nullish()
+    .transform((v, ctx) => {
+      if (!v) return new Date();
+      const d = new Date(`${v}T00:00:00Z`);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(v) || Number.isNaN(d.getTime())) {
+        ctx.addIssue({ code: "custom", message: "Date like 2026-10-29" });
+        return z.NEVER;
+      }
+      return d;
+    }),
+  archivedUrl: z
+    .string()
+    .trim()
+    .nullish()
+    .transform((v) => (v ? v : null))
+    .pipe(httpUrl.nullable()),
+});
+export type SourceInput = z.output<typeof sourceInput>;
+
+export async function addSource(sql: postgres.Sql, actor: string, appId: string, s: SourceInput): Promise<string> {
+  return sql.begin(async (tx) => {
+    const [app] = await tx`select 1 from apps where id = ${appId}`;
+    if (!app) throw new AdminError("_form", "App not found");
+    const row = { app_id: appId, url: s.url, field: s.field, checked_at: s.checkedAt, archived_url: s.archivedUrl };
+    const [r] = await tx<{ id: string }[]>`insert into sources ${tx(row)} returning id`;
+    await audit(tx, actor, "create", "source", r!.id, row);
+    return r!.id;
+  });
+}
+
+export async function deleteSource(sql: postgres.Sql, actor: string, appId: string, id: string): Promise<void> {
+  try {
+    await sql.begin(async (tx) => {
+      const [before] = await tx`delete from sources where id = ${id} and app_id = ${appId} returning *`;
+      if (!before) throw new AdminError("_form", "Source not found");
+      await audit(tx, actor, "delete", "source", id, before);
+    });
+  } catch (err) {
+    if ((err as { code?: string }).code === "23503")
+      throw new AdminError("_form", "This source backs a price — change or delete that price first");
+    throw err;
+  }
+}
+
+// ---------- pricing plans ----------
+
+export const pricingInput = z.object({
+  name: z.string().trim().min(1).max(120),
+  price: priceToCents.pipe(z.number({ message: "Price is required" })),
+  currency: z
+    .string()
+    .trim()
+    .toUpperCase()
+    .regex(/^[A-Z]{3}$/, "ISO code like EUR"),
+  period: z.enum(["month", "year", "lifetime", "credits"]),
+  notes: z
+    .string()
+    .trim()
+    .max(500)
+    .nullish()
+    .transform((v) => (v ? v : null)),
+  sourceId: z.uuid("Every price needs a source"),
+});
+export type PricingInput = z.output<typeof pricingInput>;
+
+/** The source must belong to the same app — otherwise a price could cite another app's page. */
+async function assertSourceOfApp(tx: Tx, appId: string, sourceId: string | null) {
+  if (!sourceId) return;
+  const [ok] = await tx`select 1 from sources where id = ${sourceId} and app_id = ${appId}`;
+  if (!ok) throw new AdminError("sourceId", "Pick a source of this app");
+}
+
+export async function savePricingPlan(
+  sql: postgres.Sql,
+  actor: string,
+  appId: string,
+  id: string | null,
+  p: PricingInput,
+): Promise<string> {
+  return sql.begin(async (tx) => {
+    await assertSourceOfApp(tx, appId, p.sourceId);
+    const row = {
+      name: p.name,
+      price_cents: p.price,
+      currency: p.currency,
+      period: p.period,
+      notes: p.notes,
+      source_id: p.sourceId,
+    };
+    if (!id) {
+      const [r] = await tx<{ id: string }[]>`insert into pricing_plans ${tx({ ...row, app_id: appId })} returning id`;
+      await audit(tx, actor, "create", "pricing_plan", r!.id, row);
+      return r!.id;
+    }
+    const [before] = await tx`select * from pricing_plans where id = ${id} and app_id = ${appId} for update`;
+    if (!before) throw new AdminError("_form", "Price not found");
+    await tx`update pricing_plans set ${tx(row)} where id = ${id}`;
+    const diff = changes(before, row);
+    if (Object.keys(diff).length) await audit(tx, actor, "update", "pricing_plan", id, diff);
+    return id;
+  });
+}
+
+export async function deletePricingPlan(sql: postgres.Sql, actor: string, appId: string, id: string): Promise<void> {
+  await sql.begin(async (tx) => {
+    const [before] = await tx`delete from pricing_plans where id = ${id} and app_id = ${appId} returning *`;
+    if (!before) throw new AdminError("_form", "Price not found");
+    await audit(tx, actor, "delete", "pricing_plan", id, before);
+  });
+}
+
+// ---------- affiliate links ----------
+
+export const affiliateInput = z.object({
+  network: z.enum(["direct", "crakrevenue", "other"]),
+  model: z.enum(["revshare", "cpa", "pps", "hybrid"]),
+  termsSummary: z
+    .string()
+    .trim()
+    .max(1000)
+    .nullish()
+    .transform((v) => (v ? v : null)),
+  /** Only https affiliate targets. Blank on edit = keep the stored URL. */
+  url: z
+    .string()
+    .trim()
+    .nullish()
+    .transform((v) => (v ? v : null))
+    .pipe(
+      z
+        .string()
+        .max(2000)
+        .refine((v) => /^https:\/\/[^\s]+$/.test(v) && URL.canParse(v), "Must be an https URL")
+        .nullable(),
+    ),
+  sourceId: z
+    .string()
+    .nullish()
+    .transform((v) => (v ? v : null))
+    .pipe(z.uuid().nullable()),
+  active: z.boolean(),
+});
+export type AffiliateInput = z.output<typeof affiliateInput>;
+
+/**
+ * Creates or updates a link. Activating one link deactivates the app's other links in the same transaction
+ * (the DB allows only one active link per app). The audit diff never contains the URL or ciphertext — only
+ * the host hint and whether the URL changed.
+ */
+export async function saveAffiliateLink(
+  sql: postgres.Sql,
+  actor: string,
+  appId: string,
+  id: string | null,
+  a: AffiliateInput,
+  key?: Buffer,
+): Promise<string> {
+  if (!id && !a.url) throw new AdminError("url", "The affiliate URL is required");
+  let encrypted: { url_encrypted: string; url_hint: string } | null = null;
+  if (a.url) {
+    let k: Buffer;
+    try {
+      k = key ?? linkKey();
+    } catch {
+      throw new AdminError("url", "LINK_ENCRYPTION_KEY is not configured on this server — the link was not saved");
+    }
+    encrypted = { url_encrypted: encryptLink(a.url, k), url_hint: linkHint(a.url) };
+  }
+  return sql.begin(async (tx) => {
+    const [app] = await tx`select 1 from apps where id = ${appId} for update`;
+    if (!app) throw new AdminError("_form", "App not found");
+    await assertSourceOfApp(tx, appId, a.sourceId);
+    const row = {
+      network: a.network,
+      model: a.model,
+      terms_summary: a.termsSummary,
+      source_id: a.sourceId,
+      active: a.active,
+      ...(encrypted ?? {}),
+    };
+    const safe = (r: Record<string, unknown>) => {
+      const { url_encrypted, ...rest } = r;
+      return { ...rest, url_changed: url_encrypted !== undefined };
+    };
+    if (a.active)
+      await tx`update affiliate_links set active = false where app_id = ${appId} and active and id is distinct from ${id}`;
+    if (!id) {
+      const [r] = await tx<{ id: string }[]>`insert into affiliate_links ${tx({ ...row, app_id: appId })} returning id`;
+      await audit(tx, actor, "create", "affiliate_link", r!.id, safe(row));
+      return r!.id;
+    }
+    const [before] = await tx`select * from affiliate_links where id = ${id} and app_id = ${appId} for update`;
+    if (!before) throw new AdminError("_form", "Link not found");
+    await tx`update affiliate_links set ${tx(row)} where id = ${id}`;
+    const { url_encrypted: _old, ...beforeSafe } = before;
+    void _old;
+    const diff = changes(beforeSafe, safe(row));
+    delete diff.url_changed;
+    if (encrypted) diff.url = "replaced";
+    if (Object.keys(diff).length) await audit(tx, actor, "update", "affiliate_link", id, diff);
+    return id;
+  });
+}
+
+// ---------- reads for the app page ----------
+
+export async function listingFor(sql: postgres.Sql, appId: string) {
+  const [srcs, plans, links] = await Promise.all([
+    sql<{ id: string; url: string; field: string; checked_at: Date; archived_url: string | null }[]>`
+      select id, url, field, checked_at, archived_url from sources where app_id = ${appId} order by checked_at desc, url`,
+    sql<
+      {
+        id: string;
+        name: string;
+        price_cents: number;
+        currency: string;
+        period: string;
+        notes: string | null;
+        source_id: string;
+      }[]
+    >`select id, name, price_cents, currency, period, notes, source_id from pricing_plans
+      where app_id = ${appId} order by price_cents, name`,
+    // Never select url_encrypted for display.
+    sql<
+      {
+        id: string;
+        network: string;
+        model: string;
+        terms_summary: string | null;
+        url_hint: string;
+        active: boolean;
+        source_id: string | null;
+      }[]
+    >`select id, network, model, terms_summary, url_hint, active, source_id from affiliate_links
+      where app_id = ${appId} order by active desc, created_at`,
+  ]);
+  return { sources: srcs, plans, links };
+}

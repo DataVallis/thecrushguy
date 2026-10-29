@@ -14,8 +14,8 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | DONE — PR #1, Live on dev (run 40899557896) |
 | TASK-011a | Data model + migrations + publish guard | 010b | DONE — PR #2, Live on dev (migrated at start) |
 | TASK-011b | Magic-link admin auth (ADR-017/018/022) | 011a | DONE — PR #4, Live on dev (deploy + smoke check green) |
-| TASK-011c | Apps/categories admin, publish flow, audit | 011b | Built — PR pending |
-| TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | Planned |
+| TASK-011c | Apps/categories admin, publish flow, audit | 011b | DONE — PR #6, Live on dev |
+| TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | Built — PR pending |
 | TASK-012 | Public pages v1 | 003, 011 | Planned |
 | TASK-013 | `/go/` redirect + click tracking | 011 | Planned |
 | TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Planned |

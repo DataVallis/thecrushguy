@@ -177,6 +177,7 @@ const BOOL_FIELDS = new Set([
   "chkPrivacyPolicy",
   "chkOperatorIdentifiable",
   "isNsfw",
+  "active",
 ]);
 const ARRAY_FIELDS = new Set(["platforms", "categoryIds"]);
 
@@ -207,7 +208,7 @@ export const APP_FIELDS: readonly string[] = [
   "hasFreePlan",
   "startingPriceCents",
   "currency",
-  ...[...BOOL_FIELDS].filter((f) => f !== "isNsfw"),
+  ...[...BOOL_FIELDS].filter((f) => f !== "isNsfw" && f !== "active"),
   "companyName",
   "companyCountry",
   "privacyPolicyUrl",

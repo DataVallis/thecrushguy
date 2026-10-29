@@ -1,5 +1,5 @@
 # TASK-011c feedback — apps/categories admin, publish flow, audit
-Status: DONE (Built) — Live on dev after merge deploy
+Status: DONE — Live on dev (PR #6 → 785713f, CI + Deploy dev green incl. smoke check)
 
 ## What I implemented
 Admin console under `/admin` (dashboard with verification queue, apps list/new/edit, status panel, mark verified, categories list/create/edit, audit log), server actions with session guard, zod validation, repo layer writing data + audit in one transaction, cache-tag invalidation. Details: `docs/technical/admin.md`.
