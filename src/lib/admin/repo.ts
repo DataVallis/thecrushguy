@@ -6,7 +6,7 @@
 import type postgres from "postgres";
 import type { AppInput, CategoryInput } from "./validation";
 
-type Tx = postgres.TransactionSql | postgres.Sql;
+export type Tx = postgres.TransactionSql | postgres.Sql;
 
 export class AdminError extends Error {
   constructor(
@@ -33,7 +33,7 @@ function mapPgError(err: unknown): never {
   throw err;
 }
 
-async function audit(
+export async function audit(
   tx: Tx,
   actor: string,
   action: string,
@@ -185,7 +185,7 @@ export async function updateApp(
 }
 
 /**
- * Quality gate for published apps (06-SEO-CONTENT "No thin pages", ADR-026): what a published app still lacks.
+ * Quality gate for published apps (06-SEO-CONTENT "No thin pages", ADR-026/030): what a published app still lacks.
  * The compliance checklist is enforced separately by the database.
  */
 export async function qualityGaps(tx: Tx, id: string): Promise<string[]> {
@@ -194,8 +194,11 @@ export async function qualityGaps(tx: Tx, id: string): Promise<string[]> {
     from apps a where a.id = ${id}`;
   if (!a) return ["app not found"];
   const gaps: string[] = [];
+  // Data-based reviews (ADR-030) cannot score chat quality from public facts: conversation stays empty.
+  const data = a.review_method === "data";
+  if (data && !a.facts) gaps.push("sourced facts");
   for (const s of ["conversation", "memory", "customization", "media", "value", "privacy"]) {
-    if (a[`score_${s}`] === null) gaps.push(`${s} score`);
+    if (a[`score_${s}`] === null && !(data && s === "conversation")) gaps.push(`${s} score`);
     if (!String(a[`score_${s}_note`] ?? "").trim()) gaps.push(`${s} reason`);
   }
   if (!String(a.verdict_md ?? "").trim()) gaps.push("verdict");
@@ -359,4 +362,89 @@ export type AuditRow = {
 
 export async function recentAudit(sql: postgres.Sql, limit = 100): Promise<AuditRow[]> {
   return sql<AuditRow[]>`select * from audit_log order by id desc limit ${limit}`;
+}
+
+// ---------- data-based reviews: review queue (ADR-030, TASK-016) ----------
+
+export type QueueItem = {
+  id: string;
+  slug: string;
+  name: string;
+  websiteUrl: string;
+  overall: number;
+  nsfwAllowed: boolean;
+  factsNotes: string | null;
+  /** Everything except the human gallery check that still blocks publishing. */
+  blockers: string[];
+};
+
+const AUTO_CHECKS: [string, string][] = [
+  ["chk_18plus_terms", "terms don't state 18+"],
+  ["chk_privacy_policy", "no privacy policy"],
+  ["chk_operator_identifiable", "operator not identifiable"],
+  ["chk_no_deepfake_feature", "deepfake check not confirmed"],
+];
+
+/** Draft data-based reviews, ready ones first. Ready = only the gallery check (chk_no_minor_content) is missing. */
+export async function reviewQueue(sql: postgres.Sql): Promise<QueueItem[]> {
+  const { overallScore } = await import("@/lib/public/scoring");
+  const rows = await sql<Record<string, unknown>[]>`
+    select * from apps where review_method = 'data' and status = 'draft' order by name`;
+  const out: QueueItem[] = [];
+  for (const r of rows) {
+    const blockers = [
+      ...AUTO_CHECKS.filter(([c]) => !r[c]).map(([, why]) => why),
+      ...(await qualityGaps(sql, r.id as string)).map((g) => `missing ${g}`),
+    ];
+    out.push({
+      id: r.id as string,
+      slug: r.slug as string,
+      name: r.name as string,
+      websiteUrl: r.website_url as string,
+      overall: overallScore({
+        conversation: r.score_conversation as number | null,
+        memory: r.score_memory as number | null,
+        customization: r.score_customization as number | null,
+        media: r.score_media as number | null,
+        value: r.score_value as number | null,
+        privacy: r.score_privacy as number | null,
+      }),
+      nsfwAllowed: r.nsfw_allowed as boolean,
+      factsNotes: ((r.facts as { notes?: string } | null)?.notes ?? null) || null,
+      blockers,
+    });
+  }
+  return out.sort((a, b) => a.blockers.length - b.blockers.length || b.overall - a.overall);
+}
+
+/**
+ * The owner looked at the app's public character gallery/marketing and found no minor-coded content
+ * (07-LEGAL §2, the one check that is never automated) → tick it and publish in one audited step.
+ * Fails (and changes nothing) if any other checklist item or the quality gate is missing.
+ */
+export async function publishAfterGalleryCheck(
+  sql: postgres.Sql,
+  actor: string,
+  id: string,
+  now = new Date(),
+): Promise<void> {
+  try {
+    await sql.begin(async (tx) => {
+      const [before] = await tx<Record<string, unknown>[]>`select * from apps where id = ${id} for update`;
+      if (!before) throw new AdminError("_form", "App not found");
+      if (before.status !== "draft") throw new AdminError("_form", "Only drafts go through the review queue");
+      const next = {
+        chk_no_minor_content: true,
+        checklist_checked_at: now,
+        checklist_note: `Gallery/marketing checked for minor-coded content by ${actor} on ${now.toISOString().slice(0, 10)}`,
+        status: "published",
+        verified_at: now,
+      };
+      await tx`update apps set ${tx(next)} where id = ${id}`;
+      await assertPublishable(tx, id);
+      await audit(tx, actor, "gallery-check-publish", "app", id, changes(before, next));
+    });
+  } catch (err) {
+    mapPgError(err);
+  }
 }

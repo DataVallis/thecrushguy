@@ -67,7 +67,11 @@
       "year": "/ year",
       "lifetime": "one-time",
       "credits": "credits"
-    }
+    },
+    "dataReview": "Rated from public information — the app's pricing page, privacy policy, terms and store listings, each linked below — not tested hands-on yet.",
+    "howWeRate": "How we rate",
+    "notTested": "Not tested",
+    "sources": "Sources"
   },
   "criteria": {
     "conversation": "Conversation",

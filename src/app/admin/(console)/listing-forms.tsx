@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import type { FormState, ImportState } from "./actions";
+import type { FormState, ImportState, ResearchState } from "./actions";
 
 type Action = (prev: FormState, form: FormData) => Promise<FormState>;
 
@@ -78,6 +78,53 @@ export function ImportForm(props: { action: (prev: ImportState, form: FormData) 
             (excluded/hold) {r.skipped}.
           </p>
         )
+      ) : null}
+    </form>
+  );
+}
+
+export function ResearchImportForm(props: { action: (prev: ResearchState) => Promise<ResearchState> }) {
+  const [state, formAction, pending] = useActionState(props.action, { seq: 0 });
+  const { seed, facts } = state;
+  return (
+    <form action={formAction} className="flex flex-col gap-3 text-sm">
+      <button
+        type="submit"
+        disabled={pending}
+        className="self-start rounded bg-neutral-900 px-4 py-2 font-medium text-white"
+      >
+        {pending ? "Importing…" : "Import research bundle"}
+      </button>
+      {seed?.errors.length || facts?.errors.length ? (
+        <div role="alert" className="rounded bg-red-50 p-3">
+          <p className="font-medium">Nothing was imported:</p>
+          <ul className="list-disc pl-5">
+            {[...(seed?.errors ?? []), ...(facts?.errors ?? [])].map((e) => (
+              <li key={e}>{e}</li>
+            ))}
+          </ul>
+        </div>
+      ) : seed && facts ? (
+        <div role="status" className="rounded bg-emerald-50 p-3">
+          <p>
+            Apps: created {seed.created}, updated {seed.updated}, unchanged {seed.unchanged}, skipped (excluded/hold){" "}
+            {seed.skipped}.
+          </p>
+          <p>
+            Data reviews: updated {facts.updated}, unchanged {facts.unchanged}
+            {facts.skippedHandsOn.length ? `, kept hands-on: ${facts.skippedHandsOn.join(", ")}` : ""}.
+          </p>
+          {facts.held.length ? (
+            <details>
+              <summary>On hold ({facts.held.length}) — not imported</summary>
+              <ul className="list-disc pl-5">
+                {facts.held.map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
+            </details>
+          ) : null}
+        </div>
       ) : null}
     </form>
   );

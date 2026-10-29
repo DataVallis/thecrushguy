@@ -1,0 +1,1198 @@
+[
+  {
+    "slug": "blush",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://blush.ai/legal/terms"
+      },
+      "free_plan_limits": {
+        "v": "'Free Use' program with limited access to the Services (no specific limits stated)",
+        "src": "https://blush.ai/legal/terms"
+      },
+      "starting_price_monthly": {
+        "v": 14.99,
+        "src": "https://apps.apple.com/app/id1641301004"
+      },
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://apps.apple.com/app/id1641301004"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_messages": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_calls": {
+        "v": "unknown",
+        "src": ""
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://apps.apple.com/app/id1641301004"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://apps.apple.com/app/id1641301004"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "platforms": {
+      "v": [
+        "ios"
+      ],
+      "src": "https://apps.apple.com/app/id1641301004"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://blush.ai/legal/privacy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://blush.ai/legal/privacy",
+        "q": "You can delete your account in your account settings."
+      },
+      "sells_or_shares_for_ads": {
+        "v": "yes",
+        "src": "https://blush.ai/legal/privacy",
+        "q": "Our disclosure of information to these partners may be considered a “sale” or “sharing”."
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "no",
+        "src": "https://blush.ai/legal/privacy",
+        "q": "We will retain your personal information for only as long as necessary to fulfill the purposes"
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://blush.ai/legal/terms",
+        "q": "If you are under 18, you are not authorized to use the Services, with or without registering."
+      },
+      "bans_minor_content": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://blush.ai/legal/terms",
+        "q": "the sale is final and we will not provide a refund"
+      },
+      "age_verification": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Endura LLC",
+        "src": "https://blush.ai/legal/terms"
+      },
+      "country": {
+        "v": "US",
+        "src": "https://blush.ai/legal/terms"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://blush.ai/legal/terms"
+      }
+    },
+    "notes": "Price: lowest monthly IAP on US App Store is 'Monthly $14.99' (also $19.99 monthly, $29.99 VIP monthly, $9.99 weekly, gem packs). Image generation/custom characters come from App Store release notes (custom photos, upload own photos to create characters). Privacy says chats let 'your AI companion to learn from your interactions to improve your conversations' (personalisation, not stated as model training) -> left unknown. Privacy also says conversations/photos are never shared with advertising partners; the 'sale/sharing' is other data. Terms ban 'vulgar, obscene, pornographic' uploads but App Store rating lists infrequent sexual content -> nsfw left unknown. Address from DMCA section: 600 Arkansas Street, San Francisco, CA 94103 (Delaware corp). App Store says 'Only for iPhone'; no Android listing found. Search results mention a 2025 Linden Lab acquisition of Blush - not verified on an opened page."
+  },
+  {
+    "slug": "dream-ai-companion",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "unknown",
+        "src": ""
+      },
+      "free_plan_limits": {
+        "v": "unknown",
+        "src": ""
+      },
+      "starting_price_monthly": {
+        "v": 19.99,
+        "src": "https://apps.apple.com/us/app/dream-ai-companion/id6464687205"
+      },
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://apps.apple.com/us/app/dream-ai-companion/id6464687205"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "yes",
+        "src": "https://apps.apple.com/us/app/dream-ai-companion/id6464687205"
+      },
+      "voice_messages": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_calls": {
+        "v": "unknown",
+        "src": ""
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://apps.apple.com/us/app/dream-ai-companion/id6464687205"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://apps.apple.com/us/app/dream-ai-companion/id6464687205"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "platforms": {
+      "v": [
+        "ios",
+        "android"
+      ],
+      "src": "https://www.mydreamai.co"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://www.mydreamai.co/privacy-policy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://www.mydreamai.co/privacy-policy",
+        "q": "Deletion: Request deletion of your account and all associated data"
+      },
+      "sells_or_shares_for_ads": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "no",
+        "src": "https://www.mydreamai.co/privacy-policy",
+        "q": "Retained indefinitely until you delete your account or request deletion"
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://www.mydreamai.co/terms-of-use",
+        "q": "at least 18 years old, or the age of legal majority in your country/region—whichever is higher"
+      },
+      "bans_minor_content": {
+        "v": "yes",
+        "src": "https://www.mydreamai.co/terms-of-use",
+        "q": "any content that sexualizes or exploits minors"
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://www.mydreamai.co/terms-of-use",
+        "q": "We do not provide refunds for Google Play purchases."
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://www.mydreamai.co/terms-of-use"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Forwardpath Technologies LLP",
+        "src": "https://play.google.com/store/apps/details?id=com.girlfriend.android"
+      },
+      "country": {
+        "v": "IN",
+        "src": "https://play.google.com/store/apps/details?id=com.girlfriend.android"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://play.google.com/store/apps/details?id=com.girlfriend.android"
+      }
+    },
+    "notes": "Price: App Store IAP 'Pro Access (1 month) $19.99'; also 'Pro Access (1 year)' listed at both $59.99 and $49.99 (~$4.17-5.00/mo) and credit packs (500 for $5.99 etc.) - human check which is current. Free to download; no free-plan definition found. Memory = App Store release note 'view and edit' chat memory. App Store mentions voice responses with selectable voices (not clearly voice messages/calls) -> unknown. Retention: chat history kept indefinitely until deletion (no fixed period). Privacy shares usage data with analytics providers; no sale/ads statement. Website and terms name no legal entity (contact@fwdpath.com); operator taken from Google Play (address Bhopal, India). Google Play content rating 12+ while App Store is 18+ with sexual content listed - inconsistency. Homepage claims 100,000+ users (unverified marketing)."
+  },
+  {
+    "slug": "erogen",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://erogen.ai/plans"
+      },
+      "free_plan_limits": {
+        "v": "About 600 messages/day (75 per 3 hours), 4K context, no long-term memory slots, small monthly credit balance",
+        "src": "https://erogen.ai/plans"
+      },
+      "starting_price_monthly": {
+        "v": 15,
+        "src": "https://erogen.ai/plans"
+      },
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://erogen.ai/plans"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "yes",
+        "src": "https://erogen.ai/plans"
+      },
+      "voice_messages": {
+        "v": "yes",
+        "src": "https://erogen.ai/plans"
+      },
+      "voice_calls": {
+        "v": "yes",
+        "src": "https://erogen.ai/plans"
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://erogen.ai/plans"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://erogen.ai/plans"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "yes",
+        "src": "https://erogen.ai/terms"
+      }
+    },
+    "platforms": {
+      "v": [
+        "web"
+      ],
+      "src": "https://erogen.ai/faq"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://erogen.ai/terms/privacy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://erogen.ai/terms/privacy",
+        "q": "we will deactivate or delete your account and information from our active databases"
+      },
+      "sells_or_shares_for_ads": {
+        "v": "unknown",
+        "src": "https://erogen.ai/terms/privacy",
+        "q": "We do not sell personal information."
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "no",
+        "src": "https://erogen.ai/terms/privacy",
+        "q": "the user has an account with us"
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://erogen.ai/terms",
+        "q": "The Services are intended for users who are at least 18 years old."
+      },
+      "bans_minor_content": {
+        "v": "yes",
+        "src": "https://erogen.ai/terms",
+        "q": "will not request or create content that depicts or sexualizes minors"
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://erogen.ai/terms/refund",
+        "q": "Refunds are available within 30 days of purchase."
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://erogen.ai/terms"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Corinth LLC",
+        "src": "https://erogen.ai/terms"
+      },
+      "country": {
+        "v": "US",
+        "src": "https://erogen.ai/terms"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://erogen.ai/terms"
+      }
+    },
+    "notes": "Homepage is adult/NSFW - not used as a source. Lowest monthly plan Silver $15/mo; promotional prepaid 12-month Silver $90 (= $7.50/mo) via third-party key - human decide which to show. Platinum $35/mo. Voice calls cost 10 credits/min; image 20 credits. Refund only if service not used after purchase. Privacy says 'We do not sell personal information' but analytics/affiliate tracking 'may constitute \"sharing\" under the broad CCPA/CPRA definition' -> sells_or_shares_for_ads left unknown. Operator address 30 N Gould St, Sheridan, WY (registered-agent style address). Country inferred from Wyoming address on terms page."
+  },
+  {
+    "slug": "flipped-chat",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://flipped.chat/faq"
+      },
+      "free_plan_limits": {
+        "v": "unknown",
+        "src": ""
+      },
+      "starting_price_monthly": {
+        "v": 9.99,
+        "src": "https://apps.apple.com/us/app/id6445969623"
+      },
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://flipped.chat/faq"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_messages": {
+        "v": "yes",
+        "src": "https://flipped.chat/faq"
+      },
+      "voice_calls": {
+        "v": "yes",
+        "src": "https://apps.apple.com/us/app/id6445969623"
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://flipped.chat/faq"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://flipped.chat/faq"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "platforms": {
+      "v": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "src": "https://flipped.chat/faq"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://flipped.chat/privacy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://flipped.chat/privacy",
+        "q": "You can ask for the deletion of your personal information."
+      },
+      "sells_or_shares_for_ads": {
+        "v": "no",
+        "src": "https://flipped.chat/privacy",
+        "q": "We will not sell or share personal information in the future belonging to website visitors, users, and other consumers."
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "no",
+        "src": "https://flipped.chat/privacy",
+        "q": "for longer than the period of time in which users have an account with us"
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://flipped.chat/tos",
+        "q": "The Services are intended for users who are at least 18 years old."
+      },
+      "bans_minor_content": {
+        "v": "yes",
+        "src": "https://flipped.chat/tos",
+        "q": "any applicable law concerning child pornography"
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://flipped.chat/tos",
+        "q": "all fees are non-refundable once login details have been used."
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://flipped.chat/tos"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Singapore Desert Oasis Technical Pte. Ltd.",
+        "src": "https://flipped.chat/tos"
+      },
+      "country": {
+        "v": "SG",
+        "src": "https://flipped.chat/tos"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://flipped.chat/tos"
+      }
+    },
+    "notes": "Price from App Store IAP: Flipped Plus 1 Month $9.99 (also Plus weekly $4.99, yearly $39.99 = $3.33/mo; Platinum $9.99/wk, $19.99/mo; gem packs $0.99-$19.99). Web /pricing page returned no plan data. Free plan limits not stated. Memory: FAQ says AI 'remembers, adapts' but also that memory is limited and may forget -> unknown. NSFW: ToS bars 'obscene, lewd, lascivious' contributions and FAQ 'strictly prohibits public display of NSFW content', yet App Store rates 18+ with sexual content -> left unknown, human check. Minors: ToS only references laws on child pornography (no explicit 'sexualizing minors' clause) - weak 'yes'. App Store copyright: TellinTree Lab. Privacy names 'Flipped Team' without entity/address."
+  },
+  {
+    "slug": "herahaven",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://herahaven.ai"
+      },
+      "free_plan_limits": {
+        "v": "unknown",
+        "src": ""
+      },
+      "starting_price_monthly": {
+        "v": "unknown",
+        "src": ""
+      },
+      "currency": "USD",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_messages": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_calls": {
+        "v": "unknown",
+        "src": ""
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://herahaven.ai"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://herahaven.ai"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "yes",
+        "src": "https://herahaven.ai"
+      }
+    },
+    "platforms": {
+      "v": [
+        "web"
+      ],
+      "src": "https://herahaven.ai"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://herahaven.ai/privacy-policy",
+      "account_data_deletion": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "sells_or_shares_for_ads": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://herahaven.ai/terms-of-service",
+        "q": "are at least 18 years old or the age of majority in your jurisdiction"
+      },
+      "bans_minor_content": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://herahaven.ai/cancellation-policy",
+        "q": "All charges are final and non-refundable, including subscription fees, recurring payments, Luna Package purchases"
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://herahaven.ai/terms-of-service"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Vilala Limited",
+        "src": "https://herahaven.ai"
+      },
+      "country": {
+        "v": "CY",
+        "src": "https://herahaven.ai"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://herahaven.ai"
+      }
+    },
+    "notes": "Terms and Privacy pages only returned the click-to-enter 18+ age gate to the fetcher - full ToS/Privacy text NOT read; human should open them in a browser. No pricing page found; currency USD is an assumption (no price seen). 'Luna Package purchases' in cancellation policy suggests a virtual-currency pack, not confirmed -> tokens unknown. NSFW 'yes' based on homepage describing chat as 'uncensored'. Memory claim only 'the more you chat... the more she'll get to know you' -> unknown. Address: 61 Agiou Pavlou, Nicosia 1107, Cyprus. Homepage also mentions turning pictures into videos."
+  },
+  {
+    "slug": "kupid-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://kupid.ai/subscriptions"
+      },
+      "free_plan_limits": {
+        "v": "15 messages shown in the Free column (table layout unclear)",
+        "src": "https://kupid.ai/subscriptions"
+      },
+      "starting_price_monthly": {
+        "v": "unknown",
+        "src": ""
+      },
+      "currency": "USD",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://kupid.ai/terms-of-service"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_messages": {
+        "v": "yes",
+        "src": "https://kupid.ai/subscriptions"
+      },
+      "voice_calls": {
+        "v": "unknown",
+        "src": ""
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://kupid.ai/subscriptions"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://kupid.ai"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "yes",
+        "src": "https://kupid.ai/terms-of-service"
+      }
+    },
+    "platforms": {
+      "v": [
+        "web"
+      ],
+      "src": "https://kupid.ai"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://kupid.ai/privacy-policy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://kupid.ai/privacy-policy",
+        "q": "you have the right to obtain from the Controller the erasure of Personal Data concerning you without undue delay"
+      },
+      "sells_or_shares_for_ads": {
+        "v": "no",
+        "src": "https://kupid.ai/privacy-policy",
+        "q": "We will not disclose, sell, trade, or otherwise transfer your personal information to any third parties"
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "yes",
+        "src": "https://kupid.ai/privacy-policy",
+        "q": "we will store your personal information for a period of 6 (six) years after you cease being a User"
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://kupid.ai/terms-of-service",
+        "q": "users must be at least 18 years old or of legal age in their country of residence"
+      },
+      "bans_minor_content": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://kupid.ai/terms-of-service",
+        "q": "All sales of digital products are final and non-refundable."
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://kupid.ai/terms-of-service"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Servalot Ltd",
+        "src": "https://kupid.ai/privacy-policy"
+      },
+      "country": {
+        "v": "CY",
+        "src": "https://kupid.ai/privacy-policy"
+      },
+      "address_stated": {
+        "v": "no",
+        "src": "https://kupid.ai/privacy-policy"
+      }
+    },
+    "notes": "Pricing page shows only weekly/yearly/lifetime ('One payment, nothing renews'): Pro $3.44/week, Ultra $5.75/week (struck-through $12.99/$24.99, period unclear); no monthly price -> unknown, human check. Memory on subscriptions page = 'She Remembers' last 30/100 messages (short context, not clearly long-term) -> unknown. Free: homepage says 'Unlimited Chat for Free' after registration but subscriptions table shows 15 messages - conflicting. Privacy 'will not ... sell' is followed by 'without your consent or unless otherwise stated'. Terms name Servalot Ltd (Cyprus) as payment processor; privacy says service is 'operated by Servalot Ltd (Cyprus)'. Homepage says 'Install App' but no store listing found."
+  },
+  {
+    "slug": "luvr-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://www.luvr.ai/subscribe"
+      },
+      "free_plan_limits": {
+        "v": "10 messages per day, limited characters",
+        "src": "https://www.luvr.ai/subscribe"
+      },
+      "starting_price_monthly": {
+        "v": 5.99,
+        "src": "https://www.luvr.ai/subscribe"
+      },
+      "currency": "USD",
+      "billing": "annual",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://www.luvr.ai/subscribe"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "yes",
+        "src": "https://apps.apple.com/app/id6743984525"
+      },
+      "voice_messages": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_calls": {
+        "v": "unknown",
+        "src": ""
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://www.luvr.ai/subscribe"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://apps.apple.com/app/id6743984525"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "yes",
+        "src": "https://www.luvr.ai"
+      }
+    },
+    "platforms": {
+      "v": [
+        "web",
+        "ios"
+      ],
+      "src": "https://apps.apple.com/app/id6743984525"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://www.luvr.ai/legal/privacy-policy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://www.luvr.ai/legal/privacy-policy",
+        "q": "You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You."
+      },
+      "sells_or_shares_for_ads": {
+        "v": "unknown",
+        "src": "https://www.luvr.ai/legal/privacy-policy",
+        "q": "With business partners: We may share Your information with Our business partners."
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "no",
+        "src": "https://www.luvr.ai/legal/privacy-policy",
+        "q": "retain Your Personal Data only for as long as is necessary"
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://www.luvr.ai/legal/terms-of-service",
+        "q": "You represent that you are over the age of 18."
+      },
+      "bans_minor_content": {
+        "v": "yes",
+        "src": "https://www.luvr.ai/legal/underage-policy",
+        "q": "strictly prohibits exploitation or harm towards minors"
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://www.luvr.ai/legal/refunds-policy",
+        "q": "considered on a case-by-case basis"
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://www.luvr.ai/legal/underage-policy"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "LUVR INC.",
+        "src": "https://www.luvr.ai/legal/refunds-policy"
+      },
+      "country": {
+        "v": "US",
+        "src": "https://www.luvr.ai/legal/terms-of-service"
+      },
+      "address_stated": {
+        "v": "no",
+        "src": "https://www.luvr.ai/legal/terms-of-service"
+      }
+    },
+    "notes": "Homepage is adult-oriented (nsfw 'yes' from that marker; a 2257 statement also exists in legal hub) - homepage not otherwise used. Price: web 12-month plan $5.99/mo (struck $19.99), 6-month $8.99/mo; total term charge not shown. App Store IAP: Monthly $12.99, Yearly $69.99 (= $5.83/mo); 3-day free trial. Coins used for images/audio/unlocking characters. Voice/audio generation exists but voice messages vs calls not specified -> unknown. Country conflict: ToS says 'San Francisco, United States', Privacy says 'Texas, United States'. App Store seller is AJ NETWORK LLC. Underage policy mentions only an 'initial age gate'."
+  },
+  {
+    "slug": "nemora-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://nemora.ai/terms-of-service"
+      },
+      "free_plan_limits": {
+        "v": "unknown",
+        "src": ""
+      },
+      "starting_price_monthly": {
+        "v": "unknown",
+        "src": ""
+      },
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://nemora.ai/terms-of-service"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_messages": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_calls": {
+        "v": "unknown",
+        "src": ""
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://nemora.ai"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://nemora.ai"
+      },
+      "group_chat": {
+        "v": "yes",
+        "src": "https://nemora.ai"
+      },
+      "nsfw_allowed": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "platforms": {
+      "v": [
+        "web"
+      ],
+      "src": "https://nemora.ai"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://nemora.ai/privacy-policy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://nemora.ai/privacy-policy",
+        "q": "You may request the deletion of your Personal Data under certain circumstances"
+      },
+      "sells_or_shares_for_ads": {
+        "v": "no",
+        "src": "https://nemora.ai/privacy-policy",
+        "q": "We will not disclose, sell, trade, or otherwise transfer your Personal Data to third parties"
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "yes",
+        "src": "https://nemora.ai/privacy-policy",
+        "q": "Typically, this period extends up to three to five years after your last use of the Services."
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://nemora.ai/terms-of-service",
+        "q": "You are at least 18 years old or the age of majority in your jurisdiction, whichever is greater"
+      },
+      "bans_minor_content": {
+        "v": "yes",
+        "src": "https://nemora.ai/terms-of-service",
+        "q": "High-risk categories such as underage content, non-consensual content"
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://nemora.ai/terms-of-service",
+        "q": "you may request a full refund within 30 days of your original payment date, regardless of usage."
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://nemora.ai/terms-of-service"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "G.A Context AI Solutions Ltd",
+        "src": "https://nemora.ai/terms-of-service"
+      },
+      "country": {
+        "v": "CY",
+        "src": "https://nemora.ai/terms-of-service"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://nemora.ai/terms-of-service"
+      }
+    },
+    "notes": "Pricing page https://nemora.ai/pricing blocked by robots (not fetched) -> price unknown; homepage shows 'Up to 80% Off' first-subscription promo. Group chat: homepage 'Up to 3 characters'. Memory: FAQ only says characters 'can learn and adapt based on your interactions over time' -> unknown. NSFW not explicitly stated; homepage says designed for 18+ and 'Some content may not be suitable for younger audiences'. Privacy 'will not ... sell' continues 'for their own marketing purposes without your explicit consent'; affiliate/email marketing providers listed. Financial data kept 7 years. Refunds: first subscription 30 days regardless of usage; later periods only if <=200 tokens used. Address: Kallipoleos 48, Loucas Court, Office 303, Lykavitos 1071 Nicosia."
+  },
+  {
+    "slug": "secretwaifu",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "unknown",
+        "src": ""
+      },
+      "free_plan_limits": {
+        "v": "unknown",
+        "src": ""
+      },
+      "starting_price_monthly": {
+        "v": "unknown",
+        "src": ""
+      },
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_messages": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_calls": {
+        "v": "unknown",
+        "src": ""
+      },
+      "image_generation": {
+        "v": "unknown",
+        "src": ""
+      },
+      "custom_character_creation": {
+        "v": "unknown",
+        "src": ""
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "yes",
+        "src": "https://secretwaifu.com/legal/terms-of-service"
+      }
+    },
+    "platforms": {
+      "v": [
+        "web"
+      ],
+      "src": "https://secretwaifu.com/legal/terms-of-service"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://secretwaifu.com/legal/privacy-notice",
+      "account_data_deletion": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "sells_or_shares_for_ads": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "yes",
+        "src": "https://secretwaifu.com/legal/terms-of-service",
+        "q": "you confirm that you are at least 18 years old and legally able to access adult content in your location."
+      },
+      "bans_minor_content": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "refund_policy_stated": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "age_verification": {
+        "v": "self-declaration",
+        "src": "https://secretwaifu.com/legal/terms-of-service"
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Mihi Marketing BV",
+        "src": "https://secretwaifu.com/legal/terms-of-service"
+      },
+      "country": {
+        "v": "BE",
+        "src": "https://secretwaifu.com/legal/terms-of-service"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://secretwaifu.com/legal/terms-of-service"
+      }
+    },
+    "notes": "Homepage is explicit - left immediately, not used as a source. Membership page (/members) and /chat-faq are robots-blocked, so no pricing or feature facts. Terms point to separate Cancellation and Refund Policy pages (not found/opened) -> refund unknown. Privacy notice fetched but deletion, sale/sharing, AI training and retention were all not stated (fetched text may be partial - human check). Privacy mentions public VRoid submissions/stories 'may be reviewed for product safety, policy enforcement, and moderation'. A /download page exists (platforms beyond web unconfirmed). Address: Tabakvest 87 / Bus 4809, 2000 Antwerpen."
+  },
+  {
+    "slug": "voxta",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {
+        "v": "yes",
+        "src": "https://voxta.ai/"
+      },
+      "free_plan_limits": {
+        "v": "Lite $0: runs on Voxta Cloud, 850 credits to start and 650 credits each month",
+        "src": "https://voxta.ai/"
+      },
+      "starting_price_monthly": {
+        "v": 6,
+        "src": "https://voxta.ai/"
+      },
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {
+        "v": "yes",
+        "src": "https://voxta.ai/"
+      }
+    },
+    "features": {
+      "long_term_memory": {
+        "v": "yes",
+        "src": "https://voxta.ai/"
+      },
+      "voice_messages": {
+        "v": "unknown",
+        "src": ""
+      },
+      "voice_calls": {
+        "v": "yes",
+        "src": "https://voxta.ai/"
+      },
+      "image_generation": {
+        "v": "yes",
+        "src": "https://voxta.ai/"
+      },
+      "custom_character_creation": {
+        "v": "yes",
+        "src": "https://voxta.ai/"
+      },
+      "group_chat": {
+        "v": "unknown",
+        "src": ""
+      },
+      "nsfw_allowed": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "platforms": {
+      "v": [
+        "windows",
+        "linux",
+        "android"
+      ],
+      "src": "https://voxta.ai/"
+    },
+    "privacy": {
+      "privacy_policy_url": "https://voxta.ai/privacy",
+      "account_data_deletion": {
+        "v": "yes",
+        "src": "https://voxta.ai/privacy",
+        "q": "To request deletion of your data, contact us by email at info@voxta.ai"
+      },
+      "sells_or_shares_for_ads": {
+        "v": "no",
+        "src": "https://voxta.ai/privacy",
+        "q": "We do not use pixels, ad trackers, or cross-site profiling."
+      },
+      "chats_used_for_training": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "retention_period_stated": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      }
+    },
+    "terms": {
+      "min_age_18": {
+        "v": "unknown",
+        "src": "",
+        "q": ""
+      },
+      "bans_minor_content": {
+        "v": "yes",
+        "src": "https://voxta.ai/terms",
+        "q": "Not use Voxta to generate or support violent extremism or the sexual abuse of minors"
+      },
+      "refund_policy_stated": {
+        "v": "yes",
+        "src": "https://voxta.ai/terms",
+        "q": "Fees are generally non-refundable"
+      },
+      "age_verification": {
+        "v": "unknown",
+        "src": ""
+      }
+    },
+    "operator": {
+      "name": {
+        "v": "Voxta LLC",
+        "src": "https://voxta.ai/terms"
+      },
+      "country": {
+        "v": "US",
+        "src": "https://voxta.ai/terms"
+      },
+      "address_stated": {
+        "v": "yes",
+        "src": "https://voxta.ai/terms"
+      }
+    },
+    "notes": "Voxta is a desktop app (Windows 10/11 full app; Linux server with browser UI; Android app for subscribers via portal, 'Not on the Play Store yet'; no macOS/iOS). Platform values 'windows'/'linux' are outside the web/ios/android example set. Plans: Lite $0, User $6, Companion $12, Ultimate $24, Elite $48, Supreme $99 per month. Voice = real-time voice conversation you 'can interrupt mid-sentence' (mapped to voice_calls). Group chat: no native group chat; characters can join a Discord server -> unknown. Privacy: 'We do not store prompts or responses' (training not addressed -> unknown). Terms state no minimum age. Address 30 N Gould St #11651, Sheridan, WY (registered-agent style)."
+  }
+]

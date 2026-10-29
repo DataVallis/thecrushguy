@@ -1,0 +1,371 @@
+[
+  {
+    "slug": "ai-angels",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://www.aiangels.io/features/unlimited-ai-girlfriend-chat/"},
+      "free_plan_limits": {"v": "Text chat described as unlimited with no daily caps; voice chat, image generation and expanded memory are paid", "src": "https://www.aiangels.io/features/unlimited-ai-girlfriend-chat/"},
+      "starting_price_monthly": {"v": 12.99, "src": "https://www.aiangels.io/pricing"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://www.aiangels.io/pricing"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://www.aiangels.io/pricing"},
+      "voice_messages": {"v": "yes", "src": "https://www.aiangels.io/pricing"},
+      "voice_calls": {"v": "yes", "src": "https://www.aiangels.io/pricing"},
+      "image_generation": {"v": "yes", "src": "https://www.aiangels.io/pricing"},
+      "custom_character_creation": {"v": "yes", "src": "https://www.aiangels.io"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "yes", "src": "https://www.aiangels.io/pricing"}
+    },
+    "platforms": {"v": ["web", "telegram"], "src": "https://www.aiangels.io"},
+    "privacy": {
+      "privacy_policy_url": "https://www.aiangels.io/privacy",
+      "account_data_deletion": {"v": "yes", "src": "https://www.aiangels.io/privacy", "q": "Request deletion of your data"},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://www.aiangels.io/privacy", "q": "We do not sell or rent your personal data."},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "no", "src": "https://www.aiangels.io/privacy", "q": "We retain personal data only for as long as necessary to:"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://www.aiangels.io/terms", "q": "You must be at least 18 years old to access or use the platform."},
+      "bans_minor_content": {"v": "yes", "src": "https://www.aiangels.io/terms", "q": "Any depiction or simulation of minors or persons appearing under 18"},
+      "refund_policy_stated": {"v": "yes", "src": "https://www.aiangels.io/terms", "q": "Refund requests must be submitted within 24 hours of payment."},
+      "age_verification": {"v": "self-declaration", "src": "https://www.aiangels.io/terms"}
+    },
+    "operator": {
+      "name": {"v": "AiAppDevelopment OÜ", "src": "https://www.aiangels.io/terms"},
+      "country": {"v": "EE", "src": "https://www.aiangels.io/terms"},
+      "address_stated": {"v": "yes", "src": "https://www.aiangels.io/terms"}
+    },
+    "notes": "Prices use '$' only; USD assumed. Plans: Private $12.99/mo (1,500 credits), All Yours $39.99/mo, Diamond $99.99 once (crypto, shown as $8.33/mo). Credits fund photos, calls, voice notes, video; per-action cost not stated. Pricing page says 'Unlimited chat ... from $12.99 a month' while the feature page says free text chat is unlimited - contradiction, check. Terms mention an 'age check at entry' without describing it. Privacy policy says no sale but does not address ad sharing; AI training on chats not mentioned (only 'interaction logs' used to improve functionality). NSFW from pricing page ('Generate 18+ Images'). Voice messages/calls only named as credit-funded items on pricing page."
+  },
+  {
+    "slug": "craveu-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://craveu.ai/agreement/terms-of-use"},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 4.99, "src": "https://craveu.ai/pricing"},
+      "currency": "USD",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://craveu.ai/pricing"}
+    },
+    "features": {
+      "long_term_memory": {"v": "unknown", "src": ""},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "yes", "src": "https://craveu.ai/agreement/faq"},
+      "custom_character_creation": {"v": "yes", "src": "https://craveu.ai/agreement/faq"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://craveu.ai/"},
+    "privacy": {
+      "privacy_policy_url": "https://craveu.ai/agreement/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://craveu.ai/agreement/faq", "q": "Once your account is deleted, it cannot be recovered."},
+      "sells_or_shares_for_ads": {"v": "yes", "src": "https://craveu.ai/agreement/privacy-policy", "q": "so that we can deliver, buy, or target advertisements which are more likely to be of interest to you"},
+      "chats_used_for_training": {"v": "yes", "src": "https://craveu.ai/agreement/privacy-policy", "q": "We may use User Content from character chats to train AI models."},
+      "retention_period_stated": {"v": "no", "src": "https://craveu.ai/agreement/privacy-policy", "q": "We retain Personal Information for so long as it is reasonably necessary"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://craveu.ai/agreement/terms-of-use", "q": "You affirm that You are more than 18 years of age"},
+      "bans_minor_content": {"v": "yes", "src": "https://craveu.ai/agreement/faq", "q": "Minor-related Sexual Content"},
+      "refund_policy_stated": {"v": "yes", "src": "https://craveu.ai/agreement/refund-policy", "q": "Fees are non-refundable once the Login details have been used on Portal."},
+      "age_verification": {"v": "self-declaration", "src": "https://craveu.ai/agreement/terms-of-use"}
+    },
+    "operator": {
+      "name": {"v": "COZYAI LLC", "src": "https://craveu.ai/agreement/terms-of-use"},
+      "country": {"v": "US", "src": "https://craveu.ai/agreement/terms-of-use"},
+      "address_stated": {"v": "yes", "src": "https://craveu.ai/agreement/terms-of-use"}
+    },
+    "notes": "Pricing page shows each tier with two prices without saying which billing period applies: Essential $4.99 or $5.99/mo (total $58.88), Pro $7.99 or $14.99, Ultimate $29.99 or $49.99; monthly and annual billing both offered. 4.99 is probably the annual-equivalent rate - human must confirm and set billing. '$' only, USD assumed. Free plan from Terms ('The basic Service is free to use.'); limits not stated. Tokens: 3M tokens ~2,000 messages on Essential. Memory 'up to 128K' (context size) - long-term memory left unknown. NSFW CONFLICT: Terms prohibit posting 'NSFW, pornographic, or otherwise sexually explicit' material while homepage markets 'NSFW AI chat' - left unknown. Privacy: no opt-out from AI training stated; ad targeting via Google/third-party cookies. Terms mention mobile apps/in-app purchases but no store listing was found."
+  },
+  {
+    "slug": "fantasygf",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://fantasygf.com/"},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 12.99, "src": "https://fantasygf.com/legal/terms"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://fantasygf.com/legal/terms"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://fantasygf.com/"},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "yes", "src": "https://fantasygf.com/"},
+      "image_generation": {"v": "yes", "src": "https://fantasygf.com/"},
+      "custom_character_creation": {"v": "yes", "src": "https://fantasygf.com/"},
+      "group_chat": {"v": "yes", "src": "https://fantasygf.com/"},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://fantasygf.com/"},
+    "privacy": {
+      "privacy_policy_url": "https://fantasygf.com/legal/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://fantasygf.com/legal/privacy-policy", "q": "update, amend, or delete Your information at any time by signing in to Your Account"},
+      "sells_or_shares_for_ads": {"v": "unknown", "src": "https://fantasygf.com/legal/privacy-policy", "q": "We may share Your information with Our business partners to offer You certain products, services or promotions."},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "no", "src": "https://fantasygf.com/legal/privacy-policy", "q": "The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy."}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://fantasygf.com/legal/terms", "q": "The Website is intended for adults who are 18 years or older."},
+      "bans_minor_content": {"v": "yes", "src": "https://fantasygf.com/legal/blocked-content-policy", "q": "Absolutely no content involving minors in sexual or suggestive contexts."},
+      "refund_policy_stated": {"v": "yes", "src": "https://fantasygf.com/legal/terms", "q": "Refunds are available only before the next billing period starts."},
+      "age_verification": {"v": "self-declaration", "src": "https://fantasygf.com/legal/terms"}
+    },
+    "operator": {
+      "name": {"v": "ADVANCED AI LABS S.R.L.", "src": "https://fantasygf.com/legal/terms"},
+      "country": {"v": "RO", "src": "https://fantasygf.com/legal/terms"},
+      "address_stated": {"v": "yes", "src": "https://fantasygf.com/legal/terms"}
+    },
+    "notes": "Prices come from the Terms (Monthly $12.99, Quarterly $29.99, Yearly $69.99); no pricing page found; homepage shows '75% OFF' Premium badge but no prices. '$' only, USD assumed. Free: homepage 'Join Free', 'Try for free', '$0 trial', 'for free, every month' - limits not stated; may be a trial rather than a free plan, check. Token packages are one-time purchases per Terms. Group chat = 'Duos & Trios' (2-3 characters). Voice calls from homepage nav 'AI Live Phone Call'. NSFW: marketing says 'uncensored', but neither Terms nor Blocked Content Policy state adult content is allowed - left unknown. Privacy policy silent on AI training and targeted ads."
+  },
+  {
+    "slug": "golove-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://goloveai.com/"},
+      "free_plan_limits": {"v": "Text chat, memory, voice messages and standard photos free; daily message limit listed as unlimited", "src": "https://goloveai.com/"},
+      "starting_price_monthly": {"v": "unknown", "src": ""},
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://goloveai.com/terms-of-service"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://goloveai.com/"},
+      "voice_messages": {"v": "yes", "src": "https://goloveai.com/"},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "yes", "src": "https://goloveai.com/"},
+      "custom_character_creation": {"v": "unknown", "src": "https://goloveai.com/"},
+      "group_chat": {"v": "yes", "src": "https://goloveai.com/"},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://goloveai.com/"},
+    "privacy": {
+      "privacy_policy_url": "https://goloveai.com/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://goloveai.com/privacy-policy", "q": "delete your user account in a timely manner"},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://goloveai.com/privacy-policy", "q": "sell, trade, or otherwise transfer your personal information"},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "yes", "src": "https://goloveai.com/privacy-policy", "q": "store your personal information for a period of 6 (six) years"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://goloveai.com/underage-policy", "q": "users must be at least 18 years of age or the legal age of majority in their country of residence"},
+      "bans_minor_content": {"v": "yes", "src": "https://goloveai.com/underage-policy", "q": "does not resemble minors or exploit their likeness"},
+      "refund_policy_stated": {"v": "yes", "src": "https://goloveai.com/terms-of-service", "q": "You are entitled to request a full refund within a period of twenty-four (24) hours."},
+      "age_verification": {"v": "self-declaration", "src": "https://goloveai.com/underage-policy"}
+    },
+    "operator": {
+      "name": {"v": "404 Intelligence LTD", "src": "https://goloveai.com/terms-of-service"},
+      "country": {"v": "CY", "src": "https://goloveai.com/terms-of-service"},
+      "address_stated": {"v": "yes", "src": "https://goloveai.com/terms-of-service"}
+    },
+    "notes": "Pricing page https://goloveai.com/app/premium is robots-blocked; no price found on homepage (only 'Premium' and '70% welcome discount'). The '$20/month' on the homepage refers to competitors, not GoLove. Sells/shares: policy says it will not 'sell, trade, or otherwise transfer' data without consent, plus opt-in for marketing sharing; targeted ads not addressed. Refund denied if more than 20 credits used. Terms say only 'requisite legal age'; 18+ comes from the Underage Policy and the homepage gate. Custom creator: homepage says 'The full custom creator rolls out in the coming weeks', but legal index links an 'Image-Based Character Creation Guide' - left unknown. Group chat = 'Multi-character Scenarios' (up to 10 characters); check that it counts as group chat. Voice: voice messages plus video-style 'Live mode'; calls not stated. 18 USC 2257 page does not state if adult content is allowed."
+  },
+  {
+    "slug": "kindroid",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "no", "src": "https://kindroid.ai/v2/docs/subscriptions/"},
+      "free_plan_limits": {"v": "One-time preview (50 messages, 5 selfies, 5,000 audio credits, up to 2 Kindroids) and 3-day premium trial; then account is read-only", "src": "https://kindroid.ai/v2/docs/subscriptions/"},
+      "starting_price_monthly": {"v": 14.99, "src": "https://apps.apple.com/us/app/kindroid/id6451038161"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://kindroid.ai/v2/docs/subscriptions/"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://kindroid.ai/v2/docs/subscriptions/"},
+      "voice_messages": {"v": "yes", "src": "https://kindroid.ai/v2/docs/subscriptions/"},
+      "voice_calls": {"v": "yes", "src": "https://kindroid.ai/v2/docs/subscriptions/"},
+      "image_generation": {"v": "yes", "src": "https://apps.apple.com/us/app/kindroid/id6451038161"},
+      "custom_character_creation": {"v": "yes", "src": "https://apps.apple.com/us/app/kindroid/id6451038161"},
+      "group_chat": {"v": "yes", "src": "https://kindroid.ai/v2/docs/subscriptions/"},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web", "ios", "android"], "src": "https://kindroid.ai/v2/docs/subscriptions/"},
+    "privacy": {
+      "privacy_policy_url": "https://kindroid.ai/v2/docs/kindroid-legal/#privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://kindroid.ai/v2/docs/kindroid-legal/", "q": "edit or delete your content, Kindroids or account"},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://kindroid.ai/v2/docs/kindroid-legal/", "q": "We will not sell or share your Personal Data, and have not done so over the last 12 months."},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "yes", "src": "https://kindroid.ai/v2/docs/kindroid-legal/", "q": "We retain your chat conversation and generated media until you delete a specific AI or delete your account."}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://kindroid.ai/v2/docs/kindroid-legal/", "q": "at least 18 years of age or the age of majority in their jurisdiction, whichever is greater"},
+      "bans_minor_content": {"v": "yes", "src": "https://kindroid.ai/v2/docs/kindroid-legal/", "q": "can be classified as, or supports the creation of, child sexual abuse material"},
+      "refund_policy_stated": {"v": "yes", "src": "https://kindroid.ai/v2/docs/kindroid-legal/", "q": "KINDROID WILL NOT REFUND ANY FEES THAT YOU HAVE ALREADY PAID"},
+      "age_verification": {"v": "self-declaration", "src": "https://kindroid.ai/v2/docs/age-verification/"}
+    },
+    "operator": {
+      "name": {"v": "Beautifully Incorporated", "src": "https://kindroid.ai/v2/docs/kindroid-legal/"},
+      "country": {"v": "US", "src": "https://kindroid.ai/v2/docs/kindroid-legal/"},
+      "address_stated": {"v": "yes", "src": "https://kindroid.ai/v2/docs/kindroid-legal/"}
+    },
+    "notes": "Price $14.99/mo is the US App Store IAP (3 mo $39.99, yearly $149.99); docs say web is usually cheaper and exact price is shown only at checkout. Ultra/MAX are monthly add-ons. Credits = audio credits. Age verification: an active subscription/payment counts as verification, and Yoti selfie age estimation or ID upload is used when flagged; 'Most free users will never encounter any verification prompt' - check that 'self-declaration' is the right category. Privacy: says no sale/share, but discloses an attribution provider whose 'advertising partners' receive ad-data choices. AI training not mentioned. Images = 'diffusion-generated selfies'. NSFW not stated in terms (Moderation Guidelines not read); App Store rating 17+ with 'Infrequent/Mild Sexual Content and Nudity'. Legal page was read only to 100,000 of ~105,000 characters."
+  },
+  {
+    "slug": "nastia-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://www.nastia.ai/"},
+      "free_plan_limits": {"v": "Daily messages (number not stated); unlimited messages, voice chat and uncensored image generation are paid", "src": "https://www.nastia.ai/"},
+      "starting_price_monthly": {"v": "unknown", "src": ""},
+      "currency": "USD",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "unknown", "src": ""}
+    },
+    "features": {
+      "long_term_memory": {"v": "unknown", "src": ""},
+      "voice_messages": {"v": "yes", "src": "https://www.nastia.ai/"},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "yes", "src": "https://www.nastia.ai/"},
+      "custom_character_creation": {"v": "yes", "src": "https://www.nastia.ai/"},
+      "group_chat": {"v": "yes", "src": "https://www.nastia.ai/"},
+      "nsfw_allowed": {"v": "yes", "src": "https://nastia.ai/terms"}
+    },
+    "platforms": {"v": ["web"], "src": "https://www.nastia.ai/install"},
+    "privacy": {
+      "privacy_policy_url": "https://www.nastia.ai/privacy",
+      "account_data_deletion": {"v": "yes", "src": "https://www.nastia.ai/privacy", "q": "you can delete your account from your settings, which deletes your account and the content in it."},
+      "sells_or_shares_for_ads": {"v": "yes", "src": "https://www.nastia.ai/privacy", "q": "Some advertising cookies may count as \"sharing\" under those laws; to opt out, write to"},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "yes", "src": "https://www.nastia.ai/privacy", "q": "We keep your information while your account is open."}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://nastia.ai/terms", "q": "The Services are intended for users who are at least 18 years old."},
+      "bans_minor_content": {"v": "yes", "src": "https://nastia.ai/terms", "q": "depicts or suggests a person under 18, including childlike or 'aged-up' characters;"},
+      "refund_policy_stated": {"v": "yes", "src": "https://nastia.ai/terms", "q": "All purchases are non-refundable, except where required by law or where a technical error prevented delivery."},
+      "age_verification": {"v": "self-declaration", "src": "https://www.nastia.ai/help/age-verification"}
+    },
+    "operator": {
+      "name": {"v": "Nastia Cybernetics", "src": "https://www.nastia.ai/privacy"},
+      "country": {"v": "FR", "src": "https://www.nastia.ai/privacy"},
+      "address_stated": {"v": "no", "src": "https://www.nastia.ai/privacy"}
+    },
+    "notes": "Price unknown: /app/membership and /help/billing-and-renewal return no prices (JS-rendered). Currency USD from Terms ('all payments are in US dollars'). No App Store/Google Play listing; install page offers PWA only (iOS via Safari 'Add to Home Screen', Android/desktop install). App Store id6745784013 found in search is a different app (Xhot, Numan Durrani) - do NOT use. Privacy says 'We do not sell personal information' but shares with advertising providers, and ad cookies may count as 'sharing'. Retention: kept while account open; some records up to 7 years. Age verification: self-declaration in most countries; third-party face estimate, card check or ID where local law requires. Memory: homepage only says it 'remembers you' - left unknown. 'Voice chat' is paid; unclear if it means calls. AI training not explicitly stated ('improve ... the quality of companion replies')."
+  },
+  {
+    "slug": "ourdream-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": 19.99, "src": "https://ourdream.ai/"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://ourdream.ai/"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://ourdream.ai/"},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "yes", "src": "https://ourdream.ai/"},
+      "image_generation": {"v": "yes", "src": "https://ourdream.ai/"},
+      "custom_character_creation": {"v": "yes", "src": "https://ourdream.ai/"},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "yes", "src": "https://ourdream.ai/"}
+    },
+    "platforms": {"v": ["web"], "src": "https://ourdream.ai/"},
+    "privacy": {
+      "privacy_policy_url": "https://ourdream.ai/terms/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://ourdream.ai/terms/privacy-policy", "q": "delete your account through Settings → Account management"},
+      "sells_or_shares_for_ads": {"v": "no", "src": "https://ourdream.ai/terms/privacy-policy", "q": "Though we do not engage in advertising as of the date of this Policy"},
+      "chats_used_for_training": {"v": "yes", "src": "https://ourdream.ai/terms/privacy-policy", "q": "including to train our artificial intelligence/machine learning models"},
+      "retention_period_stated": {"v": "no", "src": "https://ourdream.ai/terms/privacy-policy", "q": "We keep your information for the time necessary for the purposes for which it is processed"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://ourdream.ai/terms/terms-of-service", "q": "If you are under 18 years old, do not sign up for the Services"},
+      "bans_minor_content": {"v": "yes", "src": "https://ourdream.ai/terms/underage-policy", "q": "does not bear any resemblance to minors or exploit their likeness"},
+      "refund_policy_stated": {"v": "yes", "src": "https://ourdream.ai/terms/refund-policy", "q": "at our discretion, may offer a credit, replacement, rectification of the service provided, or a refund."},
+      "age_verification": {"v": "self-declaration", "src": "https://ourdream.ai/terms/terms-of-service"}
+    },
+    "operator": {
+      "name": {"v": "Dream Studio USA, Inc.", "src": "https://ourdream.ai/terms/privacy-policy"},
+      "country": {"v": "US", "src": "https://ourdream.ai/terms/terms-of-service"},
+      "address_stated": {"v": "yes", "src": "https://ourdream.ai/terms/privacy-policy"}
+    },
+    "notes": "Monthly plan $19.99; yearly plan $9.99/mo billed $119.88 upfront. Both include unlimited messages and 1,000 dreamcoins/month. Free plan: only 'Sign up for free today', no limits described - left unknown. Country US from 'a Delaware corporation' (country not literally stated). Privacy: 'do not engage in advertising' as of policy date, but reserves future sharing with ad partners - may change. Refund: case-by-case, contact support within 14 days. Age: attestation at registration; Underage Policy says ID/biometric checks via third parties may apply depending on location. NSFW from homepage (NSFW images/videos, 'Adults Only'). 'All Group Chats' appears only as a category filter - group chat left unknown. AI training: no opt-out stated."
+  },
+  {
+    "slug": "secrets-ai",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "unknown", "src": ""},
+      "free_plan_limits": {"v": "unknown", "src": ""},
+      "starting_price_monthly": {"v": "unknown", "src": ""},
+      "currency": "unknown",
+      "billing": "unknown",
+      "uses_tokens_or_credits": {"v": "unknown", "src": ""}
+    },
+    "features": {
+      "long_term_memory": {"v": "unknown", "src": ""},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "unknown", "src": ""},
+      "image_generation": {"v": "unknown", "src": ""},
+      "custom_character_creation": {"v": "unknown", "src": ""},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["web"], "src": "https://www.secrets.ai/"},
+    "privacy": {
+      "privacy_policy_url": "",
+      "account_data_deletion": {"v": "unknown", "src": "", "q": ""},
+      "sells_or_shares_for_ads": {"v": "unknown", "src": "", "q": ""},
+      "chats_used_for_training": {"v": "unknown", "src": "", "q": ""},
+      "retention_period_stated": {"v": "unknown", "src": "", "q": ""}
+    },
+    "terms": {
+      "min_age_18": {"v": "unknown", "src": "", "q": ""},
+      "bans_minor_content": {"v": "unknown", "src": "", "q": ""},
+      "refund_policy_stated": {"v": "unknown", "src": "", "q": ""},
+      "age_verification": {"v": "unknown", "src": ""}
+    },
+    "operator": {
+      "name": {"v": "Secret Labs Inc.", "src": "https://www.secrets.ai/"},
+      "country": {"v": "US", "src": "https://www.secrets.ai/"},
+      "address_stated": {"v": "yes", "src": "https://www.secrets.ai/"}
+    },
+    "notes": "MANUAL BROWSER CHECK NEEDED. /terms and /store return only metadata (JS-rendered); /privacy-policy is robots-blocked; wiki.secrets.ai fetch was not permitted (permission prompt timed out); direct curl blocked by proxy (403). Store meta description mentions 'Lite, Plus, and Premium plans' and 'Purchase Moments', no prices. Homepage has 'Join Free' buttons and 'Start watching free' (Shorts), not enough for has_free_plan. Homepage address: 8 The Green Ste D, Dover, DE 19901, United States. Search found no official App Store listing (results were unrelated apps and many spammy *.pages.dev clone sites - ignore those)."
+  },
+  {
+    "slug": "tendertalk",
+    "checked_at": "2026-10-29",
+    "pricing": {
+      "has_free_plan": {"v": "yes", "src": "https://www.tendertalkapp.com/terms-of-service/"},
+      "free_plan_limits": {"v": "a free-of-charge program, which gives limited access to the Services (specific limits not stated)", "src": "https://www.tendertalkapp.com/terms-of-service/"},
+      "starting_price_monthly": {"v": 9.99, "src": "https://apps.apple.com/us/app/id6467968256"},
+      "currency": "USD",
+      "billing": "monthly",
+      "uses_tokens_or_credits": {"v": "yes", "src": "https://apps.apple.com/us/app/id6467968256"}
+    },
+    "features": {
+      "long_term_memory": {"v": "yes", "src": "https://www.tendertalkapp.com/"},
+      "voice_messages": {"v": "unknown", "src": ""},
+      "voice_calls": {"v": "yes", "src": "https://apps.apple.com/us/app/id6467968256"},
+      "image_generation": {"v": "yes", "src": "https://apps.apple.com/us/app/id6467968256"},
+      "custom_character_creation": {"v": "unknown", "src": ""},
+      "group_chat": {"v": "unknown", "src": ""},
+      "nsfw_allowed": {"v": "unknown", "src": ""}
+    },
+    "platforms": {"v": ["ios"], "src": "https://www.tendertalkapp.com/"},
+    "privacy": {
+      "privacy_policy_url": "https://www.tendertalkapp.com/privacy-policy",
+      "account_data_deletion": {"v": "yes", "src": "https://www.tendertalkapp.com/privacy-policy", "q": "You can delete your account in your account settings."},
+      "sells_or_shares_for_ads": {"v": "yes", "src": "https://www.tendertalkapp.com/privacy-policy", "q": "We share information with third-party advertising partners"},
+      "chats_used_for_training": {"v": "unknown", "src": "https://www.tendertalkapp.com/privacy-policy", "q": "learn from your interactions to improve your conversations"},
+      "retention_period_stated": {"v": "no", "src": "https://www.tendertalkapp.com/privacy-policy", "q": "We will retain your personal information for only as long as necessary"}
+    },
+    "terms": {
+      "min_age_18": {"v": "yes", "src": "https://www.tendertalkapp.com/terms-of-service/", "q": "If you are under 18, you are not authorized to use the Services, with or without registering."},
+      "bans_minor_content": {"v": "unknown", "src": "", "q": ""},
+      "refund_policy_stated": {"v": "yes", "src": "https://www.tendertalkapp.com/terms-of-service/", "q": "the sale is final and we will not provide a refund"},
+      "age_verification": {"v": "unknown", "src": ""}
+    },
+    "operator": {
+      "name": {"v": "UX App Builder Limited", "src": "https://www.tendertalkapp.com/terms-of-service/"},
+      "country": {"v": "GB", "src": "https://www.tendertalkapp.com/terms-of-service/"},
+      "address_stated": {"v": "yes", "src": "https://www.tendertalkapp.com/terms-of-service/"}
+    },
+    "notes": "App Store IAP: Monthly $9.99, Annual $39.99, 50 Image Generation Credits $19.99; App Store age rating 18+ (no sexual-content descriptor). Terms list monthly, semi-annual or annual billing. Address: 107-111 Fleet Street, London EC4A 2AB (Terms s.8.4). Privacy shares website visitor data with ad partners but says it will 'never share your TenderTalk conversations' with advertisers. AI training: only 'learn from your interactions' - left unknown. Terms ban 'pornographic' uploaded content but do not address AI-generated content - NSFW left unknown. No explicit minor-content ban (only bans soliciting info from under-18s). Voice calls from App Store 'voice and video-style interactions'; website lists video calls. 12 preset personalities; custom creation not mentioned. iOS only per website."
+  }
+]

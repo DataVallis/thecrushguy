@@ -41,9 +41,10 @@ export const INFO: Record<InfoPage, InfoContent> = {
     body: (
       <>
         <p>
-          The Crush Guy is an independent guide to AI companion apps. We sign up, chat for weeks, pay for the plans and
-          write down what actually happens — prices, memory, privacy and the dark patterns — so you don&apos;t have to
-          find out the hard way.
+          The Crush Guy is an independent guide to AI companion apps. We collect the facts that matter — prices, free
+          plans, features, privacy policies, who runs the app — with a source link and a date for each, and turn them
+          into scores with a published formula. Apps we have tested ourselves say so; apps rated from public information
+          say that too.
         </p>
         <p>
           Our mascot is the heart with sunglasses. The site is operated by {LEGAL_ENTITY.name} ({LEGAL_ENTITY.country}).
@@ -64,8 +65,8 @@ export const INFO: Record<InfoPage, InfoContent> = {
     body: (
       <>
         <p>
-          Every app gets six sub-scores from 0 to 10, based on our own testing with a real account (at least the free
-          tier). The overall score is a weighted average:
+          Every app gets up to six sub-scores from 0 to 10. The overall score is a weighted average of the sub-scores
+          the app has:
         </p>
         <ul className="list-disc pl-5">
           {criteria.map(([k, name, what]) => (
@@ -77,6 +78,40 @@ export const INFO: Record<InfoPage, InfoContent> = {
             </li>
           ))}
         </ul>
+        <H>Two kinds of reviews</H>
+        <p>
+          <strong>Tested</strong> — we used the app with a real account (at least the free tier) and scored all six
+          criteria ourselves. <strong>Rated from public information</strong> — we have not tested it yet; the scores are
+          computed by a fixed formula from facts on the app&apos;s own pricing page, privacy policy, terms and store
+          listings, each linked on the app page with the date we checked it. Such pages carry a clear label, have no
+          Conversation score (chat quality can&apos;t be judged without using the app) and are not marked up as reviews
+          for search engines.
+        </p>
+        <p>The formula for public-information ratings (0–100 per criterion, shown as 0–10):</p>
+        <ul className="list-disc pl-5">
+          <li>
+            <strong>Value</strong>: free plan +40; cheapest monthly plan ≤ $5 +60, ≤ $10 +50, ≤ $15 +40, ≤ $20 +25, ≤
+            $30 +15, more +5; extra tokens/credits −10.
+          </li>
+          <li>
+            <strong>Memory</strong>: long-term memory advertised 80, not stated 30, explicitly none 10.
+          </li>
+          <li>
+            <strong>Customization</strong>: create your own characters +70, group chats +30.
+          </li>
+          <li>
+            <strong>Media</strong>: voice messages +30, voice calls +30, image generation +40.
+          </li>
+          <li>
+            <strong>Privacy &amp; safety</strong>: account/data deletion +30, says it doesn&apos;t sell or share data
+            for ads +25, chats not used for AI training +25 (opt-out +15), retention period stated +10, operator address
+            published +10.
+          </li>
+        </ul>
+        <p>
+          Anything the app doesn&apos;t state earns nothing. These numbers say what an app offers on paper, not how well
+          it works — that is what a hands-on test adds.
+        </p>
         <H>Independence</H>
         <p>
           We earn commissions from some apps (see the affiliate disclosure). Commissions never change a score or the
