@@ -28,6 +28,9 @@
 | `LINK_ENCRYPTION_KEY` | env secret (TASK-011d) | Environments → dev / prod | AES-256-GCM key for affiliate URLs — `openssl rand -base64 32`, **different per environment**, keep a copy in your password manager (lost key = re-enter all affiliate links) |
 | `GITHUB_TOKEN` | automatic | — | push image to GHCR |
 
+## Go-live
+Everything for dev → prod (Cloudflare proxy + location headers, prod secrets, release PR `dev → main`, rollback): `docs/runbooks/go-live-prod.md`.
+
 ## Commands
 See `docs/runbooks/deploy-dev.md` §6 (deploy, logs, rollback, DB shell).
 

@@ -1,6 +1,6 @@
 # Age gate (pluggable)
 
-Status: **Built** (TASK-015) — infrastructure only; no NSFW sections exist yet (they come with public pages, TASK-012). Decisions: ADR-006, ADR-025.
+Status: **Live on dev** (TASK-015, PR #9) — infrastructure only; no NSFW sections exist yet (they come with public pages, TASK-012). Decisions: ADR-006, ADR-025.
 
 ## Use
 ```tsx
