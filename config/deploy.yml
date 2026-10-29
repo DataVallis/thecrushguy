@@ -1,0 +1,38 @@
+# Kamal 2 — shared settings (same pattern as DataVallis/postaja on the same host, ADR-019).
+# Per-environment values: config/deploy.<destination>.yml. Secrets: .kamal/secrets-common + .kamal/secrets.<destination>,
+# which only reference environment variables (set by GitHub Actions environments).
+service: thecrushguy
+image: datavallis/thecrushguy
+
+registry:
+  server: ghcr.io
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+  args:
+    GIT_SHA: <%= ENV.fetch("GITHUB_SHA") { `git rev-parse HEAD`.strip } %>
+
+ssh:
+  user: deploy
+
+proxy:
+  ssl: false # TLS is terminated by host nginx (shared host, see ops/nginx)
+  forward_headers: true # trust X-Forwarded-* from nginx
+  app_port: 3000
+  healthcheck:
+    path: /api/health
+    interval: 3
+    timeout: 5
+
+env:
+  clear:
+    NODE_ENV: production
+  secret:
+    - DATABASE_URL
+
+# Keep a few old images for rollback, prune the rest (shared host).
+retain_containers: 3

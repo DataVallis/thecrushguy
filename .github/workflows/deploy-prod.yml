@@ -1,0 +1,65 @@
+name: Deploy prod
+
+# Auto-deploy on every merge/push to `main` (owner, 2026-10-29, ADR-021) once DEPLOY_PROD_ENABLED=true.
+# Manual run (setup = true) is used once for the first deploy.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      setup:
+        description: "First run on this app: boot the DB accessory and run kamal setup (kamal-proxy on the host is already configured by postaja)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Deploy guard: prod only from main; push deploys only after the owner sets DEPLOY_PROD_ENABLED=true.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || vars.DEPLOY_PROD_ENABLED == 'true')
+    runs-on: ubuntu-24.04
+    environment: prod
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      packages: write
+    env:
+      PROD_HOST: ${{ vars.PROD_HOST }}
+      KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+      KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - name: Install Kamal
+        run: gem install kamal -v "~> 2.7" --no-document
+      - uses: docker/setup-buildx-action@v3
+      - name: SSH key and pinned host key
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.PROD_SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
+      - name: First-time setup (DB accessory + app)
+        if: github.event_name == 'workflow_dispatch' && inputs.setup
+        run: kamal setup -d prod
+      - name: Deploy
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.setup) }}
+        run: kamal deploy -d prod
+      - name: Smoke check (deployed SHA, DB, home page)
+        run: |
+          for i in $(seq 1 20); do
+            body=$(curl -fsS https://thecrushguy.com/api/health || true)
+            echo "$body" | grep -q "\"sha\":\"${GITHUB_SHA}\"" && break
+            sleep 5
+          done
+          echo "$body"
+          echo "$body" | grep -q "\"sha\":\"${GITHUB_SHA}\"" && echo "$body" | grep -q '"db":"ok"'
+          test "$(curl -s -o /dev/null -w '%{http_code}' -L https://thecrushguy.com/)" = "200"
+          # prod must be indexable: no noindex header
+          ! curl -sI https://thecrushguy.com/en | grep -qi "x-robots-tag: noindex"

@@ -13,18 +13,18 @@ Status: **Built** (scaffold, TASK-010 — not yet Live) for stack/infra rows; ev
 | Cache | Redis (optional, Phase 2) | Click counters, rate limits |
 | Admin | Inside same Next.js app under `/admin`, email magic-link login (ADR-017) | One codebase |
 | i18n | `[locale]` root segment + JSON dictionaries, `proxy.ts` negotiation, `publishedLocales` gate (ADR-012) | Multilingual SEO without a library |
-| Hosting | **Hetzner VPS**, Docker compose per env (app + Postgres + cloudflared), **Cloudflare Tunnel** (ADR-015) | Owner already uses Hetzner; no open ports |
+| Hosting | **Hetzner VM 91.99.191.8** shared with postaja: **Kamal 2**, host nginx + certbot → kamal-proxy, Postgres accessory (ADR-019) | Same proven setup as the owner's other apps |
 | CDN / DNS / WAF | Cloudflare | Caching, bot protection, Access for admin |
 | Analytics | Privacy-friendly (Plausible/Umami self-hosted) + Google Search Console | No heavy trackers |
 | Error tracking | Sentry (or GlitchTip self-hosted) | |
-| CI/CD | GitHub Actions → GHCR image (`:dev`, `:prod`, `:<sha>`) → owner deploys (ADR-015/016) | Owner's standard flow, no uat |
+| CI/CD | GitHub Actions CI on PRs; Kamal deploy workflows: dev on push to `dev`, prod on merge to `main` (ADR-016/019/021) | Owner's standard flow, no uat |
 | LLM (content tooling) | Used only in admin/scripts for drafting + translation; output always stored as `machine` until reviewed | Speed with control |
 
 Note: some managed hosts (e.g. Vercel) have acceptable-use rules around adult content. Even if the public site is SFW, keep hosting on own infra to avoid takedown risk.
 
 ## Environments
 
-local → dev → prod (owner promotes; no uat, ADR-016). Separate DBs. `APP_ENV` read at runtime; only `prod` is indexable. Prod affiliate links only in prod secrets; dev uses dummy targets.
+local → dev → prod (owner promotes by merging to `main`, which auto-deploys prod — ADR-021; no uat, ADR-016). Separate DBs. `APP_ENV` read at runtime; only `prod` is indexable. Prod affiliate links only in prod secrets; dev uses dummy targets.
 
 ## Programmatic SEO
 

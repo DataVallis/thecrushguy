@@ -7,3 +7,9 @@ Migrations for the data model; admin under `/admin` protected (auth + 2FA or Clo
 
 ## Tests
 Authorization (anon can't reach admin), publish blocked when checklist incomplete, import idempotent.
+
+## Decisions already made (2026-10-29, ADR-017/018/020)
+- Split: 011a data model + migrations (+ `translations` table, editor deferred) · 011b magic-link auth · 011c apps/categories admin, publish guard, audit log · 011d pricing, sources, affiliate links, CSV import.
+- Auth: magic link via SMTP `mail.datavallis.com` from hi@thecrushguy.com; allowlist `ADMIN_EMAILS` (GitHub variable).
+- Migrations run at container start when `RUN_MIGRATIONS=1` (pattern from postaja).
+- Dependencies approved by owner (2026-10-29): `nodemailer`, `zod`. Local/CI mail capture: Mailpit container.

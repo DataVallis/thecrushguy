@@ -5,7 +5,7 @@ Project docs: start at `docs/HANDOFF.md`. Agents: read `CLAUDE.md` first.
 
 ## Stack
 
-Next.js 16.4 (App Router, TypeScript strict, Cache Components) · Tailwind 4 · PostgreSQL 16 · Drizzle ORM · Vitest · Docker (standalone) · Hetzner + Cloudflare Tunnel. See `docs/02-ARCHITECTURE.md` and ADR-010…015.
+Next.js 16.4 (App Router, TypeScript strict, Cache Components) · Tailwind 4 · PostgreSQL 16 · Drizzle ORM · Vitest · Docker (standalone) · Kamal 2 on Hetzner (shared host). See `docs/02-ARCHITECTURE.md` and ADR-010…020.
 
 ## Local development
 
@@ -33,7 +33,7 @@ npm run build
 | `/`           | 307 → `/{locale}` (Accept-Language, published locales only) |
 | `/en`         | Placeholder home (TASK-012 replaces it)                     |
 | `/de`         | Scaffold test locale, always `noindex`                      |
-| `/api/health` | `{status, db, env, version}`; 503 if DB is down             |
+| `/api/health` | `{status, db, env, sha}`; 503 if DB is down                 |
 | `/robots.txt` | Allow only when `APP_ENV=prod`                              |
 
 All non-prod responses carry `X-Robots-Tag: noindex, nofollow`.

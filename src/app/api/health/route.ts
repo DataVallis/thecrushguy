@@ -3,7 +3,7 @@ import { appEnv } from "@/lib/env";
 
 export async function GET(): Promise<Response> {
   const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
-  const base = { env: appEnv(), version: process.env.GIT_SHA ?? "unknown" };
+  const base = { env: appEnv(), sha: process.env.GIT_SHA ?? "unknown" };
   try {
     await pingDb();
     return Response.json({ status: "ok", db: "ok", ...base }, { status: 200, headers });
