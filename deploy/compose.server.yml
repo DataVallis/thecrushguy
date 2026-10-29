@@ -1,0 +1,40 @@
+# Server stack for ONE environment (dev or prod) on Hetzner. No uat (ADR-016).
+# Owner runs this; agents never touch servers. See docs/runbooks/deploy-dev.md.
+# Values come from deploy/.env.<env> on the server (never committed).
+name: tcg-${APP_ENV}
+services:
+  app:
+    image: ghcr.io/${GH_REPO}:${IMAGE_TAG}
+    restart: unless-stopped
+    env_file: .env.${APP_ENV}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [internal]
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    env_file: .env.${APP_ENV}.db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    networks: [internal]
+
+  # Cloudflare Tunnel: no open inbound ports on the server; TLS + WAF at Cloudflare.
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    env_file: .env.${APP_ENV}.tunnel # contains TUNNEL_TOKEN
+    depends_on: [app]
+    networks: [internal]
+
+volumes:
+  pgdata:
+networks:
+  internal:

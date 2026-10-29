@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "title": "The Crush Guy — ehrliche Tests von AI-Companion-Apps",
+    "description": "MACHINE DRAFT — not published. Scaffold test locale only (see src/i18n/config.ts publishedLocales)."
+  },
+  "home": {
+    "tagline": "Ich habe jeden AI-Crush ausprobiert, damit du es nicht musst.",
+    "status": "MACHINE DRAFT — not published."
+  }
+}

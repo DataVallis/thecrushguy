@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(rsync:*)",
+      "Bash(sudo:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(docker compose -f deploy/compose.server.yml:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./deploy/.env*)"
+    ],
+    "allow": ["Read(./.env.example)"]
+  }
+}
