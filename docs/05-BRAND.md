@@ -1,6 +1,6 @@
 # 05 — BRAND (name, logo, CGP)
 
-Status: **name decided — The Crush Guy, thecrushguy.com (ADR-008)**. Logo and CGP in progress.
+Status: **name decided — The Crush Guy, thecrushguy.com (ADR-008)**. Logo (ADR-009), fonts (ADR-023) and palette (ADR-029) decided — guidelines in `design/CGP.md`.
 
 ## Positioning
 

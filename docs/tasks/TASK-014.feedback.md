@@ -1,5 +1,5 @@
 # TASK-014 feedback — SEO foundation
-Status: DONE (Built) — Live on dev after merge; Rich Results Test needs prod (dev is noindex/behind Cloudflare)
+Status: DONE — Live on dev (PR #13); Rich Results Test needs prod (dev is noindex/behind Cloudflare)
 
 ## What I implemented
 Canonical + hreflang (published locales + x-default), title/description limits, sitemap index + per locale/type sitemaps, JSON-LD (WebSite, Organization, ItemList, SoftwareApplication with own Review, BreadcrumbList), real HTTP 404s with a branded global 404 page. Details: `docs/technical/seo.md`, ADR-028.

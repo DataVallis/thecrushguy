@@ -166,3 +166,7 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Date: 2026-10-29 · Status: Accepted (agent, mode B)
 - Decision: the proxy checks app/category slugs against an in-memory list of published slugs (60 s TTL, dropped on admin save; skipped if the DB is down) and rewrites unknown URLs to a path that matches no route; `app/global-not-found.tsx` (experimental `globalNotFound`) answers with HTTP 404 and a branded page. Sitemaps: index + per locale/type files, prod only in the index. JSON-LD: our own `Review` on `SoftwareApplication`, never `AggregateRating`; hreflang only for published locales + x-default.
 - Consequences: depends on an experimental Next.js flag — re-check on Next upgrades. The 404 page is English (locale unknown at that level).
+
+## ADR-029 — Palette A "Midnight coral" (TASK-003)
+- Date: 2026-10-29 · Status: Accepted (owner picked option A from `palette-options.png`)
+- Decision: ink #1B1530, coral #FF4D6D (logo), coral-strong/CTA #C81E45 (hover #A8163A), blush #FFE4EA, paper #FFF8F9, lavender #F3F0FA, state colours. Primary CTA uses `cta` with white text because white on bright coral is only 3.2:1 (fails WCAG AA). `design/tokens.json` is the source of truth; `globals.css` mirrors it; a test enforces sync and AA contrast for every listed text pair. Guidelines: `design/CGP.md`.
