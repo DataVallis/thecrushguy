@@ -33,5 +33,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run format:check
+      - name: Migrations match the schema (no drift)
+        run: npm run db:check
       - run: npm test
       - run: npm run build

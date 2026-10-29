@@ -21,6 +21,8 @@ RUN addgroup -S app && adduser -S app -G app
 COPY --from=build --chown=app:app /app/.next/standalone ./
 COPY --from=build --chown=app:app /app/.next/static ./.next/static
 COPY --from=build --chown=app:app /app/public ./public
+# SQL migrations, applied at start when RUN_MIGRATIONS=1 (src/instrumentation-node.ts)
+COPY --from=build --chown=app:app /app/drizzle ./drizzle
 ARG GIT_SHA=unknown
 ENV GIT_SHA=$GIT_SHA
 USER app

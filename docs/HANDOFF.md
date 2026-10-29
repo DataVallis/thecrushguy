@@ -37,25 +37,25 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 ## Done
 - 2026-10-29: brand The Crush Guy + domain (ADR-008), logo A (ADR-009), affiliate research (TASK-004), entity Data Vallis (ADR-007), NSFW behind age gate from day one (ADR-006).
 - 2026-10-29: TASK-010 scaffold **Built**, pushed to `dev` (commit `chore: scaffold…`) — proof in `docs/tasks/TASK-010.feedback.md`. ADR-010…017; owner accepted ADR-011…015 and dropped uat (ADR-016); admin login = magic link (ADR-017) via mail.datavallis.com (ADR-018).
-- 2026-10-29: TASK-010b Kamal deploy (ADR-019/021) — PR from `feat/TASK-010b-kamal-deploy` to `dev` — `docs/tasks/TASK-010b.feedback.md`. TASK-011 split agreed (ADR-020).
+- 2026-10-29: TASK-010b Kamal deploy (ADR-019/021) — PR #1 merged to `dev` (CI run 40896479493 green; Deploy dev skipped until owner setup).
+- 2026-10-29: TASK-011a data model + migrations — PR to `dev` — `docs/tasks/TASK-011a.feedback.md`. TASK-011 split agreed (ADR-020).
 
 ## Owner's open actions
-1. GitHub DataVallis → **Billing**: Actions can't start ("recent account payments have failed or spending limit") — first CI run 40893619782 never started.
-2. Default branch = `dev` (check).
-3. Follow `docs/runbooks/deploy-dev.md`: Cloudflare DNS (grey cloud), nginx + certbot on the host, GitHub variables/secrets, first "Deploy dev" with setup = true; then `DEPLOY_DEV_ENABLED=true`.
-4. DNS for hi@thecrushguy.com on mail.datavallis.com: MX, SPF, DKIM, DMARC (ADR-018).
-5. Set repo variable `ADMIN_EMAILS` (owner's address, ADR-020).
-6. Claim social handles @thecrushguy. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006).
+1. Default branch = `dev` (check).
+2. Follow `docs/runbooks/deploy-dev.md`: Cloudflare DNS (grey cloud), nginx + certbot on the host, GitHub variables/secrets, first "Deploy dev" with setup = true; then `DEPLOY_DEV_ENABLED=true`.
+3. DNS for hi@thecrushguy.com on mail.datavallis.com: MX, SPF, DKIM, DMARC (ADR-018).
+4. Set repo variable `ADMIN_EMAILS` (owner's address, ADR-020).
+5. Claim social handles @thecrushguy. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006).
 
 ## Parked ideas
 - Persona poses for the heart mascot (thumbs up, yawn, raised brow).
 - Cloudflare Access as a second layer in front of `/admin`.
 
 ## Next
-- TASK-011a data model + migrations (spec: `docs/tasks/TASK-011-data-admin.md`, plan agreed 2026-10-29 except dependency approval).
+- TASK-011b magic-link auth (spec: `docs/tasks/TASK-011-data-admin.md`, ADR-017/018/020).
 - In parallel: TASK-003 CGP, TASK-005 keywords, TASK-006 app universe, review testing template.
 - Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-021 (next free ADR-022).
 
 ## Open items
 - Docker image build not yet run anywhere (first Kamal deploy will prove it).
-- GitHub Actions blocked by org billing.
+

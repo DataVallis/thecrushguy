@@ -13,7 +13,8 @@
     "format:check": "prettier --check .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:check": "drizzle-kit check && drizzle-kit generate --name drift-check && git diff --exit-code -- drizzle && test -z \"$(git ls-files --others --exclude-standard -- drizzle)\""
   },
   "dependencies": {
     "drizzle-orm": "^0.45.4",

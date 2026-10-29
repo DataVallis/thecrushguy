@@ -31,6 +31,7 @@ proxy:
 env:
   clear:
     NODE_ENV: production
+    RUN_MIGRATIONS: "1" # apply drizzle/ migrations at container start (TASK-011a)
   secret:
     - DATABASE_URL
 

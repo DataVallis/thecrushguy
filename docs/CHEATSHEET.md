@@ -31,4 +31,4 @@ See `docs/runbooks/deploy-dev.md` §6 (deploy, logs, rollback, DB shell).
 
 ## Env var names (values never here)
 `APP_ENV`, `SITE_URL`, `DATABASE_URL`, `DATABASE_POOL_MAX`, `GIT_SHA` (build arg) — see `.env.example`.
-Planned (TASK-011): `ADMIN_EMAILS`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`, `LINK_ENCRYPTION_KEY`, `RUN_MIGRATIONS`.
+`RUN_MIGRATIONS` (clear, `1` in config/deploy.yml). Planned: `ADMIN_EMAILS`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM` (011b), `LINK_ENCRYPTION_KEY` (011d, GitHub env secret).

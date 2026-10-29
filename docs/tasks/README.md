@@ -11,8 +11,11 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-005 | Keyword & competitor research | — | Planned |
 | TASK-006 | App universe (150 apps + compliance) | 004 | Planned |
 | TASK-010 | Scaffold + deploy skeleton | — | PARTIAL — Built, pushed to `dev`; CI blocked by org billing; dev deploy pending (`TASK-010.feedback.md`) |
-| TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | Built — PR to `dev` (`TASK-010b.feedback.md`) |
-| TASK-011 | Data model + admin (magic link) — split 011a–d (ADR-020) | 010b | Planned (plan agreed) |
+| TASK-010b | Kamal deploy on shared host (ADR-019/021) | 010 | Merged to `dev` (PR #1); first deploy pending owner steps |
+| TASK-011a | Data model + migrations + publish guard | 010b | DONE — PR to `dev` (`TASK-011a.feedback.md`) |
+| TASK-011b | Magic-link admin auth (ADR-017/018) | 011a | Planned |
+| TASK-011c | Apps/categories admin, publish flow, audit | 011b | Planned |
+| TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | Planned |
 | TASK-012 | Public pages v1 | 003, 011 | Planned |
 | TASK-013 | `/go/` redirect + click tracking | 011 | Planned |
 | TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Planned |
