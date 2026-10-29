@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import { AppRow, Avatar, Paragraphs, ScoreBadge, VisitButton } from "@/components/public/app-bits";
+import { AppRow, Paragraphs, ScoreBadge, VisitButton } from "@/components/public/app-bits";
+import { AppCover } from "@/components/public/cover";
 import { Disclosure } from "@/components/public/site-chrome";
 import { isLocale, publishedLocales, type Locale } from "@/i18n/config";
 import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
@@ -75,13 +76,14 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
         ]}
       />
       <header className="flex flex-col gap-4">
-        <div className="flex items-center gap-4">
-          <Avatar name={app.name} />
-          <div>
-            <h1 className="font-display text-3xl font-extrabold sm:text-4xl">{app.name}</h1>
-            {app.tagline ? <p className="text-muted">{app.tagline}</p> : null}
+        <AppCover slug={app.slug} name={app.name} variant="banner" />
+        <div className="-mt-14 flex items-end gap-4 px-4 sm:px-6">
+          <AppCover slug={app.slug} name={app.name} variant="tile-lg" className="ring-4 ring-paper" />
+          <div className="pb-1">
+            <h1 className="font-display text-3xl leading-tight font-extrabold sm:text-5xl">{app.name}</h1>
           </div>
         </div>
+        {app.tagline ? <p className="text-lg text-muted">{app.tagline}</p> : null}
         <div className="flex flex-wrap items-center gap-4">
           <ScoreBadge score={app.overall} t={t} size="lg" />
           <VisitButton slug={app.slug} name={app.name} placement="app-header" locale={locale} t={t} />

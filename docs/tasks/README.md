@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-018** (next free: TASK-019). Latest ADR: **ADR-032** (next free: ADR-033).
+Latest TASK number in use: **TASK-019** (next free: TASK-020). Latest ADR: **ADR-032** (next free: ADR-033).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -23,3 +23,4 @@ Latest TASK number in use: **TASK-018** (next free: TASK-019). Latest ADR: **ADR
 | TASK-016 | Data-based reviews + review queue (ADR-030) | 006, 012 | DONE — `/admin/research`; 36 apps researched, owner gallery check pending |
 | TASK-017 | GEO — AI search optimisation (ADR-031) | 014 | DONE — robots AI groups, /llms.txt, quick answers, IndexNow |
 | TASK-018 | Home & app page UX v2 (ADR-032) | 012 | DONE — filters, flags, top pick, sticky CTA, /go → official site |
+| TASK-019 | Visuals: mascot illustrations + app covers | 018 | DONE — illustrated filters, hero art, covers, app banner |
