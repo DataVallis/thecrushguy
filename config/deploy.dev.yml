@@ -1,0 +1,31 @@
+# Destination: dev — https://dev.thecrushguy.com (auto-deploy on push to `dev`, workflow "Deploy dev").
+# Shared Hetzner host (owner, 2026-10-29: same server as postaja). Host nginx → kamal-proxy on 127.0.0.1:8080,
+# already configured on that host by postaja (kamal proxy boot_config) — do not change proxy ports from here.
+servers:
+  web:
+    hosts:
+      - <%= ENV.fetch("DEV_HOST") %>
+
+proxy:
+  host: dev.thecrushguy.com
+
+env:
+  clear:
+    APP_ENV: dev
+    SITE_URL: https://dev.thecrushguy.com
+
+accessories:
+  db:
+    image: postgres:16-alpine
+    host: <%= ENV.fetch("DEV_HOST") %>
+    # No `port:` → reachable only on the internal `kamal` Docker network as thecrushguy-db:5432.
+    env:
+      clear:
+        POSTGRES_USER: tcg
+        POSTGRES_DB: thecrushguy_dev
+      secret:
+        - POSTGRES_PASSWORD
+    volumes:
+      - thecrushguy-dev-db:/var/lib/postgresql/data
+    options:
+      memory: 512m

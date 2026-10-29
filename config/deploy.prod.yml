@@ -1,0 +1,30 @@
+# Destination: prod — https://thecrushguy.com (auto-deploy on merge to `main`, workflow "Deploy prod", ADR-021).
+# Same host as dev. Container and volume names carry the destination, the DB accessory is "prod-db"
+# (container thecrushguy-prod-db), so nothing collides with dev.
+servers:
+  web:
+    hosts:
+      - <%= ENV.fetch("PROD_HOST") %>
+
+proxy:
+  host: thecrushguy.com
+
+env:
+  clear:
+    APP_ENV: prod
+    SITE_URL: https://thecrushguy.com
+
+accessories:
+  prod-db:
+    image: postgres:16-alpine
+    host: <%= ENV.fetch("PROD_HOST") %>
+    env:
+      clear:
+        POSTGRES_USER: tcg
+        POSTGRES_DB: thecrushguy_prod
+      secret:
+        - POSTGRES_PASSWORD
+    volumes:
+      - thecrushguy-prod-db:/var/lib/postgresql/data
+    options:
+      memory: 1g

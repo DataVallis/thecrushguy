@@ -1,4 +1,4 @@
-# LOCAL DEVELOPMENT ONLY. Server compose lives in deploy/compose.server.yml.
+# LOCAL DEVELOPMENT ONLY. Servers are deployed with Kamal (config/deploy*.yml, ADR-019).
 services:
   db:
     image: postgres:16-alpine

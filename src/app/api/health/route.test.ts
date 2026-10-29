@@ -16,7 +16,7 @@ describe("GET /api/health", () => {
     const res = await GET();
     expect(res.status).toBe(200);
     expect(res.headers.get("cache-control")).toBe("no-store");
-    expect(await res.json()).toMatchObject({ status: "ok", db: "ok" });
+    expect(await res.json()).toMatchObject({ status: "ok", db: "ok", sha: expect.any(String) });
   });
 
   it("returns 503 without leaking details when the database is unreachable", async () => {

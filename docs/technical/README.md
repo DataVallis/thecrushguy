@@ -9,7 +9,7 @@ Which doc covers which code. Every PR that changes an area updates its doc (DEVE
 | Database | `src/lib/db/*`, `drizzle.config.ts`, `drizzle/` | `database.md` (TASK-011) | Built (connection only) |
 | Health | `src/app/api/health/route.ts` | this file below | Built |
 | Fonts + tokens | `src/app/globals.css`, `src/fonts/` | `design-system.md` (TASK-003) | Built (placeholder tokens) |
-| Build + deploy | `Dockerfile`, `.github/workflows/ci.yml`, `deploy/compose.server.yml` | `docs/runbooks/deploy-dev.md` | Built |
+| Build + deploy | `Dockerfile`, `.github/workflows/*.yml`, `config/deploy*.yml`, `.kamal/`, `ops/nginx/` | `docs/runbooks/deploy-dev.md` | Built |
 
 ## Health endpoint
-`GET /api/health` → 200 `{"status":"ok","db":"ok","env":"<APP_ENV>","version":"<GIT_SHA>"}` when `select 1` succeeds within 2 s; otherwise 503 `{"status":"error","db":"down",...}` without error details. Always `Cache-Control: no-store`. Used by the Docker `HEALTHCHECK` and smoke checks.
+`GET /api/health` → 200 `{"status":"ok","db":"ok","env":"<APP_ENV>","sha":"<GIT_SHA>"}` when `select 1` succeeds within 2 s; otherwise 503 `{"status":"error","db":"down",...}` without error details. Always `Cache-Control: no-store`. Used by the Docker `HEALTHCHECK`, kamal-proxy and the deploy smoke check (compares `sha` with the pushed commit).

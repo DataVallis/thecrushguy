@@ -97,3 +97,25 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
   - Email sent via SMTP of the hi@thecrushguy.com mailbox (env `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`); new dependency `nodemailer` (needs owner approval at TASK-011 plan).
   - Optional extra layer later: Cloudflare Access in front of `/admin`.
 - Open: where the mailbox is hosted (decides SMTP host; Cloudflare Email Routing alone cannot send).
+
+## ADR-018 — Admin mail goes through the owner's mail server (resolves ADR-017 "Open")
+- Date: 2026-10-29 · Status: Accepted (owner)
+- Decision: hi@thecrushguy.com is hosted on the owner's mail server `mail.datavallis.com`; the app sends magic links via SMTP there (`SMTP_HOST=mail.datavallis.com`, port/TLS and credentials set by owner in server env files).
+- Consequences: owner adds SPF (include the mail server), DKIM and DMARC records for `thecrushguy.com` in Cloudflare DNS, otherwise links land in spam. Mail headers will show the Data Vallis server (acceptable under ADR-007).
+
+## ADR-019 — Deploy with Kamal 2 on the shared Hetzner host (supersedes ADR-015 deploy shape)
+- Date: 2026-10-29 · Status: Accepted (owner: "na isti strežnik ko postaja, apipilot … poglej po projektih")
+- Context: The host `91.99.191.8` already runs DataVallis/postaja with Kamal 2: host nginx + certbot terminate TLS and proxy to kamal-proxy on 127.0.0.1:8080; Postgres as a Kamal accessory; GitHub Actions deploys dev on push and prod manually; smoke check compares the deployed SHA.
+- Decision: The Crush Guy uses the same pattern: `config/deploy.yml` (+ `.dev.yml`, `.prod.yml`), `.kamal/secrets*` (env references only), `ops/nginx/*.conf`, workflows `deploy-dev.yml` / `deploy-prod.yml`. Kamal builds and pushes `ghcr.io/datavallis/thecrushguy`; the CI `image` job and `deploy/compose.server.yml` + Cloudflare Tunnel are dropped. `/api/health` returns `sha` (was `version`) for the smoke check.
+- Consequences: TLS via certbot on the host (Cloudflare DNS grey cloud first, then optionally orange + Full strict). Container/volume names carry the destination so dev and prod coexist on one host. Migrations at container start (`RUN_MIGRATIONS=1`) from TASK-011a.
+
+## ADR-020 — TASK-011 scope details agreed with the owner
+- Date: 2026-10-29 · Status: Accepted (owner)
+- Admin allowlist: `ADMIN_EMAILS` = the owner's address, kept as a GitHub variable (not committed), like postaja's `SUPERADMIN_EMAILS`.
+- Translations: the `translations` table is created in 011a; the translation editor is deferred to the languages phase (smaller PRs).
+- TASK-011 is split into 011a (data model + migrations), 011b (magic-link auth), 011c (apps/categories admin + publish guard + audit), 011d (pricing, sources, affiliate links, CSV import).
+
+## ADR-021 — Prod deploys automatically on merge to `main` (supersedes "prod deploys are manual" in DEVELOPMENT-RULES §9, ADR-016, ADR-019)
+- Date: 2026-10-29 · Status: Accepted (owner: "ko se merga v main, se deploy avtomatsko požene")
+- Decision: `deploy-prod.yml` runs on push to `main` once the repo variable `DEPLOY_PROD_ENABLED=true`; manual run with setup = true is used once for the first prod deploy. Deploy guard unchanged: prod only from `main`. Only the owner merges into `main`, so the merge is the release decision.
+- Consequences: every merge to `main` is a release — migrations must be backward compatible (expand → migrate → contract); the smoke check fails the workflow if the deployed SHA, DB or indexability are wrong; rollback per runbook §6.
