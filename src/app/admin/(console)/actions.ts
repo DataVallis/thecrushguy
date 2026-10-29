@@ -35,6 +35,7 @@ import {
   sourceInput,
 } from "@/lib/admin/listing";
 import { requireAdmin } from "@/lib/auth/session";
+import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { appUrls, pingIndexNow } from "@/lib/seo/indexnow";
 import { siteUrl } from "@/lib/env";
@@ -84,6 +85,7 @@ export async function saveAppAction(id: string | null, prev: FormState, form: Fo
     if (err instanceof AdminError) return failure(prev, { [err.field]: err.message }, raw);
     throw err;
   }
+  await syncAutoCategories(sql(), actor); // fact-driven lists follow edited features/prices (TASK-023)
   invalidateApps(parsed.data.slug);
   updateTag("categories");
   announceApp(savedId);
