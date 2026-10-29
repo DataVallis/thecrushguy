@@ -13,6 +13,8 @@ env:
   clear:
     APP_ENV: prod
     SITE_URL: https://thecrushguy.com
+    # Google Analytics 4 (public measurement ID, not a secret). Loads only after the visitor consents (ADR-034).
+    GA_MEASUREMENT_ID: G-C7DSZV0X87
 
 accessories:
   prod-db:

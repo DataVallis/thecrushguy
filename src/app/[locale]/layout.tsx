@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
+import { Suspense } from "react";
+import { Analytics } from "@/components/public/analytics";
 import { isLocale, locales, publishedLocales, type Locale } from "@/i18n/config";
-import { getDictionary } from "@/i18n/dictionaries";
-import { siteUrl } from "@/lib/env";
+import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
+import { isIndexable, siteUrl } from "@/lib/env";
 import { SiteFooter, SiteHeader } from "@/components/public/site-chrome";
 import "../globals.css";
 
@@ -40,7 +43,18 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           {children}
         </main>
         <SiteFooter locale={locale} t={t} />
+        <Suspense fallback={null}>
+          <AnalyticsGate locale={locale} t={t} />
+        </Suspense>
       </body>
     </html>
   );
+}
+
+/** GA only on prod with a measurement ID (ADR-034); read at request time so one image serves dev and prod. */
+async function AnalyticsGate({ locale, t }: { locale: Locale; t: Dictionary }) {
+  await connection();
+  const id = process.env.GA_MEASUREMENT_ID?.trim();
+  if (!isIndexable() || !id || !/^G-[A-Z0-9]{4,20}$/.test(id)) return null;
+  return <Analytics id={id} text={t.consent} privacyHref={`/${locale}/privacy`} />;
 }

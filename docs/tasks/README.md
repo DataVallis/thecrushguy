@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-020** (next free: TASK-021). Latest ADR: **ADR-032** (next free: ADR-033).
+Latest TASK number in use: **TASK-022** (next free: TASK-023). Latest ADR: **ADR-034** (next free: ADR-035).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -25,3 +25,5 @@ Latest TASK number in use: **TASK-020** (next free: TASK-021). Latest ADR: **ADR
 | TASK-018 | Home & app page UX v2 (ADR-032) | 012 | DONE — filters, flags, top pick, sticky CTA, /go → official site |
 | TASK-019 | Visuals: mascot illustrations + app covers | 018 | DONE — illustrated filters, hero art, covers, app banner |
 | TASK-020 | Owner completes pending apps (manual price feeds formula) | 016 | DONE |
+| TASK-021 | MCP endpoint for the research agent (ADR-033) | 016 | DONE — owner sets MCP_TOKEN + connector |
+| TASK-022 | Google Analytics 4 with consent (ADR-034) | — | DONE — prod only |

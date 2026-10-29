@@ -158,7 +158,7 @@ async function runFacts(
 
 /**
  * If research found no usable price but the owner added a sourced monthly/yearly plan in admin, use the cheapest
- * one (per month) as the starting price — so adding a price in admin is enough to make an app publishable.
+ * monthly plan (or, with no monthly plan, the cheapest yearly one per month) as the starting price — so adding a price in admin is enough to make an app publishable.
  */
 async function withManualPrice(tx: Tx, appId: string, raw: Record<string, unknown>): Promise<Record<string, unknown>> {
   const pricing = (raw.pricing ?? {}) as Record<string, unknown>;
@@ -170,7 +170,7 @@ async function withManualPrice(tx: Tx, appId: string, raw: Record<string, unknow
     from pricing_plans p join sources s on s.id = p.source_id
     where p.app_id = ${appId} and p.period in ('month', 'year')
       and p.notes is distinct from ${IMPORTED_PLAN_NOTE} and p.notes is distinct from ${LEGACY_PLAN_NOTE}
-    order by 1 limit 1`;
+    order by (p.period = 'year'), 1 limit 1`; // a monthly plan wins (same rule as research)
   if (!m) return raw;
   return {
     ...raw,

@@ -114,3 +114,13 @@ A rollback is safe because migrations are backward compatible. Then fix forward 
 1. Google Search Console → add property `https://thecrushguy.com` (DNS TXT via Cloudflare) → submit `https://thecrushguy.com/sitemap.xml`.
 2. Bing Webmaster Tools → **Import from Google Search Console** (one click, no extra verification). Bing's index feeds ChatGPT search, Copilot and DuckDuckGo; IndexNow pings start automatically on every publish (ADR-031).
 3. Check: `https://thecrushguy.com/robots.txt` lists the AI bots; `https://thecrushguy.com/llms.txt` lists the apps; `https://thecrushguy.com/indexnow-key.txt` returns a key.
+
+## 8. MCP connector (agent can add data) — per environment
+1. Generate a token: `openssl rand -hex 32` → GitHub → Settings → Environments → (`dev` and/or `prod`) → secret **`MCP_TOKEN`** (different per environment).
+2. Redeploy (Actions → Deploy dev / Deploy prod → Run workflow) so the container gets it.
+3. claude.ai → Settings → Connectors → **Add custom connector** → URL `https://thecrushguy.com/api/mcp/<token>` (prod) or `https://dev.thecrushguy.com/api/mcp/<token>` (dev). No other auth.
+4. If Cloudflare "Bot Fight Mode" is on and the connector can't connect, add a WAF skip rule for path `/api/mcp/`.
+Check: `curl -s -X POST https://thecrushguy.com/api/mcp/<token> -H 'content-type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'` lists the tools; a wrong token returns 404.
+
+## 9. Google Analytics
+Nothing to set: GA4 (G-C7DSZV0X87) is in `config/deploy.prod.yml` and loads on prod after consent (ADR-034). Check: open the site in a private window → banner → "Allow analytics" → GA Realtime shows you.

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { CookieSettingsLink } from "./analytics";
 
 export function SiteHeader({ locale, t }: { locale: Locale; t: Dictionary }) {
   return (
@@ -45,6 +46,7 @@ export function SiteFooter({ locale, t }: { locale: Locale; t: Dictionary }) {
               {label}
             </Link>
           ))}
+          <CookieSettingsLink label={t.consent.settings} />
         </nav>
         <p>{t.footer.note}</p>
         <p>{t.footer.wellbeing}</p>

@@ -170,8 +170,17 @@ export const INFO: Record<InfoPage, InfoContent> = {
         <p>
           {LEGAL_ENTITY.name}, {LEGAL_ENTITY.country} (full details in the imprint). Contact: {mail}.
         </p>
-        <H>No accounts, no tracking cookies</H>
-        <p>Readers don&apos;t create accounts. We don&apos;t use advertising or tracking cookies.</p>
+        <H>No accounts, no advertising cookies</H>
+        <p>Readers don&apos;t create accounts. We don&apos;t use advertising cookies.</p>
+        <H>Analytics (only with your consent)</H>
+        <p>
+          If you click &quot;Allow analytics&quot;, we load Google Analytics 4 (Google Ireland Limited) to count visits,
+          see which pages are useful and which app links are clicked. Google then sets the <code>_ga</code> cookies (up
+          to 2 years) and receives your IP address, which Google uses only to derive an approximate location; data may
+          be transferred to the USA under the EU–US Data Privacy Framework. Legal basis: your consent (Art. 6(1)(a)
+          GDPR). Without your consent nothing is loaded from Google. You can change your choice any time with
+          &quot;Cookie settings&quot; at the bottom of every page.
+        </p>
         <H>Cookies we set</H>
         <ul className="list-disc pl-5">
           <li>
@@ -180,6 +189,9 @@ export const INFO: Record<InfoPage, InfoContent> = {
           </li>
           <li>
             <code>tcg_admin</code> — sign-in session for our editors on <code>/admin</code> only.
+          </li>
+          <li>
+            <code>tcg_consent</code> — remembers your analytics choice (1 year). Functional.
           </li>
         </ul>
         <H>Outbound clicks</H>
