@@ -6,7 +6,7 @@ Which doc covers which code. Every PR that changes an area updates its doc (DEVE
 |---|---|---|---|
 | Routing + i18n | `src/proxy.ts`, `src/lib/routing.ts`, `src/i18n/*`, `src/app/[locale]/layout.tsx` | `routing-i18n.md` | Built |
 | Runtime env + indexing guard | `src/lib/env.ts`, `src/proxy.ts`, `src/app/robots.txt/route.ts` | `routing-i18n.md` §Indexing | Built |
-| Database | `src/lib/db/*`, `drizzle.config.ts`, `drizzle/` | `database.md` (TASK-011) | Built (connection only) |
+| Database + migrations + link encryption | `src/lib/db/*`, `src/lib/crypto/*`, `src/instrumentation*.ts`, `drizzle.config.ts`, `drizzle/` | `database.md` | Built |
 | Health | `src/app/api/health/route.ts` | this file below | Built |
 | Fonts + tokens | `src/app/globals.css`, `src/fonts/` | `design-system.md` (TASK-003) | Built (placeholder tokens) |
 | Build + deploy | `Dockerfile`, `.github/workflows/*.yml`, `config/deploy*.yml`, `.kamal/`, `ops/nginx/` | `docs/runbooks/deploy-dev.md` | Built |
