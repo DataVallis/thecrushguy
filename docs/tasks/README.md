@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-026** (next free: ADR-027).
+Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-027** (next free: ADR-028).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -19,4 +19,4 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-012 | Public pages v1 | 003, 011 | Built (012a/b, ADR-026) — Lighthouse/CWV + legal facts open |
 | TASK-013 | `/go/` redirect + click tracking | 011 | DONE — PR #8, Live on dev |
 | TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Planned |
-| TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | DONE — PR #9, Live on dev (infrastructure); region list awaits lawyer |
+| TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | DONE — PR #9, Live on dev; default region list kept (ADR-027) |

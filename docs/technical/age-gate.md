@@ -18,7 +18,7 @@ Status: **Live on dev** (TASK-015, PR #9) — infrastructure only; no NSFW secti
 | Allowed region, no `age_ok=1` cookie (humans and bots alike) | **gate** — SFW notice + "I am 18 or older" button |
 | Allowed region, cookie set | **show** |
 
-Restricted list: env `AGE_GATE_RESTRICTED_REGIONS` (comma-separated `GB`, `US-TX`, …); unset → conservative default `GB, US, FR, DE, IT, AU` (geo rule (a) from 07-LEGAL §3 until the lawyer answers). Location comes from Cloudflare (`CF-IPCountry`, `CF-Region-Code` with the "visitor location headers" managed transform), so **NSFW stays hidden everywhere until the domain is proxied through Cloudflare** — and then the origin must accept traffic only from Cloudflare, otherwise the header can be spoofed.
+Restricted list: env `AGE_GATE_RESTRICTED_REGIONS` (comma-separated `GB`, `US-TX`, …); unset → conservative default `GB, US, FR, DE, IT, AU` (geo rule (a) from 07-LEGAL §3; lawyer check dropped by the owner, ADR-027). Location comes from Cloudflare (`CF-IPCountry`, `CF-Region-Code` with the "visitor location headers" managed transform), so **NSFW stays hidden everywhere until the domain is proxied through Cloudflare** — and then the origin must accept traffic only from Cloudflare, otherwise the header can be spoofed.
 
 ## Confirm
 `POST /api/age-gate` (`confirm=yes`, `next=/local/path`) → `303` back to the local path with `age_ok=1; Path=/; Max-Age=30 days; HttpOnly; SameSite=Lax` (+ `Secure` on https). No `confirm=yes` → no cookie. Foreign `Origin` → 403. `next` is reduced to a local path (no open redirect).

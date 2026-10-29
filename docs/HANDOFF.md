@@ -53,8 +53,7 @@ Known quirk: the Next.js 16.4 docs bundled in `node_modules/next/dist/docs/` are
 ## Owner's open actions
 Done by owner 2026-10-29: `DEPLOY_DEV_ENABLED=true`, DNS + `SMTP_PASSWORD` for hi@thecrushguy.com (magic-link mail received, login works on dev 17:38), server reboot, local `~/tcg_deploy` deleted.
 Done by owner 2026-10-29 17:59: `LINK_ENCRYPTION_KEY` (dev), Cloudflare setup.
-3. Imprint facts for Data Vallis d.o.o. (address, registration no., VAT no.) → `src/content/legal.ts`; lawyer review of privacy + terms drafts (`/en/privacy`, `/en/terms`).
-4. Lawyer check `07-LEGAL-COMPLIANCE` §3 (launch-blocking, ADR-006/025).
+3. Done 2026-10-29: imprint facts provided; lawyer review dropped by owner (ADR-027).
 5. Claim social handles @thecrushguy.
 6. Prod setup when ready: `docs/runbooks/go-live-prod.md` §1, §4.
 
@@ -65,7 +64,7 @@ Done by owner 2026-10-29 17:59: `LINK_ENCRYPTION_KEY` (dev), Cloudflare setup.
 ## Next
 - TASK-014 SEO foundation (sitemaps, hreflang, schema) — then TASK-006 app universe (research + CSV) and TASK-003 palette.
 - In parallel: TASK-003 CGP, TASK-005 keywords, TASK-006 app universe, review testing template.
-- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-026 (next free ADR-027).
+- Latest numbers: TASK-015 (+010b, 011a–d sub-tasks; next free TASK-016) · ADR-027 (next free ADR-028).
 
 ## Open items
 
