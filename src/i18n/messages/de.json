@@ -71,7 +71,8 @@
     "dataReview": "Bewertet anhand öffentlicher Informationen – Preisseite, Datenschutzerklärung, AGB und Store-Einträge der App, unten verlinkt – noch nicht selbst getestet.",
     "howWeRate": "So bewerten wir",
     "notTested": "Nicht getestet",
-    "sources": "Quellen"
+    "sources": "Quellen",
+    "quickAnswers": "Kurz beantwortet"
   },
   "criteria": {
     "conversation": "Conversation",

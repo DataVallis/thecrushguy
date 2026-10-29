@@ -83,3 +83,17 @@ export function appLd(site: string, locale: string, app: AppDetail): Json {
       : {}),
   };
 }
+
+/** FAQPage for the visible quick answers (TASK-017). Same text as on the page — never extra content. */
+export function faqLd(items: { q: string; a: string }[]): Json | null {
+  if (!items.length) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((i) => ({
+      "@type": "Question",
+      name: i.q,
+      acceptedAnswer: { "@type": "Answer", text: i.a },
+    })),
+  };
+}

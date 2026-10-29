@@ -2,6 +2,7 @@
 
 import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import {
   AdminError,
   createApp,
@@ -35,6 +36,8 @@ import {
 } from "@/lib/admin/listing";
 import { requireAdmin } from "@/lib/auth/session";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
+import { appUrls, pingIndexNow } from "@/lib/seo/indexnow";
+import { siteUrl } from "@/lib/env";
 import { sql } from "@/lib/db/client";
 
 /**
@@ -53,6 +56,15 @@ function failure(prev: FormState, errors: Record<string, string>, values: Record
 }
 
 /** Cache tags for public pages (ADR-013); public pages tag their data with these in TASK-012. */
+/** After the response: tell IndexNow (Bing → ChatGPT search) that the app's pages changed (prod only). */
+function announceApp(id: string | null) {
+  if (!id) return;
+  after(async () => {
+    const [row] = await sql()<{ slug: string }[]>`select slug from apps where id = ${id}`;
+    if (row) await pingIndexNow(appUrls(siteUrl(), row.slug));
+  });
+}
+
 function invalidateApps(slug?: string) {
   forgetKnownSlugs(); // proxy 404 check sees new/renamed/unpublished slugs immediately
   updateTag("apps");
@@ -74,6 +86,7 @@ export async function saveAppAction(id: string | null, prev: FormState, form: Fo
   }
   invalidateApps(parsed.data.slug);
   updateTag("categories");
+  announceApp(savedId);
   redirect(`/admin/apps/${savedId}?saved=1`);
 }
 
@@ -89,6 +102,7 @@ export async function setStatusAction(id: string, prev: FormState, form: FormDat
     throw err;
   }
   invalidateApps();
+  announceApp(id);
   redirect(`/admin/apps/${id}?saved=1`);
 }
 
@@ -217,6 +231,7 @@ export async function galleryOkPublishAction(id: string, prev: FormState): Promi
     throw err;
   }
   invalidateApps();
+  announceApp(id);
   redirect("/admin/research?published=1");
 }
 
