@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-024** (next free: ADR-025).
+Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR-025** (next free: ADR-026).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -17,6 +17,6 @@ Latest TASK number in use: **TASK-015** (next free: TASK-016). Latest ADR: **ADR
 | TASK-011c | Apps/categories admin, publish flow, audit | 011b | DONE — PR #6, Live on dev |
 | TASK-011d | Pricing, sources, affiliate links, CSV import | 011c | DONE — PR #7, Live on dev |
 | TASK-012 | Public pages v1 | 003, 011 | Planned |
-| TASK-013 | `/go/` redirect + click tracking | 011 | Built — PR pending |
+| TASK-013 | `/go/` redirect + click tracking | 011 | DONE — PR #8, Live on dev |
 | TASK-014 | SEO foundation (incl. ADR-016 i18n quality bar) | 012 | Planned |
-| TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | Planned |
+| TASK-015 | Age gate (launch-blocking, ADR-006) | 010 | Built — infrastructure (ADR-025); region list awaits lawyer |

@@ -1,5 +1,5 @@
 # TASK-013 feedback — `/go/{slug}` redirect + click tracking
-Status: DONE (Built) — Live on dev after merge deploy
+Status: DONE — Live on dev (PR #8 → 37594b1)
 
 ## What I implemented
 Route handler `/go/[slug]`, resolver + click logger in `src/lib/go/redirect.ts`, `clicks` table (migration 0003, additive). Details: `docs/technical/go-redirect.md`.
