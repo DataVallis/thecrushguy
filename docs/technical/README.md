@@ -7,9 +7,9 @@ Which doc covers which code. Every PR that changes an area updates its doc (DEVE
 | Routing + i18n | `src/proxy.ts`, `src/lib/routing.ts`, `src/i18n/*`, `src/app/[locale]/layout.tsx` | `routing-i18n.md` | Live on dev |
 | Runtime env + indexing guard | `src/lib/env.ts`, `src/proxy.ts`, `src/app/robots.txt/route.ts` | `routing-i18n.md` §Indexing | Live on dev |
 | Database + migrations + link encryption | `src/lib/db/*`, `src/lib/crypto/*`, `src/instrumentation*.ts`, `drizzle.config.ts`, `drizzle/` | `database.md` | Live on dev |
-| Admin auth (magic link) | `src/lib/auth/*`, `src/app/admin/*`, `src/proxy.ts` (admin gate), `test/smtp-catcher.ts` | `auth.md` | Built |
+| Admin auth (magic link) | `src/lib/auth/*`, `src/app/admin/*`, `src/proxy.ts` (admin gate), `test/smtp-catcher.ts` | `auth.md` | Live on dev |
 | Health | `src/app/api/health/route.ts` | this file below | Live on dev |
-| Fonts + tokens | `src/app/globals.css`, `src/fonts/` | `design-system.md` (TASK-003) | Built (placeholder tokens) |
+| Fonts + tokens | `src/app/globals.css`, `src/fonts/`, `design/logo/generate.py` | `design-system.md` (TASK-003); fonts per ADR-023 | Built (Fraunces + Onest; placeholder colour tokens) |
 | Build + deploy | `Dockerfile`, `.github/workflows/*.yml`, `config/deploy*.yml`, `.kamal/`, `ops/nginx/` | `docs/runbooks/deploy-dev.md` | Live on dev |
 
 ## Health endpoint

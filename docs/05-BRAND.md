@@ -66,4 +66,4 @@ Deliverable `design/CGP.md` + `design/tokens.json` + a one-page visual board (HT
 - Who: a friend who paid the subscriptions, chatted for weeks and wrote it all down. Plain, funny, honest about prices and dark patterns. Never vulgar.
 - Look: NOT a real person and not a human face — the persona is the logo mascot (concepts: A cool heart with sunglasses, B chat bubble + heart + check, C heart-shaped magnifier). Can get poses (thumbs up, yawn, raised brow).
 - Never: explicit content on public pages, invented ratings/facts, "AI is better than real people" framing. Guide and critic, not salesman.
-- Working palette for concepts: ink #1B1530, coral #FF4D6D, blush #FFE4EA, lavender #F3F0FA. Type: Bricolage Grotesque (display) + Inter (text). Not final until TASK-003.
+- Working palette for concepts: ink #1B1530, coral #FF4D6D, blush #FFE4EA, lavender #F3F0FA. Type: Fraunces (display + wordmark) + Onest (text) — ADR-023 (replaced Bricolage/Inter, which PetPrep uses).
