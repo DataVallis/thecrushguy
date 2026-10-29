@@ -68,6 +68,19 @@ export const priceToCents = z
   });
 
 const bool = z.boolean();
+
+/** Textarea, one item per line → trimmed, non-empty lines (max `max` items, each ≤ `len` chars). */
+const lines = (max: number, len: number) =>
+  z
+    .string()
+    .nullish()
+    .transform((v) =>
+      (v ?? "")
+        .split(/\r?\n/)
+        .map((l) => l.trim())
+        .filter(Boolean),
+    )
+    .pipe(z.array(z.string().max(len, `Each line max ${len} characters`)).max(max, `Max ${max} lines`));
 const score = optInt(0, 100);
 
 export const appInput = z
@@ -127,6 +140,16 @@ export const appInput = z
     chkPrivacyPolicy: bool,
     chkOperatorIdentifiable: bool,
     checklistNote: optText(2000),
+    scoreConversationNote: optText(300),
+    scoreMemoryNote: optText(300),
+    scoreCustomizationNote: optText(300),
+    scoreMediaNote: optText(300),
+    scoreValueNote: optText(300),
+    scorePrivacyNote: optText(300),
+    pros: lines(5, 160),
+    cons: lines(5, 160),
+    bestFor: lines(6, 40),
+    verdictMd: optText(4000),
     categoryIds: z.array(z.uuid()).max(50),
   })
   .refine((a) => a.startingPriceCents === null || a.currency !== null, {
@@ -219,6 +242,16 @@ export const APP_FIELDS: readonly string[] = [
   "scoreValue",
   "scorePrivacy",
   "checklistNote",
+  "scoreConversationNote",
+  "scoreMemoryNote",
+  "scoreCustomizationNote",
+  "scoreMediaNote",
+  "scoreValueNote",
+  "scorePrivacyNote",
+  "pros",
+  "cons",
+  "bestFor",
+  "verdictMd",
   "categoryIds",
 ];
 

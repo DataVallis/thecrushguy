@@ -147,3 +147,12 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Date: 2026-10-29 · Status: Accepted (agent, mode B) — the restricted region list is **Proposed**, owner/lawyer to confirm (07-LEGAL §3)
 - Decision: NSFW content is gated per section (`<NsfwSection>`), self-declaration cookie `age_ok=1` (30 days) behind an `AgeVerificationProvider` interface. Location from Cloudflare headers; unknown location fails closed. Restricted regions default to GB, US, FR, DE, IT, AU (blocked even with the cookie), overridable by env `AGE_GATE_RESTRICTED_REGIONS`. Same SFW markup for every visitor without the cookie (no cloaking); pages with gated sections are `noindex`.
 - Consequences: NSFW sections stay hidden for everyone until the domain is proxied through Cloudflare with location headers, and the origin must then accept only Cloudflare traffic (else the header is spoofable). The lawyer's answer narrows the list.
+
+## ADR-026 — Editorial fields, publish quality gate, gated sections on indexable pages (TASK-012a; corrects ADR-025)
+- Date: 2026-10-29 · Status: Accepted (agent, mode B — owner may override)
+- Decision:
+  - New app fields: a one-line reason per sub-score, pros and cons (max 5 each, DB check), "best for" tags, verdict.
+  - **Quality gate** (06-SEO-CONTENT "No thin pages"): an app can only be published — and a published app only edited or lose a price — when it has all six scores with reasons, a verdict, 3–5 pros, 3–5 cons and at least one sourced price. Enforced in the admin write path; the compliance checklist stays a DB constraint.
+  - **Correction to ADR-025**: only pages that are gated *as a whole* (adults-only category pages) are `noindex`. A page with a small gated section (the "adult content allowed" fact on an app page) stays indexable, because every visitor without the cookie — crawlers included — gets identical SFW markup (no cloaking).
+  - Info pages are English-only content modules; privacy/terms are marked "Draft" and `noindex` until a lawyer reviewed them; the imprint stays `noindex` until the operator's address, registration and VAT numbers are provided.
+- Consequences: imported apps need editorial work before publishing; admin weights remain fixed in code for now.

@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import type postgres from "postgres";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { runMigrations } from "@/lib/db/migrate";
@@ -70,7 +72,11 @@ describe("migrations", () => {
   it("are idempotent (second run applies nothing new)", async () => {
     await runMigrations(db.url);
     const [{ n }] = await sql`select count(*)::int as n from drizzle.__drizzle_migrations`;
-    expect(n).toBe(4);
+    // one row per migration file in drizzle/meta/_journal.json
+    const journal = JSON.parse(readFileSync(path.join(process.cwd(), "drizzle/meta/_journal.json"), "utf8")) as {
+      entries: unknown[];
+    };
+    expect(n).toBe(journal.entries.length);
   });
 });
 

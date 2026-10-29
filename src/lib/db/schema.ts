@@ -82,6 +82,27 @@ export const apps = pgTable(
     scoreMedia: score("score_media"),
     scoreValue: score("score_value"),
     scorePrivacy: score("score_privacy"),
+    // Editorial content (TASK-012a, 01-PRODUCT-SPEC §3). One-line justification per sub-score, pros/cons (max 5
+    // each), "best for" tags and the verdict. Publishing requires them (quality gate, ADR-026).
+    scoreConversationNote: text("score_conversation_note"),
+    scoreMemoryNote: text("score_memory_note"),
+    scoreCustomizationNote: text("score_customization_note"),
+    scoreMediaNote: text("score_media_note"),
+    scoreValueNote: text("score_value_note"),
+    scorePrivacyNote: text("score_privacy_note"),
+    pros: text("pros")
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    cons: text("cons")
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    bestFor: text("best_for")
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    verdictMd: text("verdict_md"),
 
     // Compliance checklist (07-LEGAL-COMPLIANCE §2) — all must be true to publish.
     chk18PlusTerms: boolean("chk_18plus_terms").notNull().default(false),
@@ -122,6 +143,7 @@ export const apps = pgTable(
         AND ${t.checklistCheckedAt} IS NOT NULL)`,
     ),
     check("apps_removed_needs_reason", sql`${t.status} <> 'removed' OR ${t.removalReason} IS NOT NULL`),
+    check("apps_pros_cons_max5", sql`cardinality(${t.pros}) <= 5 AND cardinality(${t.cons}) <= 5`),
   ],
 );
 

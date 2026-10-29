@@ -6,7 +6,7 @@
 import type postgres from "postgres";
 import { z } from "zod";
 import { encryptLink, linkHint, linkKey } from "@/lib/crypto/link-cipher";
-import { AdminError, changes } from "./repo";
+import { AdminError, assertPublishable, changes } from "./repo";
 import { priceToCents } from "./validation";
 
 type Tx = postgres.TransactionSql;
@@ -138,6 +138,8 @@ export async function deletePricingPlan(sql: postgres.Sql, actor: string, appId:
   await sql.begin(async (tx) => {
     const [before] = await tx`delete from pricing_plans where id = ${id} and app_id = ${appId} returning *`;
     if (!before) throw new AdminError("_form", "Price not found");
+    const [app] = await tx<{ status: string }[]>`select status from apps where id = ${appId}`;
+    if (app?.status === "published") await assertPublishable(tx, appId);
     await audit(tx, actor, "delete", "pricing_plan", id, before);
   });
 }
