@@ -1,6 +1,6 @@
 # Admin console — apps, categories, publish flow, audit
 
-Status: apps/categories/publish/audit **Live on dev** (TASK-011c, PR #6); sources/pricing/affiliate links/import **Built** (TASK-011d). Auth: see `auth.md`.
+Status: apps/categories/publish/audit **Live on dev** (TASK-011c, PR #6); sources/pricing/affiliate links/import **Live on dev** (TASK-011d, PR #7). Auth: see `auth.md`.
 
 ## Pages (`src/app/admin/(console)/`, all behind `requireAdmin()`)
 | Path | What |

@@ -1,5 +1,5 @@
 # TASK-011d feedback — sources, pricing plans, affiliate links, CSV import
-Status: DONE (Built) — Live on dev after merge deploy; affiliate links need owner secret `LINK_ENCRYPTION_KEY`
+Status: DONE — Live on dev (PR #7 → 473fe13, CI + deploy green); affiliate links need owner secret `LINK_ENCRYPTION_KEY`
 
 ## What I implemented
 Per-app sections on `/admin/apps/[id]` (sources, pricing plans, affiliate links) and `/admin/import`; repo + validation in `src/lib/admin/listing.ts` and `csv-import.ts`; actions with session guard; deploy wiring for `LINK_ENCRYPTION_KEY`. Details: `docs/technical/admin.md`.
