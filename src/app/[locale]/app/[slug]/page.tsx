@@ -55,7 +55,12 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
   const faq = faqLd(answers);
 
   return (
-    <article className="flex flex-col gap-10">
+    <article className="flex flex-col gap-10 pb-20 sm:pb-0">
+      <nav aria-label="Breadcrumb" className="-mb-6 text-sm">
+        <Link href={`/${locale}#shortlist`} className="font-semibold text-ink hover:underline">
+          <span aria-hidden>←</span> {t.nav.back}
+        </Link>
+      </nav>
       <JsonLd
         data={[
           appLd(siteUrl(), locale, app),
@@ -79,9 +84,7 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <ScoreBadge score={app.overall} t={t} size="lg" />
-          {app.hasActiveLink ? (
-            <VisitButton slug={app.slug} name={app.name} placement="app-header" locale={locale} t={t} />
-          ) : null}
+          <VisitButton slug={app.slug} name={app.name} placement="app-header" locale={locale} t={t} />
           <Verified app={app} locale={locale} t={t} />
         </div>
         <Disclosure locale={locale} t={t} />
@@ -110,6 +113,11 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
           </dl>
         </section>
       ) : null}
+
+      <section className="grid gap-4 sm:grid-cols-2" aria-label={`${t.app.pros} / ${t.app.cons}`}>
+        <List title={t.card.greenFlags} items={app.pros} tone="pro" />
+        <List title={t.card.redFlags} items={app.cons} tone="con" />
+      </section>
 
       <section aria-labelledby="facts">
         <h2 id="facts" className="mb-3 font-display text-2xl font-extrabold">
@@ -201,11 +209,6 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
         </section>
       ) : null}
 
-      <section className="grid gap-6 sm:grid-cols-2">
-        <List title={t.app.pros} items={app.pros} tone="pro" />
-        <List title={t.app.cons} items={app.cons} tone="con" />
-      </section>
-
       {app.bestFor.length ? (
         <section>
           <h2 className="mb-3 font-display text-xl font-extrabold">{t.app.bestFor}</h2>
@@ -224,11 +227,9 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
           {t.app.verdict}
         </h2>
         <Paragraphs text={app.verdictMd} />
-        {app.hasActiveLink ? (
-          <div>
-            <VisitButton slug={app.slug} name={app.name} placement="app-verdict" locale={locale} t={t} />
-          </div>
-        ) : null}
+        <div>
+          <VisitButton slug={app.slug} name={app.name} placement="app-verdict" locale={locale} t={t} />
+        </div>
       </section>
 
       {app.descriptionMd || app.companyName || app.privacyPolicyUrl ? (
@@ -283,11 +284,11 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
       ) : null}
 
       {app.sources.length ? (
-        <section aria-labelledby="sources">
-          <h2 id="sources" className="mb-3 font-display text-xl font-extrabold">
-            {t.app.sources}
-          </h2>
-          <ul className="flex flex-col gap-1 text-sm">
+        <details className="group rounded-3xl border border-ink/10 bg-white p-4">
+          <summary className="cursor-pointer font-display text-xl font-extrabold">
+            {t.app.sources} <span className="font-sans text-sm font-normal text-muted">({app.sources.length})</span>
+          </summary>
+          <ul className="mt-3 flex flex-col gap-1 text-sm">
             {app.sources.map((s) => (
               <li key={`${s.field}|${s.url}`}>
                 <span className="text-muted">{s.field}: </span>
@@ -300,7 +301,7 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
               </li>
             ))}
           </ul>
-        </section>
+        </details>
       ) : null}
 
       <p className="text-sm">
@@ -311,6 +312,16 @@ async function AppPage({ params }: PageProps<"/[locale]/app/[slug]">) {
           {t.app.report}
         </a>
       </p>
+
+      {/* Mobile: the action stays in reach while reading. */}
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-ink/10 bg-paper/95 px-4 py-3 backdrop-blur sm:hidden">
+        <div className="flex items-center gap-3">
+          <ScoreBadge score={app.overall} t={t} />
+          <div className="flex-1">
+            <VisitButton slug={app.slug} name={app.name} placement="app-sticky" locale={locale} t={t} wide />
+          </div>
+        </div>
+      </div>
     </article>
   );
 }
@@ -336,14 +347,15 @@ function Fact({ label, value }: { label: string; value: string }) {
 }
 
 function List({ title, items, tone }: { title: string; items: string[]; tone: "pro" | "con" }) {
+  const pro = tone === "pro";
   return (
-    <div className="rounded-2xl border border-ink/10 bg-white p-4">
-      <h2 className="mb-2 font-display text-xl font-extrabold">{title}</h2>
-      <ul className="flex flex-col gap-1.5 text-sm">
+    <div className={`rounded-3xl border-t-4 bg-white p-5 shadow-sm ${pro ? "border-success" : "border-danger"}`}>
+      <h2 className={`mb-3 font-display text-xl font-extrabold ${pro ? "text-success" : "text-danger"}`}>{title}</h2>
+      <ul className="flex flex-col gap-2 text-sm">
         {items.map((p) => (
           <li key={p} className="flex gap-2">
-            <span aria-hidden className={tone === "pro" ? "text-success" : "text-coral-strong"}>
-              {tone === "pro" ? "+" : "−"}
+            <span aria-hidden className={`font-bold ${pro ? "text-success" : "text-danger"}`}>
+              {pro ? "+" : "−"}
             </span>
             {p}
           </li>

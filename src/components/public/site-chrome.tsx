@@ -13,8 +13,11 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Dictionary }) {
         <Link href={`/${locale}`} aria-label={t.nav.home}>
           <Image src="/logo.svg" alt="The Crush Guy" width={175} height={30} priority />
         </Link>
-        <nav className="ml-auto text-sm font-medium">
-          <Link href={`/${locale}/how-we-rank`} className="hover:underline">
+        <nav className="ml-auto flex items-center gap-5 text-sm font-semibold">
+          <Link href={`/${locale}#shortlist`} className="hover:underline">
+            {t.nav.allApps}
+          </Link>
+          <Link href={`/${locale}/how-we-rank`} className="hidden hover:underline sm:inline">
             {t.nav.howWeRank}
           </Link>
         </nav>

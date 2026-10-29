@@ -66,11 +66,17 @@ describe("resolveTarget", () => {
     });
   });
 
-  it("only inactive links → our app page, not a 404 (in a published locale)", async () => {
+  it("only inactive links → the app's official website, not a 404", async () => {
     await link(await app("candy-ai"), "https://p.test/x", false);
-    expect(await resolveTarget(sql, "candy-ai", opts)).toMatchObject({ kind: "app-page", url: "/en/app/candy-ai" });
-    // unpublished locale (de) falls back to the default locale's page
-    expect(await resolveTarget(sql, "candy-ai", { ...opts, locale: "de" })).toMatchObject({ url: "/en/app/candy-ai" });
+    const [w] = await sql`select website_url from apps where slug = 'candy-ai'`;
+    expect(await resolveTarget(sql, "candy-ai", opts)).toMatchObject({ kind: "website", url: w!.website_url });
+  });
+
+  it("invalid stored website → our app page in a published locale", async () => {
+    await app("odd-site");
+    await sql`update apps set website_url = 'not a url' where slug = 'odd-site'`;
+    expect(await resolveTarget(sql, "odd-site", opts)).toMatchObject({ kind: "app-page", url: "/en/app/odd-site" });
+    expect(await resolveTarget(sql, "odd-site", { ...opts, locale: "de" })).toMatchObject({ url: "/en/app/odd-site" });
   });
 
   it("draft, paused and removed apps and unknown or malformed slugs → not-found", async () => {
@@ -83,9 +89,9 @@ describe("resolveTarget", () => {
       expect((await resolveTarget(sql, s, opts)).kind).toBe("not-found");
   });
 
-  it("undecryptable link (wrong key) → fails safe to the app page", async () => {
+  it("undecryptable link (wrong key) → fails safe to the website", async () => {
     await link(await app("wrong-key"), "https://p.test/x", true, randomBytes(32));
-    expect(await resolveTarget(sql, "wrong-key", opts)).toMatchObject({ kind: "app-page" });
+    expect(await resolveTarget(sql, "wrong-key", opts)).toMatchObject({ kind: "website" });
   });
 });
 

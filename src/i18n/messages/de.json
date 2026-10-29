@@ -1,12 +1,14 @@
 {
   "meta": {
-    "title": "The Crush Guy — honest reviews of AI companion apps",
-    "description": "I tried every AI crush, so you don't have to. Independent rankings, reviews and comparisons of AI girlfriend, boyfriend and companion apps."
+    "title": "The Crush Guy — KI-Begleiter-Apps im Check",
+    "description": "Unabhängige Rankings von KI-Freundin-, KI-Freund- und Begleiter-Apps. Preise, Gratis-Tarife und Datenschutz an der Quelle geprüft."
   },
   "nav": {
     "home": "Home",
     "howWeRank": "How we rank",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "allApps": "Alle Apps",
+    "back": "Zurück zu allen Apps"
   },
   "footer": {
     "about": "About",
@@ -24,13 +26,23 @@
     "link": "How we make money"
   },
   "home": {
-    "tagline": "I tried every AI crush, so you don't have to.",
-    "status": "We're building the guide. First reviews coming soon.",
-    "intro": "Honest, hands-on reviews of AI companion apps — ranked on conversation, memory, customization, media, value and privacy.",
-    "topApps": "Top rated right now",
-    "categories": "Browse by category",
-    "newApps": "Recently added",
-    "empty": "The first reviews are being tested right now. Check back soon."
+    "tagline": "Finde einen KI-Schwarm, der sich lohnt.",
+    "status": "Wir bauen den Guide. Erste Bewertungen folgen bald.",
+    "intro": "Wir prüfen, was KI-Begleiter-Apps wirklich kosten, was der Gratis-Tarif bietet und was mit deinen Chats passiert – jede Angabe mit Quelle.",
+    "topApps": "Die Auswahl",
+    "categories": "Nach Kategorie",
+    "newApps": "Neu dabei",
+    "empty": "Die ersten Bewertungen werden gerade geprüft.",
+    "topPick": "Unser Favorit",
+    "filterTitle": "Was ist dir wichtig?",
+    "showing": "{n} von {total} Apps",
+    "noMatch": "Keine App erfüllt alles. Entferne einen Filter.",
+    "clear": "Filter löschen",
+    "compareTitle": "Top 5 im Vergleich",
+    "faqTitle": "Kurz beantwortet",
+    "statApps": "Apps geprüft",
+    "statSources": "Quellen verlinkt",
+    "statPaid": "gekaufte Plätze"
   },
   "app": {
     "visit": "Visit {name}",
@@ -100,5 +112,25 @@
     "free": "Free plan",
     "review": "Read review",
     "gatedTitle": "Adults-only category"
+  },
+  "filters": {
+    "free": "Gratis-Tarif",
+    "voice": "Stimme",
+    "pictures": "Bilder",
+    "memory": "Langzeitgedächtnis",
+    "cheap": "Unter 10 $/Monat"
+  },
+  "card": {
+    "greenFlag": "Green Flag",
+    "redFlag": "Red Flag",
+    "fullReview": "Ganze Bewertung",
+    "data": "Aus öffentlichen Infos bewertet",
+    "tested": "Von uns getestet",
+    "privacy": "Datenschutz",
+    "yes": "Ja",
+    "no": "Nein",
+    "from": "Ab",
+    "greenFlags": "Green Flags",
+    "redFlags": "Red Flags"
   }
 }

@@ -1,12 +1,14 @@
 {
   "meta": {
-    "title": "The Crush Guy — honest reviews of AI companion apps",
-    "description": "I tried every AI crush, so you don't have to. Independent rankings, reviews and comparisons of AI girlfriend, boyfriend and companion apps."
+    "title": "The Crush Guy — AI companion apps, checked",
+    "description": "Independent rankings of AI girlfriend, boyfriend and companion apps. Prices, free plans and privacy checked against the source, with the date we checked."
   },
   "nav": {
     "home": "Home",
     "howWeRank": "How we rank",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "allApps": "All apps",
+    "back": "Back to all apps"
   },
   "footer": {
     "about": "About",
@@ -24,13 +26,23 @@
     "link": "How we make money"
   },
   "home": {
-    "tagline": "I tried every AI crush, so you don't have to.",
+    "tagline": "Find an AI crush worth your time.",
     "status": "We're building the guide. First reviews coming soon.",
-    "intro": "Honest, hands-on reviews of AI companion apps — ranked on conversation, memory, customization, media, value and privacy.",
-    "topApps": "Top rated right now",
+    "intro": "We check what AI companion apps really cost, what the free plan gets you and what they do with your chats — every fact linked to its source.",
+    "topApps": "The shortlist",
     "categories": "Browse by category",
-    "newApps": "Recently added",
-    "empty": "The first reviews are being tested right now. Check back soon."
+    "newApps": "New on the shelf",
+    "empty": "The first reviews are being checked right now. Check back soon.",
+    "topPick": "Our top pick",
+    "filterTitle": "What matters to you?",
+    "showing": "Showing {n} of {total} apps",
+    "noMatch": "No app ticks all of those yet. Try removing a filter.",
+    "clear": "Clear filters",
+    "compareTitle": "Top 5 side by side",
+    "faqTitle": "Quick answers",
+    "statApps": "apps checked",
+    "statSources": "sources linked",
+    "statPaid": "paid rankings"
   },
   "app": {
     "visit": "Visit {name}",
@@ -100,5 +112,25 @@
     "free": "Free plan",
     "review": "Read review",
     "gatedTitle": "Adults-only category"
+  },
+  "filters": {
+    "free": "Free plan",
+    "voice": "Voice",
+    "pictures": "Pictures",
+    "memory": "Long-term memory",
+    "cheap": "Under $10/month"
+  },
+  "card": {
+    "greenFlag": "Green flag",
+    "redFlag": "Red flag",
+    "fullReview": "Full review",
+    "data": "Rated from public info",
+    "tested": "Tested by us",
+    "privacy": "Privacy",
+    "yes": "Yes",
+    "no": "No",
+    "from": "From",
+    "greenFlags": "Green flags",
+    "redFlags": "Red flags"
   }
 }

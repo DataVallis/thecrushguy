@@ -190,3 +190,13 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
   - App pages get "Quick answers" (is it free / how much / is it private / features / who runs it), built only from sourced fields, with matching `FAQPage` JSON-LD (same text as visible).
   - IndexNow ping (Bing → ChatGPT search, Copilot, DuckDuckGo) after admin saves/publishes, prod only; key served at `/indexnow-key.txt`, from env `INDEXNOW_KEY` or derived one-way from `LINK_ENCRYPTION_KEY`.
 - Consequences: no owner setup needed except Bing Webmaster Tools verification (runbook). Google no longer shows FAQ rich results for most sites — the markup is kept for AI parsers and costs nothing.
+
+## ADR-032 — Home/app UX v2; "Visit" always works; honest hero (TASK-018; amends ADR-024)
+- Date: 2026-10-29 · Status: Accepted (owner: "povnega grdo zgleda stran … nevem kako pridem do nomi stran … nazaj na seznam tudi neznam prit")
+- Decision:
+  - Home: full-bleed midnight hero with the promise and our top pick as a "profile" card; the whole ranked shortlist with "What matters to you?" filters (free plan, voice, pictures, memory, under $10 — filters only hide, ranking order never changes); top-5 comparison table; data-computed quick answers (+FAQPage JSON-LD).
+  - List cards: fact chips + one **green flag / red flag** (pros/cons in dating vocabulary, picked to avoid repeating the chips); the whole card opens the review.
+  - App page: "Back to all apps" link, "Visit {App}" always shown (header, verdict, sticky bar on mobile), green/red flags right after quick answers, sources collapsed.
+  - **ADR-024 amended**: `/go/{slug}` without an active affiliate link redirects to the app's official website (logged as a click with `link_id` null — shows where an affiliate deal is worth chasing); our app page only if the stored website is invalid.
+  - Hero copy no longer claims hands-on testing of every app ("Find an AI crush worth your time."), matching ADR-030.
+- Consequences: clicks table now also counts non-affiliate visits; stats must split by `link_id`.
