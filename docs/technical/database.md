@@ -1,4 +1,4 @@
-# Database — Status: Built (not yet Live)
+# Database — Status: Live on dev (2026-10-29)
 
 PostgreSQL 16, Drizzle ORM + postgres.js (ADR-011). Schema: `src/lib/db/schema.ts`. Migrations: `drizzle/` (generated, plain SQL, reviewed in PRs).
 

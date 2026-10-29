@@ -1,6 +1,6 @@
 # 02 — ARCHITECTURE
 
-Status: **Built** (scaffold, TASK-010 — not yet Live) for stack/infra rows; everything else **Planned**. Changing the stack needs an ADR. Current decisions: ADR-010…017.
+Status: stack/infra rows **Live on dev** (2026-10-29); everything else **Planned**. Changing the stack needs an ADR. Current decisions: ADR-010…017.
 
 ## Stack
 
