@@ -1,5 +1,5 @@
 # TASK-011b feedback — magic-link admin auth
-Status: DONE (Built) — Live on dev after the merge deploy + smoke check
+Status: DONE — Live on dev (PR #4 merged by owner as a2937d2; CI verify + deploy check runs green, smoke check covers /admin)
 
 ## What I implemented
 - Migration `0002_admin_auth`: `admin_login_tokens`, `admin_sessions`, `auth_rate_events` (hashes only, additive → backward compatible).

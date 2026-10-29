@@ -1,6 +1,6 @@
 # Admin authentication (magic link)
 
-Status: **Built** (TASK-011b) — becomes Live on dev after the deploy smoke check. Decisions: ADR-017, ADR-018, ADR-020, ADR-022.
+Status: **Live on dev** (TASK-011b, PR #4, deploy smoke check green 2026-10-29). Decisions: ADR-017, ADR-018, ADR-020, ADR-022.
 
 ## Flow
 1. `GET /admin/login` — email form (server action `requestLinkAction`, works without JavaScript).
