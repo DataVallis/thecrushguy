@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { Avatar, FactChips, Flags, ScoreBadge, VisitButton } from "@/components/public/app-bits";
+import { LazyVideo } from "@/components/public/lazy-video";
 import { Shortlist } from "@/components/public/shortlist";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
@@ -57,6 +58,32 @@ async function HomeBody({ locale, t }: { locale: Locale; t: Dictionary }) {
             {t.home.topApps}
           </h2>
           <Shortlist apps={data.all} locale={locale} t={t} placement="home-list" />
+        </section>
+
+        <section
+          aria-labelledby="meet"
+          className="grid items-center gap-8 rounded-[2rem] bg-ink p-6 text-white sm:grid-cols-[auto_1fr] sm:p-10"
+        >
+          <div className="mx-auto w-52 rounded-[2.2rem] border-[6px] border-white/90 bg-black p-1 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)] sm:w-60">
+            <LazyVideo
+              src="/video/crush-guy-reel.mp4"
+              poster="/video/crush-guy-reel-poster.jpg"
+              label={t.home.meetVideo}
+              className="aspect-[9/16] w-full rounded-[1.7rem] bg-ink object-cover"
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <h2 id="meet" className="font-display text-3xl font-extrabold sm:text-4xl">
+              {t.home.meetTitle}
+            </h2>
+            <p className="max-w-md text-lg leading-relaxed text-white/80">{t.home.meetText}</p>
+            <a
+              href="#shortlist"
+              className="self-start rounded-full bg-white px-5 py-2.5 font-semibold text-ink hover:bg-blush focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {t.home.meetCta}
+            </a>
+          </div>
         </section>
 
         <Compare apps={data.all.slice(0, 5)} locale={locale} t={t} />
