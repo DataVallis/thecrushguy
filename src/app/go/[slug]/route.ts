@@ -25,7 +25,8 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/go/[slug]">)
   const q = request.nextUrl.searchParams;
   const placement = cleanPlacement(q.get("p"));
   const locale = cleanLocale(q.get("l"));
-  const target = await resolveTarget(sql(), slug, { placement, locale });
+  const country = countryOf(request.headers.get("cf-ipcountry"));
+  const target = await resolveTarget(sql(), slug, { placement, locale, country });
 
   if (target.kind === "not-found") return new Response("Not found", { status: 404, headers: HEADERS });
 
@@ -40,7 +41,7 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/go/[slug]">)
       linkId: target.kind === "affiliate" ? target.linkId : null,
       placement,
       locale,
-      country: countryOf(request.headers.get("cf-ipcountry")),
+      country,
       device: deviceOf(ua),
       referrerPath: referrerPath(request.headers.get("referer"), siteUrl()),
       ipHash: hashIp(ip, now),

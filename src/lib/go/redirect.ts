@@ -94,14 +94,20 @@ export type Target =
 export async function resolveTarget(
   sql: postgres.Sql,
   slugRaw: string,
-  opts: { placement: string; locale: Locale | null; key?: Buffer },
+  opts: { placement: string; locale: Locale | null; country?: string | null; key?: Buffer },
 ): Promise<Target> {
   const slug = cleanSlug(slugRaw);
   if (!slug) return { kind: "not-found" };
   const [row] = await sql<
-    { app_id: string; link_id: string | null; url_encrypted: string | null; website_url: string }[]
+    {
+      app_id: string;
+      link_id: string | null;
+      url_encrypted: string | null;
+      countries: string[] | null;
+      website_url: string;
+    }[]
   >`
-    select a.id as app_id, l.id as link_id, l.url_encrypted, a.website_url
+    select a.id as app_id, l.id as link_id, l.url_encrypted, l.countries, a.website_url
     from apps a left join affiliate_links l on l.app_id = a.id and l.active
     where a.slug = ${slug} and a.status = 'published'`;
   if (!row) return { kind: "not-found" };
@@ -112,6 +118,9 @@ export async function resolveTarget(
       ? { kind: "website", appId: row.app_id, url: row.website_url }
       : { kind: "app-page", appId: row.app_id, url: appPage };
   if (!row.link_id || !row.url_encrypted) return fallback();
+  // Geo-limited offer: networks send non-target visitors to unrelated "fallback" offers, so they go to the
+  // official site instead. Unknown country counts as outside the list.
+  if (row.countries?.length && !(opts.country && row.countries.includes(opts.country))) return fallback();
   try {
     const plain = opts.key ? decryptLink(row.url_encrypted, opts.key) : decryptLink(row.url_encrypted);
     if (!/^https:\/\//.test(plain)) throw new Error("non-https target");

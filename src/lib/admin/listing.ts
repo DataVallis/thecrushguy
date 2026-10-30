@@ -174,6 +174,23 @@ export const affiliateInput = z.object({
     .transform((v) => (v ? v : null))
     .pipe(z.uuid().nullable()),
   active: z.boolean(),
+  /** "US, GB ca" → ["US","GB","CA"]; blank = all countries. */
+  countries: z
+    .string()
+    .nullish()
+    .transform((v, ctx) => {
+      const list = [
+        ...new Set(
+          (v ?? "")
+            .toUpperCase()
+            .split(/[\s,;]+/)
+            .filter(Boolean),
+        ),
+      ];
+      const bad = list.filter((c) => !/^[A-Z]{2}$/.test(c));
+      if (bad.length) ctx.addIssue({ code: "custom", message: `Not a 2-letter country code: ${bad.join(", ")}` });
+      return list.length ? list.sort() : null;
+    }),
 });
 export type AffiliateInput = z.output<typeof affiliateInput>;
 
@@ -211,6 +228,7 @@ export async function saveAffiliateLink(
       terms_summary: a.termsSummary,
       source_id: a.sourceId,
       active: a.active,
+      countries: a.countries,
       ...(encrypted ?? {}),
     };
     const safe = (r: Record<string, unknown>) => {
@@ -265,8 +283,9 @@ export async function listingFor(sql: postgres.Sql, appId: string) {
         url_hint: string;
         active: boolean;
         source_id: string | null;
+        countries: string[] | null;
       }[]
-    >`select id, network, model, terms_summary, url_hint, active, source_id from affiliate_links
+    >`select id, network, model, terms_summary, url_hint, active, source_id, countries from affiliate_links
       where app_id = ${appId} order by active desc, created_at`,
   ]);
   return { sources: srcs, plans, links };

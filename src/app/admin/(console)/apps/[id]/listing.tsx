@@ -96,7 +96,9 @@ export async function Listing({ appId }: { appId: string }) {
       <section>
         <h2 className="mb-1 text-lg font-semibold">Affiliate links</h2>
         <p className="mb-3 text-xs text-neutral-600">
-          URLs are encrypted on save and never shown again — only the host. One active link per app.
+          URLs are encrypted on save and never shown again — only the host. One active link per app. Countries: copy the
+          offer&apos;s accepted countries from the network; visitors from other countries go to the official site
+          instead of the network&apos;s fallback offers.
         </p>
         <ul className="mb-3 divide-y divide-neutral-200 rounded border border-neutral-200 bg-white text-sm">
           {links.length === 0 ? <li className="p-2 text-neutral-500">No links yet.</li> : null}
@@ -111,6 +113,11 @@ export async function Listing({ appId }: { appId: string }) {
                   {l.active ? "active" : "inactive"}
                 </span>
                 {l.terms_summary ? <span className="text-neutral-500">{l.terms_summary}</span> : null}
+                <span className="text-neutral-500">
+                  {l.countries?.length
+                    ? `only ${l.countries.join(", ")} — others go to the official site`
+                    : "all countries"}
+                </span>
               </div>
               <MiniForm action={saveAffiliateAction.bind(null, appId, l.id)} submit="Update">
                 <input type="hidden" name="network" value={l.network} />
@@ -122,6 +129,12 @@ export async function Listing({ appId }: { appId: string }) {
                   className={input}
                 />
                 <input name="url" placeholder="new URL (blank = keep)" autoComplete="off" className={`${input} w-64`} />
+                <input
+                  name="countries"
+                  defaultValue={l.countries?.join(", ") ?? ""}
+                  placeholder="countries, e.g. US, GB, CA (blank = all)"
+                  className={`${input} w-72`}
+                />
                 <select name="sourceId" defaultValue={l.source_id ?? ""} className={input}>
                   <option value="">no source</option>
                   {sourceOptions}
@@ -153,6 +166,7 @@ export async function Listing({ appId }: { appId: string }) {
             className={`${input} w-72`}
           />
           <input name="termsSummary" placeholder="terms summary" className={input} />
+          <input name="countries" placeholder="countries, e.g. US, GB, CA (blank = all)" className={`${input} w-72`} />
           <select name="sourceId" className={input}>
             <option value="">no source</option>
             {sourceOptions}
