@@ -43,6 +43,13 @@
       "when": 1793298340448,
       "tag": "0005_data_reviews",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793355550379,
+      "tag": "0006_affiliate_outreach",
+      "breakpoints": true
     }
   ]
 }

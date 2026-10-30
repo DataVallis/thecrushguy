@@ -46,7 +46,9 @@ describe("MCP (TASK-021)", () => {
     expect(await handleRpc(sql, { jsonrpc: "2.0", method: "notifications/initialized" }, () => {})).toBeNull();
     const list = await handleRpc(sql, { jsonrpc: "2.0", id: 2, method: "tools/list" }, () => {});
     const text = JSON.stringify(list!.result);
-    expect(text).not.toMatch(/publish"|chk_no_minor_content"|affiliate/);
+    const names = (list!.result as { tools: { name: string }[] }).tools.map((t) => t.name);
+    expect(names.filter((n) => /publish|gallery|affiliate_link/.test(n))).toEqual([]);
+    expect(text).not.toMatch(/"chk_no_minor_content"/); // the gallery check is never an allowed checklist item
     expect(text).toContain("set_price");
   });
 

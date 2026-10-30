@@ -35,7 +35,7 @@ const fail = (id: Rpc["id"], code: number, message: string): RpcResponse => ({
 });
 
 export const WRITE_TOOLS = new Set(
-  TOOLS.filter((t) => !/^(review_queue|list_apps|get_app)$/.test(t.name)).map((t) => t.name),
+  TOOLS.filter((t) => !/^(review_queue|list_apps|get_app|list_outreach)$/.test(t.name)).map((t) => t.name),
 );
 
 /** Handles one JSON-RPC message; returns null for notifications. `onWrite` runs after a successful write tool. */
