@@ -10,7 +10,7 @@ import {
 } from "@/lib/admin/outreach";
 import { requireAdmin } from "@/lib/auth/session";
 import { sql } from "@/lib/db/client";
-import { saveOutreachAction, seedOutreachAction } from "../actions";
+import { deleteOutreachAction, saveOutreachAction, seedOutreachAction } from "../actions";
 import { MiniForm } from "../listing-forms";
 import { Loading, PageTitle } from "../ui";
 
@@ -97,6 +97,7 @@ async function Affiliates() {
 
 function OutreachItem({ r }: { r: OutreachRow }) {
   const save = saveOutreachAction.bind(null, r.program);
+  const remove = deleteOutreachAction.bind(null, r.program);
   return (
     <li className="rounded border border-neutral-300 bg-white p-3">
       <div className="flex flex-wrap items-center gap-3">
@@ -168,6 +169,9 @@ function OutreachItem({ r }: { r: OutreachRow }) {
             />
             <input name="signupUrl" defaultValue={r.signup_url ?? ""} placeholder="signup URL" className={input} />
             <input name="notes" defaultValue={r.notes ?? ""} placeholder="notes" className={`${input} w-full`} />
+          </MiniForm>
+          <MiniForm action={remove} submit="Delete this row (duplicate / mistake)" danger className="mt-3">
+            {null}
           </MiniForm>
         </details>
       </div>

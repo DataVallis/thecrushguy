@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import bundle from "@/data/research-bundle.json";
 import { freshDb } from "../../../test/db";
 import { bundleSchema, importResearchBundle } from "./facts-import";
-import { forgottenApps, isDue, listOutreach, seedOutreach, upsertOutreach } from "./outreach";
+import { deleteOutreach, forgottenApps, isDue, listOutreach, seedOutreach, upsertOutreach } from "./outreach";
 
 let db: Awaited<ReturnType<typeof freshDb>>;
 let sql: postgres.Sql;
@@ -51,5 +51,14 @@ describe("affiliate outreach (TASK-025)", () => {
     await sql.unsafe(`update apps set chk_18plus_terms=true, chk_no_minor_content=true, chk_no_deepfake_feature=true,
       chk_privacy_policy=true, chk_operator_identifiable=true, checklist_checked_at=now(), status='published' where id='${a!.id}'`);
     expect((await forgottenApps(sql)).map((x) => x.slug)).toContain("lonely");
+  });
+
+  it("deletes a duplicate row and audits it", async () => {
+    await upsertOutreach(sql, actor, { program: "Candi.ai", status: "applied" });
+    expect(await deleteOutreach(sql, actor, "candi.ai")).toBe(true);
+    expect((await listOutreach(sql)).some((r) => r.program === "Candi.ai")).toBe(false);
+    expect(await deleteOutreach(sql, actor, "Candi.ai")).toBe(false);
+    const [a] = await sql`select action from audit_log where entity = 'affiliate_outreach' and action = 'delete'`;
+    expect(a).toBeTruthy();
   });
 });
