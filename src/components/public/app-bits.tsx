@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { fmt, money } from "@/i18n/format";
 import type { Dictionary } from "@/i18n/dictionaries";
+import type { BestForKey } from "@/lib/public/best-for";
 import type { AppCard } from "@/lib/public/catalog";
 import { toTen } from "@/lib/public/scoring";
 import { AppCover } from "./cover";
@@ -99,7 +100,22 @@ export function Flags({ app, t }: { app: AppCard; t: Dictionary }) {
   );
 }
 
-export function AppRow(props: { app: AppCard; rank?: number; locale: string; t: Dictionary; placement: string }) {
+export function BestForBadge({ k, t }: { k: BestForKey; t: Dictionary }) {
+  return (
+    <span className="inline-block rounded-full bg-coral/25 px-2.5 py-0.5 text-xs font-bold text-ink">
+      ★ {t.card.bestFor[k]}
+    </span>
+  );
+}
+
+export function AppRow(props: {
+  app: AppCard;
+  rank?: number;
+  locale: string;
+  t: Dictionary;
+  placement: string;
+  bestFor?: BestForKey;
+}) {
   const { app, t, locale } = props;
   return (
     <li className="group relative grid gap-4 rounded-3xl border border-ink/10 bg-white p-4 transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(27,21,48,0.25)] sm:grid-cols-[1fr_auto] sm:p-5">
@@ -112,6 +128,11 @@ export function AppRow(props: { app: AppCard; rank?: number; locale: string; t: 
           ) : null}
           <Avatar name={app.name} slug={app.slug} />
           <div className="min-w-0 flex-1">
+            {props.bestFor ? (
+              <p className="mb-1">
+                <BestForBadge k={props.bestFor} t={t} />
+              </p>
+            ) : null}
             <h3 className="font-display text-xl leading-tight font-extrabold">
               {/* The name link covers the card (stretched link) so the whole card opens the review. */}
               <Link

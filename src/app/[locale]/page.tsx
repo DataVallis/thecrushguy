@@ -189,14 +189,16 @@ function Hero({ t, locale, data }: { t: Dictionary; locale: Locale; data: HomeDa
             unoptimized
             className="absolute top-0 right-2 z-10 w-40 md:right-6 md:w-56"
           />
-          {pick ? <PickCard app={pick} locale={locale} t={t} /> : null}
+          {pick ? <PickCard apps={data!.all.slice(0, 3)} locale={locale} t={t} /> : null}
         </div>
       </div>
     </section>
   );
 }
 
-function PickCard({ app, locale, t }: { app: AppCard; locale: Locale; t: Dictionary }) {
+function PickCard({ apps, locale, t }: { apps: AppCard[]; locale: Locale; t: Dictionary }) {
+  const [app, ...rest] = apps;
+  if (!app) return null;
   return (
     <article className="relative rounded-[2rem] bg-white p-6 text-ink shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] ring-4 ring-coral/70">
       <p className="absolute -top-3 left-6 rounded-full bg-coral px-3 py-1 text-xs font-bold text-ink">
@@ -224,6 +226,33 @@ function PickCard({ app, locale, t }: { app: AppCard; locale: Locale; t: Diction
           </Link>
         </div>
       </div>
+      {rest.length ? (
+        <ol className="mt-5 flex flex-col gap-2 border-t border-ink/10 pt-4" aria-label={t.home.top3}>
+          {rest.map((a, i) => (
+            <li key={a.slug} className="flex items-center gap-3">
+              <span className="w-5 font-display text-lg font-extrabold text-muted tabular-nums">{i + 2}</span>
+              <Link
+                href={`/${locale}/app/${a.slug}`}
+                className="min-w-0 flex-1 truncate font-display text-lg font-extrabold hover:underline"
+              >
+                {a.name}
+              </Link>
+              <span className="font-display font-extrabold tabular-nums">
+                {toTen(a.overall)}
+                <span className="font-sans text-xs font-medium text-muted">{t.app.outOf}</span>
+              </span>
+              <a
+                href={`/go/${a.slug}?p=home-top3&l=${locale}`}
+                rel="sponsored nofollow noopener"
+                target="_blank"
+                className="rounded-full bg-cta px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap text-white hover:bg-cta-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta"
+              >
+                {t.home.visitShort}
+              </a>
+            </li>
+          ))}
+        </ol>
+      ) : null}
     </article>
   );
 }

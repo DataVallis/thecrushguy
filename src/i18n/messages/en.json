@@ -46,7 +46,9 @@
     "meetTitle": "Meet The Crush Guy",
     "meetText": "He reads the pricing pages, privacy policies and terms so you don't have to — and flags what you should know before you pay.",
     "meetCta": "See the shortlist",
-    "meetVideo": "The Crush Guy mascot checking AI companion apps for red flags"
+    "meetVideo": "The Crush Guy mascot checking AI companion apps for red flags",
+    "top3": "Top 3 right now",
+    "visitShort": "Visit"
   },
   "app": {
     "visit": "Visit {name}",
@@ -135,7 +137,14 @@
     "no": "No",
     "from": "From",
     "greenFlags": "Green flags",
-    "redFlags": "Red flags"
+    "redFlags": "Red flags",
+    "bestFor": {
+      "free": "Best free plan",
+      "voice": "Best for voice",
+      "pictures": "Best for pictures",
+      "memory": "Best memory",
+      "cheap": "Lowest price"
+    }
   },
   "consent": {
     "text": "We'd like to use Google Analytics to see which pages are useful. It sets cookies and sends usage data to Google.",
