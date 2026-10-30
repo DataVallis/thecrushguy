@@ -13,7 +13,10 @@ export default function AppsPage() {
     <>
       <div className="flex items-center">
         <PageTitle>Apps</PageTitle>
-        <Link href="/admin/apps/new" className="mb-6 ml-auto rounded bg-neutral-900 px-3 py-1.5 text-sm text-white">
+        <Link
+          href="/admin/apps/new"
+          className="mb-6 ml-auto rounded bg-coral px-3 py-1.5 text-sm text-ink font-semibold hover:bg-coral/85"
+        >
           New app
         </Link>
       </div>

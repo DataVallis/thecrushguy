@@ -271,6 +271,7 @@ export async function saveOutreachAction(program: string | null, prev: FormState
   const raw = formToObject(form, [
     "program",
     "appSlug",
+    "via",
     "signupUrl",
     "contact",
     "status",

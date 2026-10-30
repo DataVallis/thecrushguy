@@ -26,7 +26,7 @@ async function ConfirmForm({ searchParams }: Pick<PageProps<"/admin/auth/verify"
   return (
     <form action={verifyLinkAction}>
       <input type="hidden" name="token" value={token} />
-      <button type="submit" className="w-full rounded bg-neutral-900 px-3 py-2 font-medium text-white">
+      <button type="submit" className="w-full rounded bg-coral px-3 py-2 text-ink font-semibold hover:bg-coral/85">
         Sign in to admin
       </button>
     </form>

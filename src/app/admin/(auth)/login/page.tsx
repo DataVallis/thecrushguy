@@ -24,7 +24,7 @@ export default function LoginPage({ searchParams }: PageProps<"/admin/login">) {
           maxLength={254}
           className="rounded border border-neutral-300 px-3 py-2"
         />
-        <button type="submit" className="rounded bg-neutral-900 px-3 py-2 font-medium text-white">
+        <button type="submit" className="rounded bg-coral px-3 py-2 text-ink font-semibold hover:bg-coral/85">
           Email me a sign-in link
         </button>
       </form>

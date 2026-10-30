@@ -193,7 +193,7 @@ export function AppForm(props: { action: Action; initial: Values; categories: { 
       <button
         type="submit"
         disabled={pending}
-        className="self-start rounded bg-neutral-900 px-4 py-2 font-medium text-white"
+        className="self-start rounded bg-coral px-4 py-2 text-ink font-semibold hover:bg-coral/85"
       >
         {pending ? "Saving…" : "Save"}
       </button>
@@ -267,7 +267,7 @@ export function CategoryForm(props: {
       <button
         type="submit"
         disabled={pending}
-        className="self-start rounded bg-neutral-900 px-4 py-2 font-medium text-white"
+        className="self-start rounded bg-coral px-4 py-2 text-ink font-semibold hover:bg-coral/85"
       >
         {props.submitLabel}
       </button>

@@ -280,6 +280,8 @@ export const affiliateOutreach = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     appId: uuid("app_id").references(() => apps.id, { onDelete: "cascade" }),
     program: text("program").notNull(),
+    /** Affiliate network the program runs through (e.g. "CrakRevenue"); null = direct with the app. */
+    via: text("via"),
     signupUrl: text("signup_url"),
     contact: text("contact"),
     status: outreachStatus("status").notNull().default("to_apply"),
