@@ -79,3 +79,45 @@ html {
 body {
   font-family: var(--font-sans);
 }
+
+/*
+ * Admin console (not public): dark "midnight" theme in brand colours. Admin pages use neutral/white utilities;
+ * here those colour tokens are remapped so every admin page turns dark without touching each class.
+ */
+.admin {
+  color-scheme: dark;
+  background: #120e21;
+  color: #ece8f5;
+  --color-white: #1f1934;
+  --color-neutral-50: #262040;
+  --color-neutral-100: #2c2548;
+  --color-neutral-200: #342c52;
+  --color-neutral-300: #41385f;
+  --color-neutral-400: #5b5180;
+  --color-neutral-500: #9d95b5;
+  --color-neutral-600: #b3abc8;
+  --color-neutral-700: #cfc9de;
+  --color-neutral-800: #e2deec;
+  --color-neutral-900: #f4f2f8;
+  --color-emerald-50: #0f2a26;
+  --color-emerald-100: #12392f;
+  --color-emerald-700: #6ee7b7;
+  --color-emerald-900: #a7f3d0;
+  --color-amber-50: #2e2410;
+  --color-amber-100: #3d2e10;
+  --color-amber-300: #8a6a1f;
+  --color-amber-900: #fcd34d;
+  --color-red-50: #34121c;
+  --color-red-100: #451624;
+  --color-red-700: #ff8fa3;
+  --color-red-800: #ffb3c1;
+  --color-red-900: #ffc9d3;
+}
+.admin a {
+  text-underline-offset: 3px;
+}
+.admin input,
+.admin select,
+.admin textarea {
+  background-color: #17122a;
+}

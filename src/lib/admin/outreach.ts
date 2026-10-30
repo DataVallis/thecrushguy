@@ -54,6 +54,8 @@ export const outreachInput = z.object({
     )
     .nullish(),
   contact: optText(200),
+  /** Network name, e.g. "CrakRevenue"; empty = direct with the app. */
+  via: optText(60),
   status: z.enum(OUTREACH_STATUSES).optional(),
   appliedAt: day.nullish().or(z.literal("").transform(() => undefined)),
   followUpAt: day.nullish().or(z.literal("").transform(() => undefined)),
@@ -65,6 +67,7 @@ export type OutreachInput = z.input<typeof outreachInput>;
 export type OutreachRow = {
   id: string;
   program: string;
+  via: string | null;
   status: OutreachStatus;
   signup_url: string | null;
   contact: string | null;
@@ -82,7 +85,7 @@ export type OutreachRow = {
 
 export async function listOutreach(sql: postgres.Sql): Promise<OutreachRow[]> {
   return sql<OutreachRow[]>`
-    select o.id, o.program, o.status, o.signup_url, o.contact, o.applied_at, o.follow_up_at, o.terms, o.notes,
+    select o.id, o.program, o.via, o.status, o.signup_url, o.contact, o.applied_at, o.follow_up_at, o.terms, o.notes,
       o.updated_at, a.id as app_id, a.slug as app_slug, a.name as app_name, a.status::text as app_status,
       exists(select 1 from affiliate_links l where l.app_id = o.app_id and l.active) as has_active_link
     from affiliate_outreach o left join apps a on a.id = o.app_id
@@ -127,6 +130,7 @@ export async function upsertOutreach(
     for (const [k, col] of [
       ["signupUrl", "signup_url"],
       ["contact", "contact"],
+      ["via", "via"],
       ["status", "status"],
       ["appliedAt", "applied_at"],
       ["followUpAt", "follow_up_at"],
