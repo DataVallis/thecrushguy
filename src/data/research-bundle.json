@@ -118,6 +118,11 @@
         }
       },
       "notes": "Prices use '$' only; USD assumed. Plans: Private $12.99/mo (1,500 credits), All Yours $39.99/mo, Diamond $99.99 once (crypto, shown as $8.33/mo). Credits fund photos, calls, voice notes, video; per-action cost not stated. Pricing page says 'Unlimited chat ... from $12.99 a month' while the feature page says free text chat is unlimited - contradiction, check. Terms mention an 'age check at entry' without describing it. Privacy policy says no sale but does not address ad sharing; AI training on chats not mentioned (only 'interaction logs' used to improve functionality). NSFW from pricing page ('Generate 18+ Images'). Voice messages/calls only named as credit-funded items on pricing page.",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://www.aiangels.io/pricing",
+        "q": "AI Angels provides advanced AI girlfriend experiences with realistic conversations"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://www.aiangels.io/pricing",
@@ -240,6 +245,11 @@
         }
       },
       "notes": "Pricing page shows each tier with two prices without saying which billing period applies: Essential $4.99 or $5.99/mo (total $58.88), Pro $7.99 or $14.99, Ultimate $29.99 or $49.99; monthly and annual billing both offered. 4.99 is probably the annual-equivalent rate - human must confirm and set billing. '$' only, USD assumed. Free plan from Terms ('The basic Service is free to use.'); limits not stated. Tokens: 3M tokens ~2,000 messages on Essential. Memory 'up to 128K' (context size) - long-term memory left unknown. NSFW CONFLICT: Terms prohibit posting 'NSFW, pornographic, or otherwise sexually explicit' material while homepage markets 'NSFW AI chat' - left unknown. Privacy: no opt-out from AI training stated; ad targeting via Google/third-party cookies. Terms mention mobile apps/in-app purchases but no store listing was found.",
+      "audience": {
+        "v": "both",
+        "src": "https://craveu.ai/pricing",
+        "q": "AI Boyfriend / AI Girlfriend (Explore menu)"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://craveu.ai/agreement/terms-of-use",
@@ -362,6 +372,11 @@
         }
       },
       "notes": "Prices come from the Terms (Monthly $12.99, Quarterly $29.99, Yearly $69.99); no pricing page found; homepage shows '75% OFF' Premium badge but no prices. '$' only, USD assumed. Free: homepage 'Join Free', 'Try for free', '$0 trial', 'for free, every month' - limits not stated; may be a trial rather than a free plan, check. Token packages are one-time purchases per Terms. Group chat = 'Duos & Trios' (2-3 characters). Voice calls from homepage nav 'AI Live Phone Call'. NSFW: marketing says 'uncensored', but neither Terms nor Blocked Content Policy state adult content is allowed - left unknown. Privacy policy silent on AI training and targeted ads.",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://fantasygf.com/pricing",
+        "q": "Create 5 AI girlfriends free a month"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://fantasygf.com/legal/blocked-content-policy",
@@ -484,6 +499,11 @@
         }
       },
       "notes": "Pricing page https://goloveai.com/app/premium is robots-blocked; no price found on homepage (only 'Premium' and '70% welcome discount'). The '$20/month' on the homepage refers to competitors, not GoLove. Sells/shares: policy says it will not 'sell, trade, or otherwise transfer' data without consent, plus opt-in for marketing sharing; targeted ads not addressed. Refund denied if more than 20 credits used. Terms say only 'requisite legal age'; 18+ comes from the Underage Policy and the homepage gate. Custom creator: homepage says 'The full custom creator rolls out in the coming weeks', but legal index links an 'Image-Based Character Creation Guide' - left unknown. Group chat = 'Multi-character Scenarios' (up to 10 characters); check that it counts as group chat. Voice: voice messages plus video-style 'Live mode'; calls not stated. 18 USC 2257 page does not state if adult content is allowed.",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://goloveai.com/faq",
+        "q": "350+ AI Girls Ready to Chat."
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://goloveai.com/blocked-content-policy",
@@ -606,6 +626,11 @@
         }
       },
       "notes": "Price $14.99/mo is the US App Store IAP (3 mo $39.99, yearly $149.99); docs say web is usually cheaper and exact price is shown only at checkout. Ultra/MAX are monthly add-ons. Credits = audio credits. Age verification: an active subscription/payment counts as verification, and Yoti selfie age estimation or ID upload is used when flagged; 'Most free users will never encounter any verification prompt' - check that 'self-declaration' is the right category. Privacy: says no sale/share, but discloses an attribution provider whose 'advertising partners' receive ad-data choices. AI training not mentioned. Images = 'diffusion-generated selfies'. NSFW not stated in terms (Moderation Guidelines not read); App Store rating 17+ with 'Infrequent/Mild Sexual Content and Nudity'. Legal page was read only to 100,000 of ~105,000 characters.",
+      "audience": {
+        "v": "friend",
+        "src": "https://apps.apple.com/us/app/id6451038161",
+        "q": "Kindroid enables you to build a digital friend so realistic, it feels like conversing with a human."
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://kindroid.ai/v2/docs/kindroid-legal/"
@@ -727,6 +752,11 @@
         }
       },
       "notes": "Price unknown: /app/membership and /help/billing-and-renewal return no prices (JS-rendered). Currency USD from Terms ('all payments are in US dollars'). No App Store/Google Play listing; install page offers PWA only (iOS via Safari 'Add to Home Screen', Android/desktop install). App Store id6745784013 found in search is a different app (Xhot, Numan Durrani) - do NOT use. Privacy says 'We do not sell personal information' but shares with advertising providers, and ad cookies may count as 'sharing'. Retention: kept while account open; some records up to 7 years. Age verification: self-declaration in most countries; third-party face estimate, card check or ID where local law requires. Memory: homepage only says it 'remembers you' - left unknown. 'Voice chat' is paid; unclear if it means calls. AI training not explicitly stated ('improve ... the quality of companion replies').",
+      "audience": {
+        "v": "both",
+        "src": "https://www.nastia.ai",
+        "q": "AI Girlfriend / AI Boyfriend (use-case links)"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://nastia.ai/terms"
@@ -848,6 +878,11 @@
         }
       },
       "notes": "Monthly plan $19.99; yearly plan $9.99/mo billed $119.88 upfront. Both include unlimited messages and 1,000 dreamcoins/month. Free plan: only 'Sign up for free today', no limits described - left unknown. Country US from 'a Delaware corporation' (country not literally stated). Privacy: 'do not engage in advertising' as of policy date, but reserves future sharing with ad partners - may change. Refund: case-by-case, contact support within 14 days. Age: attestation at registration; Underage Policy says ID/biometric checks via third parties may apply depending on location. NSFW from homepage (NSFW images/videos, 'Adults Only'). 'All Group Chats' appears only as a category filter - group chat left unknown. AI training: no opt-out stated.",
+      "audience": {
+        "v": "both",
+        "src": "https://ourdream.ai/pricing",
+        "q": "I'm interested in: Females, Males, Trans"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://ourdream.ai/"
@@ -969,6 +1004,11 @@
         }
       },
       "notes": "MANUAL BROWSER CHECK NEEDED. /terms and /store return only metadata (JS-rendered); /privacy-policy is robots-blocked; wiki.secrets.ai fetch was not permitted (permission prompt timed out); direct curl blocked by proxy (403). Store meta description mentions 'Lite, Plus, and Premium plans' and 'Purchase Moments', no prices. Homepage has 'Join Free' buttons and 'Start watching free' (Shorts), not enough for has_free_plan. Homepage address: 8 The Green Ste D, Dover, DE 19901, United States. Search found no official App Store listing (results were unrelated apps and many spammy *.pages.dev clone sites - ignore those).",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://www.secrets.ai/terms",
+        "q": "Chat 24/7 with realistic AI Girlfriend and enjoy 100+ Fantasies."
+      },
       "no_deepfake_feature": {
         "v": "unknown",
         "src": "https://www.secrets.ai/"
@@ -1090,6 +1130,11 @@
         }
       },
       "notes": "App Store IAP: Monthly $9.99, Annual $39.99, 50 Image Generation Credits $19.99; App Store age rating 18+ (no sexual-content descriptor). Terms list monthly, semi-annual or annual billing. Address: 107-111 Fleet Street, London EC4A 2AB (Terms s.8.4). Privacy shares website visitor data with ad partners but says it will 'never share your TenderTalk conversations' with advertisers. AI training: only 'learn from your interactions' - left unknown. Terms ban 'pornographic' uploaded content but do not address AI-generated content - NSFW left unknown. No explicit minor-content ban (only bans soliciting info from under-18s). Voice calls from App Store 'voice and video-style interactions'; website lists video calls. 12 preset personalities; custom creation not mentioned. iOS only per website.",
+      "audience": {
+        "v": "friend",
+        "src": "https://www.tendertalkapp.com/",
+        "q": "Your trusted AI friend."
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://www.tendertalkapp.com/",
@@ -1455,6 +1500,11 @@
         }
       },
       "notes": "Homepage is adult/NSFW - not used as a source. Lowest monthly plan Silver $15/mo; promotional prepaid 12-month Silver $90 (= $7.50/mo) via third-party key - human decide which to show. Platinum $35/mo. Voice calls cost 10 credits/min; image 20 credits. Refund only if service not used after purchase. Privacy says 'We do not sell personal information' but analytics/affiliate tracking 'may constitute \"sharing\" under the broad CCPA/CPRA definition' -> sells_or_shares_for_ads left unknown. Operator address 30 N Gould St, Sheridan, WY (registered-agent style address). Country inferred from Wyoming address on terms page.",
+      "audience": {
+        "v": "both",
+        "src": "https://erogen.ai/faq",
+        "q": "AI girlfriend, AI boyfriend, AI companion"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://erogen.ai/terms"
@@ -1576,6 +1626,11 @@
         }
       },
       "notes": "Price from App Store IAP: Flipped Plus 1 Month $9.99 (also Plus weekly $4.99, yearly $39.99 = $3.33/mo; Platinum $9.99/wk, $19.99/mo; gem packs $0.99-$19.99). Web /pricing page returned no plan data. Free plan limits not stated. Memory: FAQ says AI 'remembers, adapts' but also that memory is limited and may forget -> unknown. NSFW: ToS bars 'obscene, lewd, lascivious' contributions and FAQ 'strictly prohibits public display of NSFW content', yet App Store rates 18+ with sexual content -> left unknown, human check. Minors: ToS only references laws on child pornography (no explicit 'sexualizing minors' clause) - weak 'yes'. App Store copyright: TellinTree Lab. Privacy names 'Flipped Team' without entity/address.",
+      "audience": {
+        "v": "both",
+        "src": "https://flipped.chat/pricing",
+        "q": "AI Girlfriend,AI Boyfriend"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://apps.apple.com/us/app/id6445969623",
@@ -1698,6 +1753,11 @@
         }
       },
       "notes": "Terms and Privacy pages only returned the click-to-enter 18+ age gate to the fetcher - full ToS/Privacy text NOT read; human should open them in a browser. No pricing page found; currency USD is an assumption (no price seen). 'Luna Package purchases' in cancellation policy suggests a virtual-currency pack, not confirmed -> tokens unknown. NSFW 'yes' based on homepage describing chat as 'uncensored'. Memory claim only 'the more you chat... the more she'll get to know you' -> unknown. Address: 61 Agiou Pavlou, Nicosia 1107, Cyprus. Homepage also mentions turning pictures into videos.",
+      "audience": {
+        "v": "both",
+        "src": "https://herahaven.ai",
+        "q": "Girlfriend / Boyfriend / Anime (navigation)"
+      },
       "no_deepfake_feature": {
         "v": "unknown",
         "src": "https://herahaven.ai/"
@@ -1819,6 +1879,11 @@
         }
       },
       "notes": "Pricing page shows only weekly/yearly/lifetime ('One payment, nothing renews'): Pro $3.44/week, Ultra $5.75/week (struck-through $12.99/$24.99, period unclear); no monthly price -> unknown, human check. Memory on subscriptions page = 'She Remembers' last 30/100 messages (short context, not clearly long-term) -> unknown. Free: homepage says 'Unlimited Chat for Free' after registration but subscriptions table shows 15 messages - conflicting. Privacy 'will not ... sell' is followed by 'without your consent or unless otherwise stated'. Terms name Servalot Ltd (Cyprus) as payment processor; privacy says service is 'operated by Servalot Ltd (Cyprus)'. Homepage says 'Install App' but no store listing found.",
+      "audience": {
+        "v": "both",
+        "src": "https://kupid.ai",
+        "q": "They can create an ideal girlfriend/boyfriend, choose their features"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://kupid.ai/subscriptions",
@@ -1941,6 +2006,11 @@
         }
       },
       "notes": "Homepage is adult-oriented (nsfw 'yes' from that marker; a 2257 statement also exists in legal hub) - homepage not otherwise used. Price: web 12-month plan $5.99/mo (struck $19.99), 6-month $8.99/mo; total term charge not shown. App Store IAP: Monthly $12.99, Yearly $69.99 (= $5.83/mo); 3-day free trial. Coins used for images/audio/unlocking characters. Voice/audio generation exists but voice messages vs calls not specified -> unknown. Country conflict: ToS says 'San Francisco, United States', Privacy says 'Texas, United States'. App Store seller is AJ NETWORK LLC. Underage policy mentions only an 'initial age gate'.",
+      "audience": {
+        "v": "both",
+        "src": "https://www.luvr.ai",
+        "q": "Girls Anime Guys"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://www.luvr.ai/subscribe",
@@ -2063,6 +2133,11 @@
         }
       },
       "notes": "Pricing page https://nemora.ai/pricing blocked by robots (not fetched) -> price unknown; homepage shows 'Up to 80% Off' first-subscription promo. Group chat: homepage 'Up to 3 characters'. Memory: FAQ only says characters 'can learn and adapt based on your interactions over time' -> unknown. NSFW not explicitly stated; homepage says designed for 18+ and 'Some content may not be suitable for younger audiences'. Privacy 'will not ... sell' continues 'for their own marketing purposes without your explicit consent'; affiliate/email marketing providers listed. Financial data kept 7 years. Refunds: first subscription 30 days regardless of usage; later periods only if <=200 tokens used. Address: Kallipoleos 48, Loucas Court, Office 303, Lykavitos 1071 Nicosia.",
+      "audience": {
+        "v": "both",
+        "src": "https://nemora.ai",
+        "q": "Girls Guys Anime"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://nemora.ai/terms-of-service"
@@ -2428,6 +2503,11 @@
         }
       },
       "notes": "No price amounts on /premium or /faq (only '70% OFF' and monthly/quarterly/yearly plans; free trial mentioned). Terms do not say 18 explicitly (legal contract age); separate Underage Policy not opened. FAQ says companions 'engage in voice conversations' - unclear if messages or calls, left unknown. Paid subscribers get 'generally 100' tokens/month per terms. EU/UK 14-day withdrawal right also in terms. Training quote says chat data may be aggregated/anonymized first. Homepage not opened (likely explicit). All quotes came through WebFetch extraction - verify verbatim. | 2026-10-29: 18+ and adult content confirmed on the Underage Policy (owner pasted the page; agent verified the URL).",
+      "audience": {
+        "v": "both",
+        "src": "https://candy.ai/faq",
+        "q": "Prefer a masculine presence? Our AI Boyfriend characters offer confidence, support, humor, or even a bit of edge."
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://candy.ai/terms-of-service"
@@ -2549,6 +2629,11 @@
         }
       },
       "notes": "/plans renders prices client-side; WebFetch got no amounts (menu tooltip says 'Monthly Subscriptions of DreamBF') - needs a human browser check for price, free tier, tokens. Features unknown: homepage not opened (likely explicit), no SFW feature page read. Terms say refunds 'may be granted at our discretion' while /refund says non-refundable unless law requires. UK-only age verification page exists (https://dreambf.ai/policies/uk-users) but method/provider not stated. Same operator/network as other DreamAI SRL sites. Quotes via WebFetch extraction - verify verbatim.",
+      "audience": {
+        "v": "boyfriend",
+        "src": "https://dreambf.ai",
+        "q": "Are you looking to create your own AI boyfriend?"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://www.dreambf.ai/terms"
@@ -2792,6 +2877,11 @@
         }
       },
       "notes": "No pricing page found (/pricing failed to load); homepage shows no prices. Terms: paid subscribers get '100 tokens per month'; subscription auto-renews. NSFW quote: 'The APP includes AI-generated adult content for registered users only.' Homepage text was suggestive but WebFetch rated it not explicit; image generation/custom character from homepage feature text ('AI Art Generator', create AI girlfriend by appearance/personality). Privacy policy deletion quote only concerns children's data; no general deletion process -> unknown. Retention and training not addressed in privacy policy (so 'unknown', arguably 'no' for retention). Quotes via WebFetch extraction - verify verbatim.",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://funfun.ai",
+        "q": "Create and chat with your dream AI Girlfriend"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://funfun.ai/legal/terms"
@@ -3157,6 +3247,11 @@
         }
       },
       "notes": "Lowest monthly = 'Launch Plan Monthly' $9.99 on US App Store; 'Standard Plan Monthly' $15.99, yearly $99.99 / Launch yearly $59.99; credits packs from $4.99. Web prices not published on nomi.ai. Free: homepage says 'free (no credit card required) to start chatting' - limits not found. Platforms: web (nomi.ai app), iOS (App Store, seller AI GLIMPSE INC, 18+), Android (Play listing https://play.google.com/store/apps/details?id=ai.nomi.twa - developer not shown in fetch). Ads: policy says personal info not sold/leased and ad networks not currently used. Training: privacy policy references 'training archives' that survive account deletion de-identified - treated as 'yes'. Address in privacy policy (Baltimore, MD). No explicit minors-content clause found in ToS. Age: ToS 'requires users to provide their age' and reserves additional verification. NSFW not stated on pages read. Quotes via WebFetch extraction - verify verbatim.",
+      "audience": {
+        "v": "both",
+        "src": "https://play.google.com/store/apps/details?id=ai.nomi.twa",
+        "q": "Whether you're looking for a mentor chatbot or an AI girlfriend or boyfriend, Nomi's ready to roll with it."
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://apps.apple.com/us/app/nomi-ai-companion-with-a-soul/id6450270929",
@@ -3522,6 +3617,11 @@
         }
       },
       "notes": "Price: /pricing lists promo first payments ($12.99 first, then $25.99/month; quarterly $77.97; annual $311.88 = ~$25.99/mo). Plan labels on /pricing look swapped (the $12.99 row is labelled '3-Month'); homepage says Monthly $12.99 first then $25.98. Stored the recurring rate; verify. Membership includes 100 tokens/mo (/plans meta says 150) - image 10, voice msg 3, call 7/min, companion 20 tokens. Free plan unclear: homepage says 'Try it for FREE!' but also no free trial 'at the moment'; terms say paid plans 'allow users to generate more content'. Retention: criteria only, no period. Underage policy wording is 'content inappropriate for minors'; terms quote used for minor ban. Separate UK age-verification page exists (/policies/uk-users) - not opened. Platforms: no official app found; App Store 'DreamGF - My AI Friend' (id6503708349) is an UNRELATED developer (Van Hong Nguyen / ZeeZoo). Homepage is explicit (adult copy) - only footer/text read. Same operator as fantasy-ai.",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://play.google.com/store/apps/details?id=com.mavtao.girlfriend.ai&hl=en_US",
+        "q": "Virtual Dating & Roleplay Game, Chat with Fun AI Girls"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://dreamgf.ai/terms",
@@ -3644,6 +3744,11 @@
         }
       },
       "notes": "Price: Monthly first payment $7.99 (promo), then $14.99/month; 7-day trial $5.99 then $14.99/mo; quarterly $38.00; annual $155.88 (~$12.99/mo). Stored recurring monthly rate. 200 tokens/month included; token packs $2.99-$179.99, premium only; $2 fee on failed rebill. Terms contradict themselves on jurisdiction ('incorporated ... under the laws of the United States' vs Romania HQ) - country set to RO from address; verify. Custom character creation sourced only from homepage link title 'Create your own AI girlfriend'. Same operator/template as dreamgf. App Store 'Fantasy AI - Character Chat' (id6468505908, Rimone Holding) is UNRELATED. Homepage is explicit - only footer/text read.",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://fantasy.ai/pricing",
+        "q": "Chat with your AI girlfriend in real time"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://fantasy.ai/policies/terms",
@@ -3766,6 +3871,11 @@
         }
       },
       "notes": "No prices found: /pricing is robots-disallowed; FAQ/support pages render no answers; only unofficial *.pages.dev clone sites show prices (not used). Terms: subscribers get 5,000-20,000 credits/month by tier; extra credits purchasable. Ads: privacy says no sale/transfer 'unless otherwise stated' but lists 'advertising networks/agencies' as a data source - ambiguous, verify. Homepage mentions 'Voice chat' and that the companion 'learns from every conversation' - too vague for voice/memory facts. Platforms: Android via direct APK (not Play Store); iOS only via PWA ('Skip the iOS App Store'). Also NextDay AI USA Inc (Delaware) and NextDay AI EU Ltd (Limassol, CY). Homepage is explicit - only text read.",
+      "audience": {
+        "v": "both",
+        "src": "https://www.gptgirlfriend.online/faq",
+        "q": "a smart, engaging AI boyfriend or girlfriend anytime"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://www.gptgirlfriend.online/legal/terms",
@@ -3888,6 +3998,11 @@
         }
       },
       "notes": "kajiwoto.com is a client-rendered SPA: homepage and /privacy returned only meta tags, /terms errored, direct curl blocked - privacy/terms facts all unknown; needs a human with a browser. App Store IAPs (durations not shown): Kajiwoto Plus $10.49, Plus $116.99, Pro $34.99, Pro (Annual) $349.99, Coins (10) $9.99 - $10.49 assumed lowest but billing period unverified. App Store age rating 18+; app is free to download with IAP (not counted as a free plan). Last iOS update v1.17.23 on Oct 31, 2024 - possibly inactive. Version notes mention 'Updated memories list' and 'Multiple AIs added to all rooms' (possible memory/group features, unconfirmed). No Google Play listing found. Web app likely at kajiwoto.com but not verifiable from text.",
+      "audience": {
+        "v": "friend",
+        "src": "https://play.google.com/store/apps/details?id=com.cho.kajiwoto&hl=en",
+        "q": "Kajiwoto AI Friend Companions"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://apps.apple.com/us/app/kajiwoto/id1409354116",
@@ -4010,6 +4125,11 @@
         }
       },
       "notes": "/terms and /privacy are client-rendered (only meta tags returned); /content-moderation-policy robots-disallowed; help.lovescape.com shows only category names ('Pricing & Plans', 'Features & Capabilities'). All pricing/privacy/terms facts need a human with a browser. Homepage: 'web-based ... app for compatible mobile and desktop browsers', no native apps; operator 'Warmtech Ltd, Spyrou Kyprianou 75, Flat/Office 102, Potamos Germasogeias, 4042, Limassol, Cyprus'; support help@lovescape.com. Homepage is explicit (adult copy) - only text read. A third-party review warns of copycat sites using the Lovescape name.",
+      "audience": {
+        "v": "both",
+        "src": "https://lovescape.com/pricing",
+        "q": "Choose between real life and anime AI girlfriends and boyfriends."
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://lovescape.com/"
@@ -4253,6 +4373,11 @@
         }
       },
       "notes": "Price from App Store IAP list: 1 month $7.99 and $14.99, weekly $2.99/$6.99, annual $44.99 (~$3.75/mo); hearts packs $4.99-$14.99. Web prices not shown. Hearts buy gifts, 'photo and audio generations' (terms) - audio may mean voice messages, unconfirmed. Store reviews say chatting consumes hearts. Privacy policy (last updated Mar 17, 2025) names data controller 'Zemomedia, Tegelhagen 2 LT2, 02780 Espoo, Finland'; terms name Just Web It Oy (same address, company no. 2476716-9). Terms also say anonymized interaction data may be used 'to improve and train Romantic AI models'. Privacy says 'never sell' but ad sharing not addressed (Facebook Pixel listed); Play data safety says data may be shared with third parties - left unknown. Minor-content ban sits in a referenced Blocked Content Policy not opened. FAQ notes chatting with 'several virtual girlfriends at once' (separate chats, not group chat). Play rating 16+, App Store 18+. Mozilla *Privacy Not Included reviewed this app (not opened).",
+      "audience": {
+        "v": "girlfriend",
+        "src": "https://play.google.com/store/apps/details?id=com.romanticai.romanticai&hl=en_US",
+        "q": "Create your own dream chatbot girlfriend from scratch"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://chat.romanticai.com/assets/documents/Terms_&_Conditions.pdf"
@@ -4374,6 +4499,11 @@
         }
       },
       "notes": "No prices found: /premium errored, homepage shows no plan amounts; only third-party reviews list prices (not used). Terms: plans billed weekly/monthly/3-monthly/yearly; tokens for premium features. Refund applies when 10% or less of the tokens bought with that payment were used - verify wording. Homepage advertises 'Join Free' / 'free AI girlfriend website' but no defined free plan or limits - left unknown. Memory from homepage marketing line 'Desires, limits, and habits stay remembered.' 'Sexy Voice' mentioned without detail. Age verification: terms only 'represent and warrant' 18+. Content policy sets 21+ for characters. Privacy also lets users delete individual chats or full history. Homepage is explicit - only text read.",
+      "audience": {
+        "v": "both",
+        "src": "https://sweetdream.ai/pricing",
+        "q": "Create AI Girlfriend / Create AI Boyfriend"
+      },
       "no_deepfake_feature": {
         "v": "yes",
         "src": "https://sweetdream.ai/pricing",

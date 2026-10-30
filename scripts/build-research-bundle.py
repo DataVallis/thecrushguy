@@ -35,10 +35,19 @@ for f in sorted(RAW.glob("deepfake-*.json")):
         d = x.get("no_deepfake_feature", {})
         if d.get("v") in ("yes", "no") and str(d.get("src", "")).startswith("http"):
             deepfake[x["slug"]] = d
+# Audience checks (audience.json, TASK-024): who the companions are, with source + quote.
+audience = {}
+if (RAW / "audience.json").exists():
+    for x in json.loads((RAW / "audience.json").read_text(encoding="utf-8")):
+        a = x.get("audience", {})
+        if a.get("v") in ("girlfriend", "boyfriend", "both", "friend") and str(a.get("src", "")).startswith("http"):
+            audience[x["slug"]] = a
 facts = []
 for f in sorted(RAW.glob("facts-*.json")):
     for x in json.loads(f.read_text(encoding="utf-8")):
         s = seed.get(x["slug"])
+        if x["slug"] in audience:
+            x["audience"] = audience[x["slug"]]
         if s:
             x["no_deepfake_feature"] = deepfake.get(x["slug"]) or {
                 "v": s.get("chk_no_deepfake_feature", "unknown"),

@@ -10,6 +10,7 @@ import { z } from "zod";
 import bundle from "@/data/research-bundle.json";
 import { bundleSchema, importFacts, importResearchBundle, recomputeApp } from "@/lib/admin/facts-import";
 import { AdminError, audit, changes, qualityGaps, reviewQueue, setAppStatus } from "@/lib/admin/repo";
+import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { factsSchema } from "@/lib/review/data-review";
 
@@ -76,6 +77,7 @@ const FACT_PATHS = [
   "operator.country",
   "operator.address_stated",
   "no_deepfake_feature",
+  "audience",
 ] as const;
 
 const CHECK_ITEMS = [
@@ -225,7 +227,7 @@ export const TOOLS: Tool[] = [
   },
   {
     name: "set_fact",
-    description: `Set one sourced fact and recompute the data review. path: ${FACT_PATHS.join(", ")}. value: yes/no/unknown (training also opt-out; operator.name/country/free_plan_limits/age_verification are text). A quote (≤25 words) is required for privacy.* and terms.*.`,
+    description: `Set one sourced fact and recompute the data review. path: ${FACT_PATHS.join(", ")}. value: yes/no/unknown (training also opt-out; audience: girlfriend/boyfriend/both/friend — who the companions are as the app presents them; operator.name/country/free_plan_limits/age_verification are text). A quote (≤25 words) is required for privacy.* and terms.*.`,
     input: z.object({
       slug,
       path: z.enum(FACT_PATHS),
@@ -296,6 +298,13 @@ export const TOOLS: Tool[] = [
       forgetKnownSlugs();
       return { ok: true };
     },
+  },
+  {
+    name: "sync_categories",
+    description:
+      "Create/refresh the fact-driven category lists (free, cheap, voice, pictures, memory, iPhone, Android, adults-only) and recompute which apps belong to each.",
+    input: z.object({}),
+    run: async (sql) => ({ changes: await syncAutoCategories(sql, MCP_ACTOR) }),
   },
   {
     name: "import_research_bundle",

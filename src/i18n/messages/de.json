@@ -104,7 +104,7 @@
     "api": "API"
   },
   "category": {
-    "title": "Best {name} apps",
+    "title": "{name}",
     "ranked": "Ranked by our score",
     "empty": "No apps in this category yet.",
     "rank": "#{n}",
