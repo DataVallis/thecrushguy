@@ -217,3 +217,8 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Decision: in Mode B the agent also merges release PRs `dev → main` (merge commit, not squash), but only when CI is green on `dev` and the dev deploy + smoke `verify` passed. Prod deploy runs automatically on the merge; the agent waits for `Deploy prod` to finish and reports the result.
 - Still owner-only: the gallery check/publishing of apps, affiliate links, secrets, anything under the content-policy STOP rule, and irreversible prod data changes.
 - Consequences: releases no longer wait for the owner; a broken prod deploy is the agent's to roll back (revert PR to `dev`, release again).
+
+## ADR-036 — Geo-limited affiliate links; agent may set link countries
+- Date: 2026-10-30 · Status: Accepted (owner: "js bi raje da tebi tu not mečem linke in slike držav pa ti to urejaš")
+- Decision: `affiliate_links.countries` (null = all). `/go` sends visitors outside the list (or with unknown country) to the official site, because networks redirect non-target traffic to unrelated fallback offers. MCP tool `set_link_countries` lets the agent set the list from the offer's country screenshot.
+- Still owner-only: the affiliate URL itself is entered in /admin (encrypted on save). The agent never receives, stores or reads tracking URLs (CLAUDE.md hard rule; ADR-033 unchanged).
