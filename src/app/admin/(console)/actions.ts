@@ -36,7 +36,7 @@ import {
 } from "@/lib/admin/listing";
 import { requireAdmin } from "@/lib/auth/session";
 import { syncAutoCategories } from "@/lib/catalog/auto-categories";
-import { seedOutreach, upsertOutreach } from "@/lib/admin/outreach";
+import { deleteOutreach, seedOutreach, upsertOutreach } from "@/lib/admin/outreach";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { appUrls, pingIndexNow } from "@/lib/seo/indexnow";
 import { siteUrl } from "@/lib/env";
@@ -287,4 +287,10 @@ export async function saveOutreachAction(program: string | null, prev: FormState
     throw err;
   }
   redirect("/admin/affiliates?saved=1");
+}
+
+export async function deleteOutreachAction(program: string): Promise<FormState> {
+  const actor = await requireAdmin();
+  await deleteOutreach(sql(), actor, program);
+  redirect("/admin/affiliates?deleted=1");
 }

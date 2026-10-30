@@ -188,6 +188,17 @@ export async function seedOutreach(sql: postgres.Sql, actor: string): Promise<nu
   return added;
 }
 
+/** Removes a tracker row (e.g. a duplicate). Audited with the full row so it can be restored by hand. */
+export async function deleteOutreach(sql: postgres.Sql, actor: string, program: string): Promise<boolean> {
+  return sql.begin(async (tx) => {
+    const [row] = await tx<Record<string, unknown>[]>`
+      delete from affiliate_outreach where lower(program) = lower(${program.trim()}) returning *`;
+    if (!row) return false;
+    await audit(tx, actor, "delete", "affiliate_outreach", row.id as string, row);
+    return true;
+  });
+}
+
 export function isDue(r: Pick<OutreachRow, "follow_up_at" | "status">, now = new Date()): boolean {
   return r.status === "applied" && !!r.follow_up_at && new Date(r.follow_up_at).getTime() <= now.getTime();
 }
