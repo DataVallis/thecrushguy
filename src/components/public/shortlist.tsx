@@ -5,6 +5,7 @@ import { useState } from "react";
 import { fmt } from "@/i18n/format";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { AppCard } from "@/lib/public/catalog";
+import { bestForLabels } from "@/lib/public/best-for";
 import { AppRow } from "./app-bits";
 
 type FilterKey = "free" | "voice" | "pictures" | "memory" | "cheap";
@@ -26,6 +27,7 @@ export function Shortlist(props: { apps: AppCard[]; locale: string; t: Dictionar
   const { t } = props;
   const [on, setOn] = useState<FilterKey[]>([]);
   const shown = props.apps.filter((a) => on.every((k) => TEST[k](a)));
+  const labels = bestForLabels(props.apps);
   const toggle = (k: FilterKey) => setOn((cur) => (cur.includes(k) ? cur.filter((x) => x !== k) : [...cur, k]));
   return (
     <div className="flex flex-col gap-4">
@@ -72,6 +74,7 @@ export function Shortlist(props: { apps: AppCard[]; locale: string; t: Dictionar
               key={app.slug}
               app={app}
               rank={props.apps.indexOf(app) + 1}
+              bestFor={labels[app.slug]}
               locale={props.locale}
               t={t}
               placement={props.placement}

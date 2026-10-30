@@ -46,7 +46,9 @@
     "meetTitle": "Das ist The Crush Guy",
     "meetText": "Er liest Preisseiten, Datenschutzerklärungen und AGB, damit du es nicht musst – und markiert, was du vor dem Bezahlen wissen solltest.",
     "meetCta": "Zur Auswahl",
-    "meetVideo": "Das Crush-Guy-Maskottchen prüft KI-Begleiter-Apps auf Red Flags"
+    "meetVideo": "Das Crush-Guy-Maskottchen prüft KI-Begleiter-Apps auf Red Flags",
+    "top3": "Aktuelle Top 3",
+    "visitShort": "Ansehen"
   },
   "app": {
     "visit": "Visit {name}",
@@ -135,7 +137,14 @@
     "no": "Nein",
     "from": "Ab",
     "greenFlags": "Green Flags",
-    "redFlags": "Red Flags"
+    "redFlags": "Red Flags",
+    "bestFor": {
+      "free": "Bester Gratis-Plan",
+      "voice": "Beste Stimme",
+      "pictures": "Beste Bilder",
+      "memory": "Bestes Gedächtnis",
+      "cheap": "Günstigster Preis"
+    }
   },
   "consent": {
     "text": "Wir möchten Google Analytics nutzen, um zu sehen, welche Seiten hilfreich sind. Dabei werden Cookies gesetzt und Nutzungsdaten an Google gesendet.",
