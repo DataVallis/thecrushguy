@@ -13,6 +13,7 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
           <Link href="/admin/apps">Apps</Link>
           <Link href="/admin/categories">Categories</Link>
           <Link href="/admin/research">Research &amp; queue</Link>
+          <Link href="/admin/affiliates">Affiliates</Link>
           <Link href="/admin/import">Import</Link>
           <Link href="/admin/audit">Audit log</Link>
           <form action={logoutAction} className="ml-auto">

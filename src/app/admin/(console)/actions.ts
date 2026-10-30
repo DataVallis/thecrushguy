@@ -36,6 +36,7 @@ import {
 } from "@/lib/admin/listing";
 import { requireAdmin } from "@/lib/auth/session";
 import { syncAutoCategories } from "@/lib/catalog/auto-categories";
+import { seedOutreach, upsertOutreach } from "@/lib/admin/outreach";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { appUrls, pingIndexNow } from "@/lib/seo/indexnow";
 import { siteUrl } from "@/lib/env";
@@ -255,4 +256,35 @@ export async function rejectFromQueueAction(id: string, prev: FormState, form: F
   }
   invalidateApps();
   redirect("/admin/research?removed=1");
+}
+
+// ---------- TASK-025: affiliate outreach tracker ----------
+
+export async function seedOutreachAction(): Promise<FormState> {
+  const actor = await requireAdmin();
+  await seedOutreach(sql(), actor);
+  redirect("/admin/affiliates?seeded=1");
+}
+
+export async function saveOutreachAction(program: string | null, prev: FormState, form: FormData): Promise<FormState> {
+  const actor = await requireAdmin();
+  const raw = formToObject(form, [
+    "program",
+    "appSlug",
+    "signupUrl",
+    "contact",
+    "status",
+    "appliedAt",
+    "followUpAt",
+    "terms",
+    "notes",
+  ]);
+  if (program) raw.program = program;
+  try {
+    await upsertOutreach(sql(), actor, raw as never);
+  } catch (err) {
+    if (err instanceof AdminError) return failure(prev, { [err.field]: err.message }, raw);
+    throw err;
+  }
+  redirect("/admin/affiliates?saved=1");
 }

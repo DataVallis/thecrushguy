@@ -260,6 +260,42 @@ export const affiliateLinks = pgTable(
   ],
 );
 
+/**
+ * Affiliate outreach tracker (TASK-025): which programs/apps the owner applied to, what's pending, what's done.
+ * A program may cover one app (direct program) or many (a network like CrakRevenue → app_id null). No secrets here:
+ * the actual affiliate URL lives encrypted in affiliate_links.
+ */
+export const outreachStatus = pgEnum("outreach_status", [
+  "to_apply",
+  "to_contact",
+  "applied",
+  "approved",
+  "rejected",
+  "no_program",
+]);
+
+export const affiliateOutreach = pgTable(
+  "affiliate_outreach",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    appId: uuid("app_id").references(() => apps.id, { onDelete: "cascade" }),
+    program: text("program").notNull(),
+    signupUrl: text("signup_url"),
+    contact: text("contact"),
+    status: outreachStatus("status").notNull().default("to_apply"),
+    appliedAt: timestamp("applied_at", { withTimezone: true }),
+    followUpAt: timestamp("follow_up_at", { withTimezone: true }),
+    terms: text("terms"),
+    notes: text("notes"),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    uniqueIndex("affiliate_outreach_program_uq").on(t.program),
+    check("affiliate_outreach_signup_http", sql`${t.signupUrl} IS NULL OR ${t.signupUrl} ~ '^https?://'`),
+  ],
+);
+
 export const translations = pgTable(
   "translations",
   {
