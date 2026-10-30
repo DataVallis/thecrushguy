@@ -247,6 +247,8 @@ export const affiliateLinks = pgTable(
     /** Non-secret hint for the admin UI, e.g. the target host. */
     urlHint: text("url_hint").notNull(),
     active: boolean("active").notNull().default(true),
+    /** ISO 3166-1 alpha-2 countries the offer accepts; null = all. Visitors from elsewhere go to the official site. */
+    countries: text("countries").array(),
     sourceId: uuid("source_id").references(() => sources.id, { onDelete: "set null" }),
     createdAt: createdAt(),
     updatedAt: updatedAt(),

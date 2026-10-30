@@ -66,6 +66,18 @@ describe("resolveTarget", () => {
     });
   });
 
+  it("geo-limited link: listed country → affiliate; other or unknown country → official website", async () => {
+    const id = await app("geo-app");
+    const l = await link(id, "https://partner.test/geo");
+    await sql`update affiliate_links set countries = ${["GB", "US"]} where id = ${l}`;
+    expect(await resolveTarget(sql, "geo-app", { ...opts, country: "US" })).toMatchObject({ kind: "affiliate" });
+    expect(await resolveTarget(sql, "geo-app", { ...opts, country: "SI" })).toMatchObject({
+      kind: "website",
+      url: "https://x.test",
+    });
+    expect((await resolveTarget(sql, "geo-app", opts)).kind).toBe("website");
+  });
+
   it("only inactive links → the app's official website, not a 404", async () => {
     await link(await app("candy-ai"), "https://p.test/x", false);
     const [w] = await sql`select website_url from apps where slug = 'candy-ai'`;
