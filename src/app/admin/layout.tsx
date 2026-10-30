@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: LayoutProps<"/admin">) {
   return (
     <html lang="en">
-      <body className="min-h-dvh bg-neutral-50 text-neutral-900 antialiased">{children}</body>
+      <body className="admin min-h-dvh antialiased">{children}</body>
     </html>
   );
 }

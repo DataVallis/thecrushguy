@@ -1,6 +1,6 @@
 // Small presentational helpers shared by admin pages (server components).
 export function PageTitle({ children }: { children: React.ReactNode }) {
-  return <h1 className="mb-6 text-2xl font-bold">{children}</h1>;
+  return <h1 className="mb-6 font-display text-3xl font-extrabold text-[#f7f5fb]">{children}</h1>;
 }
 
 export function Loading() {

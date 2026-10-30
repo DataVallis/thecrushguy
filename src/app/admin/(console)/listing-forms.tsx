@@ -58,7 +58,7 @@ export function ImportForm(props: { action: (prev: ImportState, form: FormData) 
       <button
         type="submit"
         disabled={pending}
-        className="self-start rounded bg-neutral-900 px-4 py-2 font-medium text-white"
+        className="self-start rounded bg-coral px-4 py-2 text-ink font-semibold hover:bg-coral/85"
       >
         {pending ? "Importing…" : "Import"}
       </button>
@@ -91,7 +91,7 @@ export function ResearchImportForm(props: { action: (prev: ResearchState) => Pro
       <button
         type="submit"
         disabled={pending}
-        className="self-start rounded bg-neutral-900 px-4 py-2 font-medium text-white"
+        className="self-start rounded bg-coral px-4 py-2 text-ink font-semibold hover:bg-coral/85"
       >
         {pending ? "Importing…" : "Import research bundle"}
       </button>

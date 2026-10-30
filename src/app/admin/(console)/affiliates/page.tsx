@@ -35,12 +35,22 @@ async function Affiliates() {
   const [rows, forgotten] = await Promise.all([listOutreach(sql()), forgottenApps(sql())]);
   const now = new Date();
   const due = rows.filter((r) => isDue(r, now));
+  const viaNetwork = rows.filter((r) => r.via && r.app_id && r.status === "approved" && !r.has_active_link);
   const groups: [string, OutreachRow[]][] = [
     ["Follow up now (no answer yet)", due],
+    [
+      `${[...new Set(viaNetwork.map((r) => r.via))].join(" / ")} — approved: create the tracking link there, paste it in the app's “Affiliate links”`,
+      viaNetwork,
+    ],
     ["To apply", rows.filter((r) => r.status === "to_apply")],
     ["To contact (no public program — send an email)", rows.filter((r) => r.status === "to_contact")],
     ["Applied — waiting for an answer", rows.filter((r) => r.status === "applied" && !isDue(r, now))],
-    ["Approved — add the link in the app's “Affiliate links”", rows.filter((r) => r.status === "approved")],
+    [
+      "Approved directly — add the link in the app's “Affiliate links”",
+      rows.filter((r) => r.status === "approved" && r.app_id && !r.has_active_link && !r.via),
+    ],
+    ["Networks you're in", rows.filter((r) => r.status === "approved" && !r.app_id)],
+    ["Links active ✓", rows.filter((r) => r.status === "approved" && r.has_active_link)],
     ["Closed (rejected / no program)", rows.filter((r) => r.status === "rejected" || r.status === "no_program")],
   ];
   return (
@@ -64,8 +74,8 @@ async function Affiliates() {
       {groups.map(([title, list]) =>
         list.length ? (
           <section key={title} className="flex flex-col gap-2">
-            <h2 className="text-lg font-bold">
-              {title} ({list.length})
+            <h2 className="font-display text-xl font-extrabold text-[#f7f5fb]">
+              {title} <span className="font-sans text-base font-medium text-neutral-500">({list.length})</span>
             </h2>
             <ul className="flex flex-col gap-2">
               {list.map((r) => (
@@ -77,10 +87,11 @@ async function Affiliates() {
       )}
 
       <section className="flex flex-col gap-2 rounded border border-neutral-300 bg-white p-3">
-        <h2 className="text-lg font-bold">Add a program or app to track</h2>
+        <h2 className="font-display text-xl font-extrabold text-[#f7f5fb]">Add a program or app to track</h2>
         <MiniForm action={saveOutreachAction.bind(null, null)} submit="Add">
           <input name="program" placeholder="Program (e.g. CrakRevenue)" required className={input} />
           <input name="appSlug" placeholder="app slug (optional)" className={input} />
+          <input name="via" placeholder="via network (e.g. CrakRevenue)" className={input} />
           <input name="signupUrl" placeholder="https://… signup page" className={input} />
           <select name="status" defaultValue="to_apply" className={input}>
             {OUTREACH_STATUSES.map((s) => (
@@ -99,9 +110,12 @@ function OutreachItem({ r }: { r: OutreachRow }) {
   const save = saveOutreachAction.bind(null, r.program);
   const remove = deleteOutreachAction.bind(null, r.program);
   return (
-    <li className="rounded border border-neutral-300 bg-white p-3">
+    <li className="rounded-xl border border-neutral-200 bg-white p-4">
       <div className="flex flex-wrap items-center gap-3">
-        <strong>{r.program}</strong>
+        <strong className="text-base text-[#f7f5fb]">{r.program}</strong>
+        {r.via ? (
+          <span className="rounded-full bg-coral/20 px-2 py-0.5 text-xs font-semibold text-coral">via {r.via}</span>
+        ) : null}
         {r.app_name ? (
           <a href={`/admin/apps/${r.app_id}`} className="underline">
             {r.app_name}
@@ -168,6 +182,7 @@ function OutreachItem({ r }: { r: OutreachRow }) {
               className={input}
             />
             <input name="signupUrl" defaultValue={r.signup_url ?? ""} placeholder="signup URL" className={input} />
+            <input name="via" defaultValue={r.via ?? ""} placeholder="via network (empty = direct)" className={input} />
             <input name="notes" defaultValue={r.notes ?? ""} placeholder="notes" className={`${input} w-full`} />
           </MiniForm>
           <MiniForm action={remove} submit="Delete this row (duplicate / mistake)" danger className="mt-3">

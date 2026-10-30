@@ -317,10 +317,11 @@ export const TOOLS: Tool[] = [
   {
     name: "update_outreach",
     description:
-      "Create or update an outreach row by program name (e.g. the owner says he applied to Candy AI). status=applied sets applied date (today) and a follow-up in 7 days if missing. Dates as YYYY-MM-DD. Never put affiliate URLs or IDs here.",
+      'Create or update an outreach row by program name (e.g. the owner says he applied to Candy AI). status=applied sets applied date (today) and a follow-up in 7 days if missing. via = affiliate network name (e.g. "CrakRevenue"), empty string = direct. Dates as YYYY-MM-DD. Never put affiliate URLs or IDs here.',
     input: z.object({
       program: z.string().min(1).max(120),
       app_slug: z.string().optional(),
+      via: z.string().max(60).optional(),
       status: z.enum(OUTREACH_STATUSES).optional(),
       signup_url: z.string().optional(),
       contact: z.string().max(200).optional(),
@@ -333,6 +334,7 @@ export const TOOLS: Tool[] = [
       a: {
         program: string;
         app_slug?: string;
+        via?: string;
         status?: (typeof OUTREACH_STATUSES)[number];
         signup_url?: string;
         contact?: string;
@@ -344,6 +346,7 @@ export const TOOLS: Tool[] = [
       upsertOutreach(sql, MCP_ACTOR, {
         program: a.program,
         appSlug: a.app_slug,
+        via: a.via,
         status: a.status,
         signupUrl: a.signup_url,
         contact: a.contact,

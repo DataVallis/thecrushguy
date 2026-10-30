@@ -50,6 +50,13 @@
       "when": 1793355550379,
       "tag": "0006_affiliate_outreach",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793374472545,
+      "tag": "0007_outreach_via",
+      "breakpoints": true
     }
   ]
 }
