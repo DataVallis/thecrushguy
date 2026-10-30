@@ -10,7 +10,14 @@ import { z } from "zod";
 import bundle from "@/data/research-bundle.json";
 import { bundleSchema, importFacts, importResearchBundle, recomputeApp } from "@/lib/admin/facts-import";
 import { AdminError, audit, changes, qualityGaps, reviewQueue, setAppStatus } from "@/lib/admin/repo";
-import { OUTREACH_STATUSES, forgottenApps, listOutreach, seedOutreach, upsertOutreach } from "@/lib/admin/outreach";
+import {
+  OUTREACH_STATUSES,
+  deleteOutreach,
+  forgottenApps,
+  listOutreach,
+  seedOutreach,
+  upsertOutreach,
+} from "@/lib/admin/outreach";
 import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { factsSchema } from "@/lib/review/data-review";
@@ -344,6 +351,13 @@ export const TOOLS: Tool[] = [
         followUpAt: a.follow_up_at,
         notes: a.notes,
       }),
+  },
+  {
+    name: "delete_outreach",
+    description:
+      "Delete one outreach row by its exact program name — only for duplicates or rows the owner asked to remove. Audited.",
+    input: z.object({ program: z.string().min(1).max(120) }),
+    run: async (sql, a: { program: string }) => ({ deleted: await deleteOutreach(sql, MCP_ACTOR, a.program) }),
   },
   {
     name: "seed_outreach",
