@@ -13,6 +13,7 @@ import {
   pricingInput,
   saveAffiliateLink,
   savePricingPlan,
+  setLinkCountries,
   sourceInput,
 } from "./listing";
 import { AdminError } from "./repo";
@@ -268,5 +269,17 @@ describe("CSV import", () => {
     ])
       expect((await importAppsCsv(sql, ACTOR, [HEADER, ROW1.replace(from!, to!)].join("\n"))).errors).toHaveLength(1);
     expect(await sql`select 1 from apps`).toHaveLength(0);
+  });
+});
+
+describe("setLinkCountries (MCP)", () => {
+  it("sets countries on the active link only and validates codes", async () => {
+    const a = await newApp();
+    const [{ slug }] = await sql<{ slug: string }[]>`select slug from apps where id = ${a}`;
+    await expectAdminError(setLinkCountries(sql, ACTOR, slug!, "US"), "slug");
+    await saveAffiliateLink(sql, ACTOR, a, null, link(), KEY);
+    expect(await setLinkCountries(sql, ACTOR, slug!, "us, gb")).toMatchObject({ countries: ["GB", "US"] });
+    expect((await setLinkCountries(sql, ACTOR, slug!, "")).countries).toBeNull();
+    await expectAdminError(setLinkCountries(sql, ACTOR, slug!, "USA"), "countries");
   });
 });

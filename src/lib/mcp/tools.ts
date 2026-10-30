@@ -18,6 +18,7 @@ import {
   seedOutreach,
   upsertOutreach,
 } from "@/lib/admin/outreach";
+import { setLinkCountries } from "@/lib/admin/listing";
 import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { factsSchema } from "@/lib/review/data-review";
@@ -361,6 +362,13 @@ export const TOOLS: Tool[] = [
       "Delete one outreach row by its exact program name — only for duplicates or rows the owner asked to remove. Audited.",
     input: z.object({ program: z.string().min(1).max(120) }),
     run: async (sql, a: { program: string }) => ({ deleted: await deleteOutreach(sql, MCP_ACTOR, a.program) }),
+  },
+  {
+    name: "set_link_countries",
+    description:
+      "Set the countries an app's ACTIVE affiliate link accepts (from the network's offer page), e.g. \"US, GB, CA\"; empty = all. Visitors from other countries go to the app's official site. Never touches the URL; you cannot add or read affiliate links.",
+    input: z.object({ slug: z.string().min(1), countries: z.string().max(1000) }),
+    run: async (sql, a: { slug: string; countries: string }) => setLinkCountries(sql, MCP_ACTOR, a.slug, a.countries),
   },
   {
     name: "seed_outreach",

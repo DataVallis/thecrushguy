@@ -290,3 +290,28 @@ export async function listingFor(sql: postgres.Sql, appId: string) {
   ]);
   return { sources: srcs, plans, links };
 }
+
+/**
+ * Sets the accepted countries of an app's active affiliate link (no URL involved — safe for the MCP agent).
+ * `raw` like "US, GB, CA"; empty = all countries. Returns the stored list.
+ */
+export async function setLinkCountries(
+  sql: postgres.Sql,
+  actor: string,
+  slug: string,
+  raw: string,
+): Promise<{ countries: string[] | null; url_hint: string }> {
+  const parsed = affiliateInput.shape.countries.safeParse(raw);
+  if (!parsed.success) throw new AdminError("countries", parsed.error.issues.map((i) => i.message).join("; "));
+  const countries = parsed.data ?? null;
+  return sql.begin(async (tx) => {
+    const [l] = await tx<{ id: string; countries: string[] | null; url_hint: string }[]>`
+      select l.id, l.countries, l.url_hint from affiliate_links l join apps a on a.id = l.app_id
+      where a.slug = ${slug} and l.active for update of l`;
+    if (!l)
+      throw new AdminError("slug", `No active affiliate link for ${slug} — the owner adds the link in /admin first`);
+    await tx`update affiliate_links set countries = ${countries} where id = ${l.id}`;
+    await audit(tx, actor, "update", "affiliate_link", l.id, { countries: [l.countries, countries] });
+    return { countries, url_hint: l.url_hint };
+  });
+}
