@@ -211,3 +211,9 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Date: 2026-10-29 · Status: Accepted (owner provided measurement ID G-C7DSZV0X87 for prod)
 - Decision: GA4 loads only on prod (`APP_ENV=prod` + `GA_MEASUREMENT_ID` in `config/deploy.prod.yml`, a public ID) and only after the visitor clicks "Allow analytics" (EU ePrivacy/GDPR). Choice in cookie `tcg_consent` (1 year); "Cookie settings" in the footer reopens it. Outbound `/go` clicks become `visit_app` events. Privacy policy updated (Google Ireland, `_ga` cookies, DPF transfer, consent basis).
 - Consequences: GA numbers undercount (only consenting visitors); our own `/go` click log stays the source of truth for clicks.
+
+## ADR-035 — Agent merges releases to `main` (supersedes "only the owner merges into `main`" in ADR-028/deploy)
+- Date: 2026-10-30 · Status: Accepted (owner: "Dej ti megaj vse zakaj mene caka")
+- Decision: in Mode B the agent also merges release PRs `dev → main` (merge commit, not squash), but only when CI is green on `dev` and the dev deploy + smoke `verify` passed. Prod deploy runs automatically on the merge; the agent waits for `Deploy prod` to finish and reports the result.
+- Still owner-only: the gallery check/publishing of apps, affiliate links, secrets, anything under the content-policy STOP rule, and irreversible prod data changes.
+- Consequences: releases no longer wait for the owner; a broken prod deploy is the agent's to roll back (revert PR to `dev`, release again).
