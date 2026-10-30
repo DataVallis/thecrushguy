@@ -1,6 +1,6 @@
 # Tasks
 
-Latest TASK number in use: **TASK-024** (next free: TASK-025). Latest ADR: **ADR-034** (next free: ADR-035).
+Latest TASK number in use: **TASK-025** (next free: TASK-026). Latest ADR: **ADR-034** (next free: ADR-035).
 
 | Task | Title | Depends on | Status |
 |---|---|---|---|
@@ -29,3 +29,4 @@ Latest TASK number in use: **TASK-024** (next free: TASK-025). Latest ADR: **ADR
 | TASK-022 | Google Analytics 4 with consent (ADR-034) | — | DONE — prod only |
 | TASK-023 | Fact-driven category lists | 016 | DONE — 9 auto categories |
 | TASK-024 | Audience fact + girlfriend/boyfriend/roleplay lists | 023 | DONE |
+| TASK-025 | Affiliate outreach tracker (/admin/affiliates) | 011d | DONE |

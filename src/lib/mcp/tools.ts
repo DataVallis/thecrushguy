@@ -10,6 +10,7 @@ import { z } from "zod";
 import bundle from "@/data/research-bundle.json";
 import { bundleSchema, importFacts, importResearchBundle, recomputeApp } from "@/lib/admin/facts-import";
 import { AdminError, audit, changes, qualityGaps, reviewQueue, setAppStatus } from "@/lib/admin/repo";
+import { OUTREACH_STATUSES, forgottenApps, listOutreach, seedOutreach, upsertOutreach } from "@/lib/admin/outreach";
 import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { factsSchema } from "@/lib/review/data-review";
@@ -298,6 +299,57 @@ export const TOOLS: Tool[] = [
       forgetKnownSlugs();
       return { ok: true };
     },
+  },
+  {
+    name: "list_outreach",
+    description:
+      "Affiliate outreach tracker: every program/app with status (to_apply, to_contact, applied, approved, rejected, no_program), dates, notes, and whether an active affiliate link exists. Also lists published apps with nothing in progress.",
+    input: z.object({}),
+    run: async (sql) => ({ outreach: await listOutreach(sql), forgotten_apps: await forgottenApps(sql) }),
+  },
+  {
+    name: "update_outreach",
+    description:
+      "Create or update an outreach row by program name (e.g. the owner says he applied to Candy AI). status=applied sets applied date (today) and a follow-up in 7 days if missing. Dates as YYYY-MM-DD. Never put affiliate URLs or IDs here.",
+    input: z.object({
+      program: z.string().min(1).max(120),
+      app_slug: z.string().optional(),
+      status: z.enum(OUTREACH_STATUSES).optional(),
+      signup_url: z.string().optional(),
+      contact: z.string().max(200).optional(),
+      applied_at: z.string().optional(),
+      follow_up_at: z.string().optional(),
+      notes: z.string().max(1000).optional(),
+    }),
+    run: async (
+      sql,
+      a: {
+        program: string;
+        app_slug?: string;
+        status?: (typeof OUTREACH_STATUSES)[number];
+        signup_url?: string;
+        contact?: string;
+        applied_at?: string;
+        follow_up_at?: string;
+        notes?: string;
+      },
+    ) =>
+      upsertOutreach(sql, MCP_ACTOR, {
+        program: a.program,
+        appSlug: a.app_slug,
+        status: a.status,
+        signupUrl: a.signup_url,
+        contact: a.contact,
+        appliedAt: a.applied_at,
+        followUpAt: a.follow_up_at,
+        notes: a.notes,
+      }),
+  },
+  {
+    name: "seed_outreach",
+    description: "Load the researched affiliate programs and apps-to-contact into the tracker (never overwrites).",
+    input: z.object({}),
+    run: async (sql) => ({ added: await seedOutreach(sql, MCP_ACTOR) }),
   },
   {
     name: "sync_categories",

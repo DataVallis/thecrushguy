@@ -57,6 +57,7 @@ describe("migrations", () => {
       "admin_login_tokens",
       "admin_sessions",
       "affiliate_links",
+      "affiliate_outreach",
       "app_categories",
       "apps",
       "audit_log",
