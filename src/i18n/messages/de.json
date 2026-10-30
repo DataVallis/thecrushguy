@@ -42,7 +42,11 @@
     "faqTitle": "Kurz beantwortet",
     "statApps": "Apps geprüft",
     "statSources": "Quellen verlinkt",
-    "statPaid": "gekaufte Plätze"
+    "statPaid": "gekaufte Plätze",
+    "meetTitle": "Das ist The Crush Guy",
+    "meetText": "Er liest Preisseiten, Datenschutzerklärungen und AGB, damit du es nicht musst – und markiert, was du vor dem Bezahlen wissen solltest.",
+    "meetCta": "Zur Auswahl",
+    "meetVideo": "Das Crush-Guy-Maskottchen prüft KI-Begleiter-Apps auf Red Flags"
   },
   "app": {
     "visit": "Visit {name}",
