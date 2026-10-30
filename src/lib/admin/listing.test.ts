@@ -156,6 +156,12 @@ describe("affiliate links", () => {
     expect(
       affiliateInput.safeParse({ network: "direct", model: "cpa", url: "http://x.test", active: true }).success,
     ).toBe(false);
+    expect(link({ countries: " us, gb;CA us " }).countries).toEqual(["CA", "GB", "US"]);
+    expect(link({ countries: "" }).countries).toBeNull();
+    expect(
+      affiliateInput.safeParse({ network: "direct", model: "cpa", url: AFF_URL, active: true, countries: "USA" })
+        .success,
+    ).toBe(false);
     const a = await newApp();
     await expectAdminError(saveAffiliateLink(sql, ACTOR, a, null, link({ url: "" }), KEY), "url");
     const saved = process.env.LINK_ENCRYPTION_KEY;

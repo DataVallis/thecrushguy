@@ -196,7 +196,7 @@ export async function saveAffiliateAction(
 ): Promise<FormState> {
   const actor = await requireAdmin();
   // The URL is never echoed back to the form, even after a validation error.
-  const raw = formToObject(form, ["network", "model", "termsSummary", "url", "sourceId", "active"]);
+  const raw = formToObject(form, ["network", "model", "termsSummary", "url", "sourceId", "active", "countries"]);
   const parsed = affiliateInput.safeParse(raw);
   const echo = { ...raw, url: "" };
   if (!parsed.success) return failure(prev, fieldErrors(parsed.error), echo);
