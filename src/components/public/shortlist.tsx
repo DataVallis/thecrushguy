@@ -29,7 +29,7 @@ export function Shortlist(props: { apps: AppCard[]; locale: string; t: Dictionar
   const toggle = (k: FilterKey) => setOn((cur) => (cur.includes(k) ? cur.filter((x) => x !== k) : [...cur, k]));
   return (
     <div className="flex flex-col gap-4">
-      <fieldset className="flex flex-col gap-2">
+      <fieldset className="flex min-w-0 flex-col gap-2">
         <legend className="mb-2 font-display text-lg font-extrabold">{t.home.filterTitle}</legend>
         <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-5 sm:overflow-visible sm:px-0">
           {(Object.keys(TEST) as FilterKey[]).map((k) => {
