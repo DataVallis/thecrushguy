@@ -42,7 +42,11 @@
     "faqTitle": "Quick answers",
     "statApps": "apps checked",
     "statSources": "sources linked",
-    "statPaid": "paid rankings"
+    "statPaid": "paid rankings",
+    "meetTitle": "Meet The Crush Guy",
+    "meetText": "He reads the pricing pages, privacy policies and terms so you don't have to — and flags what you should know before you pay.",
+    "meetCta": "See the shortlist",
+    "meetVideo": "The Crush Guy mascot checking AI companion apps for red flags"
   },
   "app": {
     "visit": "Visit {name}",
