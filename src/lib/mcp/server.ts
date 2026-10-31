@@ -49,7 +49,7 @@ export async function handleRpc(sql: postgres.Sql, msg: Rpc, onWrite: () => void
         capabilities: { tools: { listChanged: false } },
         serverInfo: { name: "thecrushguy-admin", version: "1.0.0" },
         instructions:
-          "Admin data tools for The Crush Guy. Every fact needs a source URL you actually opened; never invent prices, ratings or user counts. Public, SFW pages only — never open galleries or explicit pages. You cannot publish or do the gallery check; the owner does that in /admin/research.",
+          "Admin data tools for The Crush Guy. Every fact needs a source URL you actually opened; never invent prices, ratings or user counts. Public, SFW pages only — never open galleries or explicit pages. You cannot publish or do the gallery check; the owner does that in /admin/research. Affiliate tracking links: store only links the owner sent you (set_affiliate_link) and never repeat them anywhere.",
       });
     }
     case "ping":

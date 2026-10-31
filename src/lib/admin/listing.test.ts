@@ -13,6 +13,7 @@ import {
   pricingInput,
   saveAffiliateLink,
   savePricingPlan,
+  setAffiliateLinkBySlug,
   setLinkCountries,
   sourceInput,
 } from "./listing";
@@ -281,5 +282,32 @@ describe("setLinkCountries (MCP)", () => {
     expect(await setLinkCountries(sql, ACTOR, slug!, "us, gb")).toMatchObject({ countries: ["GB", "US"] });
     expect((await setLinkCountries(sql, ACTOR, slug!, "")).countries).toBeNull();
     await expectAdminError(setLinkCountries(sql, ACTOR, slug!, "USA"), "countries");
+  });
+});
+
+describe("setAffiliateLinkBySlug (MCP, ADR-037)", () => {
+  it("encrypts, replaces the active link and never returns the URL", async () => {
+    const a = await newApp();
+    const [{ slug }] = await sql<{ slug: string }[]>`select slug from apps where id = ${a}`;
+    const r1 = await setAffiliateLinkBySlug(
+      sql,
+      ACTOR,
+      slug!,
+      { network: "crakrevenue", model: "pps", url: AFF_URL, countries: "us,gb" },
+      KEY,
+    );
+    expect(r1).toEqual({ url_hint: expect.any(String), countries: ["GB", "US"], replaced: false });
+    expect(JSON.stringify(r1)).not.toContain(AFF_URL);
+    const r2 = await setAffiliateLinkBySlug(sql, ACTOR, slug!, { network: "direct", model: "cpa", url: AFF_URL }, KEY);
+    expect(r2.replaced).toBe(true);
+    expect(await sql`select 1 from affiliate_links where app_id = ${a} and active`).toHaveLength(1);
+    const [row] = await sql<
+      { url_encrypted: string }[]
+    >`select url_encrypted from affiliate_links where app_id = ${a} and active`;
+    expect(decryptLink(row!.url_encrypted, KEY)).toBe(AFF_URL);
+    await expectAdminError(
+      setAffiliateLinkBySlug(sql, ACTOR, slug!, { network: "direct", model: "cpa", url: "http://x.test" }, KEY),
+      "_form",
+    );
   });
 });
