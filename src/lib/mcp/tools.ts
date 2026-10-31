@@ -18,7 +18,7 @@ import {
   seedOutreach,
   upsertOutreach,
 } from "@/lib/admin/outreach";
-import { setLinkCountries } from "@/lib/admin/listing";
+import { setAffiliateLinkBySlug, setLinkCountries } from "@/lib/admin/listing";
 import { syncAutoCategories } from "@/lib/catalog/auto-categories";
 import { forgetKnownSlugs } from "@/lib/seo/known-slugs";
 import { factsSchema } from "@/lib/review/data-review";
@@ -364,9 +364,33 @@ export const TOOLS: Tool[] = [
     run: async (sql, a: { program: string }) => ({ deleted: await deleteOutreach(sql, MCP_ACTOR, a.program) }),
   },
   {
+    name: "set_affiliate_link",
+    description:
+      "Store a tracking link the OWNER sent you in chat (ADR-037) as the app's active affiliate link — encrypted; replaces the current active link. Only use URLs the owner gave you, never ones you found yourself. Never repeat the URL in chat, commits, docs or notes. countries = the offer's accepted countries, e.g. \"US, GB\" (empty = all).",
+    input: z.object({
+      slug: z.string().min(1),
+      network: z.enum(["direct", "crakrevenue", "other"]),
+      model: z.enum(["revshare", "cpa", "pps", "hybrid"]),
+      url: z.string().min(1).max(2000),
+      terms_summary: z.string().max(1000).optional(),
+      countries: z.string().max(2000).optional(),
+    }),
+    run: async (
+      sql,
+      a: { slug: string; network: string; model: string; url: string; terms_summary?: string; countries?: string },
+    ) =>
+      setAffiliateLinkBySlug(sql, MCP_ACTOR, a.slug, {
+        network: a.network,
+        model: a.model,
+        url: a.url,
+        termsSummary: a.terms_summary,
+        countries: a.countries,
+      }),
+  },
+  {
     name: "set_link_countries",
     description:
-      "Set the countries an app's ACTIVE affiliate link accepts (from the network's offer page), e.g. \"US, GB, CA\"; empty = all. Visitors from other countries go to the app's official site. Never touches the URL; you cannot add or read affiliate links.",
+      "Set the countries an app's ACTIVE affiliate link accepts (from the network's offer page), e.g. \"US, GB, CA\"; empty = all. Visitors from other countries go to the app's official site. Never touches the URL; you cannot read affiliate links.",
     input: z.object({ slug: z.string().min(1), countries: z.string().max(1000) }),
     run: async (sql, a: { slug: string; countries: string }) => setLinkCountries(sql, MCP_ACTOR, a.slug, a.countries),
   },

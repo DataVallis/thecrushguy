@@ -222,3 +222,8 @@ Append-only. Newest wins. Format: ID, date, status, context, decision, consequen
 - Date: 2026-10-30 · Status: Accepted (owner: "js bi raje da tebi tu not mečem linke in slike držav pa ti to urejaš")
 - Decision: `affiliate_links.countries` (null = all). `/go` sends visitors outside the list (or with unknown country) to the official site, because networks redirect non-target traffic to unrelated fallback offers. MCP tool `set_link_countries` lets the agent set the list from the offer's country screenshot.
 - Still owner-only: the affiliate URL itself is entered in /admin (encrypted on save). The agent never receives, stores or reads tracking URLs (CLAUDE.md hard rule; ADR-033 unchanged).
+
+## ADR-037 — Agent stores tracking links the owner sends (amends CLAUDE.md affiliate rule and ADR-033)
+- Date: 2026-10-31 · Status: Accepted (owner: "želim da linke dodaš ti! to spremenima pravilo. Če ti pošljem link ga dodaj, če ga ne pošljem ga bom sam dodal")
+- Decision: MCP tool `set_affiliate_link` stores a tracking URL the owner pasted in chat as the app's active link (AES-GCM like /admin, audited without the URL, returns only the host). The agent uses only URLs the owner sent, never discovers links itself, and never writes them to code, docs, commits, logs or task notes, nor repeats them in chat.
+- Links the owner doesn't send he adds himself in /admin. Reading or exporting stored URLs stays impossible through MCP.

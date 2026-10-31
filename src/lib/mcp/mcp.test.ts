@@ -36,7 +36,7 @@ describe("MCP (TASK-021)", () => {
     expect(tokenOk("short", "short")).toBe(false);
   });
 
-  it("initialize + tools/list: no publish, no gallery check, no affiliate tools", async () => {
+  it("initialize + tools/list: no publish, no gallery check, affiliate links write-only (ADR-037)", async () => {
     const init = await handleRpc(
       sql,
       { jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } },
@@ -47,7 +47,8 @@ describe("MCP (TASK-021)", () => {
     const list = await handleRpc(sql, { jsonrpc: "2.0", id: 2, method: "tools/list" }, () => {});
     const text = JSON.stringify(list!.result);
     const names = (list!.result as { tools: { name: string }[] }).tools.map((t) => t.name);
-    expect(names.filter((n) => /publish|gallery|affiliate_link/.test(n))).toEqual([]);
+    expect(names.filter((n) => /publish|gallery|affiliate_link/.test(n))).toEqual(["set_affiliate_link"]);
+    expect(names.filter((n) => /(get|list|read|export)_.*link/.test(n))).toEqual([]);
     expect(text).not.toMatch(/"chk_no_minor_content"/); // the gallery check is never an allowed checklist item
     expect(text).toContain("set_price");
   });
