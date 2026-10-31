@@ -66,6 +66,21 @@ describe("computeDataReview (ADR-030)", () => {
     expect(r.missing).toContain("a sourced starting price");
   });
 
+  it("flags a quoted no-refunds clause as a con, but not a time-limited refund", () => {
+    const withRefund = (q: string) =>
+      computeDataReview("Demo", { ...base, terms: { ...base.terms, refund_policy_stated: { v: "yes", src: S, q } } })
+        .cons;
+    expect(withRefund("GIRLFRIENDGPT does not offer refunds for subscriptions that have been paid for.")).toContain(
+      "No refunds on paid subscriptions (per its terms)",
+    );
+    expect(withRefund("All payments are non-refundable.")).toContain(
+      "No refunds on paid subscriptions (per its terms)",
+    );
+    expect(withRefund("You are entitled to request a full refund within 24 hours.")).not.toContain(
+      "No refunds on paid subscriptions (per its terms)",
+    );
+  });
+
   it("never claims the gallery check", () => {
     const r = computeDataReview("Demo", base);
     expect(Object.keys(r.checklist)).not.toContain("chkNoMinorContent");
