@@ -315,3 +315,28 @@ export async function setLinkCountries(
     return { countries, url_hint: l.url_hint };
   });
 }
+
+/**
+ * MCP (ADR-037): store a tracking link the owner sent the agent in chat. Replaces the app's active link
+ * (encrypted like the admin form). Returns only the host hint — the URL is never echoed back.
+ */
+export async function setAffiliateLinkBySlug(
+  sql: postgres.Sql,
+  actor: string,
+  slug: string,
+  raw: { network: string; model: string; url: string; termsSummary?: string; countries?: string },
+  key?: Buffer,
+): Promise<{ url_hint: string; countries: string[] | null; replaced: boolean }> {
+  const parsed = affiliateInput.safeParse({ ...raw, active: true, sourceId: null });
+  if (!parsed.success)
+    throw new AdminError("_form", parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; "));
+  if (!parsed.data.url) throw new AdminError("url", "The affiliate URL is required");
+  const [app] = await sql<{ id: string; link_id: string | null }[]>`
+    select a.id, l.id as link_id from apps a left join affiliate_links l on l.app_id = a.id and l.active
+    where a.slug = ${slug}`;
+  if (!app) throw new AdminError("slug", `No app with slug ${slug}`);
+  const id = await saveAffiliateLink(sql, actor, app.id, app.link_id, parsed.data, key);
+  const [l] = await sql<{ url_hint: string; countries: string[] | null }[]>`
+    select url_hint, countries from affiliate_links where id = ${id}`;
+  return { url_hint: l!.url_hint, countries: l!.countries, replaced: !!app.link_id };
+}
