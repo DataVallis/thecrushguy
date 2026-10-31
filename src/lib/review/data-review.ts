@@ -97,6 +97,9 @@ export type DataReview = {
 };
 
 const yes = (f: { v: unknown }) => f.v === "yes";
+/** The quoted refund clause says there are no refunds at all (not "within 24 hours" etc.). */
+const NO_REFUNDS =
+  /\b(?:does not|do not|doesn't|don't|will not|won't)\s+(?:offer|provide|issue|give)\s+refunds?\b|\bno refunds?\b|\bnon-refundable\b/i;
 const no = (f: { v: unknown }) => f.v === "no";
 const clamp = (n: number) => Math.max(0, Math.min(100, Math.round(n)));
 
@@ -251,7 +254,11 @@ export function computeDataReview(name: string, raw: unknown): DataReview {
     yes(pr.sells_or_shares_for_ads) ? "Shares data for advertising" : null,
     !yes(pr.account_data_deletion) ? "No account/data deletion option stated in the privacy policy" : null,
     !yes(op.address_stated) ? "We couldn't find the operator's address" : null,
-    !yes(f.terms.refund_policy_stated) ? "No refund policy found" : null,
+    !yes(f.terms.refund_policy_stated)
+      ? "No refund policy found"
+      : NO_REFUNDS.test("q" in f.terms.refund_policy_stated ? (f.terms.refund_policy_stated.q ?? "") : "")
+        ? "No refunds on paid subscriptions (per its terms)"
+        : null,
     mediaList.length === 0 ? "No voice or image features advertised" : null,
     training === "unknown" ? "Privacy policy doesn't say whether chats are used to train AI" : null,
     !yes(pr.retention_period_stated) ? "No data-retention period stated" : null,
